@@ -1,6 +1,6 @@
 # VLAN Segmentation
 
-English | **[Português (Brasil)](../pt-BR/networking/vlans.md)**
+English | **[Português (Brasil)](../pt-BR/redes/vlans.md)**
 
 ## Overview
 
