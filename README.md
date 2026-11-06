@@ -1,4 +1,4 @@
-# Enterprise NOC & Observability Lab
+# Enterprise NOC — From Scratch
 
 English | **[Português (Brasil)](README.pt-BR.md)**
 
