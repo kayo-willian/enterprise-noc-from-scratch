@@ -1,6 +1,6 @@
 # Cisco Catalyst 9200L — SNMP Troubleshooting
 
-**English | [Português (Brasil)](../pt-BR/monitoring/snmp-troubleshooting.md)**
+**English | [Português (Brasil)](../pt-BR/monitoramento/diagnostico-snmp.md)**
 
 ## Overview
 
