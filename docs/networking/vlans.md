@@ -1,5 +1,7 @@
 # VLAN Segmentation
 
+English | **[Português (Brasil)](../pt-BR/networking/vlans.md)**
+
 ## Overview
 
 The enterprise infrastructure uses VLANs (Virtual Local Area Networks) to logically separate departments, infrastructure services, wireless connectivity, and IoT devices.
