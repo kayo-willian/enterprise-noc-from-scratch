@@ -2,6 +2,20 @@
 
 **English | [Português (Brasil)](README.pt-BR.md)**
 
+<p align="center">
+  <img src="https://img.shields.io/badge/NOC-Infrastructure-0F172A?style=flat-square" alt="NOC Infrastructure">
+  <img src="https://img.shields.io/badge/Status-In%20Development-2563EB?style=flat-square" alt="Development Status">
+  <img src="https://img.shields.io/github/license/kayo-willian/enterprise-noc-from-scratch?style=flat-square" alt="MIT License">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Cisco-1BA0D7?style=flat-square&amp;logo=cisco&amp;logoColor=white" alt="Cisco">
+  <img src="https://img.shields.io/badge/Linux-FCC624?style=flat-square&amp;logo=linux&amp;logoColor=black" alt="Linux">
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&amp;logo=docker&amp;logoColor=white" alt="Docker">
+  <img src="https://img.shields.io/badge/Zabbix-D40000?style=flat-square&amp;logo=zabbix&amp;logoColor=white" alt="Zabbix">
+  <img src="https://img.shields.io/badge/Grafana-F46800?style=flat-square&amp;logo=grafana&amp;logoColor=white" alt="Grafana">
+</p>
+
 ## Overview
 
 An end-to-end enterprise IT infrastructure project covering the design, physical deployment, configuration, integration, and monitoring of a simulated corporate network.
