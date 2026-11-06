@@ -1,5 +1,7 @@
 # Enterprise NOC & Observability Lab
 
+English | **[Português (Brasil)](README.pt-BR.md)**
+
 A hands-on infrastructure project focused on enterprise networking, Linux system administration, containerization, and network observability.
 
 The lab integrates Cisco network equipment, Linux servers, Docker-based services, and monitoring solutions such as Zabbix and Grafana.
