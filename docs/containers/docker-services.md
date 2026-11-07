@@ -135,6 +135,30 @@ configuration used in the laboratory.
 - [Pi-hole](../../docker_configs/lab-ti/pihole/docker-compose.yml)
 - [Portainer](../../docker_configs/lab-ti/portainer/docker-compose.yml)
 
+### Reverse Proxy and Corporate Portal
+
+The laboratory includes an Nginx reverse proxy and an
+Apache HTTP Server container responsible for the corporate portal.
+
+The collected configuration includes routes for Zabbix,
+Grafana, Uptime Kuma, Portainer, Pi-hole, and the portal.
+
+The public configuration currently documents the routes
+for the portal, Zabbix, Grafana, and Uptime Kuma.
+
+Configuration files:
+
+- [Nginx Main Configuration](../../docker_configs/reverse-proxy/nginx.conf)
+- [Reverse Proxy Rules](../../docker_configs/reverse-proxy/conf.d/lab.conf)
+
+The public files use example domains and certificate paths.
+The original environment used local DNS names and TLS certificates.
+
+Private keys and institution-specific settings are not included.
+
+The static website is hosted by the `site-estatico` container,
+using the `httpd:alpine` image and port `8081` on the Docker host.
+
 These files are sanitized versions of the collected configurations.
 Credentials and institution-specific DNS settings have been removed.
 
