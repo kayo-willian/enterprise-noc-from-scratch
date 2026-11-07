@@ -24,6 +24,45 @@ O ambiente integra equipamentos físicos de rede, cabeamento estruturado, estaç
 
 O objetivo é documentar a implementação de uma infraestrutura de padrão corporativo, desde seus componentes físicos até sua administração e monitoramento.
 
+## Contexto Empresarial — Tapajós Inovações
+
+O **Enterprise NOC — From Scratch** é um projeto de infraestrutura de redes corporativas desenvolvido a partir do cenário de uma empresa fictícia chamada **Tapajós Inovações**.
+
+A empresa representa o cliente simulado de uma iniciativa de modernização de redes, fornecendo o contexto empresarial para o planejamento, a implementação e a documentação de um Centro de Operações de Rede (NOC).
+
+### O Desafio Empresarial
+
+Conforme a apresentação original do projeto, a Tapajós Inovações enfrentava quatro problemas críticos em sua infraestrutura:
+
+- **Cabeamento estruturado sem certificação:** Problemas físicos de conectividade e interrupções frequentes na comunicação.
+- **Rede sem fio desprotegida:** Ambiente Wi-Fi aberto e sem controle adequado de acesso.
+- **Telefonia IP instável:** Interrupções recorrentes nas comunicações internas por VoIP.
+- **Ausência de monitoramento centralizado:** Visibilidade limitada sobre o desempenho da infraestrutura, a disponibilidade dos serviços e os incidentes operacionais.
+
+Esses problemas representam o cenário empresarial inicial, não necessariamente o estado atual do laboratório.
+
+### A Solução Proposta
+
+O projeto busca desenvolver e documentar uma infraestrutura corporativa integrada, incluindo:
+
+- Roteamento Cisco Catalyst C8200L e comutação Cisco Catalyst C9200L.
+- Segmentação por VLANs, com acesso administrativo centralizado e isolamento dos setores.
+- Segmentos dedicados às redes Wi-Fi corporativa e IoT.
+- Infraestrutura e serviços baseados em Linux.
+- Telefonia IP com Asterisk e autenticação de rede com FreeRADIUS.
+- Serviços em containers administrados por Docker e Docker Compose.
+- Monitoramento centralizado utilizando Zabbix, Grafana e Uptime Kuma.
+- Filtragem DNS e gerenciamento de serviços internos com Pi-hole.
+- Documentação técnica, inventários da infraestrutura e evidências operacionais.
+
+### Escopo do Projeto
+
+**A Tapajós Inovações é uma empresa fictícia.** O cenário empresarial foi apresentado no roteiro técnico inicial, enquanto o laboratório utiliza equipamentos físicos de rede, servidores Linux, estações Windows e serviços implantados.
+
+Este repositório documenta a infraestrutura desenvolvida para esse cenário, incluindo sua implementação, evidências coletadas, limitações e melhorias em andamento.
+
+O objetivo é demonstrar conhecimentos práticos em engenharia de redes, administração Linux, monitoramento de infraestrutura, diagnóstico de problemas e documentação técnica por meio de um laboratório corporativo integrado.
+
 ## Escopo do Projeto
 
 ### 1. Infraestrutura Física
