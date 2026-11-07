@@ -24,6 +24,45 @@ The environment combines physical networking equipment, structured cabling, work
 
 The objective is to document the implementation of an enterprise-style infrastructure, from its physical components to its daily administration and monitoring.
 
+## Business Context — Tapajós Inovações
+
+**Enterprise NOC — From Scratch** is a corporate network infrastructure project developed around a fictional company named **Tapajós Inovações**.
+
+The company serves as the simulated client for a network modernization initiative, providing a business scenario for the design, implementation, and documentation of an enterprise Network Operations Center (NOC).
+
+### The Business Challenge
+
+According to the original project brief, Tapajós Inovações faced four critical infrastructure challenges:
+
+- **Unreliable structured cabling:** Physical connectivity issues and frequent communication interruptions.
+- **Unsecured wireless network:** An open Wi-Fi environment with insufficient access control.
+- **Unstable IP telephony:** Recurring interruptions affecting internal VoIP communications.
+- **Lack of centralized monitoring:** Limited visibility into infrastructure performance, service availability, and operational incidents.
+
+These problems define the initial business scenario rather than the verified current state of the laboratory.
+
+### The Proposed Solution
+
+The project aims to design and document an integrated enterprise infrastructure featuring:
+
+- Cisco Catalyst C8200L routing and Catalyst C9200L switching.
+- VLAN segmentation with centralized administrative access and departmental isolation.
+- Dedicated network segments for corporate wireless connectivity and IoT devices.
+- Linux-based infrastructure and services.
+- Asterisk IP telephony and FreeRADIUS network authentication.
+- Containerized services managed through Docker and Docker Compose.
+- Centralized monitoring and visualization using Zabbix, Grafana, and Uptime Kuma.
+- DNS filtering and internal service management through Pi-hole.
+- Technical documentation, infrastructure inventories, and operational evidence.
+
+### Project Scope
+
+**Tapajós Inovações is a fictional company.** The business scenario originates from the project's initial technical brief, while the laboratory uses physical networking equipment, Linux servers, Windows workstations, and deployed services.
+
+This repository documents the infrastructure developed for that scenario, including its implementation, collected evidence, limitations, and ongoing improvements.
+
+The objective is to demonstrate practical network engineering, Linux administration, infrastructure monitoring, troubleshooting, and technical documentation through an integrated corporate laboratory.
+
 ## Project Scope
 
 ### 1. Physical Infrastructure
