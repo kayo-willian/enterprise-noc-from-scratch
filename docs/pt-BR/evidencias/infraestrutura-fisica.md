@@ -12,7 +12,7 @@ As fotografias documentam a instalação dos equipamentos, a organização do ra
 
 ## 1. Visão Geral do Rack
 
-![Rack de rede e estação de monitoramento](../../assets/images/physical/20261106_181756.jpg)
+![Rack de rede e estação de monitoramento](../../assets/images/physical/network-infrastructure-overview.jpg)
 
 O laboratório possui um rack de rede localizado próximo a uma estação de trabalho utilizada para acessar e monitorar o ambiente.
 
