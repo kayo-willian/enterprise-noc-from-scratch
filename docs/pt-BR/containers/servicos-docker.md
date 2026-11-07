@@ -126,4 +126,16 @@ Entretanto, essas evidências não comprovam:
 
 Esses aspectos precisam de verificações e documentação específicas.
 
+## 8. Configuração do Docker Compose
+
+Os arquivos Docker Compose a seguir documentam as configurações
+de implantação utilizadas no laboratório.
+
+- [Stack de Monitoramento e Infraestrutura](../../../docker_configs/docker-compose.yml)
+- [Pi-hole](../../../docker_configs/lab-ti/pihole/docker-compose.yml)
+- [Portainer](../../../docker_configs/lab-ti/portainer/docker-compose.yml)
+
+Esses arquivos são versões sanitizadas das configurações coletadas.
+Credenciais e configurações DNS específicas da instituição foram removidas.
+
 **Data da coleta das evidências:** 6 de novembro de 2026.
