@@ -12,7 +12,7 @@ The photographs document equipment installation, rack organization, and physical
 
 ## 1. Rack Overview
 
-![Network rack and monitoring workstation](../assets/images/physical/20261106_181756.jpg)
+![Network rack and monitoring workstation](../assets/images/physical/network-infrastructure-overview.jpg)
 
 The laboratory includes a network rack positioned alongside a workstation used to access and monitor the environment.
 
@@ -20,7 +20,7 @@ This photograph provides an overview of the physical installation and its surrou
 
 ## 2. Internal Rack Organization
 
-![Internal view of the network rack](../assets/images/physical/20261106_181835.jpg)
+![Internal view of the network rack](../assets/images/physical/network-rack-interior.jpg)
 
 The open rack provides visibility into the arrangement of the networking equipment, structured cabling components, and Ethernet connections.
 
@@ -35,7 +35,7 @@ The photograph provides evidence of the physical arrangement, but does not indep
 
 ## 3. Cisco Networking Equipment
 
-![Cisco router, switch and patch panel](../assets/images/physical/20261106_181924.jpg)
+![Cisco router, switch and patch panel](../assets/images/physical/cisco-router-switch-patch-panel.jpg)
 
 The main networking equipment identified in the laboratory includes:
 
