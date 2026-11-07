@@ -126,4 +126,16 @@ However, the evidence does not establish:
 
 These topics require separate verification and documentation.
 
+## 8. Docker Compose Configuration
+
+The following Docker Compose files document the deployment
+configuration used in the laboratory.
+
+- [Monitoring and Infrastructure Stack](../../docker_configs/docker-compose.yml)
+- [Pi-hole](../../docker_configs/lab-ti/pihole/docker-compose.yml)
+- [Portainer](../../docker_configs/lab-ti/portainer/docker-compose.yml)
+
+These files are sanitized versions of the collected configurations.
+Credentials and institution-specific DNS settings have been removed.
+
 **Evidence collection date:** November 6, 2026.
