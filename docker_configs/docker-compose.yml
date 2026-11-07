@@ -123,10 +123,22 @@ services:
       - ./reverse-proxy/certs:/etc/nginx/certs:ro
     networks:
       - zabbix-net
-    depends_on:
+     depends_on:
       - zabbix-web
       - grafana
       - uptime-kuma
+      - site-estatico
+
+    site-estatico:
+    image: httpd:alpine
+    container_name: site-estatico
+    restart: always
+    ports:
+      - "8081:80"
+    volumes:
+      - ./site-estatico-html:/usr/local/apache2/htdocs:ro
+    networks:
+      - zabbix-net
 
 networks:
   zabbix-net:
