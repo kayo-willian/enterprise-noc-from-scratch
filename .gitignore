@@ -1,0 +1,18 @@
+# Environment variables
+**/.env
+**/.env.*
+!**/.env.example
+
+# Private keys and certificates
+**/*.key
+**/*.pem
+docker_configs/reverse-proxy/certs/
+
+# Persistent Docker data
+docker_configs/zabbix-db-data/
+docker_configs/grafana-data/
+docker_configs/uptime-kuma-data/
+
+# Pi-hole persistent data
+docker_configs/lab-ti/pihole/etc-pihole/
+docker_configs/lab-ti/pihole/etc-dnsmasq.d/
