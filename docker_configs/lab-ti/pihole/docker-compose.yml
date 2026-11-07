@@ -1,0 +1,23 @@
+services:
+  pihole:
+    image: pihole/pihole:latest
+    container_name: pihole
+    restart: unless-stopped
+
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "8080:80/tcp"
+
+    environment:
+      TZ: America/Belem
+      FTLCONF_webserver_api_password: "${PIHOLE_ADMIN_PASSWORD:?Set PIHOLE_ADMIN_PASSWORD}"
+      FTLCONF_dns_listeningMode: "ALL"
+      FTLCONF_dns_upstreams: "${PIHOLE_DNS_UPSTREAMS:?Set PIHOLE_DNS_UPSTREAMS}"
+
+    volumes:
+      - ./etc-pihole:/etc/pihole
+      - ./etc-dnsmasq.d:/etc/dnsmasq.d
+
+    cap_add:
+      - NET_ADMIN
