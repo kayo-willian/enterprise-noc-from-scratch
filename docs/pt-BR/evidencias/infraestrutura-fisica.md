@@ -20,7 +20,7 @@ A fotografia apresenta uma visão geral da instalação física e do espaço ond
 
 ## 2. Organização Interna do Rack
 
-![Visão interna do rack de rede](../../assets/images/physical/20261106_181835.jpg)
+![Visão interna do rack de rede](../../assets/images/physical/network-rack-interior.jpg)
 
 Com o rack aberto, é possível observar a disposição dos equipamentos de rede, os componentes do cabeamento estruturado e as conexões Ethernet.
 
@@ -35,7 +35,7 @@ A fotografia comprova a disposição física dos componentes, mas não verifica 
 
 ## 3. Equipamentos de Rede Cisco
 
-![Roteador, switch Cisco e patch panel](../../assets/images/physical/20261106_181924.jpg)
+![Roteador, switch Cisco e patch panel](../../assets/images/physical/cisco-router-switch-patch-panel.jpg)
 
 Os principais equipamentos identificados no laboratório são:
 
