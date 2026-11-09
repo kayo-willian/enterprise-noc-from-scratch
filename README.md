@@ -32,7 +32,7 @@ The company serves as the simulated client for a network modernization initiativ
 
 ### The Business Challenge
 
-According to the original project brief, Tapajós Inovações faced four critical infrastructure challenges:
+The fictional business scenario of Tapajós Inovações presents four infrastructure challenges:
 
 - **Unreliable structured cabling:** Physical connectivity issues and frequent communication interruptions.
 - **Unsecured wireless network:** An open Wi-Fi environment with insufficient access control.
@@ -57,7 +57,7 @@ The project aims to design and document an integrated enterprise infrastructure 
 
 ### Project Scope
 
-**Tapajós Inovações is a fictional company.** The business scenario originates from the project's initial technical brief, while the laboratory uses physical networking equipment, Linux servers, Windows workstations, and deployed services.
+**Tapajós Inovações is a fictional company.** The project is developed in a physical training laboratory using real networking equipment, Linux servers, Windows workstations, and deployed infrastructure services.
 
 This repository documents the infrastructure developed for that scenario, including its implementation, collected evidence, limitations, and ongoing improvements.
 
