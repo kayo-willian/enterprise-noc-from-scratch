@@ -263,6 +263,18 @@ These limitations are documented rather than excluded from the project.
 
 They provide useful evidence for troubleshooting and demonstrate the importance of validating monitoring configurations against the actual network environment.
 
+### DHCP and Monitoring Considerations
+
+The laboratory uses dynamic IP addressing (DHCP) for its workstations.
+
+As a result, IP addresses observed in screenshots may differ from addresses previously registered in Zabbix.
+
+This behavior can cause temporary monitoring inconsistencies when hosts are identified by IP addresses that are not updated following DHCP lease changes.
+
+Consequently, unavailable host states and missing metrics should be interpreted in the context of the laboratory environment and the evidence collection date.
+
+The screenshots document conditions observed at a specific point in time and do not represent a definitive assessment of device availability.
+
 ## 8. Relationship with Grafana
 
 Zabbix also acts as a monitoring data source for Grafana dashboards used in the laboratory.
