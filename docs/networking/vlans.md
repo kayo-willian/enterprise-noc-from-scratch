@@ -34,19 +34,29 @@ The corporate wireless and IoT networks use separate wireless routers of the sam
 ## Corporate Wireless Network — VLAN 60
 
 VLAN 60 is dedicated to corporate wireless connectivity.
+
 The network uses a TP-Link Archer AX53, identified through physical equipment evidence collected on November 6, 2026.
+
 The Cisco Catalyst C9200L configuration snapshot from November 4, 2026, assigns interface `Gi1/0/15` to VLAN 60.
+
 The wireless router's operating mode, client addressing, DHCP configuration, and authentication settings require further verification.
+
 The intended network architecture restricts unauthorized access between the corporate wireless network and other internal VLANs.
 
 ## IoT Network — VLAN 70
 
 VLAN 70 is dedicated to Internet of Things (IoT) connectivity.
+
 The network includes an Amazon Alexa connected over Wi-Fi to a dedicated TP-Link Archer AX53.
+
 The wireless router connects to the Cisco Catalyst C9200L through Ethernet.
+
 The switch configuration snapshot from November 4, 2026, assigns interface `Gi1/0/14` to VLAN 70.
+
 The wireless router's operating mode, internal addressing, DHCP behavior, and NAT configuration remain pending verification.
+
 The IoT network is intended to remain isolated from sensitive corporate infrastructure.
+
 The exact routing and access control implementation has not yet been validated.
 
 
