@@ -32,7 +32,7 @@ A empresa representa o cliente simulado de uma iniciativa de modernização de r
 
 ### O Desafio Empresarial
 
-Conforme a apresentação original do projeto, a Tapajós Inovações enfrentava quatro problemas críticos em sua infraestrutura:
+O cenário empresarial fictício da Tapajós Inovações apresenta quatro desafios de infraestrutura:
 
 - **Cabeamento estruturado sem certificação:** Problemas físicos de conectividade e interrupções frequentes na comunicação.
 - **Rede sem fio desprotegida:** Ambiente Wi-Fi aberto e sem controle adequado de acesso.
@@ -57,7 +57,7 @@ O projeto busca desenvolver e documentar uma infraestrutura corporativa integrad
 
 ### Escopo do Projeto
 
-**A Tapajós Inovações é uma empresa fictícia.** O cenário empresarial foi apresentado no roteiro técnico inicial, enquanto o laboratório utiliza equipamentos físicos de rede, servidores Linux, estações Windows e serviços implantados.
+**A Tapajós Inovações é uma empresa fictícia.** O projeto é desenvolvido em um laboratório físico de treinamento, utilizando equipamentos reais de rede, servidores Linux, estações Windows e serviços de infraestrutura implantados.
 
 Este repositório documenta a infraestrutura desenvolvida para esse cenário, incluindo sua implementação, evidências coletadas, limitações e melhorias em andamento.
 
