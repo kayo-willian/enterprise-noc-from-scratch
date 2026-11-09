@@ -23,8 +23,8 @@ The switch connects departmental workstations, infrastructure servers, IP teleph
 | Gi1/0/9–10 | Sales | 40 | Access |
 | Gi1/0/11 | Debian Server — VoIP & RADIUS | 50 | Access |
 | Gi1/0/12–13 | Grandstream IP Phones | 50 | To verify |
-| Gi1/0/14 | Intelbras — IoT Network | 70 | To verify |
-| Gi1/0/15 | Intelbras — Corporate Wi-Fi | 60 | To verify |
+| Gi1/0/14 | TP-Link Archer AX53 — IoT Network | 70 | To verify |
+| Gi1/0/15 | TP-Link Archer AX53 — Corporate Wi-Fi | 60 | To verify |
 | Gi1/0/16–24 | Spare / Reserved | To verify | To verify |
 | Gi1/1/1–4 | SFP Uplink Interfaces | To verify | To verify |
 
