@@ -23,8 +23,8 @@ O equipamento conecta estações de trabalho dos departamentos, servidores de in
 | Gi1/0/9–10 | Vendas | 40 | Access |
 | Gi1/0/11 | Servidor Debian — VoIP e RADIUS | 50 | Access |
 | Gi1/0/12–13 | Telefones IP Grandstream | 50 | A verificar |
-| Gi1/0/14 | Intelbras — Rede IoT | 70 | A verificar |
-| Gi1/0/15 | Intelbras — Wi-Fi Corporativo | 60 | A verificar |
+| Gi1/0/14 | TP-Link Archer AX53 — Rede IoT | 70 | A verificar |
+| Gi1/0/15 | TP-Link Archer AX53 — Wi-Fi Corporativo | 60 | A verificar |
 | Gi1/0/16–24 | Livres / Reservadas | A verificar | A verificar |
 | Gi1/1/1–4 | Interfaces SFP de Uplink | A verificar | A verificar |
 
