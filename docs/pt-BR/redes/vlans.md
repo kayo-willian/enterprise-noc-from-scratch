@@ -22,43 +22,42 @@ A arquitetura da rede contempla sete VLANs, proporcionando segmentação lógica
 
 ## Infraestrutura de Rede
 
-A infraestrutura física inclui os seguintes equipamentos:
+A infraestrutura física inclui:
 
-- **Cisco Catalyst C8200L:** Roteador corporativo.
-- **Cisco Catalyst 9200L:** Switch corporativo.
-- **Roteador Intelbras (VLAN 60):** Fornece conectividade à rede sem fio corporativa.
-- **Roteador Intelbras (VLAN 70):** Fornece conectividade aos dispositivos IoT.
+- **Cisco Catalyst C8200L:** Infraestrutura de roteamento corporativo.
+- **Cisco Catalyst C9200L:** Switch Ethernet gerenciável.
+- **TP-Link Archer AX53 (VLAN 60):** Conectividade Wi-Fi corporativa.
+- **TP-Link Archer AX53 (VLAN 70):** Conectividade wireless dedicada aos dispositivos IoT.
 
-Os dois roteadores Intelbras são do mesmo modelo, que será identificado durante o levantamento final dos equipamentos.
+As redes Wi-Fi corporativa e IoT utilizam roteadores wireless separados do mesmo modelo.
 
 ## Rede Wi-Fi Corporativa — VLAN 60
 
-A VLAN 60 é dedicada à conectividade sem fio corporativa.
+A VLAN 60 é destinada à conectividade sem fio corporativa.
 
-A implementação no laboratório inclui:
+A rede utiliza um TP-Link Archer AX53, identificado por evidência física coletada em 06/11/2026.
 
-- Um roteador Intelbras.
-- Um esquema de endereçamento na faixa `10.0.0.0`, ainda pendente de confirmação da máscara.
-- Restrições de acesso envolvendo ACLs.
-- Controle de acesso baseado em RADIUS.
+O registro de configuração do Cisco Catalyst C9200L, coletado em 04/11/2026, atribui a interface `Gi1/0/15` à VLAN 60.
 
-O segmento sem fio foi projetado para permanecer isolado da rede principal, conforme as políticas de acesso do laboratório.
+O modo de operação do roteador wireless, o endereçamento dos clientes, a configuração DHCP e os mecanismos de autenticação ainda precisam de verificação.
 
-A máscara de sub-rede, o modelo do roteador, as regras de ACL e a configuração RADIUS ainda precisam ser documentados e verificados.
+A arquitetura de rede pretende restringir acessos não autorizados entre o Wi-Fi corporativo e as demais VLANs internas.
 
 ## Rede IoT — VLAN 70
 
-A VLAN 70 é dedicada aos dispositivos de Internet das Coisas (IoT).
+A VLAN 70 é destinada à conectividade de dispositivos de Internet das Coisas (IoT).
 
-O ambiente inclui:
+A rede inclui uma Amazon Alexa conectada via Wi-Fi a um TP-Link Archer AX53 dedicado ao ambiente IoT.
 
-- Um roteador Intelbras.
-- Um dispositivo Amazon Alexa com tela.
-- Uma lâmpada inteligente controlada por comandos de voz da Alexa.
+O roteador wireless conecta-se ao switch Cisco Catalyst C9200L por Ethernet.
 
-O segmento IoT demonstra a integração de dispositivos inteligentes em uma infraestrutura de rede segmentada, semelhante à de ambientes corporativos.
+O registro de configuração do switch, coletado em 04/11/2026, atribui a interface `Gi1/0/14` à VLAN 70.
 
-A configuração específica do roteador e as políticas de acesso dos dispositivos IoT ainda precisam ser verificadas.
+O modo de operação do roteador wireless, o endereçamento interno, o comportamento DHCP e a configuração NAT ainda precisam de verificação.
+
+A rede IoT foi planejada para permanecer isolada dos recursos corporativos sensíveis.
+
+A implementação exata das políticas de roteamento e controle de acesso ainda não foi validada.
 
 ## Status da Documentação
 
