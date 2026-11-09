@@ -263,6 +263,18 @@ Essas limitações foram mantidas na documentação, em vez de serem omitidas.
 
 Elas representam oportunidades de diagnóstico e demonstram a importância de validar as configurações de monitoramento com o estado real da infraestrutura.
 
+### Considerações sobre DHCP e monitoramento
+
+O ambiente do laboratório utiliza endereçamento dinâmico (DHCP) para estações de trabalho.
+
+Por esse motivo, os endereços IP observados nas capturas podem diferir daqueles registrados anteriormente no Zabbix.
+
+Essa característica pode ocasionar inconsistências temporárias no monitoramento quando os hosts são identificados por endereços IP que não acompanham as mudanças de concessão DHCP.
+
+Consequentemente, estados de indisponibilidade e ausência de métricas devem ser interpretados considerando o contexto do laboratório e a data de coleta das evidências.
+
+As capturas documentam o comportamento observado naquele momento e não representam uma avaliação definitiva da disponibilidade dos equipamentos.
+
 ## 8. Integração com Grafana
 
 O Zabbix também funciona como fonte de dados para os dashboards do Grafana utilizados no laboratório.
