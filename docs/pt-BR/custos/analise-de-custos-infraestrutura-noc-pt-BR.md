@@ -12,7 +12,7 @@
 
 O projeto reproduz uma infraestrutura corporativa fictícia, incluindo **estações de trabalho, rack, cabeamento estruturado, roteador e switch Cisco, Wi-Fi corporativo, IoT, telefonia IP, servidores Linux, containers Docker e monitoramento NOC**. A análise estima o investimento para adquirir e implantar o ambiente, o custo de implantação quando os ativos já existem e despesas recorrentes de operação.
 
-A análise separa **equipamentos e consumíveis**, **ferramentas reutilizáveis**, **serviços técnicos**, **licenças** e **despesas mensais**. Preços de itens comparáveis não provam o modelo que está instalado. As quantidades ainda pendentes permanecem explicitamente identificadas.
+A análise separa **equipamentos e consumíveis**, **ferramentas reutilizáveis**, **serviços técnicos**, **licenças** e **despesas mensais**. Preços de itens comparáveis não identificam necessariamente o modelo instalado. Quantidades e custos ausentes permanecem excluídos dos subtotais.
 
 ## 2. Visão executiva dos três cenários
 
@@ -20,7 +20,7 @@ A análise separa **equipamentos e consumíveis**, **ferramentas reutilizáveis*
 | --- | --- | --- | --- |
 | **A — Implantação do zero** | Compra de equipamentos e materiais + instalação e configuração | R$ 46.606,36 | Equipamentos precificados, consumíveis selecionados e mão de obra simulada |
 | **B — Equipamentos existentes** | Ativos principais fornecidos pela contratante | R$ 7.271,37 | Materiais adicionais selecionados e mão de obra simulada |
-| **C — Operação mensal** | Infraestrutura já em funcionamento | R$ 355,00/mês | Horas mínimas simuladas de manutenção; despesas pendentes ficam de fora |
+| **C — Operação mensal** | Infraestrutura já em funcionamento | R$ 355,00/mês | Horas mínimas simuladas de manutenção; despesas sem estimativa ficam de fora |
 
 **Projeções parciais, sem inflação nem reajustes:**
 
@@ -35,13 +35,13 @@ As projeções **não** incluem energia, internet, possíveis contratos de supor
 
 ## 3. Cenário A — Aquisição e implantação completa
 
-Uma empresa começa sem a infraestrutura de referência e precisa comprar os equipamentos/materiais necessários e contratar a implantação. **Itens opcionais com quantidade zero não estão somados**; equipamentos pendentes não entraram no subtotal por falta de dados.
+Uma empresa começa sem a infraestrutura de referência e precisa comprar os equipamentos/materiais necessários e contratar a implantação. **Itens opcionais com quantidade zero não estão somados**; equipamentos sem estimativa não entraram no subtotal.
 
 | Componente | Subtotal parcial | Critério |
 | --- | --- | --- |
 | Equipamentos e materiais | R$ 39.856,86 | Somente linhas ativas e precificadas do inventário |
 | Mão de obra | R$ 6.749,50 | 32 atividades simuladas, detalhadas na seção de serviços |
-| Licenças iniciais conhecidas | R$ 0,00 | Edições livres identificadas; contratos e outras licenças pendentes |
+| Licenças iniciais conhecidas | R$ 0,00 | Edições livres identificadas; contratos e outras licenças fora do subtotal |
 | Reserva e frete conhecidos | R$ 0,00 | Reserva definida como zero por padrão; frete não informado |
 | **TOTAL A — PARCIAL** | **R$ 46.606,36** | Não inclui despesas ainda não precificadas |
 
@@ -60,16 +60,16 @@ Uma empresa começa sem a infraestrutura de referência e precisa comprar os equ
 
 ### Inventário detalhado — equipamentos, materiais e ferramentas
 
-**Leitura das tabelas:** `—` indica custo não computado no subtotal, seja por quantidade zero, compra desativada ou dado pendente. Os preços unitários são **referências de mercado registradas na planilha**, frequentemente de modelos similares; não são notas fiscais do ambiente. Os códigos **RF-xx** apontam para a seção de fontes.
+**Leitura das tabelas:** `—` indica custo não computado no subtotal, seja por quantidade zero, compra desativada ou informação de custo ausente. Os preços unitários são **referências de mercado registradas na planilha**, frequentemente de modelos similares; não são notas fiscais do ambiente. Os códigos **RF-xx** apontam para a seção de fontes.
 
 #### Rede Cisco
 
 | ID | Item / referência | Qtd. | Preço unit. | A — subtotal | B — subtotal | Situação | Fonte |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| EQ-001 | Roteador Cisco Catalyst C8200L — C8200L-1N-4T, SKU a confirmar | 1 un. | R$ 17.787,82 | R$ 17.787,82 | — | SKU exato pendente | RF-01 |
-| EQ-002 | Switch Cisco Catalyst 9200L — C9200L-24P-4G-A, SKU/PoE/licença a confirmar | 1 un. | R$ 18.800,00 | R$ 18.800,00 | — | SKU exato pendente | RF-02 |
-| EQ-033 | Módulos SFP/transceptores | 0 un. | Pendente | — | — | Opcional / validar | — |
-| EQ-034 | Cabos/console/serial de gerenciamento | 0 un. | Pendente | — | — | Opcional / validar | — |
+| EQ-001 | Roteador Cisco Catalyst C8200L — C8200L-1N-4T, SKU específico não identificado no inventário | 1 un. | R$ 17.787,82 | R$ 17.787,82 | — | SKU do equipamento físico não registrado | RF-01 |
+| EQ-002 | Switch Cisco Catalyst 9200L — C9200L-24P-4G-A, SKU/PoE/licença do item usado como referência de preço | 1 un. | R$ 18.800,00 | R$ 18.800,00 | — | SKU não identificado no inventário | RF-02 |
+| EQ-033 | Módulos SFP/transceptores | 0 un. | Não estimado | — | — | Opcional / fora do subtotal | — |
+| EQ-034 | Cabos/console/serial de gerenciamento | 0 un. | Não estimado | — | — | Opcional / validar | — |
 
 **Observação da categoria:** Os preços de Cisco dependem **fortemente de SKU, PoE, licenças, condição fiscal e suporte**. Modelos sugeridos como referência não substituem conferência do equipamento real. Módulos SFP e cabos de console estão fora do subtotal até verificação.
 
@@ -77,10 +77,10 @@ Uma empresa começa sem a infraestrutura de referência e precisa comprar os equ
 
 | ID | Item / referência | Qtd. | Preço unit. | A — subtotal | B — subtotal | Situação | Fonte |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| EQ-003 | Computadores montados no laboratório — Configurações pendentes • custo da aba Computadores | 9 un. | Pendente | — | — | Preço pendente | — |
+| EQ-003 | Computadores montados no laboratório — configurações não incluídas no subtotal financeiro | 9 un. | Não estimado | — | — | Preço não estimado | — |
 | EQ-004 | Monitor avulso (se não incluído no PC) — Monitor 21'' econômico (somente se PC não inclui) | 0 un. | R$ 299,99 | — | — | Opcional / validar | RF-26 |
 | EQ-005 | Teclado e mouse (se não incluídos no PC) — Kit teclado+mouse (somente se PC não inclui) | 0 un. | R$ 95,99 | — | — | Opcional / validar | RF-25 |
-| EQ-006 | Servidor Linux / host Docker dedicado | 0 un. | Pendente | — | — | Opcional / validar | — |
+| EQ-006 | Servidor Linux / host Docker dedicado | 0 un. | Não estimado | — | — | Opcional / validar | — |
 
 **Observação da categoria:** A quantidade inicial usada é de **9 PCs**, mas ainda não há CPU/RAM/armazenamento nem preço unitário confirmados. Monitor e teclado/mouse só devem ser somados à parte se não estiverem incluídos no valor de cada PC. Servidor Docker adicional depende de verificar se é uma estação já contada.
 
@@ -88,10 +88,10 @@ Uma empresa começa sem a infraestrutura de referência e precisa comprar os equ
 
 | ID | Item / referência | Qtd. | Preço unit. | A — subtotal | B — subtotal | Situação | Fonte |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| EQ-007 | Dois TP-Link Archer AX53 (VLAN 60 + VLAN 70) — preço de referência comparativo: Intelbras W5 1200 GS, não corresponde ao modelo instalado | 2 un. | R$ 232,76 | R$ 465,52 | — | Modelo a confirmar | RF-03 |
-| EQ-008 | Dispositivo Alexa com tela — Echo Show 5 — equipamento real não confirmado | 1 un. | R$ 599,00 | R$ 599,00 | — | Modelo a confirmar | RF-04 |
-| EQ-009 | Lâmpada inteligente — Lâmpada Wi-Fi E27 compatível Alexa, ilustrativa | 1 un. | R$ 42,66 | R$ 42,66 | — | Modelo a confirmar | RF-05 |
-| EQ-010 | Bocal / adaptador da lâmpada inteligente — Bocal E27, verificar se separado da lâmpada | 1 un. | R$ 8,12 | R$ 8,12 | — | Modelo a confirmar | RF-06 |
+| EQ-007 | Dois TP-Link Archer AX53 (VLAN 60 + VLAN 70) — preço de referência comparativo: Intelbras W5 1200 GS, não corresponde ao modelo instalado | 2 un. | R$ 232,76 | R$ 465,52 | — | Modelo de referência orçamentária | RF-03 |
+| EQ-008 | Dispositivo Alexa com tela — Echo Show 5 — modelo físico não identificado no inventário | 1 un. | R$ 599,00 | R$ 599,00 | — | Modelo de referência orçamentária | RF-04 |
+| EQ-009 | Lâmpada inteligente — Lâmpada Wi-Fi E27 compatível Alexa, ilustrativa | 1 un. | R$ 42,66 | R$ 42,66 | — | Modelo de referência orçamentária | RF-05 |
+| EQ-010 | Bocal / adaptador da lâmpada inteligente — Bocal E27, acessório orçado separadamente na simulação | 1 un. | R$ 8,12 | R$ 8,12 | — | Modelo de referência orçamentária | RF-06 |
 
 **Observação da categoria:** A rede documentada utiliza **dois TP-Link Archer AX53** em equipamentos separados, um na VLAN 60 e outro na VLAN 70. O preço unitário exibido nesta simulação corresponde ao Intelbras W5 1200 GS usado como comparativo de mercado, e não ao Archer AX53. W5 1200 GS, Echo Show 5 e lâmpada E27 são **comparativos**, ainda não identificações reais. Conferir se o bocal é item separado.
 
@@ -101,11 +101,11 @@ Uma empresa começa sem a infraestrutura de referência e precisa comprar os equ
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | EQ-011 | Rack 19 polegadas — Rack 12U — só comparativo; verificar tipo e U | 1 un. | R$ 650,56 | R$ 650,56 | — | Qtd. e modelo estimados | RF-07 |
 | EQ-012 | Patch panel 24 portas — Patch panel 24p CAT6 referência econômica | 1 un. | R$ 202,35 | R$ 202,35 | — | Qtd. e modelo estimados | RF-08 |
-| EQ-013 | Régua de energia para rack (PDU) — Régua rack 19'' 8 tomadas | 1 un. | R$ 99,00 | R$ 99,00 | — | Modelo a confirmar | RF-09 |
-| EQ-014 | Organizador horizontal de cabos para rack — Organizador horizontal 1U | 1 un. | R$ 23,32 | R$ 23,32 | — | Modelo a confirmar | RF-10 |
+| EQ-013 | Régua de energia para rack (PDU) — Régua rack 19'' 8 tomadas | 1 un. | R$ 99,00 | R$ 99,00 | — | Modelo de referência orçamentária | RF-09 |
+| EQ-014 | Organizador horizontal de cabos para rack — Organizador horizontal 1U | 1 un. | R$ 23,32 | R$ 23,32 | — | Modelo de referência orçamentária | RF-10 |
 | EQ-015 | Bandeja/suporte de rack (se utilizada) — Bandeja 300mm, se houver | 0 un. | R$ 53,20 | — | — | Opcional / validar | RF-11 |
-| EQ-016 | Kit fixação rack (20 porcas/parafusos) — Kit 20 fixadores, preço do pacote | 1 un. | R$ 24,62 | R$ 24,62 | R$ 24,62 | Modelo a confirmar | RF-12 |
-| EQ-017 | Nobreak / UPS | 0 un. | Pendente | — | — | Opcional / validar | — |
+| EQ-016 | Kit fixação rack (20 porcas/parafusos) — Kit 20 fixadores, preço do pacote | 1 un. | R$ 24,62 | R$ 24,62 | R$ 24,62 | Modelo de referência orçamentária | RF-12 |
+| EQ-017 | Nobreak / UPS | 0 un. | Não estimado | — | — | Opcional / validar | — |
 
 **Observação da categoria:** O rack 12U é apenas **referência de preço**; dimensões e componentes reais não foram medidos. O kit de fixadores é um **pacote de 20**, não o preço de cada parafuso. Bandejas e UPS só entram se existirem.
 
@@ -113,27 +113,27 @@ Uma empresa começa sem a infraestrutura de referência e precisa comprar os equ
 
 | ID | Item / referência | Qtd. | Preço unit. | A — subtotal | B — subtotal | Situação | Fonte |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| EQ-018 | Caixa de cabo de rede CAT6 (305 m, ilustrativa) — 1 caixa 305m 100% cobre; categoria a confirmar | 1 un. | R$ 430,80 | R$ 430,80 | R$ 430,80 | Qtd. e modelo estimados | RF-13 |
+| EQ-018 | Caixa de cabo de rede CAT6 (305 m, ilustrativa) — 1 caixa 305m 100% cobre; categoria adotada como referência | 1 un. | R$ 430,80 | R$ 430,80 | R$ 430,80 | Qtd. e modelo estimados | RF-13 |
 | EQ-019 | Conectores RJ45 CAT6 (pacote de 100) — Pacote com 100 conectores | 1 un. | R$ 40,22 | R$ 40,22 | R$ 40,22 | Qtd. e modelo estimados | RF-14 |
 | EQ-020 | Keystone RJ45 CAT6 (unidade) — Keystone CAT6 simples, se houver | 0 un. | R$ 7,60 | — | — | Opcional / validar | RF-15 |
 | EQ-021 | Caixa/espelho de sobrepor para keystone — Caixa 2 pontos, sem keystones | 0 un. | R$ 7,15 | — | — | Opcional / validar | RF-16 |
-| EQ-022 | Protetores de conector (boots) | 0 un. | Pendente | — | — | Opcional / validar | — |
-| EQ-023 | Velcro para organização de cabos (rolo) — Rolo velcro 3 metros | 1 un. | R$ 13,97 | R$ 13,97 | R$ 13,97 | Modelo a confirmar | RF-17 |
+| EQ-022 | Protetores de conector (boots) | 0 un. | Não estimado | — | — | Opcional / validar | — |
+| EQ-023 | Velcro para organização de cabos (rolo) — Rolo velcro 3 metros | 1 un. | R$ 13,97 | R$ 13,97 | R$ 13,97 | Modelo de referência orçamentária | RF-17 |
 | EQ-024 | Canaletas, conduítes e acessórios — Canaleta adesiva 2m, se houver | 0 un. | R$ 9,90 | — | — | Opcional / validar | RF-18 |
-| EQ-025 | Patch cords comerciais adicionais | 0 un. | Pendente | — | — | Opcional / validar | — |
+| EQ-025 | Patch cords comerciais adicionais | 0 un. | Não estimado | — | — | Opcional / validar | — |
 | EQ-036 | Abraçadeiras nylon (pacote de 100) — 3,5×200mm, pacote 100 | 1 pacote | R$ 12,26 | R$ 12,26 | R$ 12,26 | Qtd. estimada | RF-24 |
-| EQ-037 | Protetores para plug RJ45 (boots) — Categoria a conferir | 0 pacote | Pendente | — | — | Opcional / validar | — |
-| EQ-038 | Patch cord CAT6 pronto para uso — Comprimento a confirmar | 0 un. | Pendente | — | — | Opcional / validar | — |
-| EQ-039 | Etiquetas de identificação / rotulagem — Marca/modelo a conferir | 0 pacote | Pendente | — | — | Opcional / validar | — |
+| EQ-037 | Protetores para plug RJ45 (boots) — Categoria não especificada | 0 pacote | Não estimado | — | — | Opcional / validar | — |
+| EQ-038 | Patch cord CAT6 pronto para uso — Comprimento não especificado | 0 un. | Não estimado | — | — | Opcional / validar | — |
+| EQ-039 | Etiquetas de identificação / rotulagem — Marca/modelo não especificado | 0 pacote | Não estimado | — | — | Opcional / validar | — |
 
-**Observação da categoria:** Foi usada uma hipótese de **uma caixa de 305 m de cabo CAT6** e **um pacote de 100 conectores RJ45**, não uma medição da metragem instalada. Keystones, espelhos, canaletas e patch cords prontos não entram até confirmar uso. Evitar contar cabos montados manualmente duas vezes.
+**Observação da categoria:** Foi usada uma hipótese de **uma caixa de 305 m de cabo CAT6** e **um pacote de 100 conectores RJ45**, não uma medição da metragem instalada. Keystones, espelhos, canaletas e patch cords prontos não entram no subtotal desta simulação. Evitar contar cabos montados manualmente duas vezes.
 
 #### Telefonia
 
 | ID | Item / referência | Qtd. | Preço unit. | A — subtotal | B — subtotal | Situação | Fonte |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | EQ-026 | Telefones IP Grandstream — GRP2601 utilizado como referência comercial; o modelo físico não consta das evidências de inventário | 2 un. | R$ 249,99 | R$ 499,98 | — | Qtd. e modelo estimados | RF-19 |
-| EQ-027 | Headsets / acessórios de telefonia | 0 un. | Pendente | — | — | Opcional / validar | — |
+| EQ-027 | Headsets / acessórios de telefonia | 0 un. | Não estimado | — | — | Opcional / validar | — |
 
 **Observação da categoria:** Os dois Grandstream GRP2601 são **hipótese de quantidade e modelo**, sujeita a conferência. Fontes, PoE e demais acessórios devem ser checados.
 
@@ -152,8 +152,8 @@ Uma empresa começa sem a infraestrutura de referência e precisa comprar os equ
 
 | ID | Item / referência | Qtd. | Preço unit. | A — subtotal | B — subtotal | Situação | Fonte |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| EQ-031 | Bancadas e suportes para estações | 0 un. | Pendente | — | — | Opcional / validar | — |
-| EQ-032 | Cadeiras e suportes de monitor | 0 un. | Pendente | — | — | Opcional / validar | — |
+| EQ-031 | Bancadas e suportes para estações | 0 un. | Não estimado | — | — | Opcional / validar | — |
+| EQ-032 | Cadeiras e suportes de monitor | 0 un. | Não estimado | — | — | Opcional / validar | — |
 
 **Observação da categoria:** Bancadas, cadeiras e suportes estão **fora do orçamento-base** até decidir se mobiliário compõe o escopo de aquisição.
 
@@ -164,7 +164,7 @@ Neste cenário, a contratante já possui os roteadores, switches, computadores, 
 - **Materiais adicionais:** R$ 521,87.
 - **Mão de obra de implantação:** R$ 6.749,50.
 - **Licenças iniciais (se aplicável):** R$ 0,00.
-- **Frete / deslocamento adicional:** pendente, sem valor presumido.
+- **Frete / deslocamento adicional:** sem estimativa, excluído do subtotal.
 - **TOTAL PARCIAL B:** **R$ 7.271,37**.
 
 **Materiais adicionais atualmente incluídos no cenário B:**
@@ -177,11 +177,11 @@ Neste cenário, a contratante já possui os roteadores, switches, computadores, 
 | Velcro para organização de cabos (rolo) | 1 un. | R$ 13,97 |
 | Abraçadeiras nylon (pacote de 100) | 1 pacote | R$ 12,26 |
 
-O subtotal de mão de obra é **o mesmo no A e no B** nesta revisão, porque a planilha supõe o mesmo escopo de instalação; isso precisa ser reduzido se parte da montagem ou do cabeamento já estiver pronta. O B não é um contrato real nem uma tabela de preços obrigatória.
+O subtotal de mão de obra é **o mesmo no A e no B** nesta revisão, porque a planilha supõe o mesmo escopo de instalação; o cálculo adota horas de implantação integral mesmo no cenário com equipamentos existentes. O B não é um contrato real nem uma tabela de preços obrigatória.
 
 ## 5. Serviços de implantação — composição da mão de obra
 
-Os valores abaixo são **hipóteses comerciais editáveis**, calculadas a partir de quantidade × horas por unidade × tarifa horária. **Não representam salário, horas efetivamente medidas ou cotações comprovadas de prestadores.** A coluna de observações indica o alcance previsto e o que precisa ser validado.
+Os valores abaixo são **hipóteses comerciais editáveis**, calculadas a partir de quantidade × horas por unidade × tarifa horária. **Não representam salário, horas efetivamente medidas ou cotações comprovadas de prestadores.** A coluna de observações indica o alcance previsto e o que cada estimativa inclui.
 
 | Código | Atividade técnica | Qtd. | Horas totais | R$/h | Subtotal | Observação |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -198,7 +198,7 @@ Os valores abaixo são **hipóteses comerciais editáveis**, calculadas a partir
 | MO-011 | Configuração do Catalyst 9200L | 1 | 4 | R$ 90,00 | R$ 360,00 | VLANs, access/trunk, segurança e validação; papéis a conferir. |
 | MO-012 | Configuração do Catalyst C8200L | 1 | 4 | R$ 90,00 | R$ 360,00 | Roteamento, subinterfaces/ACLs conforme configuração real. |
 | MO-013 | Implementação e testes de ACLs | 1 | 2 | R$ 90,00 | R$ 180,00 | Somente ACLs adicionais não incluídas na configuração básica do roteador. |
-| MO-014 | Configuração dos dois roteadores wireless | 2 | 2 | R$ 90,00 | R$ 180,00 | Rede 60 e rede 70; modo roteador/AP ainda a confirmar. |
+| MO-014 | Configuração dos dois roteadores wireless | 2 | 2 | R$ 90,00 | R$ 180,00 | Rede 60 e rede 70; modo roteador/AP fora da referência financeira. |
 | MO-015 | Integração dos dispositivos de IoT | 1 | 1 | R$ 50,00 | R$ 50,00 | Configuração de Alexa/lâmpada por participantes; não atribuir autoria. |
 | MO-016 | Implantação do FreeRADIUS e testes | 1 | 3 | R$ 70,00 | R$ 210,00 | Autenticação e integração na rede corporativa. |
 | MO-017 | Implantação de Asterisk / VoIP | 1 | 4 | R$ 70,00 | R$ 280,00 | Instalação e configuração conforme evidências disponíveis. |
@@ -220,26 +220,26 @@ Os valores abaixo são **hipóteses comerciais editáveis**, calculadas a partir
 
 **Horas técnicas estimadas:** 101.65 h. **Custo de mão de obra:** **R$ 6.749,50**.
 
-**Critério de cobrança:** serviços simples receberam estimativas menores; tarefas complexas, como configuração de rede Cisco, utilizam taxas diferentes. Entretanto, as tarifas **não foram verificadas com empresas locais** e precisam ser ajustadas antes de qualquer proposta comercial. Também é necessário evitar dupla cobrança por tarefas já abrangidas por instalação, configuração ou testes.
+**Critério de cobrança:** serviços simples receberam estimativas menores; tarefas complexas, como configuração de rede Cisco, utilizam taxas diferentes. Entretanto, as tarifas **não foram cotadas com empresas locais**; são premissas da simulação e não constituem proposta comercial. Também é necessário evitar dupla cobrança por tarefas já abrangidas por instalação, configuração ou testes.
 
 ## 6. Cenário C — Operação e manutenção
 
-Representa um ambiente já instalado. O subtotal atual cobre **manutenção preventiva limitada**, não uma equipe dedicada, monitoramento humano 24 horas por dia, atendimento com SLA ou operação empresarial integral. Itens pendentes e opcionais não são tratados como gratuitos.
+Representa um ambiente já instalado. O subtotal atual cobre **manutenção preventiva limitada**, não uma equipe dedicada, monitoramento humano 24 horas por dia, atendimento com SLA ou operação empresarial integral. Itens sem estimativa e opcionais não são tratados como gratuitos.
 
 | ID | Despesa / atividade | Quantidade | Valor unitário | Subtotal mensal | Ativo? | Observação |
 | --- | --- | --- | --- | --- | --- | --- |
-| OP-001 | Energia elétrica (rack + estações) | 1 mês | Pendente | — | Sim | Potência, tarifa e regime de uso pendentes; fórmula ligada às Premissas. |
-| OP-002 | Link de internet / WAN | 1 mês | Pendente | — | Sim | Informe apenas quando plano e preço mensal forem conhecidos. |
+| OP-001 | Energia elétrica (rack + estações) | 1 mês | Não estimado | — | Sim | Potência, tarifa e regime de uso pendentes; fórmula ligada às Premissas. |
+| OP-002 | Link de internet / WAN | 1 mês | Não estimado | — | Sim | Informe apenas quando plano e preço mensal forem conhecidos. |
 | OP-003 | Suporte Linux e containers (preventivo) | 2 h/mês | R$ 70,00 | R$ 140,00 | Sim | 2h mensais hipotéticas; não equivale a suporte 24×7. |
 | OP-004 | Administração de equipamentos Cisco e Wi-Fi | 1 h/mês | R$ 90,00 | R$ 90,00 | Sim | 1h/mês de manutenção; incidentes fora do pacote podem ser adicionais. |
 | OP-005 | Revisão de painéis e alarmes NOC | 1 h/mês | R$ 70,00 | R$ 70,00 | Sim | Atividade distinta do suporte Linux; evitar duplicidade de horas. |
 | OP-006 | Verificação de backups | 1 h/mês | R$ 55,00 | R$ 55,00 | Sim | Validação operacional mínima; armazenamento não incluso. |
-| OP-007 | Fundo de reposição / peças | 1 mês | Pendente | — | Não | Não pressupor reserva sem política definida. |
-| OP-008 | Armazenamento externo de backup | 1 mês | Pendente | — | Não | Só se for contratado; não confundir com volume local Docker. |
-| OP-009 | Suporte/licenças recorrentes Cisco | 1 mês | Pendente | — | Não | Licenças e contratos dependem de SKU e contratação real. |
-| OP-010 | Certificado TLS público comercial | 1 mês | Pendente | — | Não | Certificado privado/local não implica assinatura. |
-| OP-011 | Suporte profissional de software | 1 mês | Pendente | — | Não | OSS gratuito não implica suporte contratado. |
-| OP-012 | Domínio público / DNS externo | 1 mês | Pendente | — | Não | Domínios .local são internos; só incluir se adquirir domínio público. |
+| OP-007 | Fundo de reposição / peças | 1 mês | Não estimado | — | Não | Não pressupor reserva sem política definida. |
+| OP-008 | Armazenamento externo de backup | 1 mês | Não estimado | — | Não | Só se for contratado; não confundir com volume local Docker. |
+| OP-009 | Suporte/licenças recorrentes Cisco | 1 mês | Não estimado | — | Não | Licenças e contratos dependem de SKU e contratação real. |
+| OP-010 | Certificado TLS público comercial | 1 mês | Não estimado | — | Não | Certificado privado/local não implica assinatura. |
+| OP-011 | Suporte profissional de software | 1 mês | Não estimado | — | Não | OSS gratuito não implica suporte contratado. |
+| OP-012 | Domínio público / DNS externo | 1 mês | Não estimado | — | Não | Domínios .local são internos; só incluir se adquirir domínio público. |
 
 **Total parcial mensal:** **R$ 355,00**. **12 meses:** R$ 4.260,00. **36 meses:** R$ 12.780,00 (sem reajustes).
 
@@ -255,7 +255,7 @@ A licença de uso de diversas soluções livres pode custar **R$ 0,00**, mas **i
 
 | ID | Software / serviço | Regime | Licença inicial considerada | Status / ressalva |
 | --- | --- | --- | --- | --- |
-| SW-001 | Ubuntu / Debian Linux | Software livre | R$ 0,00 | Confirmar distribuição/versão no servidor físico. |
+| SW-001 | Ubuntu / Debian Linux | Software livre | R$ 0,00 | Distribuições Linux registradas nos documentos técnicos do laboratório. |
 | SW-002 | Docker Engine / Compose | Software livre | R$ 0,00 | Edição comunitária, sem subscrição paga prevista. |
 | SW-003 | Portainer Community Edition | Edição comunitária | R$ 0,00 | Se Portainer CE realmente estiver implantado; BE tem licenças próprias. |
 | SW-004 | Zabbix Server / Web / Agent | Software livre | R$ 0,00 | Zabbix OSS, sem custo de licença de uso. |
@@ -267,46 +267,46 @@ A licença de uso de diversas soluções livres pode custar **R$ 0,00**, mas **i
 | SW-010 | Apache HTTP Server | Software livre | R$ 0,00 | Portal HTML estático. |
 | SW-011 | Asterisk | Software livre | R$ 0,00 | Licença de software distinta de configuração e telefonia. |
 | SW-012 | FreeRADIUS | Software livre | R$ 0,00 | Software de código aberto. |
-| SW-013 | Cisco IOS XE / DNA / SmartNet | A confirmar | Pendente | Assinaturas, suporte e direito de uso dependem do SKU do hardware. |
-| SW-014 | Sistema operacional das estações | A confirmar | Pendente | Se houver Windows, checar situação de licenciamento OEM/volume. |
-| SW-015 | Certificados TLS / PKI privada | A confirmar | Pendente | Certificado autoassinado não implica pagamento, mas exige administração. |
+| SW-013 | Cisco IOS XE / DNA / SmartNet | Não especificado | Não estimado | Assinaturas, suporte e direito de uso dependem do SKU do hardware. |
+| SW-014 | Sistema operacional das estações | Não especificado | Não estimado | Se houver Windows, checar situação de licenciamento OEM/volume. |
+| SW-015 | Certificados TLS / PKI privada | Não especificado | Não estimado | Certificado autoassinado não implica pagamento, mas exige administração. |
 
-**Licenças iniciais precificadas nesta revisão:** **R$ 0,00** (somente soluções livres identificadas). Cisco IOS XE, contratos de suporte/licenciamento, sistema operacional das estações e eventuais certificados comerciais **permanecem pendentes**.
+**Licenças iniciais precificadas nesta revisão:** **R$ 0,00** (somente soluções livres identificadas). Cisco IOS XE, contratos de suporte/licenciamento, sistema operacional das estações e eventuais certificados comerciais **não integram os subtotais calculados**.
 
-## 8. Computadores e critérios para a próxima revisão
+## 8. Computadores fora do subtotal financeiro
 
-A planilha considera provisoriamente **9 computadores** dentro de uma faixa inicial aproximada de 8 a 10 unidades, mas a quantidade efetiva pode ser maior. Nenhum deles foi precificado: **0 de 9 estações têm valor completo registrado**. Isso afeta diretamente o cenário A e pode alterar energia e outros custos de operação no C.
+A simulação financeira de 06/11/2026 utilizou **9 computadores como premissa**, enquanto o inventário técnico registra **10 estações**. Nenhuma das nove posições orçamentárias possui preço completo. Assim, o custo dos PCs permanece fora do subtotal do cenário A e também não compõe o cálculo de energia do cenário C.
 
-O orçamento dos PCs será preenchido por perfil ou máquina, registrando **processador, placa-mãe, RAM, SSD/HD, vídeo, monitor/periféricos incluídos, quantidade e fonte do preço**. PCs com componentes diferentes não devem receber artificialmente um preço único sem justificar a média. O servidor Linux só deve ser adquirido/contabilizado à parte se não for um dos computadores já incluídos.
+A simulação não atribui preços individuais a **processador, placa-mãe, RAM, SSD/HD, vídeo, monitor/periféricos ou perfis distintos de PC**. Sem referência de compra, esses valores não são presumidos. Um host Linux que já integra o inventário de computadores não deve ser contado novamente como servidor adicional.
 
 ## 9. Premissas que influenciam os resultados
 
 | Parâmetro | Valor atual | Critério |
 | --- | --- | --- |
-| PCs previstos (estimativa) | 9 un. | Faixa inicial informada: aproximadamente 8 a 10; confirmar o número final. |
+| PCs previstos (estimativa) | 9 un. | Premissa da simulação: 9 PCs; inventário técnico posterior: 10 estações. |
 | PCs — limite inferior | 8 un. | Referência de quantidade informada. |
-| PCs — limite superior | 10 un. | A quantidade pode ser maior; atualizar após inventário. |
+| PCs — limite superior | 10 un. | Limite superior da faixa inicialmente considerada na simulação. |
 | Hora técnica — cabeamento | R$ 55,00/h | Hipótese comercial, sem cotação local; ajustar conforme orçamento de prestadores. |
 | Hora técnica — montagem/suporte | R$ 50,00/h | Hipótese comercial, sem cotação local. |
 | Hora técnica — Linux / containers | R$ 70,00/h | Hipótese comercial, sem cotação local. |
 | Hora técnica — redes Cisco | R$ 90,00/h | Hipótese comercial, sem cotação local; pode mudar por complexidade. |
 | Hora técnica — testes/documentação | R$ 60,00/h | Hipótese comercial, sem cotação local. |
-| Potência média rack/servidores | Pendente | Medir ou estimar com modelos confirmados (uso contínuo). |
-| Potência média por estação | Pendente | Valor médio durante expediente; depende da configuração de cada PC. |
-| Tarifa elétrica completa | Pendente | Inserir valor da concessionária com tributos, quando conhecido. |
+| Potência média rack/servidores | Não estimado | Medir ou estimar com modelos confirmados (uso contínuo). |
+| Potência média por estação | Não estimado | Valor médio durante expediente; depende da configuração de cada PC. |
+| Tarifa elétrica completa | Não estimado | Inserir valor da concessionária com tributos, quando conhecido. |
 | Horas mensais rack/servidores | 720 h/mês | Simulação 24h × 30 dias; alterar se o ambiente não operar continuamente. |
 | Horas mensais de cada PC | 176 h/mês | 22 dias × 8h; cenário de empresa em horário comercial. |
-| Internet contratada por mês | Pendente | Preencher apenas quando plano e valor forem conhecidos. |
+| Internet contratada por mês | Não estimado | Preencher apenas quando plano e valor forem conhecidos. |
 | Reserva de imprevistos inicial | R$ 0,00 | Opcional. Zero por padrão para não inflar; só alterar se desejado. |
-| Frete / deslocamento inicial | Pendente | Não presumido; cotar para a localidade antes do fechamento. |
+| Frete / deslocamento inicial | Não estimado | Não presumido; cotar para a localidade antes do fechamento. |
 | Referência de preços | 06/11/2026 data | Data de compilação das referências da aba Fontes. |
-| Unidade monetária | BRL real | Por enquanto somente reais. Versão bilíngue e conversão ficam para depois. |
+| Unidade monetária | BRL real | Simulação financeira expressa exclusivamente em reais. |
 
 **Regra de consistência:** quando a planilha estiver atualizada, este documento deve ser revisado **na mesma alteração**, pois Markdown não recalcula fórmulas. Não copiar valores antigos para uma versão nova do inventário.
 
 ## 10. Exclusões e Premissas do Modelo Financeiro
 
-Os principais pontos a confirmar são:
+As seguintes informações não integram a cotação completa deste modelo financeiro:
 
 1. **Computadores:** quantidade efetiva, especificações, preços de compra e periféricos incluídos.
 2. **Cisco:** código completo dos modelos, PoE, módulos, licenciamento e condições comerciais.
@@ -314,12 +314,12 @@ Os principais pontos a confirmar são:
 4. **Rack:** altura em U, profundidade, tipo, equipamentos instalados, suportes e sistema elétrico.
 5. **Cabeamento:** CAT5e/CAT6, metragem, pontos de rede, conexões, patch panel, keystones e consumíveis realmente utilizados.
 6. **Telefonia:** quantidade e modelo dos telefones Grandstream; fontes e acessórios.
-7. **Servidores:** identificar se o host Docker é uma estação já contada ou um equipamento independente.
-8. **Mão de obra:** validar horas e tarifas com referências locais; ajustar tarefas já realizadas e evitar sobreposição.
+7. **Servidores:** custo de um host Docker adicional, separado das estações inventariadas, não incluído.
+8. **Mão de obra:** tarifas comerciais ilustrativas, sem pesquisa local ou deduplicação contratual completa.
 9. **Operação:** consumo elétrico, horas de funcionamento, tarifa local, internet e contratos necessários.
 10. **Despesas externas:** frete, impostos conforme destino, eventual reserva e equipamentos opcionais efetivos.
 
-Os campos **pendentes não foram zerados** para caber em uma estimativa mais baixa. Um orçamento realista deve refletir o custo verificável, mesmo quando isso aumentar ou diminuir o resultado inicial.
+Os itens **sem estimativa não foram contabilizados como R$ 0,00**. Os subtotais representam apenas parcelas precificadas e não o orçamento total de aquisição ou operação.
 
 ## 11. Fontes de preços registradas na planilha
 

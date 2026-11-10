@@ -3,7 +3,7 @@
 **English** | [Português (Brasil)](../../pt-BR/operacoes-noc/runbooks/interface-cisco-indisponivel.md)
 
 **Project:** Enterprise NOC — From Scratch · Tapajós Inovações  
-**Category:** NET / PHY / MON · **Status:** Proposed diagnostic procedure  
+**Category:** NET / PHY / MON · **Document type:** Operational troubleshooting runbook  
 **Hardware:** Cisco Catalyst C9200L switch and C8200L router
 
 ## 1. Purpose and evidence
@@ -59,7 +59,7 @@ Use specific interface commands rather than dumping a full configuration to publ
 
 | Observation | Possible meaning / required check |
 |---|---|
-| `administratively down` | Interface intentionally disabled; confirm owner and intended state |
+| `administratively down` | Interface intentionally disabled; review the approved configuration and expected administrative state |
 | `notconnect` or physical link absent | Endpoint power, cable, transceiver or physical path may matter |
 | Link up but VLAN traffic missing | Verify access VLAN, trunk tagging, MAC learning and upstream routing |
 | CRC/input errors increasing | Investigate physical medium, connectors and interface quality |

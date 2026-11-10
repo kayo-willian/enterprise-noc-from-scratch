@@ -71,7 +71,7 @@ The following host ports were identified in the collected `docker ps` output:
 | `pihole` | 53 TCP/UDP, 8080 |
 | `portainer` | 8000, 9000, 9443 |
 
-These ports describe the container configuration at the time of collection. A published port does not independently confirm that a service is reachable from every network segment.
+These ports describe the container configuration at the time of collection. Published ports are recorded configuration values, not network-by-network reachability test results.
 
 ## 5. Docker Networking
 
@@ -83,7 +83,7 @@ The environment includes Docker's standard networking mechanisms and networks as
 
 The collected Linux system report also identifies Docker bridge interfaces and private container subnets.
 
-Network presence does not independently establish communication between every container or service.
+The network inventory shows configured Docker networks, rather than an application-to-application connectivity test matrix.
 
 ## 6. Service Organization
 
@@ -116,7 +116,7 @@ The collected evidence confirms the presence of ten running Docker containers on
 
 The Portainer screenshots also document container management, network configuration, and resource counts.
 
-However, the evidence does not establish:
+This dated container inventory does not record the following operational properties:
 
 - Continuous service availability.
 - Successful access from every VLAN.
@@ -124,7 +124,7 @@ However, the evidence does not establish:
 - Correct operation of every monitoring item.
 - High availability or redundancy.
 
-Those properties are outside the scope of the dated container inventory; the running-container list does not demonstrate them.
+The inventory describes containers, published ports and networks at the collection date, without treating those configuration entries as application test results.
 
 ## 8. Docker Compose Configuration
 

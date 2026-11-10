@@ -3,7 +3,7 @@
 **English** | [Português (Brasil)](../../pt-BR/operacoes-noc/runbooks/grafana-sem-dados.md)
 
 **Project:** Enterprise NOC — From Scratch · Tapajós Inovações  
-**Category:** MON · **Status:** Proposed runbook; historical missing-data cases not declared resolved  
+**Category:** MON · **Document type:** Operational troubleshooting runbook  
 **Environment:** Grafana OSS container with Zabbix integration; Debian Docker NOC host
 
 ## 1. Purpose and historical evidence
@@ -127,4 +127,4 @@ Preserve dashboard/panel identifiers, time range, Zabbix host/item, last data ti
 - [SNMP troubleshooting case study](../../monitoring/snmp-troubleshooting.md)
 - [Docker infrastructure](../../containers/docker-services.md)
 
-**Status:** Recommended diagnostic process; no new panel fix is claimed.
+**Document scope:** Reference diagnostic procedure based on dated laboratory evidence, not an incident-execution record.

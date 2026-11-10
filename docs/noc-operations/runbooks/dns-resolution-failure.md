@@ -3,7 +3,7 @@
 **English** | [Português (Brasil)](../../pt-BR/operacoes-noc/runbooks/falhas-resolucao-dns.md)
 
 **Project:** Enterprise NOC — From Scratch · Tapajós Inovações  
-**Category:** DNS / NET / CNT · **Status:** Proposed runbook; not evidence of a new outage  
+**Category:** DNS / NET / CNT · **Document type:** Operational troubleshooting runbook  
 **Environment:** Pi-hole container on Debian NOC host; departmental networks; Docker reverse proxy and internal services
 
 ## 1. Purpose and recorded environment
@@ -126,4 +126,4 @@ Capture client/VLAN, DHCP resolver supplied, test name classification (public/in
 - [Router and DHCP evidence boundaries](../../networking/router-c8200l.md)
 - [Docker service failure](docker-service-failure.md)
 
-**Status:** Proposed procedure; no new DNS incident or successful repair is asserted.
+**Document scope:** Reference diagnostic procedure based on dated laboratory evidence, not an incident-execution record.

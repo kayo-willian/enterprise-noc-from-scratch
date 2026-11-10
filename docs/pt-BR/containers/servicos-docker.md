@@ -71,7 +71,7 @@ As seguintes portas do host foram identificadas na saída do comando `docker ps`
 | `pihole` | 53 TCP/UDP, 8080 |
 | `portainer` | 8000, 9000, 9443 |
 
-As portas representam a configuração observada durante a coleta. Uma porta publicada não comprova, isoladamente, que o serviço esteja acessível a partir de todas as redes do laboratório.
+As portas representam a configuração observada durante a coleta. As portas publicadas são registros de configuração, não resultados de testes de acesso em todas as VLANs.
 
 ## 5. Redes Docker
 
@@ -83,7 +83,7 @@ O ambiente utiliza mecanismos padrão de rede do Docker e redes associadas às s
 
 O relatório do sistema Linux também identifica interfaces bridge do Docker e sub-redes privadas utilizadas pelos containers.
 
-A existência dessas redes não comprova, isoladamente, a comunicação entre todos os containers ou serviços.
+A captura registra as redes Docker configuradas, não uma matriz de testes de conectividade entre aplicações.
 
 ## 6. Organização dos Serviços
 
@@ -116,7 +116,7 @@ As evidências coletadas confirmam a presença de dez containers Docker em execu
 
 As capturas do Portainer também documentam o gerenciamento de containers, a configuração de redes e as quantidades de recursos.
 
-Entretanto, essas evidências não comprovam:
+O inventário datado não registra as seguintes propriedades operacionais:
 
 - Disponibilidade contínua dos serviços.
 - Acesso bem-sucedido a partir de todas as VLANs.
@@ -124,7 +124,7 @@ Entretanto, essas evidências não comprovam:
 - Funcionamento correto de todos os itens de monitoramento.
 - Alta disponibilidade ou redundância.
 
-Essas propriedades estão fora do escopo do inventário datado; a lista de containers em execução não as comprova.
+O inventário apresenta containers, portas e redes na data de coleta, sem tratar essas configurações como resultados de testes das aplicações.
 
 ## 8. Configuração do Docker Compose
 

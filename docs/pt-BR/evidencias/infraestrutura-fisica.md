@@ -54,7 +54,7 @@ A presença física desses equipamentos está comprovada pelas fotografias. Entr
 
 As fotografias confirmam a presença e a disposição física dos equipamentos documentados em 6 de novembro de 2026.
 
-Isoladamente, elas não comprovam:
+As fotografias registram os equipamentos e o cabeamento, não os seguintes resultados operacionais:
 
 - Comunicação bem-sucedida entre todos os segmentos de rede.
 - Funcionamento correto de todas as interfaces do switch.

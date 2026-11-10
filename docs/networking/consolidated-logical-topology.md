@@ -101,7 +101,7 @@ spanning-tree portfast trunk
 
 The available snapshot does not include an explicit `switchport mode access` statement for this interface.
 
-Therefore, the topology preserves the VLAN 50 association without assigning an operating mode that is not established by the collected configuration.
+The topology records `Gi1/0/11` assigned to VLAN 50 as documented in the switch snapshot, without assigning a switchport operating mode.
 
 Interfaces without specific configuration statements are not represented as disconnected, disabled, or available.
 
@@ -256,7 +256,7 @@ It does not represent:
 
 - An exhaustive physical cable map.
 - A complete Cisco router running configuration.
-- Confirmed enforcement of every intended ACL.
+- Router ACL entries and enforcement, which are outside the collected switch configuration.
 - A record of successful communication between every VLAN.
 - Continuous monitoring availability.
 - A complete export of wireless router configurations.

@@ -151,7 +151,7 @@ Esta seção apresenta informações complementares sobre a infraestrutura:
 
 O painel de eventos apresenta registros de incidentes e eventos resolvidos.
 
-Essas informações demonstram o acompanhamento de eventos no período observado, mas não comprovam que todos os problemas registrados foram solucionados definitivamente.
+Essas informações registram o acompanhamento dos eventos exibidos no período de coleta; seu estado é o documentado nas capturas.
 
 ### 4.5 Utilização de Recursos da Infraestrutura
 
@@ -167,7 +167,7 @@ O dashboard inclui:
 
 A captura apresenta também indicadores diferentes associados ao mesmo nome de switch.
 
-É necessário conferir os itens de origem desses indicadores antes de interpretá-los como medições independentes.
+As capturas apresentam rótulos repetidos ou truncados. Os valores são preservados como exibidos, sem classificá-los como medições independentes.
 
 A imagem foi preservada como evidência da configuração do dashboard observada em 6 de novembro de 2026.
 
@@ -184,7 +184,7 @@ A última captura da sequência apresenta:
 
 Os gráficos demonstram a existência de séries históricas de tráfego para determinadas interfaces e estações.
 
-Entretanto, não comprovam cobertura completa de monitoramento para todos os computadores.
+A cobertura exibida corresponde aos computadores e aos itens apresentados nas capturas datadas.
 
 ## 5. Cadastro e Disponibilidade dos Hosts
 
@@ -256,8 +256,8 @@ As evidências identificaram situações que ainda exigem verificação:
 | Estado das triggers | 34 triggers em estado de problema |
 | Endereçamento das estações | Seis divergências entre fotografias e cadastros |
 | Interfaces do switch | Algumas interfaces foram apresentadas como down |
-| Rótulos dos dashboards | Alguns indicadores precisam de conferência dos itens de origem |
-| Disponibilidade histórica | Não foi comprovada disponibilidade contínua dos serviços |
+| Rótulos dos dashboards | Indicadores repetidos ou truncados preservados conforme a captura |
+| Disponibilidade histórica | Estados de disponibilidade registrados na captura de 06/11 |
 
 Essas limitações foram mantidas na documentação, em vez de serem omitidas.
 

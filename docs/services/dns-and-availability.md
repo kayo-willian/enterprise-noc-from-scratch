@@ -156,7 +156,7 @@ Consequently, the current `Up` status of a monitor must not be interpreted as pr
 
 The screenshot confirms that four monitors were configured and displayed.
 
-It does not establish that all ten Docker containers or every laboratory network device were individually monitored by Uptime Kuma.
+The Uptime Kuma screenshot documents four configured monitors, rather than individual coverage of all ten containers and every network device.
 
 The application complements Zabbix rather than replacing the broader infrastructure monitoring documented elsewhere.
 

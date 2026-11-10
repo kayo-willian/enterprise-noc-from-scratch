@@ -15,7 +15,7 @@ The network combines a physical Cisco router, a Catalyst C9200L switch, departme
 
 This document records the available evidence concerning the router's network role, addressing, monitoring, and intended segmentation policies.
 
-**Important:** The router's current running configuration was not included in the available evidence. Therefore, the document distinguishes observed information from configurations that have not been independently verified.
+**Record scope:** This page consolidates dated network architecture and equipment evidence, not a router running-configuration export.
 
 ## 2. Physical Infrastructure
 
@@ -29,7 +29,7 @@ The switch configuration snapshot collected on November 4, 2026, identifies inte
 
 This supports the documented network architecture but does not independently establish the configuration of the corresponding physical interface or VLAN subinterfaces on the router.
 
-The router-side interface name remains unverified.
+The switch record identifies `Gi1/0/1` on the C9200L as the router uplink; the corresponding C8200L interface is not named in that record.
 
 ## 3. Network Segmentation
 
@@ -66,19 +66,19 @@ These observations establish the gateway settings visible on the endpoints at th
 
 They do not independently confirm the router's subinterface configuration, gateway ownership for every VLAN, or successful forwarding between departments.
 
-## 5. Intended Network Access Policy
+## 5. Network Segmentation and Access Policy Design
 
-The intended segmentation model distinguishes the IT/NOC administration network from the departmental, wireless, and IoT networks.
+The documented segmentation design distinguishes the IT/NOC administration network from the departmental, wireless, and IoT networks.
 
 ### Administrative access
 
 VLAN 10 is designated for administration and monitoring.
 
-The intended policy permits authorized administrative systems to initiate management connections to services and devices in other VLANs when required.
+The access-policy design permits authorized administrative systems to initiate management connections to services and devices in other VLANs when required.
 
 ### Departmental isolation
 
-VLANs 20, 30, and 40 are intended to remain isolated from one another, except where explicitly authorized services require communication.
+VLANs 20, 30, and 40 are separated in the access-policy design, except where explicitly authorized services require communication.
 
 ### VoIP and authentication services
 
@@ -88,13 +88,13 @@ Access to these services should be restricted according to application requireme
 
 ### Wireless and IoT isolation
 
-VLANs 60 and 70 are intended to have restricted access to internal enterprise resources.
+VLANs 60 and 70 have restricted access in the access-policy design to internal enterprise resources.
 
 Any necessary exceptions, including communication between a wireless access point and FreeRADIUS, must be defined according to the actual source addresses and service requirements.
 
-**Implementation status:** These are intended access policies, not verified ACL rules.
+**Record scope:** These are architectural access-policy requirements, not a transcription of router ACL entries.
 
-The available records do not establish the exact ACL entries, interface directions, rule order, or successful enforcement of the policy.
+The dated records include switch-side VLAN assignments, but no export of router ACL entries or ACL test results.
 
 ## 6. Router Monitoring
 
@@ -114,7 +114,7 @@ They do not demonstrate continuous availability, complete interface coverage, or
 
 The Zabbix host inventory also provides evidence of an SNMP monitoring interface associated with the router.
 
-The router's complete SNMP configuration and access restrictions were not independently verified.
+The recorded Zabbix/Grafana metrics document router monitoring; a router-side SNMP configuration export is outside the collected material.
 
 ## 7. DHCP, NAT and External Connectivity
 

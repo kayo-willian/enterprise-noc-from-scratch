@@ -3,7 +3,7 @@
 [English](../../../noc-operations/runbooks/docker-service-failure.md) | **Português (Brasil)**
 
 **Projeto:** Enterprise NOC — From Scratch · Tapajós Inovações  
-**Categoria:** CNT / SYS / WEB · **Status:** Runbook proposto; não é incidente resolvido  
+**Categoria:** CNT / SYS / WEB · **Tipo de documento:** Runbook de diagnóstico operacional  
 **Ambiente:** Computador NOC Debian 13; Docker, Compose, Portainer e aplicações de infraestrutura
 
 ## 1. Objetivo e evidências

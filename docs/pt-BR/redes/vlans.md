@@ -55,7 +55,7 @@ O registro de configuração do switch, coletado em 04/11/2026, atribui a interf
 
 A captura do switch registra a atribuição da VLAN, mas não inclui o modo de operação, o endereçamento interno, o DHCP ou as regras NAT do roteador wireless.
 
-A rede IoT foi planejada para permanecer isolada dos recursos corporativos sensíveis.
+O projeto lógico da rede IoT separa os dispositivos desse segmento dos recursos corporativos sensíveis.
 
 O isolamento descrito corresponde à política lógica do projeto, não a um resultado comprovado de testes das ACLs.
 

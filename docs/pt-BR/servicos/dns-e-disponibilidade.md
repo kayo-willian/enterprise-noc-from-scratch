@@ -34,7 +34,7 @@ Essas aplicações complementam o ambiente de monitoramento com Zabbix e Grafana
 
 O proxy reverso documentado também fornece acesso web interno a serviços.
 
-A existência de portas publicadas e containers não comprova, isoladamente, o acesso bem-sucedido a partir de todas as redes do laboratório.
+As portas publicadas descrevem a configuração Docker, não testes de acesso em todas as VLANs.
 
 Para consultar o inventário completo, acesse [Infraestrutura Docker e Serviços](../containers/servicos-docker.md).
 
@@ -77,7 +77,7 @@ O Pi-hole avalia as consultas DNS utilizando regras de filtragem e listas de dom
 
 Uma consulta DNS bloqueada indica que a solicitação correspondeu a uma regra de bloqueio ou outra condição de filtragem configurada.
 
-As estatísticas de bloqueio não comprovam, isoladamente, que determinado computador estivesse infectado, que ocorreu um ataque ou que todo tráfego indesejado foi impedido.
+As estatísticas representam correspondências com regras de filtragem DNS, não diagnósticos de infecção, incidentes de ataque ou cobertura integral de tráfego.
 
 Da mesma forma, a quantidade de domínios cadastrados nas listas não representa o número de domínios efetivamente bloqueados durante o período observado.
 
@@ -98,7 +98,7 @@ Diversos clientes aparecem identificados por endereços IPv4 privados de diferen
 
 Esses registros constituem evidências complementares da atividade DNS no laboratório.
 
-Entretanto, um endereço IPv4 na lista de clientes não comprova, isoladamente, a identidade ou as especificações de hardware do dispositivo correspondente.
+Os endereços IPv4 da lista identificam clientes DNS apresentados pelo Pi-hole; as especificações de hardware pertencem ao inventário de estações.
 
 **Observação sobre privacidade:** esta captura contém histórico de consultas DNS e endereços dos clientes. A divulgação pública exige considerar a privacidade dos usuários da rede.
 
@@ -133,7 +133,7 @@ Os alvos monitorados apresentados são:
 
 A barra lateral apresenta indicadores de `100%` para os quatro monitores.
 
-Esses valores precisam ser interpretados conforme o período de monitoramento e os parâmetros de relatório configurados na aplicação.
+Os indicadores de `100%` correspondem ao intervalo e às regras de relatório exibidos na captura.
 
 Não constituem comprovação de um acordo de nível de serviço ou de disponibilidade ininterrupta.
 
@@ -156,7 +156,7 @@ Consequentemente, o estado atual `Ligado` não deve ser interpretado como prova 
 
 A captura confirma quatro monitores cadastrados e apresentados na interface.
 
-Ela não comprova que todos os dez containers Docker ou todos os equipamentos da infraestrutura fossem monitorados individualmente pelo Uptime Kuma.
+A captura do Uptime Kuma registra quatro monitores específicos, não uma cobertura individual de todos os containers ou equipamentos.
 
 A aplicação complementa o Zabbix, sem substituir o monitoramento mais abrangente da infraestrutura.
 
@@ -203,7 +203,7 @@ Esses arquivos documentam a estrutura de implantação, enquanto as capturas col
 | `UpTimeKuma.png` | Quatro monitores configurados, estados observados e histórico de eventos |
 | Inventário dos containers Docker | Presença dos containers Pi-hole e Uptime Kuma na infraestrutura |
 
-As evidências não comprovam isoladamente:
+Essas capturas registram consultas DNS e estados dos monitores, sem documentar:
 
 - Disponibilidade contínua das duas aplicações.
 - Cobertura completa da filtragem DNS em todas as VLANs.

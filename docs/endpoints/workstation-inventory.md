@@ -81,7 +81,7 @@ The available service documentation describes the configuration of these applica
 
 The photograph records the network configuration of IT workstation 2.
 
-Its processor, RAM, and storage specifications were not confirmed by the available evidence.
+The November 6 inventory contains no CPU, RAM or storage specifications for this workstation.
 
 ### Accounting
 

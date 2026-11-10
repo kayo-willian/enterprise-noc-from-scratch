@@ -72,7 +72,7 @@ A infraestrutura utiliza a seguinte organização:
 
 A segmentação por VLAN estabelece domínios de broadcast de camada 2 separados para os segmentos documentados.
 
-A comunicação entre diferentes VLANs depende de encaminhamento em camada 3. A existência das VLANs e do trunk não demonstra, isoladamente, o funcionamento do roteamento entre elas ou a aplicação efetiva das políticas de isolamento.
+A comunicação entre VLANs depende de encaminhamento em camada 3. A captura histórica registra a segmentação no switch e o trunk, sem incluir as subinterfaces ou políticas aplicadas no roteador.
 
 ## 4. Cisco Catalyst C9200L — Mapeamento das Interfaces
 

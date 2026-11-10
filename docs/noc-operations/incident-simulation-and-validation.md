@@ -4,14 +4,14 @@
 
 **Project:** Enterprise NOC — From Scratch · Tapajós Inovações  
 **Area:** NOC Operations & Troubleshooting  
-**Document status:** **Proposed exercise plan and reporting model** — no new exercise is claimed as executed  
+**Document type:** **Exercise scenario catalog and reporting template** — not an execution log  
 **Infrastructure:** Cisco C8200L/C9200L, VLANs 10–70, Debian services, Docker, Zabbix, Grafana and Uptime Kuma
 
 ## 1. Purpose
 
-Incident response skills must include more than interpreting screenshots. This document provides an auditable method to design **safe, controlled and reversible** laboratory exercises, validate recovery and retain evidence. Its exercises are prospective. They must not be described as completed incidents until execution records exist.
+Incident response skills must include more than interpreting screenshots. This document provides an auditable method to design **safe, controlled and reversible** laboratory exercises, validate recovery and retain evidence. The scenarios are reference exercises, not recorded recoveries. Dated execution records, if any, must remain separate from this catalog.
 
-The actual November 4, 2026 Cisco SNMP troubleshooting cases are separately documented as historical interventions. The November 6 Zabbix/Grafana screenshots show monitoring conditions, not proof that the proposed simulations below were run.
+The actual November 4, 2026 Cisco SNMP troubleshooting cases are separately documented as historical interventions. The November 6 Zabbix/Grafana screenshots show monitoring conditions, not records of the scenarios in this catalog being executed.
 
 ## 2. Exercise categories: distinguish the evidence
 
@@ -21,15 +21,15 @@ The actual November 4, 2026 Cisco SNMP troubleshooting cases are separately docu
 | **READ-ONLY** | Observe existing host/service status and compare monitoring without changing production state | Record actual commands, timestamps and results |
 | **CONTROLLED LAB TEST** | Authorized, bounded experiment with validated restore steps | Describe only after setup, execution, and recovery evidence are available |
 | **HISTORICAL CASE** | Previously recorded troubleshooting with source evidence | Cite its original date and observed result |
-| **UNVALIDATED** | Scenario proposed but no technical execution available | Do not publish as a passed test |
+| **SCENARIO ONLY** | Reference scenario with no execution record | Do not report it as a passed test |
 
-Do not relabel TABLETOP or UNVALIDATED work as a successful technical recovery.
+Do not present TABLETOP or SCENARIO ONLY material as a successful technical recovery.
 
 ## 3. Authorization and environment boundaries
 
 Before any test, require:
 
-- A named responsible operator and explicit authorization from the laboratory owner or supervising instructor.
+- An identified technical operator and explicit authorization for the specific infrastructure and exercise scope.
 - A precise target host, network segment, service and test duration; no blanket permission for all systems.
 - Confirmation that no users or shared infrastructure depend on an uninterrupted service.
 - An agreed start/end window, communication channel, abort condition and documented rollback.
@@ -59,7 +59,7 @@ Never consider a dashboard indicator sufficient by itself to demonstrate recover
 
 ## 5. Exercise plan matrix
 
-The following **planned** exercises avoid directly causing unapproved outages.
+The following **reference scenarios** are designed to avoid unapproved outages.
 
 | ID | Scenario | Safe starting mode | Validation focus | Runbook |
 |---|---|---|---|---|
@@ -170,7 +170,7 @@ Possible result labels: `PLANNED`, `NOT EXECUTED`, `WALKTHROUGH COMPLETED`, `OBS
 - Justification:
 - Sanitized evidence links:
 - Lessons learned:
-- Follow-up owner / documentation:
+- Action tracking / documentation:
 ~~~
 
 Do not pre-fill hypothetical console outputs or mark any field as passed without a corresponding test.
@@ -191,7 +191,7 @@ Documentation is structurally complete when the incident-management framework, s
 
 That is **documentation completeness**, not certification of the operational infrastructure, recovery time, staffing, incident resolution or SLA compliance.
 
-Future validated exercises can be added to an existing incident record or evidence section without creating an unbounded collection of hypothetical incident reports.
+Any separately documented exercise results belong in the corresponding incident or evidence record, not as unbounded hypothetical reports.
 
 ## 11. References
 
@@ -202,4 +202,4 @@ Future validated exercises can be added to an existing incident record or eviden
 - [SNMP Historical Troubleshooting](../monitoring/snmp-troubleshooting.md)
 - [Evidence Collection](../evidence/evidence-collection-2026-11-06.md)
 
-**Status:** Exercise planning and validation framework only. No exercise results or additional incidents have been fabricated.
+**Document scope:** Scenario design, safe exercise guidance and reporting format. No execution results are attributed to this catalog.

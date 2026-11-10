@@ -13,9 +13,9 @@ O Cisco Catalyst C8200L desempenha o papel de roteador central na arquitetura do
 
 A infraestrutura combina um roteador Cisco físico, um switch Catalyst C9200L, VLANs departamentais, servidores Linux, estações Windows e plataformas de monitoramento.
 
-Este documento reúne as evidências disponíveis sobre o papel do roteador, endereçamento, monitoramento e políticas de segmentação pretendidas.
+Este documento reúne as evidências disponíveis sobre o papel do roteador, endereçamento, monitoramento e projeto de segmentação.
 
-**Importante:** A configuração atual do roteador não foi disponibilizada nas evidências analisadas. Por isso, distinguimos informações observadas de configurações que ainda não puderam ser verificadas.
+**Escopo do registro:** Esta página consolida evidências datadas da arquitetura e do equipamento, não uma exportação da configuração em execução do roteador.
 
 ## 2. Infraestrutura Física
 
@@ -29,7 +29,7 @@ A configuração do switch coletada em 04/11/2026 identifica a interface `Gi1/0/
 
 Essa evidência é compatível com a arquitetura documentada, mas não comprova isoladamente a configuração da interface física correspondente ou das subinterfaces VLAN do roteador.
 
-O nome da interface utilizada no lado do C8200L permanece sem confirmação.
+O registro do switch identifica `Gi1/0/1` no C9200L como uplink para o roteador; a interface correspondente do C8200L não é nomeada nesse registro.
 
 ## 3. Segmentação da Rede
 
@@ -66,19 +66,19 @@ Essas informações demonstram os gateways configurados nas estações no moment
 
 Entretanto, não confirmam isoladamente a configuração das subinterfaces do C8200L, a propriedade de todos os gateways ou a comunicação efetiva entre departamentos.
 
-## 5. Política de Controle de Acesso Pretendida
+## 5. Modelo de Segmentação e Controle de Acesso
 
-O modelo de segmentação previsto diferencia a rede administrativa de TI/NOC das redes departamentais, sem fio e IoT.
+O modelo de segmentação documentado diferencia a rede administrativa de TI/NOC das redes departamentais, sem fio e IoT.
 
 ### Acesso administrativo
 
 A VLAN 10 é destinada à administração e ao monitoramento.
 
-A política pretendida permite que sistemas administrativos autorizados iniciem conexões de gerenciamento com serviços e equipamentos de outras VLANs, quando necessário.
+O projeto de controle de acesso prevê que sistemas administrativos autorizados iniciem conexões de gerenciamento com serviços e equipamentos de outras VLANs, quando necessário.
 
 ### Isolamento departamental
 
-As VLANs 20, 30 e 40 devem permanecer isoladas entre si, exceto quando houver comunicação explicitamente autorizada para determinados serviços.
+O projeto de controle de acesso separa as VLANs 20, 30 e 40, exceto quando houver comunicação explicitamente autorizada para determinados serviços.
 
 ### Telefonia e autenticação
 
@@ -88,13 +88,13 @@ O acesso aos serviços dessa rede deve respeitar as necessidades das aplicaçõe
 
 ### Isolamento de Wi-Fi e IoT
 
-As VLANs 60 e 70 devem possuir acesso restrito aos recursos internos da infraestrutura corporativa.
+O projeto de controle de acesso prevê acesso restrito para as VLANs 60 e 70 aos recursos internos da infraestrutura corporativa.
 
 Exceções necessárias, incluindo a comunicação entre um ponto de acesso Wi-Fi e o servidor FreeRADIUS, precisam considerar os endereços de origem reais e os serviços utilizados.
 
-**Estado de implementação:** As regras descritas representam a política pretendida, e não ACLs comprovadamente aplicadas.
+**Escopo do registro:** As regras apresentadas são requisitos do projeto de acesso, não uma transcrição das ACLs do roteador.
 
-As evidências disponíveis não confirmam as entradas exatas das ACLs, interfaces de aplicação, direção das regras, ordem de avaliação ou testes de bloqueio bem-sucedidos.
+O material histórico contém a configuração das VLANs no switch, mas não inclui exportação das ACLs do roteador nem testes registrados dessas regras.
 
 ## 6. Monitoramento do Roteador
 
@@ -114,7 +114,7 @@ Elas não comprovam disponibilidade contínua, cobertura integral das interfaces
 
 O inventário de hosts do Zabbix também apresenta evidência de uma interface de monitoramento SNMP associada ao roteador.
 
-A configuração completa do SNMP e suas restrições de acesso ainda não foram verificadas de forma independente.
+As métricas do Zabbix/Grafana registram o monitoramento do roteador; uma exportação da configuração SNMP do próprio C8200L não integra o material coletado.
 
 ## 7. DHCP, NAT e Conectividade Externa
 

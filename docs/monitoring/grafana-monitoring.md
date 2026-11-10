@@ -246,8 +246,8 @@ The collected screenshots identify the following limitations:
 | Host addressing | Six workstation IP addresses differed between collected records |
 | Switch interface labels | Multiple panels used the same interface label |
 | Switch interface status | Both `UP` and `DOWN` states were displayed |
-| Monitoring coverage | Complete coverage of every system was not established |
-| Service availability | Continuous availability was not demonstrated |
+| Monitoring coverage | Recorded hosts, panels, and data series visible in the dated screenshots |
+| Service availability | Status and values displayed during the historical capture period |
 
 These limitations are preserved as part of the technical documentation.
 

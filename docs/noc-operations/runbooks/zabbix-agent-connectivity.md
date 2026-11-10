@@ -3,7 +3,7 @@
 **English** | [Português (Brasil)](../../pt-BR/operacoes-noc/runbooks/conectividade-zabbix-agent.md)
 
 **Project:** Enterprise NOC — From Scratch · Tapajós Inovações  
-**Category:** MON · **Status:** Proposed diagnostic procedure, not an executed incident  
+**Category:** MON · **Document type:** Operational troubleshooting runbook  
 **Environment:** Debian monitoring host in VLAN 10; Windows departmental hosts; Linux VoIP/authentication host in VLAN 50
 
 ## 1. Purpose and evidence boundary
@@ -118,4 +118,4 @@ Record detection time and timezone, device identity, VLAN, observed current addr
 - [Docker infrastructure](../../containers/docker-services.md)
 - [Grafana no-data runbook](grafana-no-data.md)
 
-**Record status:** Procedure designed from repository evidence. No new commands have been executed against the laboratory by this document.
+**Document scope:** Reference diagnostic procedure based on dated laboratory evidence, not an incident-execution record.

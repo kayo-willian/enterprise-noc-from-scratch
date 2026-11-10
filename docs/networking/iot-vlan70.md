@@ -39,7 +39,7 @@ The November 4 switch configuration records `Gi1/0/14` with access VLAN 70 and `
 | 60 | Corporate Wi-Fi | Corporate wireless connectivity |
 | 70 | IoT | Dedicated Alexa and smart-device connectivity |
 
-The network design separates IoT equipment from administrative and departmental resources. The access VLAN assignment is visible in the switch record; the application of router ACL restrictions is not demonstrated by that record.
+The documented design allocates a dedicated IoT segment, with `Gi1/0/14` assigned to VLAN 70 in the switch record. Router ACL enforcement belongs to a separate configuration layer.
 
 ## 4. IP Addressing and Operating Mode
 
