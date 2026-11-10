@@ -1,6 +1,6 @@
 # Runbook — Grafana Panel Displays No Data
 
-**English** | [Português (Brasil)](../../../pt-BR/operacoes-noc/runbooks/grafana-sem-dados.md)
+**English** | [Português (Brasil)](../../pt-BR/operacoes-noc/runbooks/grafana-sem-dados.md)
 
 **Project:** Enterprise NOC — From Scratch · Tapajós Inovações  
 **Category:** MON · **Status:** Proposed runbook; historical missing-data cases not declared resolved  

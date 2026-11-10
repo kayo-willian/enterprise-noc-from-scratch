@@ -1,6 +1,6 @@
 # Runbook — High CPU, Memory or Disk Utilization
 
-**English** | [Português (Brasil)](../../../pt-BR/operacoes-noc/runbooks/utilizacao-recursos-sistema.md)
+**English** | [Português (Brasil)](../../pt-BR/operacoes-noc/runbooks/utilizacao-recursos-sistema.md)
 
 **Project:** Enterprise NOC — From Scratch · Tapajós Inovações  
 **Category:** SYS / CNT / MON · **Status:** Proposed diagnostic procedure  

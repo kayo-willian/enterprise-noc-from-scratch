@@ -1,6 +1,6 @@
 # Runbook — DNS Resolution Failure
 
-**English** | [Português (Brasil)](../../../pt-BR/operacoes-noc/runbooks/falhas-resolucao-dns.md)
+**English** | [Português (Brasil)](../../pt-BR/operacoes-noc/runbooks/falhas-resolucao-dns.md)
 
 **Project:** Enterprise NOC — From Scratch · Tapajós Inovações  
 **Category:** DNS / NET / CNT · **Status:** Proposed runbook; not evidence of a new outage  

@@ -1,6 +1,6 @@
 # Runbook — Docker Service Failure
 
-**English** | [Português (Brasil)](../../../pt-BR/operacoes-noc/runbooks/falhas-servicos-docker.md)
+**English** | [Português (Brasil)](../../pt-BR/operacoes-noc/runbooks/falhas-servicos-docker.md)
 
 **Project:** Enterprise NOC — From Scratch · Tapajós Inovações  
 **Category:** CNT / SYS / WEB · **Status:** Proposed runbook, not a resolved incident  

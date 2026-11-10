@@ -1,6 +1,6 @@
 # Runbook — Cisco Interface Unavailable or Degraded
 
-**English** | [Português (Brasil)](../../../pt-BR/operacoes-noc/runbooks/interface-cisco-indisponivel.md)
+**English** | [Português (Brasil)](../../pt-BR/operacoes-noc/runbooks/interface-cisco-indisponivel.md)
 
 **Project:** Enterprise NOC — From Scratch · Tapajós Inovações  
 **Category:** NET / PHY / MON · **Status:** Proposed diagnostic procedure  
