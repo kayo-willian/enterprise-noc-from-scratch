@@ -31,9 +31,9 @@ Um processo consistente de gerenciamento de incidentes contribui para:
 - Preservação das evidências.
 - Identificação de problemas recorrentes.
 
-**Status de implementação:** Este documento define um modelo operacional proposto. Ele não estabelece que todas as etapas do processo já tenham sido implementadas ou executadas no laboratório.
+**Escopo documental:** Este capítulo estabelece um processo de referência para gerenciamento de incidentes no laboratório. Intervenções e exercícios executados, quando registrados, são documentados separadamente.
 
-As atividades históricas de troubleshooting são identificadas separadamente dos procedimentos propostos.
+As atividades históricas de troubleshooting são diferenciadas dos procedimentos reutilizáveis de resposta.
 
 ## 2. Ambiente Operacional
 
@@ -119,7 +119,7 @@ A classificação deve distinguir a perda de visibilidade do monitoramento da in
 
 ## 4. Objetivos do Gerenciamento de Incidentes
 
-O processo proposto possui seis objetivos principais:
+O modelo de gerenciamento de incidentes possui seis objetivos principais:
 
 1. Detectar eventos potencialmente relevantes.
 2. Determinar se existe uma interrupção real do serviço.
@@ -148,7 +148,7 @@ Os incidentes podem ser classificados conforme a camada da infraestrutura afetad
 | WEB | Aplicações internas e proxy reverso | Aplicação indisponível pelo endereço esperado |
 | PHY | Cabeamento e equipamentos físicos | Defeito físico comprovado em cabo ou enlace |
 
-Essas categorias são identificadores organizacionais propostos.
+Essas categorias são identificadores de referência para organizar registros de incidentes.
 
 Elas não representam uma configuração existente de sistema de chamados ou plataforma de gerenciamento de incidentes já implantada.
 
@@ -160,7 +160,7 @@ A prioridade de um incidente deve considerar dois fatores:
 
 **Urgência:** Com que rapidez a situação precisa ser tratada para evitar ou reduzir prejuízos operacionais?
 
-O modelo proposto para o laboratório é:
+O modelo de referência utilizado na documentação é:
 
 | Prioridade | Classificação | Descrição do Impacto | Cenário Ilustrativo |
 |---|---|---|---|
@@ -189,11 +189,11 @@ O motivo de qualquer alteração deve ser registrado.
 
 Este documento não estabelece prazos contratuais de atendimento, garantias de recuperação ou acordos de nível de serviço (SLA).
 
-Metas futuras de resposta deverão ser definidas conforme a estrutura de operação, as necessidades do ambiente e sua capacidade efetivamente medida.
+Esta documentação não atribui SLA contratual nem metas de resposta mensuradas ao processo do laboratório.
 
 ## 7. Ciclo de Vida dos Incidentes
 
-O ciclo operacional proposto possui sete etapas.
+O ciclo de referência possui sete etapas.
 
 ```text
 EVENTO OU COMUNICAÇÃO
@@ -360,7 +360,7 @@ O escalonamento ocorre quando um incidente não pode ser investigado ou resolvid
 
 O laboratório não possui uma estrutura de produção com escala de plantão ou equipes designadas comprovada.
 
-Portanto, as responsabilidades abaixo representam funções técnicas propostas, e não cargos oficialmente atribuídos.
+As responsabilidades abaixo descrevem funções técnicas do fluxo de referência, não cargos formalmente atribuídos.
 
 | Função Técnica | Responsabilidade |
 |---|---|
@@ -518,7 +518,7 @@ O estado do monitoramento deve ser avaliado em contexto antes de declarar um inc
 
 ## 12. Modelo de Registro de Incidentes
 
-O modelo a seguir pode ser utilizado para documentar incidentes futuros.
+O modelo reutilizável a seguir define um formato consistente para registros de incidentes.
 
 Ele não representa um relatório de incidente já concluído.
 
@@ -596,11 +596,11 @@ Um possível formato de identificação é:
 
 `NOC-YYYYMMDD-001`
 
-Esse formato é uma proposta para relatórios futuros, não um sistema de numeração de incidentes já existente.
+Esse formato é um modelo de relatório, não uma afirmação de implantação de sistema de chamados numerados.
 
 ## 13. Exemplos Ilustrativos de Classificação
 
-Os exemplos abaixo demonstram como o processo proposto poderia classificar situações operacionais.
+Os exemplos abaixo ilustram a classificação de situações operacionais pelo processo de referência.
 
 São **cenários hipotéticos**, não novos incidentes apresentados como ocorrências reais do laboratório.
 
@@ -630,7 +630,7 @@ Uma revisão técnica periódica pode examinar:
 - Efetividade das ações corretivas.
 - Oportunidades de melhoria da documentação operacional.
 
-Entre os possíveis indicadores futuros estão quantidade de incidentes por categoria, reincidências, conclusão das validações e tempo utilizado nas investigações de incidentes confirmados.
+Os indicadores de referência deste modelo incluem quantidade de incidentes por categoria, reincidências, resultados das validações e duração das investigações registradas.
 
 Esses indicadores só devem ser apresentados como métricas reais de desempenho do NOC quando forem medidos a partir de registros operacionais correspondentes.
 
@@ -653,7 +653,7 @@ O documento complementar [Simulação de Incidentes e Validação da Recuperaç�
 
 ## 16. Escopo da Documentação
 
-Este documento estabelece um modelo proposto de gerenciamento de incidentes adaptado à infraestrutura do Enterprise NOC.
+Este documento define o modelo de referência de gerenciamento de incidentes para a infraestrutura do Enterprise NOC.
 
 Ele define classificação, priorização, triagem, investigação, escalonamento, validação, encerramento e elaboração de relatórios.
 
@@ -669,7 +669,7 @@ O documento não afirma:
 - Resolução de todos os alertas históricos.
 - Execução dos exemplos hipotéticos de incidentes.
 
-Este modelo é acompanhado por seis runbooks técnicos e pelo procedimento de simulação de incidentes e validação da recuperação. A publicação documenta os métodos propostos, sem comprovar execução ou recuperação operacional.
+Este modelo é acompanhado por seis runbooks técnicos e pelo procedimento de simulação de incidentes e validação da recuperação. A publicação documenta os métodos operacionais; execuções ou recuperações históricas são descritas apenas nos respectivos registros datados.
 
 ## 17. Documentação Relacionada
 
@@ -687,7 +687,7 @@ Este modelo é acompanhado por seis runbooks técnicos e pelo procedimento de si
 
 ---
 
-**Classificação do documento:** Processo operacional NOC proposto.  
+**Classificação do documento:** Processo de referência de gerenciamento de incidentes NOC.  
 **Referências das evidências históricas:** 04 a 06/11/2026.  
 **Procedimentos NOC relacionados:** Seis runbooks técnicos bilíngues e o modelo de simulação e validação de incidentes, vinculados na Seção 15.
 

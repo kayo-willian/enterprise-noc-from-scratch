@@ -31,9 +31,9 @@ A consistent incident management process improves:
 - Preservation of evidence.
 - Identification of recurring problems.
 
-**Implementation status:** This document defines a proposed operational framework. It does not establish that the entire incident management process has already been implemented or exercised in the laboratory.
+**Document scope:** This chapter provides the laboratory's incident-management reference process. Dated interventions and executed exercises, where available, are documented separately.
 
-Historical troubleshooting activities are identified separately from proposed procedures.
+Historical troubleshooting activities are distinguished from reusable response procedures.
 
 ## 2. Operational Environment
 
@@ -119,7 +119,7 @@ Incident classification must distinguish loss of monitoring visibility from conf
 
 ## 4. Incident Management Objectives
 
-The proposed incident management process has six objectives:
+The incident management framework has six objectives:
 
 1. Detect potentially relevant infrastructure events.
 2. Determine whether an actual service disruption exists.
@@ -148,7 +148,7 @@ Incidents can be categorized according to the affected infrastructure layer.
 | WEB | Internal web applications and reverse proxy | Required application unavailable through its expected endpoint |
 | PHY | Cabling and physical equipment | Verified physical link or cable fault |
 
-These categories are proposed organizational identifiers.
+These categories are reference identifiers for organizing incident records.
 
 They do not represent an existing ticketing configuration or a deployed incident management platform.
 
@@ -160,7 +160,7 @@ Incident priority should consider two factors:
 
 **Urgency:** How quickly must the condition be addressed to prevent or reduce operational disruption?
 
-The following model is proposed for the laboratory.
+The documentation uses the following laboratory reference model.
 
 | Priority | Classification | Impact Description | Illustrative Scenario |
 |---|---|---|---|
@@ -189,11 +189,11 @@ The reason for any priority change should be recorded.
 
 This document does not establish contractual response times, recovery guarantees, or service-level agreements.
 
-Any future response targets must be defined according to the environment's staffing, operational requirements, and measured capabilities.
+No contractual SLA or measured response-time target is assigned to this laboratory process.
 
 ## 7. Incident Lifecycle
 
-The proposed lifecycle consists of seven stages.
+The reference incident lifecycle consists of seven stages.
 
 ```text
 EVENT OR REPORT
@@ -360,7 +360,7 @@ Escalation is required when an incident cannot be appropriately investigated or 
 
 The laboratory does not have a verified production staffing or on-call structure.
 
-The following responsibilities are therefore proposed technical functions rather than documented assigned positions.
+The following responsibilities describe technical functions in the reference workflow, not formally assigned positions.
 
 | Function | Responsibility |
 |---|---|
@@ -518,7 +518,7 @@ A monitoring status must be evaluated in context before an incident is declared.
 
 ## 12. Incident Record Template
 
-The following template is intended for future documented incidents.
+The following reusable template defines a consistent incident record format.
 
 It is not a completed incident report.
 
@@ -596,11 +596,11 @@ A possible identifier format is:
 
 `NOC-YYYYMMDD-001`
 
-This format is proposed for future reports and does not establish an existing incident numbering system.
+This is a reporting template, not a claim that a numbered ticketing system was deployed.
 
 ## 13. Illustrative Incident Classification
 
-The following examples demonstrate how the proposed process could classify operational situations.
+The following examples illustrate how the reference process classifies operational situations.
 
 They are **hypothetical scenarios**, not additional incidents claimed to have occurred in the laboratory.
 
@@ -630,7 +630,7 @@ A periodic technical review may examine:
 - Effectiveness of corrective actions.
 - Opportunities to improve operational documentation.
 
-Possible future indicators include incident counts by category, repeated failures, validation completion, and time spent investigating confirmed incidents.
+Reference indicators for this framework include incident counts by category, repeated failures, validation outcomes, and time spent investigating documented incidents.
 
 These indicators should only be reported as actual NOC performance metrics once they are measured from corresponding operational records.
 
@@ -653,7 +653,7 @@ The companion [Incident Simulation and Recovery Validation](incident-simulation-
 
 ## 16. Documentation Scope
 
-This document establishes a proposed incident management framework adapted to the Enterprise NOC infrastructure.
+This document defines the incident-management reference framework for the Enterprise NOC infrastructure.
 
 It defines classification, prioritization, triage, investigation, escalation, validation, closure, and incident reporting.
 
@@ -669,7 +669,7 @@ It does not claim:
 - Resolution of all historical alerts.
 - Execution of the hypothetical incident examples.
 
-This framework is accompanied by the six technical runbooks and the incident simulation and recovery validation procedure. Their publication documents the proposed operational method; it does not demonstrate live execution or recovery.
+This framework is accompanied by the six technical runbooks and the incident simulation and recovery validation procedure. Their publication documents the operational method; historical execution or recovery is described only in the relevant dated evidence records.
 
 ## 17. Related Documentation
 
@@ -687,7 +687,7 @@ This framework is accompanied by the six technical runbooks and the incident sim
 
 ---
 
-**Document classification:** Proposed NOC operational process.  
+**Document classification:** NOC incident-management reference process.  
 **Historical evidence references:** November 4–6, 2026.  
 **Related NOC procedures:** Six bilingual technical runbooks and the incident simulation and recovery validation framework, linked in Section 15.
 

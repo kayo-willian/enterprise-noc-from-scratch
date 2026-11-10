@@ -4,12 +4,12 @@
 
 **Projeto:** Enterprise NOC — From Scratch · Tapajós Inovações  
 **Área:** NOC Operations & Troubleshooting  
-**Status documental:** **Plano de exercícios e modelo de registro propostos** — nenhuma nova simulação é declarada executada  
+**Tipo de documento:** **Catálogo de cenários e modelo de registro de exercícios** — não é histórico de execução  
 **Infraestrutura:** Cisco C8200L/C9200L, VLANs 10–70, Debian, Docker, Zabbix, Grafana e Uptime Kuma
 
 ## 1. Objetivo
 
-Desenvolver capacidade de resposta a incidentes exige mais do que interpretar screenshots. Este documento define como planejar exercícios **seguros, controlados e reversíveis**, validar a recuperação e preservar evidências. Os exercícios descritos são futuros. Não devem ser apresentados como incidentes concluídos sem execução registrada.
+Desenvolver capacidade de resposta a incidentes exige mais do que interpretar screenshots. Este documento define como planejar exercícios **seguros, controlados e reversíveis**, validar a recuperação e preservar evidências. Os cenários descritos são exercícios de referência, não recuperações registradas. Eventuais registros datados de execução permanecem separados deste catálogo.
 
 Os casos SNMP de 04/11/2026 são intervenções históricas descritas separadamente. As capturas Zabbix/Grafana de 06/11 mostram condições de monitoramento, não comprovação de que as simulações abaixo foram executadas.
 
@@ -21,9 +21,9 @@ Os casos SNMP de 04/11/2026 são intervenções históricas descritas separadame
 | **READ-ONLY** | Observar host/serviço sem alterar seu estado | Registrar comandos, horário e resultados reais |
 | **CONTROLLED LAB TEST** | Experimento autorizado e delimitado, com restauração validada | Publicar resultado somente após execução e evidência de recuperação |
 | **HISTORICAL CASE** | Troubleshooting anterior com registro original | Citar data e resultado do documento de origem |
-| **UNVALIDATED** | Cenário proposto sem teste realizado | Não descrever como teste aprovado |
+| **SCENARIO ONLY** | Cenário de referência sem registro de execução | Não apresentar como teste aprovado |
 
-Um exercício TABLETOP ou UNVALIDATED não deve ser apresentado como recuperação comprovada.
+Um exercício TABLETOP ou SCENARIO ONLY não constitui registro de recuperação técnica.
 
 ## 3. Autorização e limites do ambiente
 
@@ -59,7 +59,7 @@ Não considerar indicador de dashboard, sozinho, prova de recuperação funciona
 
 ## 5. Matriz de exercícios
 
-São exercícios **planejados** que não exigem provocar interrupções sem autorização.
+São **cenários de referência** que não exigem provocar interrupções sem autorização.
 
 | ID | Cenário | Modalidade inicial segura | Foco da validação | Runbook |
 |---|---|---|---|---|
@@ -191,7 +191,7 @@ A documentação está estruturalmente concluída quando o gerenciamento de inci
 
 Isso é **conclusão documental**, não certificação da infraestrutura, tempo de recuperação, estrutura de pessoal, resolução de todos os incidentes ou conformidade com SLA.
 
-Exercícios futuros validados poderão ser incorporados aos registros de incidentes ou evidências existentes, evitando criação excessiva de relatórios hipotéticos.
+Resultados de exercícios registrados separadamente pertencem aos documentos de incidentes ou evidências correspondentes, sem gerar relatórios hipotéticos adicionais.
 
 ## 11. Referências
 
@@ -202,4 +202,4 @@ Exercícios futuros validados poderão ser incorporados aos registros de inciden
 - [Troubleshooting Histórico SNMP](../monitoramento/diagnostico-snmp.md)
 - [Registro da Coleta de Evidências](../evidencias/registro-coleta-2026-11-06.md)
 
-**Status:** Modelo de planejamento e validação. Nenhum resultado ou incidente adicional foi inventado.
+**Escopo documental:** Catálogo de cenários, orientações seguras e modelo de registro. O documento não atribui resultados de execução a esses cenários.
