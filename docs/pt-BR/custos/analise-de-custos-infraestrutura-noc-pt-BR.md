@@ -132,7 +132,7 @@ Uma empresa começa sem a infraestrutura de referência e precisa comprar os equ
 
 | ID | Item / referência | Qtd. | Preço unit. | A — subtotal | B — subtotal | Situação | Fonte |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| EQ-026 | Telefones IP Grandstream (modelo a verificar) — Grandstream GRP2601, modelo real pendente | 2 un. | R$ 249,99 | R$ 499,98 | — | Qtd. e modelo estimados | RF-19 |
+| EQ-026 | Telefones IP Grandstream — GRP2601 utilizado como referência comercial; o modelo físico não consta das evidências de inventário | 2 un. | R$ 249,99 | R$ 499,98 | — | Qtd. e modelo estimados | RF-19 |
 | EQ-027 | Headsets / acessórios de telefonia | 0 un. | Pendente | — | — | Opcional / validar | — |
 
 **Observação da categoria:** Os dois Grandstream GRP2601 são **hipótese de quantidade e modelo**, sujeita a conferência. Fontes, PoE e demais acessórios devem ser checados.
@@ -192,7 +192,7 @@ Os valores abaixo são **hipóteses comerciais editáveis**, calculadas a partir
 | MO-005 | Certificação e teste dos pontos de rede | 12 | 2.4000000000000004 | R$ 55,00 | R$ 132,00 | Teste simples com testador de continuidade; NÃO chamar de certificação de enlace CAT6. |
 | MO-006 | Montagem, fixação e organização do rack | 1 | 3 | R$ 55,00 | R$ 165,00 | Inclui régua, patch panel e acomodação dos equipamentos. |
 | MO-007 | Montagem e revisão dos computadores | 9 | 6.75 | R$ 50,00 | R$ 337,50 | Quantidade vinculada à premissa de PCs. |
-| MO-008 | Instalação de sistema operacional e drivers | 9 | 6.75 | R$ 50,00 | R$ 337,50 | Quantidade vinculada à premissa de PCs; SO a verificar. |
+| MO-008 | Instalação de sistema operacional e drivers | 9 | 6.75 | R$ 50,00 | R$ 337,50 | Quantidade vinculada à premissa financeira de nove PCs; não equivale ao inventário físico. |
 | MO-009 | Endereçamento e testes de conectividade | 9 | 2.25 | R$ 50,00 | R$ 112,50 | Por PC; inclui validação DHCP/rede conforme cenário. |
 | MO-010 | Planejamento IPv4, VLANs e segmentação | 1 | 3 | R$ 90,00 | R$ 270,00 | VLANs 10,20,30,40,50,60,70; projeto técnico. |
 | MO-011 | Configuração do Catalyst 9200L | 1 | 4 | R$ 90,00 | R$ 360,00 | VLANs, access/trunk, segurança e validação; papéis a conferir. |
@@ -202,7 +202,7 @@ Os valores abaixo são **hipóteses comerciais editáveis**, calculadas a partir
 | MO-015 | Integração dos dispositivos de IoT | 1 | 1 | R$ 50,00 | R$ 50,00 | Configuração de Alexa/lâmpada por participantes; não atribuir autoria. |
 | MO-016 | Implantação do FreeRADIUS e testes | 1 | 3 | R$ 70,00 | R$ 210,00 | Autenticação e integração na rede corporativa. |
 | MO-017 | Implantação de Asterisk / VoIP | 1 | 4 | R$ 70,00 | R$ 280,00 | Instalação e configuração conforme evidências disponíveis. |
-| MO-018 | Instalação e hardening básico do host Linux | 1 | 3 | R$ 70,00 | R$ 210,00 | Host Docker; distribuição e medidas efetivas a verificar. |
+| MO-018 | Instalação e hardening básico do host Linux | 1 | 3 | R$ 70,00 | R$ 210,00 | Serviço hipotético de implantação de host Linux na simulação financeira. |
 | MO-019 | Instalação Docker Engine e Compose | 1 | 2 | R$ 70,00 | R$ 140,00 | Rede, diretórios, políticas de reinício e testes. |
 | MO-020 | Implantação MariaDB + Zabbix | 1 | 6 | R$ 70,00 | R$ 420,00 | Zabbix Server e interface Web, volumes e conexões. |
 | MO-021 | Implantação do Grafana e datasources | 1 | 3 | R$ 70,00 | R$ 210,00 | Integração com Zabbix, usuários e painéis. |
@@ -323,14 +323,14 @@ Os campos **pendentes não foram zerados** para caber em uma estimativa mais bai
 
 ## 11. Fontes de preços registradas na planilha
 
-As 28 referências abaixo foram **transcritas do arquivo Excel recebido** e estavam datadas de **06/11/2026**. Os preços anunciados podem mudar; links de lojas podem apontar para páginas de busca, produtos similares, condições fiscais específicas ou anúncios indisponíveis. **Não houve nova verificação independente das ofertas para este relatório Markdown.**
+As 28 referências abaixo foram **registradas na planilha Excel do projeto** e estavam datadas de **06/11/2026**. Os preços anunciados podem mudar; links de lojas podem apontar para páginas de busca, produtos similares, condições fiscais específicas ou anúncios indisponíveis. **Não houve nova verificação independente das ofertas para este relatório Markdown.**
 
 | ID | Produto de referência | Fornecedor / referência | Preço anunciado | Consulta | Link e ressalva |
 | --- | --- | --- | --- | --- | --- |
 | RF-01 | Cisco Catalyst C8200L-1N-4T | Switches Express — C8200L-1N-4T | R$ 17.787,82 | 06/11/2026 | [Consultar anúncio](https://switches.express/produto/router-cisco-c8200l-1n-4t/). Preço de referência; apenas CNPJ contribuinte ICMS SP; confirme o SKU. |
 | RF-02 | Cisco Catalyst C9200L-24P-4G-A | MultiNetwork — C9200L-24P-4G-A | R$ 18.800,00 | 06/11/2026 | [Consultar anúncio](https://www.multinetwork.com.br/produto/switch-cisco-c9200l-24p-4g-a/). Preço indicativo para empresa em SP; disponibilidade e faturamento sob análise. |
 | RF-03 | Roteador Intelbras, modelo semelhante | Loja Intelbras — W5 1200 GS | R$ 232,76 | 06/11/2026 | [Consultar anúncio](https://loja.intelbras.com.br/w5-roteador-1200gs/p). Modelo comparativo, não é confirmação do modelo instalado. |
-| RF-04 | Echo Show com tela, comparativo | Mercado Livre (busca) — Echo Show 5 3ª geração | R$ 599,00 | 06/11/2026 | [Consultar anúncio](https://lista.mercadolivre.com.br/amazon-echo-show-5-3rd-gen-preto). Preço visto em listagem; anunciante, modelo real e frete a verificar. |
+| RF-04 | Echo Show com tela, comparativo | Mercado Livre (busca) — Echo Show 5 3ª geração | R$ 599,00 | 06/11/2026 | [Consultar anúncio](https://lista.mercadolivre.com.br/amazon-echo-show-5-3rd-gen-preto). Preço histórico de listagem comercial, sem cotação formal ou frete incluído. |
 | RF-05 | Lâmpada inteligente Wi-Fi E27 | KaBuM! — Intelbras ELW 1001 | R$ 42,66 | 06/11/2026 | [Consultar anúncio](https://www.kabum.com.br/produto/1043228/lampada-inteligente-led-wi-fi-elw-1001-intelbras). Modelo comparativo compatível com Alexa; modelo real desconhecido. |
 | RF-06 | Bocal E27 com chave | Central Elétrica — PVC E27 | R$ 8,12 | 06/11/2026 | [Consultar anúncio](https://www.lojacentraleletrica.com.br/produto/soquete-porta-lampada-com-chave-pvc-latao-e27). Somente se adquirido à parte. |
 | RF-07 | Mini rack de parede 19" 12U | Solução Cabos — 12U x 570 mm | R$ 650,56 | 06/11/2026 | [Consultar anúncio](https://www.solucaocabos.com.br/mini-rack-de-parede-19--12us-x-570mm-branco/p). REFERÊNCIA de rack; medir U, profundidade, carga e tipo real. |

@@ -178,7 +178,7 @@ The `/24` networks are derived from the observed host addresses and subnet masks
 
 The collected workstation evidence also identifies `.1` as the default gateway in the documented departmental networks.
 
-The available evidence does not include the current router configuration required to verify the gateway interfaces, DHCP settings, ACLs, or inter-VLAN routing policies.
+The collected switch snapshot does not contain the router configuration, so it cannot establish gateway interfaces, DHCP pools, ACLs, or routed forwarding between VLANs.
 
 ### Addressing Consistency
 

@@ -178,7 +178,7 @@ As redes `/24` foram derivadas dos endereços e das máscaras registrados nos co
 
 As capturas das estações também identificam `.1` como gateway padrão nas redes departamentais documentadas.
 
-O material disponível não inclui a configuração atual do roteador necessária para verificar as interfaces de gateway, DHCP, ACLs e políticas de roteamento entre VLANs.
+A captura do switch não contém a configuração do roteador; portanto, não estabelece interfaces de gateway, pools DHCP, ACLs ou encaminhamento entre VLANs.
 
 ### Consistência do Endereçamento
 
@@ -233,7 +233,7 @@ Essas capturas demonstram a existência de dados de monitoramento no momento da 
 
 Entretanto, não apresentam a configuração final completa do SNMP.
 
-Alguns painéis do Grafana também possuem identificações repetidas de interfaces, que precisam ser verificadas nos respectivos itens de monitoramento.
+Alguns painéis históricos do Grafana apresentam identificações repetidas de interfaces. A captura não inclui um mapeamento completo entre os rótulos e os itens de monitoramento.
 
 ## 8. Escopo da Captura Histórica
 
