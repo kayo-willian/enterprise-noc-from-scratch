@@ -316,11 +316,11 @@ Esta lista auxilia a manutenção; não afirma que todos os testes já foram exe
 
 ## 12. Integridade das evidências, privacidade e limites
 
-O portal público é uma apresentação técnica educacional, não uma interface de controle da infraestrutura. Ele aponta para documentação sanitizada do repositório em vez de publicar senhas, certificados privados, dumps de bancos de dados ou volumes brutos persistentes. As capturas são evidências de observação; não devem ser apresentadas como estado atual da rede ou prova de correção de incidentes.
+O portal público é um estudo de caso técnico, não uma interface de controle da infraestrutura. Ele aponta para documentação sanitizada do repositório em vez de publicar senhas, certificados privados, dumps de bancos de dados ou volumes brutos persistentes. As capturas são evidências de observação; não devem ser apresentadas como estado atual da rede ou prova de correção de incidentes.
 
 Na inclusão de novas imagens, devem ser evitadas credenciais, tokens secretos, comunidades SNMP reais, dados desnecessários que identifiquem dispositivos ou detalhes internos excessivos. As explicações devem permanecer alinhadas aos documentos técnicos de origem. Informações que não podem ser recuperadas devem ser delimitadas quando relevante, sem virar tarefas eternas de verificação.
 
-A identidade empresarial fictícia da Tapajós Inovações deve permanecer distinta do laboratório físico real do SENAC e de sua implementação.
+Tapajós Inovações é o cenário corporativo fictício apresentado no portal; os equipamentos, as fotografias, as configurações e as capturas de monitoramento registram a implementação física do laboratório do projeto.
 
 ## 13. Escopo histórico e possíveis evoluções
 

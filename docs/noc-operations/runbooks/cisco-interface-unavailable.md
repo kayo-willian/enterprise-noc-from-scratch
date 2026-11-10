@@ -59,7 +59,7 @@ Use specific interface commands rather than dumping a full configuration to publ
 
 | Observation | Possible meaning / required check |
 |---|---|
-| `administratively down` | Interface intentionally disabled; confirm owner and intended state |
+| `administratively down` | Interface intentionally disabled; review the approved configuration and expected administrative state |
 | `notconnect` or physical link absent | Endpoint power, cable, transceiver or physical path may matter |
 | Link up but VLAN traffic missing | Verify access VLAN, trunk tagging, MAC learning and upstream routing |
 | CRC/input errors increasing | Investigate physical medium, connectors and interface quality |

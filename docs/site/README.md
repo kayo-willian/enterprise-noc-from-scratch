@@ -316,11 +316,11 @@ This is a maintenance checklist, not a statement that every test above has alrea
 
 ## 12. Evidence integrity, privacy and boundaries
 
-The public site is an educational technical showcase, not a control plane. It deliberately links to sanitized repository documentation rather than embedding passwords, private certificates, database dumps or raw persistent volumes. Its screenshots are observational evidence; do not reinterpret them as current system health or use them to claim an incident was fixed.
+The public site is a technical case study, not an infrastructure control plane. It deliberately links to sanitized repository documentation rather than embedding passwords, private certificates, database dumps or raw persistent volumes. Its screenshots are observational evidence; do not reinterpret them as current system health or use them to claim an incident was fixed.
 
 Avoid exposing credentials, secret tokens, real SNMP community strings, personally identifying device information or unnecessary internal configuration details when adding new captures. Keep technical explanations aligned with the corresponding source documentation; unknown facts that cannot reasonably be recovered should be described once as documentation boundaries, not carried indefinitely as mandatory future tasks.
 
-The fictional Tapajós Inovações business identity must remain distinguishable from the real SENAC laboratory and its physical implementation.
+Tapajós Inovações is the fictional corporate scenario presented by the site; the equipment, photographs, configurations and monitoring captures document the project's physical laboratory implementation.
 
 ## 13. Historical scope and future changes
 

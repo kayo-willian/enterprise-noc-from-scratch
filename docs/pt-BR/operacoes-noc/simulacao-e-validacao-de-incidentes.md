@@ -29,7 +29,7 @@ Um exercício TABLETOP ou SCENARIO ONLY não constitui registro de recuperação
 
 Antes de qualquer teste, exigir:
 
-- Responsável técnico identificado e autorização explícita do laboratório ou instrutor supervisor.
+- Operador técnico identificado e autorização explícita para o equipamento e o escopo do exercício.
 - Host, VLAN, serviço e duração definidos; autorização não é genérica para toda a rede.
 - Confirmação de que usuários ou serviços compartilhados não dependem de continuidade durante o teste.
 - Janela de início/fim, comunicação, condição de interrupção e reversão documentadas.

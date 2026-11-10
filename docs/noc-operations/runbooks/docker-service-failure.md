@@ -109,7 +109,7 @@ Use an approved functional check against a published endpoint as appropriate. A 
 
 - Resolve missing service dependencies or storage exhaustion using a controlled procedure.
 - Restore an approved configuration from a known-good version when a mismatch is confirmed.
-- Consider controlled restart of the affected service **only** when the service owner accepts the temporary interruption.
+- Consider a controlled restart of the affected service **only** when the temporary interruption is explicitly authorized.
 - Recreate containers or change images only with persistent data, backup, migration and rollback requirements understood.
 
 Never delete `zabbix-db` or persistent volumes as a routine restart method. `latest` image tags in the inventory do not establish fixed application versions; avoid uncontrolled pulls.

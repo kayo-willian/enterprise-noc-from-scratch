@@ -29,7 +29,7 @@ Do not present TABLETOP or SCENARIO ONLY material as a successful technical reco
 
 Before any test, require:
 
-- A named responsible operator and explicit authorization from the laboratory owner or supervising instructor.
+- An identified technical operator and explicit authorization for the specific infrastructure and exercise scope.
 - A precise target host, network segment, service and test duration; no blanket permission for all systems.
 - Confirmation that no users or shared infrastructure depend on an uninterrupted service.
 - An agreed start/end window, communication channel, abort condition and documented rollback.
@@ -170,7 +170,7 @@ Possible result labels: `PLANNED`, `NOT EXECUTED`, `WALKTHROUGH COMPLETED`, `OBS
 - Justification:
 - Sanitized evidence links:
 - Lessons learned:
-- Follow-up owner / documentation:
+- Action tracking / documentation:
 ~~~
 
 Do not pre-fill hypothetical console outputs or mark any field as passed without a corresponding test.
