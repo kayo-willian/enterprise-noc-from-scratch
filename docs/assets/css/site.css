@@ -28,3 +28,11 @@ dialog.lightbox{border:1px solid #627468;border-radius:19px;max-width:min(1080px
 .service:hover .service-photo img{transform:scale(1.07);opacity:1}
 .service-mark{position:relative;z-index:2;margin-top:-48px;margin-bottom:18px;background:#293b2d;box-shadow:0 8px 18px rgba(0,0,0,.3)}
 .service .tag{background:#1b251e;border-color:rgba(178,228,179,.36);z-index:2}
+
+/* Link to the full bilingual technical FAQ beneath the four homepage questions */
+.faq-more{margin-top:22px;padding:25px 29px;display:flex;align-items:center;justify-content:space-between;gap:24px;background:linear-gradient(110deg,#293b2e,#242e27);border:1px solid rgba(153,237,166,.28);border-radius:16px}
+.faq-more-copy{min-width:0}
+.faq-more-copy p{font-size:.91rem;color:#d8e7da;line-height:1.7;margin:12px 0 0;max-width:690px}
+.faq-more .btn{flex-shrink:0}
+@media(max-width:760px){.faq-more{align-items:flex-start;flex-direction:column}.faq-more .btn{width:auto}}
+@media(max-width:480px){.faq-more{padding:21px}.faq-more .btn{width:100%}}
