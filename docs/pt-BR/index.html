@@ -1,1278 +1,164 @@
-<!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Estudo técnico de um laboratório NOC com infraestrutura física e virtual: redes Cisco, Linux, Docker, Zabbix e Grafana."><meta name="robots" content="index,follow">
-<meta property="og:title" content="Enterprise NOC — From Scratch | Laboratório de Infraestrutura"><meta property="og:description" content="Estudo técnico de um laboratório NOC com infraestrutura física e virtual: redes Cisco, Linux, Docker, Zabbix e Grafana."><meta property="og:type" content="website">
-<title>Enterprise NOC — From Scratch | Laboratório de Infraestrutura</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<style>
-        :root {
-            /* Tema Claro (Fallback) */
-            --bg-base: #f8fafc;
-            --bg-card: rgba(255, 255, 255, 0.85);
-            --bg-card-solid: #ffffff;
-            --border-light: rgba(226, 232, 240, 0.9);
-            --primary: #0284c7;
-            --primary-dark: #0369a1;
-            --primary-light: #e0f2fe;
-            --accent: #2563eb;
-            --emerald: #059669;
-            --amber: #d97706;
-            --danger: #dc2626;
-            --text-dark: #0f172a;
-            --text-muted: #475569;
-            --text-subtle: #64748b;
-            --header-bg: rgba(255, 255, 255, 0.9);
-            --terminal-bg: #0b1120;
-            --terminal-border: rgba(56, 189, 248, 0.25);
-            --font-display: "Space Grotesk", sans-serif;
-            --font-sans: "Plus Jakarta Sans", sans-serif;
-            --font-mono: "JetBrains Mono", monospace;
-            --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            --shadow-float: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
-            --shadow-glow: 0 0 35px -5px rgba(2, 132, 199, 0.25);
-            --aurora-opacity: 0.12;
-            --divider-color: rgba(203, 213, 225, 0.9);
-        }
-
-        /* Tema Escuro Cyberpunk NOC (Padrão) */
-        [data-theme="dark"] {
-            --bg-base: #070b14;
-            --bg-card: rgba(15, 23, 42, 0.72);
-            --bg-card-solid: #0f172a;
-            --border-light: rgba(51, 65, 85, 0.65);
-            --primary: #38bdf8;
-            --primary-dark: #0284c7;
-            --primary-light: rgba(56, 189, 248, 0.12);
-            --accent: #60a5fa;
-            --emerald: #10b981;
-            --amber: #f59e0b;
-            --danger: #ef4444;
-            --text-dark: #f8fafc;
-            --text-muted: #94a3b8;
-            --text-subtle: #64748b;
-            --header-bg: rgba(11, 17, 33, 0.88);
-            --terminal-bg: #030712;
-            --terminal-border: rgba(56, 189, 248, 0.35);
-            --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-            --shadow-float: 0 20px 30px -5px rgba(0, 0, 0, 0.5);
-            --shadow-glow: 0 0 45px -5px rgba(56, 189, 248, 0.35);
-            --aurora-opacity: 0.22;
-            --divider-color: rgba(51, 65, 85, 0.8);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: background-color 0.25s ease, border-color 0.25s ease;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-sans);
-            background-color: var(--bg-base);
-            color: var(--text-dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-            min-height: 100vh;
-        }
-
-        /* Luzes Aurora em Background */
-        .aurora-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .aurora-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: var(--aurora-opacity);
-            animation: floatOrb 18s infinite alternate ease-in-out;
-        }
-
-        .orb-cyan {
-            top: -10%;
-            left: 15%;
-            width: 550px;
-            height: 550px;
-            background: radial-gradient(circle, #0284c7, #38bdf8);
-        }
-
-        .orb-indigo {
-            top: 35%;
-            right: 5%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, #4f46e5, #818cf8);
-            animation-duration: 22s;
-            animation-direction: alternate-reverse;
-        }
-
-        .orb-emerald {
-            bottom: -10%;
-            left: 25%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, #059669, #10b981);
-            animation-duration: 26s;
-        }
-
-        @keyframes floatOrb {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(70px, -50px) scale(1.15); }
-            100% { transform: translate(-50px, 60px) scale(0.92); }
-        }
-
-        /* Glassmorphism Classes */
-        .glass-panel {
-            background: var(--bg-card);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            border: 1px solid var(--border-light);
-            border-radius: 16px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .container {
-            max-width: 1260px;
-            margin: 0 auto;
-            padding: 0 24px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Faixa Superior */
-        .top-notification {
-            background: linear-gradient(90deg, #090e1a, #111827);
-            color: #94a3b8;
-            font-size: 0.8rem;
-            padding: 6px 0;
-            text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            position: relative;
-            z-index: 101;
-        }
-
-        .top-notification span.badge-pill {
-            background: #0284c7;
-            color: #fff;
-            padding: 2px 8px;
-            border-radius: 9999px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            margin-right: 6px;
-            letter-spacing: 0.5px;
-        }
-
-        /* Header / Navbar */
-        header.site-header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: var(--header-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-light);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-        }
-
-        .nav-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 68px;
-            flex-wrap: nowrap;
-        }
-
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            flex-shrink: 0;
-        }
-
-        .brand-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #0284c7, #38bdf8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            font-size: 1.15rem;
-            box-shadow: 0 0 15px rgba(2, 132, 199, 0.45);
-        }
-
-        .brand-text h1 {
-            font-family: var(--font-display);
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: var(--text-dark);
-            line-height: 1.1;
-        }
-
-        .brand-text span {
-            font-size: 0.72rem;
-            color: var(--text-subtle);
-            font-weight: 600;
-            letter-spacing: 0.4px;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 22px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: 0.88rem;
-            transition: color 0.2s;
-            white-space: nowrap;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        /* Botão Alternador de Tema */
-        .theme-toggle-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            color: var(--text-dark);
-            width: 34px;
-            height: 34px;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.95rem;
-            transition: all 0.2s;
-            margin-left: 12px;
-        }
-
-        .theme-toggle-btn:hover {
-            transform: scale(1.08);
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        /* Botões de Acesso Rápido */
-        .nav-action-buttons {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            flex-wrap: nowrap;
-            flex-shrink: 0;
-            margin-left: 16px;
-            padding-left: 16px;
-            border-left: 1px solid var(--divider-color);
-        }
-
-        .btn-live-zabbix {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 11px;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 0.78rem;
-            white-space: nowrap;
-            text-decoration: none;
-            line-height: 1.2;
-            transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
-        }
-
-        .btn-live-zabbix:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.1);
-        }
-
-        .live-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            animation: pulse-dot 1.5s infinite;
-        }
-
-        @keyframes pulse-dot {
-            0% { transform: scale(0.95); opacity: 0.8; }
-            50% { transform: scale(1.25); opacity: 1; }
-            100% { transform: scale(0.95); opacity: 0.8; }
-        }
-
-        /* Hero Section */
-        .hero-section {
-            padding: 50px 0 40px;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.15fr 0.85fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--primary-light);
-            color: var(--primary);
-            padding: 6px 14px;
-            border-radius: 9999px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            margin-bottom: 18px;
-            border: 1px solid rgba(56, 189, 248, 0.25);
-        }
-
-        .hero-title {
-            font-family: var(--font-display);
-            font-size: 2.75rem;
-            line-height: 1.15;
-            font-weight: 800;
-            margin-bottom: 18px;
-            letter-spacing: -0.8px;
-            color: var(--text-dark);
-        }
-
-        .hero-title span {
-            background: linear-gradient(135deg, #0284c7, #38bdf8, #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-desc {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            margin-bottom: 28px;
-            max-width: 540px;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-
-        .btn-cta-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 24px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #0284c7, #2563eb);
-            color: #ffffff;
-            font-weight: 700;
-            font-size: 0.92rem;
-            text-decoration: none;
-            box-shadow: 0 4px 18px rgba(2, 132, 199, 0.4);
-            transition: all 0.2s;
-        }
-
-        .btn-cta-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(2, 132, 199, 0.5);
-        }
-
-        .btn-cta-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 24px;
-            border-radius: 10px;
-            background: var(--bg-card);
-            color: var(--text-dark);
-            border: 1px solid var(--border-light);
-            font-weight: 700;
-            font-size: 0.92rem;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
-        .btn-cta-secondary:hover {
-            background: var(--bg-card-solid);
-            border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        /* Terminal Console no Hero */
-        .terminal-window {
-            background: var(--terminal-bg);
-            border: 1px solid var(--terminal-border);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow-glow);
-            transition: transform 0.3s ease;
-        }
-
-        .terminal-header {
-            background: rgba(255, 255, 255, 0.04);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 10px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .window-dots {
-            display: flex;
-            gap: 6px;
-        }
-
-        .window-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
-
-        .dot-red { background: #ef4444; }
-        .dot-yellow { background: #f59e0b; }
-        .dot-green { background: #10b981; }
-
-        .terminal-title {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: #94a3b8;
-            letter-spacing: 0.5px;
-        }
-
-        .telemetry-metrics-bar {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            padding: 14px 16px;
-            background: rgba(255, 255, 255, 0.02);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .t-metric {
-            text-align: center;
-        }
-
-        .t-metric-label {
-            font-size: 0.68rem;
-            color: #64748b;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin-bottom: 2px;
-        }
-
-        .t-metric-val {
-            font-family: var(--font-mono);
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #38bdf8;
-        }
-
-        .terminal-body {
-            padding: 16px;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: #cbd5e1;
-            min-height: 190px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .t-line {
-            display: flex;
-            gap: 8px;
-            align-items: flex-start;
-            line-height: 1.4;
-        }
-
-        .t-prompt {
-            color: #38bdf8;
-            user-select: none;
-            font-weight: 700;
-        }
-
-        .t-tag {
-            padding: 1px 6px;
-            border-radius: 4px;
-            font-size: 0.68rem;
-            font-weight: 700;
-        }
-
-        .tag-cisco { background: rgba(2, 132, 199, 0.25); color: #38bdf8; border: 1px solid #0284c7; }
-        .tag-sip { background: rgba(234, 88, 12, 0.25); color: #fb923c; border: 1px solid #ea580c; }
-        .tag-kuma { background: rgba(16, 185, 129, 0.25); color: #34d399; border: 1px solid #10b981; }
-        .tag-ssl { background: rgba(168, 85, 247, 0.25); color: #c084fc; border: 1px solid #a855f7; }
-
-        .blinking-cursor {
-            display: inline-block;
-            width: 8px;
-            height: 14px;
-            background: #38bdf8;
-            animation: blinkCursor 0.9s infinite;
-            vertical-align: middle;
-            margin-left: 4px;
-        }
-
-        @keyframes blinkCursor {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        /* Stats Strip */
-        .stats-strip {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 35px;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            padding: 18px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 4px;
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-
-        .stat-sub {
-            font-size: 0.72rem;
-            color: var(--text-subtle);
-        }
-
-        /* SEÇÃO: TOPOLOGIA DINÂMICA (NOVA) */
-        .topology-section {
-            padding: 60px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 680px;
-            margin: 0 auto 40px;
-        }
-
-        .section-tag {
-            color: var(--primary);
-            font-size: 0.8rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: 2.1rem;
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
-        }
-
-        .section-desc {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-        }
-
-        .topology-canvas-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: 20px;
-            padding: 30px;
-            position: relative;
-            box-shadow: var(--shadow-float);
-            overflow: hidden;
-        }
-
-        .topology-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr 1fr;
-            gap: 25px;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .topo-node {
-            background: var(--bg-card-solid);
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            padding: 16px;
-            box-shadow: var(--shadow-subtle);
-            transition: all 0.25s ease;
-            position: relative;
-        }
-
-        .topo-node:hover {
-            transform: translateY(-4px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 25px rgba(2, 132, 199, 0.25);
-        }
-
-        .topo-node-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .topo-node-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.95rem;
-        }
-
-        .topo-node-title {
-            font-family: var(--font-display);
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-
-        .topo-node-ip {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-subtle);
-        }
-
-        .topo-node-badge {
-            font-size: 0.65rem;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 700;
-            background: rgba(16, 185, 129, 0.15);
-            color: #10b981;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
-
-        .topo-core-card {
-            background: linear-gradient(135deg, rgba(2, 132, 199, 0.15), rgba(99, 102, 241, 0.15));
-            border: 2px solid var(--primary);
-            text-align: center;
-            padding: 24px;
-        }
-
-        /* SVG Linhas Animadas de Pulso */
-        .svg-cable-lines {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .cable-path {
-            stroke: var(--primary);
-            stroke-width: 2;
-            fill: none;
-            stroke-dasharray: 6, 6;
-            animation: dashPulse 25s linear infinite;
-            opacity: 0.45;
-        }
-
-        @keyframes dashPulse {
-            to { stroke-dashoffset: -1000; }
-        }
-
-        /* SEÇÃO: FLEET DE MICROSSERVIÇOS DOCKER (9 CONTAINERS) */
-        .docker-fleet-section {
-            padding: 40px 0 60px;
-        }
-
-        .fleet-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .fleet-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.25s ease;
-        }
-
-        .fleet-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--primary);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .fleet-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 12px;
-        }
-
-        .fleet-icon-wrapper {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            background: var(--primary-light);
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-        }
-
-        .fleet-badge {
-            font-size: 0.65rem;
-            padding: 2px 7px;
-            border-radius: 9999px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .badge-healthy {
-            background: rgba(16, 185, 129, 0.15);
-            color: #10b981;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
-
-        .fleet-name {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 4px;
-        }
-
-        .fleet-desc {
-            font-size: 0.78rem;
-            color: var(--text-subtle);
-            margin-bottom: 12px;
-            line-height: 1.35;
-        }
-
-        .fleet-meta {
-            display: flex;
-            justify-content: space-between;
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            padding-top: 10px;
-            border-top: 1px solid var(--border-light);
-        }
-
-        /* Seção Soluções & Showcase */
-        .solutions-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-
-        .solution-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: 16px;
-            padding: 30px;
-            transition: all 0.3s ease;
-            position: relative;
-            transform-style: preserve-3d;
-        }
-
-        .solution-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--primary);
-            box-shadow: var(--shadow-float);
-        }
-
-        .card-icon-wrapper {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            background: var(--primary-light);
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-        }
-
-        .card-title {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 10px;
-        }
-
-        .card-text {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .card-pills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .card-pills span.pill {
-            background: rgba(2, 132, 199, 0.08);
-            color: var(--primary);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        /* Showcase Banner */
-        .showcase-banner {
-            margin: 60px 0;
-            background: linear-gradient(135deg, #090e1a, #0f172a);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 40px;
-            color: #ffffff;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .showcase-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 40px;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .showcase-title {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 14px;
-        }
-
-        .showcase-desc {
-            color: #94a3b8;
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-        }
-
-        .showcase-feature-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-
-        .showcase-feature-list li {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.88rem;
-            color: #e2e8f0;
-        }
-
-        .showcase-feature-list li i {
-            color: #38bdf8;
-        }
-
-        .showcase-action-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 16px;
-            padding: 24px;
-            text-align: center;
-        }
-
-        .btn-showcase {
-            display: block;
-            text-align: center;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
-        .btn-showcase:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.1);
-        }
-
-        /* Modal do Dossiê */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(8px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-            padding: 20px;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-window {
-            background: var(--bg-card-solid);
-            border: 1px solid var(--border-light);
-            border-radius: 16px;
-            width: 100%;
-            max-width: 860px;
-            max-height: 85vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            animation: modalPop 0.25s ease-out;
-        }
-
-        @keyframes modalPop {
-            from { transform: scale(0.95); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .modal-header {
-            padding: 16px 24px;
-            border-bottom: 1px solid var(--border-light);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .modal-tabs {
-            display: flex;
-            gap: 10px;
-            padding: 12px 24px 0;
-            background: var(--bg-card);
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .modal-tab-btn {
-            background: none;
-            border: none;
-            padding: 8px 14px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-        }
-
-        .modal-tab-btn.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        }
-
-        .modal-body {
-            padding: 24px;
-            overflow-y: auto;
-            font-size: 0.9rem;
-            color: var(--text-dark);
-        }
-
-        .modal-close-btn {
-            background: none;
-            border: none;
-            color: var(--text-subtle);
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        /* Tech Section */
-        .tech-section {
-            padding: 40px 0 60px;
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 16px;
-        }
-
-        .tech-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.2s;
-        }
-
-        .tech-box:hover {
-            transform: translateY(-4px);
-            border-color: var(--primary);
-        }
-
-        .tech-box i {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .tech-box h5 {
-            font-family: var(--font-display);
-            font-size: 0.95rem;
-            color: var(--text-dark);
-            margin-bottom: 4px;
-        }
-
-        .tech-box span {
-            font-size: 0.72rem;
-            color: var(--text-subtle);
-        }
-
-        /* Footer */
-        footer.site-footer {
-            background: #060911;
-            color: #94a3b8;
-            padding: 50px 0 25px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            position: relative;
-            z-index: 1;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
-            gap: 35px;
-            margin-bottom: 40px;
-        }
-
-        .footer-col h4 {
-            color: #ffffff;
-            font-family: var(--font-display);
-            font-size: 0.95rem;
-            margin-bottom: 16px;
-        }
-
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 8px;
-        }
-
-        .footer-col ul li a {
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.2s;
-        }
-
-        .footer-col ul li a:hover {
-            color: #38bdf8;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            font-size: 0.85rem;
-        }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 25px;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            font-size: 0.78rem;
-        }
-
-        /* Responsividade */
-        @media (max-width: 992px) {
-            .hero-grid, .showcase-grid, .topology-grid, .footer-grid {
-                grid-template-columns: 1fr;
-            }
-            .solutions-grid, .fleet-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .tech-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        @media (max-width: 768px) {
-            .solutions-grid, .fleet-grid, .tech-grid, .stats-strip {
-                grid-template-columns: 1fr;
-            }
-            .nav-links, .nav-action-buttons {
-                display: none;
-            }
-        }
-    
-
-/* GitHub Pages adaptation — retain original visual system */
-html { scroll-padding-top: 95px; }
-button { font-family: inherit; }
-a:focus-visible, button:focus-visible { outline: 3px solid var(--primary); outline-offset: 4px; }
-.site-header .nav-content { gap: 16px; }
-.site-header .nav-links { gap: 14px; }
-.header-controls { display:flex; align-items:center; gap:10px; margin-left:auto; }
-.header-link { display:inline-flex; align-items:center; justify-content:center; gap:6px; border:1px solid var(--border-light); padding:7px 12px; border-radius:8px; color:var(--text-dark); font-size:.81rem; font-weight:700; text-decoration:none; background:var(--bg-card); white-space:nowrap; }
-.header-link:hover { color:var(--primary); border-color:var(--primary); }
-.nav-toggle { display:none; align-items:center; justify-content:center; width:38px; height:38px; background:var(--bg-card); border:1px solid var(--border-light); color:var(--text-dark); border-radius:8px; cursor:pointer; }
-.project-banner { display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; text-align:center; }
-.project-banner .badge-pill { white-space:nowrap; }
-.public-disclaimer { border:1px solid rgba(245,158,11,.32); background:rgba(245,158,11,.08); border-radius:12px; padding:13px 18px; color:var(--text-muted); margin:0 0 20px; font-size:.88rem; }
-.public-disclaimer strong { color:var(--text-dark); }
-.terminal-window .t-metric-val { font-size:.88rem; }
-.terminal-body .t-line { overflow-wrap:anywhere; }
-.topology-grid { grid-template-columns: 1fr 1.15fr 1fr; }
-.topo-stack { display:flex; flex-direction:column; gap:12px; }
-.topo-core-card + .topo-core-card { margin-top:12px; }
-.topo-note { font-size:.75rem; color:var(--text-muted); text-align:center; margin-top:14px; }
-.evidence-gallery { padding:40px 0 65px; }
-.evidence-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
-.evidence-card { overflow:hidden; min-width:0; background:var(--bg-card); border:1px solid var(--border-light); border-radius:14px; box-shadow:var(--shadow-subtle); }
-.evidence-card img { width:100%; aspect-ratio: 4/3; display:block; object-fit:cover; background:var(--bg-card-solid); }
-.evidence-card .evidence-caption { padding:16px; }
-.evidence-card h4 { font-family:var(--font-display); color:var(--text-dark); margin-bottom:6px; font-size:.98rem; }
-.evidence-card p { color:var(--text-muted); font-size:.8rem; line-height:1.55; }
-.resource-links { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:18px; }
-.resource-links a { color:var(--primary); border:1px solid var(--border-light); background:var(--bg-card); border-radius:8px; padding:10px 14px; text-decoration:none; font-size:.83rem; font-weight:700; }
-.resource-links a:hover { border-color:var(--primary); }
-.stack-notice { color:var(--text-muted); font-size:.8rem; margin-top:14px; }
-.stat-card .stat-sub { color:var(--text-muted); font-size:.75rem; }
-.stat-card .stat-label { color:var(--text-dark); }
-.site-footer a[target="_blank"]::after { content: ' ↗'; }
-.fleet-badge { white-space:nowrap; }
-@media (max-width: 1100px) { .site-header .nav-links { gap:9px; } .site-header .nav-links a { font-size:.77rem; } }
-@media (max-width: 992px) { .evidence-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .topology-grid { grid-template-columns:1fr; } .site-header .nav-links { gap:7px; } }
-@media (max-width: 768px) {
-    .header-controls { gap:6px; }
-    .nav-toggle { display:flex; }
-    .nav-content { position:relative; }
-    .nav-links { display:none !important; position:absolute; top:68px; left:0; right:0; padding:14px 18px; background:var(--bg-card-solid); border:1px solid var(--border-light); box-shadow:var(--shadow-float); border-radius:0 0 14px 14px; z-index:105; flex-direction:column; align-items:flex-start; gap:12px; }
-    .nav-links.is-open { display:flex !important; }
-    .brand-text h1 { font-size:.93rem; }
-    .brand-text span { font-size:.60rem; }
-    .header-link { padding:7px; font-size:.71rem; }
-    .evidence-grid { grid-template-columns:1fr; }
-    .telemetry-metrics-bar { grid-template-columns:repeat(2,1fr); }
-    .terminal-body { font-size:.69rem; }
-    .modal-tabs { overflow-x:auto; }
-    .footer-bottom { align-items:flex-start; flex-direction:column; gap:8px; }
-}
-@media (max-width: 450px) { .brand-text h1 { font-size:.78rem; } .brand-icon { width:33px; height:33px; } .header-link span { display:none; } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; scroll-behavior:auto !important; } }
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1a1e1b">
+<meta name="description" content="Conheça um laboratório físico de infraestrutura empresarial com fotografias reais, arquitetura VLAN, serviços Linux e Docker e painéis Zabbix/Grafana.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tapajós Inovações — Enterprise NOC | Infraestrutura e Monitoramento">
+<meta property="og:description" content="Conheça um laboratório físico de infraestrutura empresarial com fotografias reais, arquitetura VLAN, serviços Linux e Docker e painéis Zabbix/Grafana.">
+<meta property="og:image" content="https://kayo-willian.github.io/enterprise-noc-from-scratch/assets/images/physical/network-infrastructure-overview.jpg">
+<meta property="og:url" content="https://kayo-willian.github.io/enterprise-noc-from-scratch/pt-BR/">
+<link rel="canonical" href="https://kayo-willian.github.io/enterprise-noc-from-scratch/pt-BR/">
+<link rel="alternate" hreflang="en" href="https://kayo-willian.github.io/enterprise-noc-from-scratch/">
+<link rel="alternate" hreflang="pt-BR" href="https://kayo-willian.github.io/enterprise-noc-from-scratch/pt-BR/">
+<link rel="icon" type="image/svg+xml" href="../assets/brand/tapajos-favicon.svg">
+<link rel="preload" as="image" href="../assets/images/physical/network-infrastructure-overview.jpg">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script defer src="../assets/js/site.js"></script>
+<title>Tapajós Inovações — Enterprise NOC | Infraestrutura e Monitoramento</title>
 </head>
-<body>
-<div class="aurora-container" aria-hidden="true"><div class="aurora-orb orb-cyan"></div><div class="aurora-orb orb-indigo"></div><div class="aurora-orb orb-emerald"></div></div>
-<div class="top-notification"><div class="container project-banner"><span class="badge-pill">LABORATÓRIO TÉCNICO • 06/11/2026</span> Estudo de caso público · Documentação estática, sem monitoramento ao vivo</div></div>
-<header class="site-header"><div class="container nav-content">
-  <a class="brand-logo" href="#top" aria-label="Enterprise NOC"><div class="brand-icon"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></div><div class="brand-text"><h1>Tapajós Inovações</h1><span>Organização simulada · Enterprise NOC</span></div></a>
-  <nav aria-label="Primary navigation"><ul class="nav-links" id="primary-nav"><li><a href="#solucoes">Tecnologias</a></li><li><a href="#topologia">Rede</a></li><li><a href="#physical">Evidências</a></li><li><a href="#fleet">Docker</a></li><li><a href="#noc-live">Monitoramento</a></li><li><a href="#documentation">Documentação</a></li></ul></nav>
-  <div class="header-controls"><a class="header-link" href="../index.html" lang="en" hreflang="en" aria-label="Mudar para inglês"><i class="fa-solid fa-language" aria-hidden="true"></i> <span>English</span></a><a class="header-link" href="https://github.com/kayo-willian/enterprise-noc-from-scratch" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository"><i class="fa-brands fa-github" aria-hidden="true"></i><span>GitHub</span></a><button id="theme-toggle" class="theme-toggle-btn" title="Alternar tema claro e escuro" aria-label="Alternar tema claro e escuro" type="button"><i class="fa-solid fa-sun" aria-hidden="true"></i></button><button id="menu-toggle" class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Menu"><i class="fa-solid fa-bars" aria-hidden="true"></i></button></div>
-</div></header>
-<main class="container" id="top">
-<section class="hero-section"><div class="public-disclaimer"><strong>Registro baseado em evidências.</strong> Os dados descrevem o ambiente observado em 6 de novembro de 2026. Não é uma rede de produção pública e os estados operacionais não são atualizados em tempo real.</div><div class="hero-grid"><div>
-<div class="hero-badge"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> INFRAESTRUTURA FÍSICA + VIRTUAL</div>
-<h2 class="hero-title">Enterprise <span>NOC — From Scratch</span></h2><p class="hero-desc">Laboratório documentado com roteamento e switching Cisco, VLANs departamentais, servidores Debian, serviços Docker e monitoramento com Zabbix, Grafana e Uptime Kuma.</p>
-<div class="hero-cta"><a href="#physical" class="btn-cta-primary"><i class="fa-solid fa-images" aria-hidden="true"></i> Ver evidências reais</a><button id="btn-open-modal-hero" class="btn-cta-secondary" type="button"><i class="fa-solid fa-book-bookmark" aria-hidden="true"></i> Dossiê da arquitetura</button></div></div>
-<div class="terminal-window"><div class="terminal-header"><div class="window-dots"><div class="window-dot dot-red"></div><div class="window-dot dot-yellow"></div><div class="window-dot dot-green"></div></div><div class="terminal-title">registro-lab-2026-11-06.txt</div><div style="font-size:.65rem;color:#10b981;font-weight:700">COLETA HISTÓRICA</div></div><div class="telemetry-metrics-bar"><div class="t-metric"><div class="t-metric-label">Coleta em</div><div class="t-metric-val">06/11/2026</div></div><div class="t-metric"><div class="t-metric-label">Containers Docker</div><div class="t-metric-val">10 executando</div></div><div class="t-metric"><div class="t-metric-label">Computadores</div><div class="t-metric-val">10 documentados</div></div><div class="t-metric"><div class="t-metric-label">Equipamentos Cisco</div><div class="t-metric-val">2 Cisco</div></div></div><div class="terminal-body"><div class="t-line"><span class="t-tag tag-cisco">SISTEMA</span><span>Debian 13 (Trixie) · computador principal de infraestrutura</span></div><div class="t-line"><span class="t-tag tag-sip">CISCO</span><span>Roteador Catalyst C8200L + switch C9200L documentados</span></div><div class="t-line"><span class="t-tag tag-kuma">DOCKER</span><span>10 containers em execução na data da coleta</span></div><div class="t-line"><span class="t-tag tag-ssl">MONITOR</span><span>Zabbix e Grafana configurados; algumas métricas exigem revisão</span></div><div class="t-line"><span class="t-tag tag-cisco">NOTA</span><span>Terminal ilustrativo: nenhum comando é executado ao vivo</span></div></div></div></div>
-<div class="stats-strip"><div class="stat-card"><div class="stat-number">10</div><div class="stat-label">Containers Docker</div><div class="stat-sub">Em execução na captura de 6 de novembro</div></div><div class="stat-card"><div class="stat-number">10</div><div class="stat-label">Computadores</div><div class="stat-sub">2 Linux + 8 estações Windows</div></div><div class="stat-card"><div class="stat-number">7</div><div class="stat-label">VLANs documentadas</div><div class="stat-sub">10 / 20 / 30 / 40 / 50 / 60 / 70; configurações variam</div></div></div></section>
-<section id="topologia" class="topology-section"><div class="section-header"><span class="section-tag">FÍSICA + LÓGICA</span><h3 class="section-title">Arquitetura de rede</h3><p class="section-desc">Visão geral baseada nos equipamentos, relatórios dos hosts e documentação das VLANs. É uma representação ilustrativa, não um mapa de portas validado.</p></div>
-<div class="topology-canvas-container"><div class="topology-grid"><div class="topo-stack"><div class="topo-node"><div class="topo-node-header"><div class="topo-node-title">TI / monitoramento</div><span class="topo-node-badge">VLAN 10</span></div><div class="topo-node-ip">Debian 13 · Host Docker / estação</div></div><div class="topo-node"><div class="topo-node-header"><div class="topo-node-title">Contabilidade</div><span class="topo-node-badge">VLAN 20</span></div><div class="topo-node-ip">3 PCs Windows documentados</div></div><div class="topo-node"><div class="topo-node-header"><div class="topo-node-title">Financeiro</div><span class="topo-node-badge">VLAN 30</span></div><div class="topo-node-ip">2 PCs Windows documentados</div></div></div>
-<div><div class="topo-node topo-core-card"><div style="font-size:2.5rem;color:#38bdf8;margin-bottom:10px"><i class="fa-solid fa-route" aria-hidden="true"></i></div><div class="topo-node-title" style="font-size:1.12rem">Cisco Catalyst C8200L</div><div class="topo-node-ip">Roteador · Camada 3 / roteamento de VLANs</div></div><div class="topo-node topo-core-card"><div style="font-size:2.5rem;color:#38bdf8;margin-bottom:10px"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></div><div class="topo-node-title" style="font-size:1.12rem">Cisco Catalyst C9200L</div><div class="topo-node-ip">Switch gerenciável · monitorado via SNMPv2c</div></div></div>
-<div class="topo-stack"><div class="topo-node"><div class="topo-node-header"><div class="topo-node-title">Vendas</div><span class="topo-node-badge">VLAN 40</span></div><div class="topo-node-ip">2 PCs Windows documentados</div></div><div class="topo-node"><div class="topo-node-header"><div class="topo-node-title">Telefonia / autenticação</div><span class="topo-node-badge">VLAN 50</span></div><div class="topo-node-ip">Servidor Asterisk + FreeRADIUS</div></div><div class="topo-node"><div class="topo-node-header"><div class="topo-node-title">Wi-Fi corporativo / IoT</div><span class="topo-node-badge">VLAN 60 / 70</span></div><div class="topo-node-ip">No projeto lógico; verificar cada conexão</div></div></div></div><p class="topo-note">Diagrama de relações. Consulte a documentação técnica para detalhes das interfaces e endereçamento observado na coleta.</p></div></section>
-<section class="evidence-gallery" id="physical"><div class="section-header"><span class="section-tag">EVIDÊNCIAS FOTOGRÁFICAS</span><h3 class="section-title">O laboratório físico</h3><p class="section-desc">Fotografias registradas em 6 de novembro de 2026. São os equipamentos reais utilizados no laboratório.</p></div><div class="evidence-grid"><figure class="evidence-card"><img src="../assets/images/physical/network-infrastructure-overview.jpg" alt="Visão geral da infraestrutura" loading="lazy" width="1280" height="960"><figcaption class="evidence-caption"><h4>Visão geral da infraestrutura</h4><p>Rack e estação de monitoramento próxima.</p></figcaption></figure><figure class="evidence-card"><img src="../assets/images/physical/network-rack-interior.jpg" alt="Interior do rack de rede" loading="lazy" width="1280" height="960"><figcaption class="evidence-caption"><h4>Interior do rack de rede</h4><p>Posicionamento dos equipamentos e cabeamento estruturado.</p></figcaption></figure><figure class="evidence-card"><img src="../assets/images/physical/cisco-router-switch-patch-panel.jpg" alt="Roteador, switch Cisco e patch panel" loading="lazy" width="1280" height="960"><figcaption class="evidence-caption"><h4>Roteador, switch Cisco e patch panel</h4><p>Catalyst C8200L e C9200L com conexões Ethernet.</p></figcaption></figure></div><div class="resource-links"><a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/evidencias/infraestrutura-fisica.md" target="_blank" rel="noopener noreferrer">Ler documentação da infraestrutura física <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div></section>
-<section id="fleet" class="docker-fleet-section"><div class="section-header"><span class="section-tag">DOCKER / PORTAINER</span><h3 class="section-title">Serviços conteinerizados — 10 observados</h3><p class="section-desc">Os dez containers abaixo constavam em execução no registro de 6 de novembro. “Em execução” não significa que todos estavam totalmente saudáveis.</p></div><div class="fleet-grid"><article class="fleet-card"><div><div class="fleet-header"><div class="fleet-icon-wrapper"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div><span class="fleet-badge" style="border:1px solid var(--border-light);color:var(--text-muted);background:var(--bg-card-solid)">2026-11-06</span></div><div class="fleet-name">reverse-proxy</div><div class="fleet-desc">Proxy Nginx para aplicações internas.</div></div><div class="fleet-meta"><span>80, 443</span><span title="Image tag seen in logs">nginx:alpine</span></div></article><article class="fleet-card"><div><div class="fleet-header"><div class="fleet-icon-wrapper"><i class="fa-solid fa-server" aria-hidden="true"></i></div><span class="fleet-badge" style="border:1px solid var(--border-light);color:var(--text-muted);background:var(--bg-card-solid)">2026-11-06</span></div><div class="fleet-name">zabbix-server</div><div class="fleet-desc">Servidor de monitoramento Zabbix 7.0.</div></div><div class="fleet-meta"><span>10051</span><span title="Image tag seen in logs">zabbix/zabbix-server-mysql:ubuntu-7.0-latest</span></div></article><article class="fleet-card"><div><div class="fleet-header"><div class="fleet-icon-wrapper"><i class="fa-solid fa-display" aria-hidden="true"></i></div><span class="fleet-badge" style="border:1px solid var(--border-light);color:var(--text-muted);background:var(--bg-card-solid)">2026-11-06</span></div><div class="fleet-name">zabbix-web</div><div class="fleet-desc">Interface web do Zabbix.</div></div><div class="fleet-meta"><span>8082</span><span title="Image tag seen in logs">zabbix/zabbix-web-apache-mysql:ubuntu-7.0-latest</span></div></article><article class="fleet-card"><div><div class="fleet-header"><div class="fleet-icon-wrapper"><i class="fa-solid fa-database" aria-hidden="true"></i></div><span class="fleet-badge" style="border:1px solid var(--border-light);color:var(--text-muted);background:var(--bg-card-solid)">2026-11-06</span></div><div class="fleet-name">zabbix-db</div><div class="fleet-desc">Banco MariaDB 11.4 do Zabbix.</div></div><div class="fleet-meta"><span>internal</span><span title="Image tag seen in logs">mariadb:11.4</span></div></article><article class="fleet-card"><div><div class="fleet-header"><div class="fleet-icon-wrapper"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></div><span class="fleet-badge" style="border:1px solid var(--border-light);color:var(--text-muted);background:var(--bg-card-solid)">2026-11-06</span></div><div class="fleet-name">grafana</div><div class="fleet-desc">Dashboards e integração com Zabbix.</div></div><div class="fleet-meta"><span>3000</span><span title="Image tag seen in logs">grafana/grafana-oss:latest</span></div></article><article class="fleet-card"><div><div class="fleet-header"><div class="fleet-icon-wrapper"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i></div><span class="fleet-badge" style="border:1px solid var(--border-light);color:var(--text-muted);background:var(--bg-card-solid)">2026-11-06</span></div><div class="fleet-name">uptime-kuma</div><div class="fleet-desc">Interface de verificações de disponibilidade.</div></div><div class="fleet-meta"><span>3001</span><span title="Image tag seen in logs">louislam/uptime-kuma:1</span></div></article><article class="fleet-card"><div><div class="fleet-header"><div class="fleet-icon-wrapper"><i class="fa-solid fa-globe" aria-hidden="true"></i></div><span class="fleet-badge" style="border:1px solid var(--border-light);color:var(--text-muted);background:var(--bg-card-solid)">2026-11-06</span></div><div class="fleet-name">site-estatico</div><div class="fleet-desc">Apache HTTP Server do portal interno.</div></div><div class="fleet-meta"><span>8081</span><span title="Image tag seen in logs">httpd:alpine</span></div></article><article class="fleet-card"><div><div class="fleet-header"><div class="fleet-icon-wrapper"><i class="fa-solid fa-shield-virus" aria-hidden="true"></i></div><span class="fleet-badge" style="border:1px solid var(--border-light);color:var(--text-muted);background:var(--bg-card-solid)">2026-11-06</span></div><div class="fleet-name">pihole</div><div class="fleet-desc">Filtragem DNS e gerenciamento de nomes locais.</div></div><div class="fleet-meta"><span>53, 8080</span><span title="Image tag seen in logs">pihole/pihole:latest</span></div></article><article class="fleet-card"><div><div class="fleet-header"><div class="fleet-icon-wrapper"><i class="fa-brands fa-docker" aria-hidden="true"></i></div><span class="fleet-badge" style="border:1px solid var(--border-light);color:var(--text-muted);background:var(--bg-card-solid)">2026-11-06</span></div><div class="fleet-name">portainer</div><div class="fleet-desc">Gerenciamento de containers e stacks Docker.</div></div><div class="fleet-meta"><span>9000, 9443</span><span title="Image tag seen in logs">portainer/portainer-ce:latest</span></div></article><article class="fleet-card"><div><div class="fleet-header"><div class="fleet-icon-wrapper"><i class="fa-solid fa-microchip" aria-hidden="true"></i></div><span class="fleet-badge" style="border:1px solid var(--border-light);color:var(--text-muted);background:var(--bg-card-solid)">2026-11-06</span></div><div class="fleet-name">zabbix-agent</div><div class="fleet-desc">Container do agente de monitoramento.</div></div><div class="fleet-meta"><span>10050</span><span title="Image tag seen in logs">zabbix/zabbix-agent:ubuntu-7.0-latest</span></div></article></div><p class="stack-notice">O Portainer apresentou 3 stacks, 11 imagens, 4 volumes e 6 redes. Quatro verificações indicavam healthy; nem todos os containers possuíam healthcheck.</p><div class="resource-links"><a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/containers/servicos-docker.md" target="_blank" rel="noopener noreferrer">Configurações Docker e evidências <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div></section>
-<section id="solucoes" style="padding:20px 0 50px"><div class="section-header"><span class="section-tag">REDES + SISTEMAS</span><h3 class="section-title">O que foi implementado</h3><p class="section-desc">Trabalho técnico representado pelas evidências coletadas. Afirmações ainda não verificadas foram excluídas.</p></div><div class="solutions-grid"><article class="solution-card"><div class="card-icon-wrapper"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></div><h4 class="card-title">Cabeamento estruturado e rack</h4><p class="card-text">Cabos Ethernet, patch panel, organização do rack e equipamentos físicos registrados em fotografias.</p></article><article class="solution-card"><div class="card-icon-wrapper"><i class="fa-solid fa-route" aria-hidden="true"></i></div><h4 class="card-title">Redes Cisco</h4><p class="card-text">Segmentação por VLANs, roteamento e comutação com Catalyst C8200L e C9200L; evidências de SNMPv2c no switch.</p></article><article class="solution-card"><div class="card-icon-wrapper"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i></div><h4 class="card-title">Monitoramento e observabilidade</h4><p class="card-text">Zabbix 7.0, dashboards Grafana, serviços Docker e Uptime Kuma, incluindo inconsistências de monitoramento identificadas.</p></article><article class="solution-card"><div class="card-icon-wrapper"><i class="fa-solid fa-phone-volume" aria-hidden="true"></i></div><h4 class="card-title">Telefonia e autenticação</h4><p class="card-text">Servidor Linux separado com documentação Asterisk e FreeRADIUS e terminais VoIP Grandstream.</p></article></div></section>
-<section id="noc-live" class="showcase-banner"><div class="showcase-grid"><div><span class="badge-pill" style="background:rgba(2,132,199,.3);border:1px solid #38bdf8;margin-bottom:16px;display:inline-block">EVIDÊNCIAS DE MONITORAMENTO</span><h3 class="showcase-title">Observabilidade, não dashboard ao vivo</h3><p class="showcase-desc">Os links levam às evidências datadas no repositório. As interfaces do Zabbix, Grafana e Portainer permanecem na rede do laboratório. Parte dos itens de monitoramento estava não suportada durante a coleta.</p><ul class="showcase-feature-list"><li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> <a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/evidencias/registro-coleta-2026-11-06.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Hosts e monitoramento Zabbix</a></li><li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> <a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/containers/servicos-docker.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Capturas Docker e Portainer</a></li><li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> <a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/estacoes/inventario-de-computadores.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Inventário dos computadores</a></li><li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> <a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/evidencias/infraestrutura-fisica.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Fotografias da infraestrutura</a></li><li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> <a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/evidencias/registro-coleta-2026-11-06.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Metodologia da coleta</a></li></ul><button id="btn-open-modal-showcase" class="btn-cta-primary" type="button" style="border:none;cursor:pointer"><i class="fa-solid fa-file-invoice" aria-hidden="true"></i> Abrir dossiê da arquitetura</button></div>
-<div class="showcase-action-card"><div style="font-size:2.2rem;color:#38bdf8;margin-bottom:8px"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></div><h4 style="font-family:var(--font-display);font-size:1.15rem;margin-bottom:6px">Documentação baseada em evidências</h4><p style="font-size:.8rem;color:#94a3b8;margin-bottom:14px">Consulte configurações, inventário e limitações no GitHub. Endereços internos das aplicações não são anunciados como serviços públicos.</p><div style="display:flex;flex-direction:column;gap:8px"><a class="btn-showcase" href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/containers/servicos-docker.md" target="_blank" rel="noopener noreferrer" style="background:linear-gradient(135deg,#0284c7,#2563eb);color:#fff"><i class="fa-brands fa-docker" aria-hidden="true"></i> Portainer / Docker</a><a class="btn-showcase" href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/estacoes/inventario-de-computadores.md" target="_blank" rel="noopener noreferrer" style="background:linear-gradient(135deg,#059669,#10b981);color:#fff"><i class="fa-solid fa-desktop" aria-hidden="true"></i> Estações e servidores</a><a class="btn-showcase" href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/evidencias/registro-coleta-2026-11-06.md" target="_blank" rel="noopener noreferrer" style="background:linear-gradient(135deg,#d97706,#f59e0b);color:#000"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Registro de coleta de evidências</a></div></div></div></section>
-<section class="tech-section" id="ecossistema"><div class="section-header"><span class="section-tag">COMPONENTES</span><h3 class="section-title">Tecnologias do laboratório</h3><p class="section-desc">Equipamentos físicos e sistemas identificados nos registros do projeto.</p></div><div class="tech-grid"><div class="tech-box"><i class="fa-solid fa-network-wired" aria-hidden="true" style="color:var(--primary)"></i><h5>Cisco Catalyst</h5><span>C8200L / C9200L</span></div><div class="tech-box"><i class="fa-solid fa-linux" aria-hidden="true" style="color:var(--primary)"></i><h5>Debian Linux</h5><span>Servers / Hosts</span></div><div class="tech-box"><i class="fa-solid fa-docker" aria-hidden="true" style="color:var(--primary)"></i><h5>Docker</h5><span>Compose / Portainer</span></div><div class="tech-box"><i class="fa-solid fa-chart-line" aria-hidden="true" style="color:var(--primary)"></i><h5>Zabbix / Grafana</h5><span>Monitoring</span></div><div class="tech-box"><i class="fa-solid fa-phone-volume" aria-hidden="true" style="color:var(--primary)"></i><h5>Asterisk / FreeRADIUS</h5><span>VoIP / Authentication</span></div></div></section>
-<section id="documentation" class="evidence-gallery" style="padding-top:20px"><div class="section-header"><span class="section-tag">GITHUB</span><h3 class="section-title">Documentação</h3><p class="section-desc">Documentação pública de uma infraestrutura corporativa simulada. A marca e o cenário institucional são fictícios; os equipamentos e capturas foram registrados em laboratório de formação. Não é serviço oficial.</p></div><div class="resource-links"><a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/evidencias/infraestrutura-fisica.md" target="_blank" rel="noopener noreferrer">Infraestrutura física <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a><a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/estacoes/inventario-de-computadores.md" target="_blank" rel="noopener noreferrer">Estações e servidores <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a><a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/containers/servicos-docker.md" target="_blank" rel="noopener noreferrer">Serviços Docker <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a><a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/evidencias/registro-coleta-2026-11-06.md" target="_blank" rel="noopener noreferrer">Registro de coleta de evidências <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a><a href="https://github.com/kayo-willian/enterprise-noc-from-scratch" target="_blank" rel="noopener noreferrer">Repositório no GitHub</a></div></section>
+<body id="top">
+<a class="show-on-focus" href="#main">Pular para o conteúdo</a>
+<div class="reading-line" aria-hidden="true"></div>
+<header class="site-head">
+ <div class="nav">
+  <a href="#top" class="brand" aria-label="Tapajós Inovações — Enterprise NOC"><img width="51" height="51" src="../assets/brand/tapajos-emblem.svg" alt=""><span><span class="brand-name">Tapajós Inovações</span><span class="brand-sub">Enterprise NOC · From Scratch</span></span></a>
+  <nav id="primary-nav" class="nav-links" aria-label="Navegação principal"><a href="#about">Projeto</a>
+<a href="#architecture">Arquitetura</a>
+<a href="#services">Serviços</a>
+<a href="#evidence">Evidências</a>
+<a href="#cabling">Cabeamento</a>
+<a href="#monitoring">Monitoramento</a>
+<a href="#documentation">Documentação</a></nav>
+  <div class="nav-right"><a class="lang-btn" lang="en" hreflang="en" href="../index.html">English ↗</a><button type="button" class="menu-btn" data-menu aria-controls="primary-nav" aria-expanded="false" aria-label="Abrir navegação">☰</button></div>
+ </div>
+</header>
+<main id="main">
+<section class="hero" id="home">
+<div class="hero-image" aria-hidden="true"></div>
+<div class="wrap hero-content"><div class="hero-copy">
+ <span class="hero-flag"><b aria-hidden="true"></b>LABORATÓRIO REAL · EMPRESA FICTÍCIA</span>
+ <h1>Infraestrutura que conecta.<em>Visibilidade que transforma.</em></h1>
+ <p>Uma rede corporativa, do rack e do cabeamento estruturado ao roteamento Cisco, sete VLANs, serviços Linux e um ecossistema de monitoramento. Um cenário empresarial fictício. Equipamentos, capturas e trabalho técnico reais.</p>
+ <div class="actions"><a class="btn btn-main" href="#about">Conhecer o projeto <span aria-hidden="true">↗</span></a><a class="btn btn-outline" href="#evidence">Explorar evidências <span aria-hidden="true">↗</span></a></div>
+ <div class="hero-foot"><i aria-hidden="true"></i>Laboratório físico · Estudo de caso técnico · Novembro de 2026</div>
+</div><aside class="hero-index" aria-label="CAPTURAS HISTÓRICAS, NÃO DADOS AO VIVO"><div class="mini"><b>7</b><span>VLANs</span></div><div class="mini"><b>10</b><span>Docker</span></div><div class="mini"><b>12</b><span>Zabbix hosts</span></div><div class="mini"><b>02</b><span>IP Phones</span></div></aside></div>
+</section>
+<div class="stats"><div class="wrap stat-grid"><div class="stat"><strong>07</strong><span>VLANs</span></div><div class="stat"><strong>10</strong><span>Computadores inventariados</span></div><div class="stat"><strong>10</strong><span>Containers Docker ativos</span></div><div class="stat"><strong>12</strong><span>Hosts no Zabbix</span></div><div class="stat"><strong>02</strong><span>Telefones IP</span></div></div></div>
+<section class="section" id="about"><div class="wrap">
+<div class="section-head reveal"><div><div class="kicker eyebrow">01 / O PROJETO</div><h2>Uma história corporativa.<br>Construída com infraestrutura real.</h2></div><p>A Tapajós Inovações é uma organização fictícia que contextualiza um projeto de modernização de rede empresarial. O laboratório por trás do cenário é físico: equipamentos foram instalados, redes segmentadas, serviços implantados e evidências operacionais coletadas.</p></div>
+<div class="overview-grid"><div class="big-panel reveal"><div class="chip">ENTERPRISE NOC · FROM SCRATCH</div><h3 style="margin-top:18px">Da infraestrutura física às operações de rede</h3><p>O Enterprise NOC — From Scratch documenta a trajetória do rack e da configuração do switch à segmentação de setores, serviços Linux e observabilidade. É um estudo de caso técnico, não uma operação em produção ou um painel ao vivo.</p><div class="factline"><span class="icon-ring" aria-hidden="true">⌁</span><div><strong>Laboratório real, cliente fictício</strong><small>As necessidades empresariais são simuladas; os equipamentos fotografados, inventários e capturas de monitoramento pertencem ao ambiente real de treinamento.</small></div></div><div class="factline"><span class="icon-ring" aria-hidden="true">✓</span><div><strong>Documentação sem exageros</strong><small>Capturas são registros históricos. Um indicador do dashboard não garante disponibilidade contínua, isolamento testado ou cobertura completa.</small></div></div></div><div><h3 style="font-size:1.2rem;margin:0 0 14px">Quatro desafios que definem o cenário</h3><p style="font-size:.82rem;margin-bottom:17px">O negócio simulado parte de problemas de conectividade, Wi-Fi, telefonia e visibilidade. O projeto relaciona uma resposta técnica a cada necessidade.</p><div class="scenario"><article class="scenario-card"><span class="num">01 / 04</span><h4>Cabeamento</h4><p>Organizar a base física com rack, patch panel e cabeamento estruturado.</p></article>
+<article class="scenario-card"><span class="num">02 / 04</span><h4>Acesso sem fio</h4><p>Separar Wi-Fi corporativo e IoT em segmentos lógicos próprios.</p></article>
+<article class="scenario-card"><span class="num">03 / 04</span><h4>Telefonia IP</h4><p>Hospedar PBX interna e serviços RADIUS em um servidor Linux dedicado.</p></article>
+<article class="scenario-card"><span class="num">04 / 04</span><h4>Visibilidade operacional</h4><p>Utilizar Zabbix, Grafana e Uptime Kuma para observar infraestrutura e serviços.</p></article></div></div></div>
+<div class="feature-rail"><article class="feature"><div class="glyph" aria-hidden="true">◇</div><div><h4>Infraestrutura primeiro</h4><p>Roteador, switch, rack físico e computadores por departamento.</p></div></article>
+<article class="feature"><div class="glyph" aria-hidden="true">◫</div><div><h4>Serviços integrados</h4><p>Linux, containers, monitoramento, telefonia e DNS no mesmo cenário.</p></div></article>
+<article class="feature"><div class="glyph" aria-hidden="true">◎</div><div><h4>Evidências reais</h4><p>Capturas e configurações datadas, diferenciadas de diagramas explicativos.</p></div></article></div>
+</div></section>
+<section class="section" id="architecture"><div class="wrap">
+<div class="section-head reveal"><div><div class="kicker eyebrow">02 / REDES</div><h2>Sete VLANs.<br>Uma arquitetura lógica.</h2></div><p>O roteador Cisco Catalyst C8200L e o switch Catalyst C9200L estruturam a rede. Selecione uma VLAN para conhecer a função, os equipamentos documentados e a referência técnica.</p></div>
+<div class="topology reveal"><div class="network-flow"><div class="network-node"><span class="node-type">ROTEADOR CORPORATIVO</span><strong>Cisco Catalyst C8200L</strong><small>802.1Q · VLAN 10–70</small></div><div class="flow-stem" aria-hidden="true"></div><div class="network-node"><span class="node-type">SWITCH GERENCIÁVEL</span><strong>Cisco Catalyst C9200L</strong><small>Gi1/0/1 · Trunk</small></div></div>
+<div class="vlan-grid" role="group" aria-label="VLAN selection"><button type="button" class="vlan" data-vlan="10" data-title="VLAN 10 · TI / NOC" data-description="A VLAN 10 reúne administração da infraestrutura e monitoramento. O computador principal Debian 13 hospeda Docker, Zabbix, Grafana e serviços relacionados." data-url="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/redes/vlans.md" data-link="Ler documentação →" aria-pressed="true"><b>10</b><span>TI / NOC</span><em>VLAN 10</em></button>
+<button type="button" class="vlan" data-vlan="20" data-title="VLAN 20 · Contabilidade" data-description="A VLAN 20 atende à Contabilidade. O inventário de 06/11 registra três estações Windows." data-url="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/redes/vlans.md" data-link="Ler documentação →" aria-pressed="false"><b>20</b><span>Contabilidade</span><em>VLAN 20</em></button>
+<button type="button" class="vlan" data-vlan="30" data-title="VLAN 30 · Financeiro" data-description="A VLAN 30 atende ao Financeiro. O inventário de hardware documenta duas estações Windows nesse segmento." data-url="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/redes/vlans.md" data-link="Ler documentação →" aria-pressed="false"><b>30</b><span>Financeiro</span><em>VLAN 30</em></button>
+<button type="button" class="vlan" data-vlan="40" data-title="VLAN 40 · Vendas" data-description="A VLAN 40 atende a Vendas. O inventário inclui duas estações Windows." data-url="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/redes/vlans.md" data-link="Ler documentação →" aria-pressed="false"><b>40</b><span>Vendas</span><em>VLAN 40</em></button>
+<button type="button" class="vlan" data-vlan="50" data-title="VLAN 50 · VoIP" data-description="A VLAN 50 é destinada à telefonia e autenticação. Reúne o servidor Linux Asterisk/FreeRADIUS e dois telefones Grandstream." data-url="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/servicos/asterisk-freeradius.md" data-link="Ler documentação →" aria-pressed="false"><b>50</b><span>VoIP</span><em>VLAN 50</em></button>
+<button type="button" class="vlan" data-vlan="60" data-title="VLAN 60 · Wi-Fi corporativo" data-description="A VLAN 60 é destinada ao Wi-Fi corporativo por meio de um TP-Link Archer AX53. A captura do switch de 04/11 atribui a Gi1/0/15 à VLAN 60." data-url="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/redes/wifi-corporativo-vlan60.md" data-link="Ler documentação →" aria-pressed="false"><b>60</b><span>Wi-Fi corporativo</span><em>VLAN 60</em></button>
+<button type="button" class="vlan" data-vlan="70" data-title="VLAN 70 · IoT" data-description="A VLAN 70 separa a conectividade IoT. Uma Amazon Alexa conecta-se por Wi-Fi a um Archer AX53 dedicado, ligado por Ethernet ao switch; a Gi1/0/14 está atribuída à VLAN 70." data-url="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/redes/iot-vlan70.md" data-link="Ler documentação →" aria-pressed="false"><b>70</b><span>IoT</span><em>VLAN 70</em></button></div>
+<div class="vlan-detail" data-vlan-detail aria-live="polite"><div><h3 data-vlan-title></h3><p data-vlan-description></p></div><a data-vlan-link href="#documentation" target="_blank" rel="noopener noreferrer">Ler registro técnico →</a></div>
+<p class="caption">Topologia lógica baseada na configuração do switch de 04/11 e no inventário do projeto. Selecionar um segmento não representa estado operacional em tempo real. A Gi1/0/1 está registrada como trunk no lado do switch.</p></div></div>
+</section>
+<section class="section" id="services"><div class="wrap">
+<div class="section-head reveal"><div><div class="kicker eyebrow">03 / SERVIÇOS DE INFRAESTRUTURA</div><h2>Serviços com propósito.<br>Evidências para demonstrar.</h2></div><p>Nove componentes integram as camadas de rede, sistemas e observabilidade. Os cartões levam aos registros técnicos, não a páginas de produtos simulados.</p></div>
+<div class="services-grid"><article class="service reveal"><span class="tag">REDES</span><div class="service-photo"><img src="../assets/images/physical/cisco-router-switch-patch-panel.jpg" loading="lazy" decoding="async" alt="Roteador, switch Cisco e patch panel" width="640" height="360"></div><div class="service-mark" aria-hidden="true">CS</div><h3>Redes Cisco</h3><p>Roteador C8200L, switch Catalyst C9200L, trunk, VLANs e métricas SNMP.</p><a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/redes/registro-switch-vlans-2026-11-04.md" target="_blank" rel="noopener noreferrer">Abrir documentação técnica ↗</a></article>
+<article class="service reveal"><span class="tag">SISTEMAS</span><div class="service-photo"><img src="../assets/images/docker/portainer-running-containers.png" loading="lazy" decoding="async" alt="Containers Docker executando no Debian Linux" width="640" height="360"></div><div class="service-mark" aria-hidden="true">LX</div><h3>Debian e Docker</h3><p>Dois computadores Linux documentados, serviços conteinerizados e infraestrutura.</p><a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/containers/servicos-docker.md" target="_blank" rel="noopener noreferrer">Abrir documentação técnica ↗</a></article>
+<article class="service reveal"><span class="tag">MONITORAMENTO</span><div class="service-photo"><img src="../assets/images/monitoring/zabbix/zabbix_dashboard1.png" loading="lazy" decoding="async" alt="Dashboard de monitoramento Zabbix" width="640" height="360"></div><div class="service-mark" aria-hidden="true">ZB</div><h3>Zabbix</h3><p>Monitoramento da infraestrutura, hosts, interfaces, itens, eventos e dashboards.</p><a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/monitoramento/zabbix.md" target="_blank" rel="noopener noreferrer">Abrir documentação técnica ↗</a></article>
+<article class="service reveal"><span class="tag">DASHBOARDS</span><div class="service-photo"><img src="../assets/images/monitoring/grafana/grafana_order.png" loading="lazy" decoding="async" alt="Organização dos dashboards Grafana" width="640" height="360"></div><div class="service-mark" aria-hidden="true">GF</div><h3>Grafana</h3><p>Dashboards históricos de equipamentos Cisco, servidores, estações e aplicações web.</p><a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/monitoramento/grafana.md" target="_blank" rel="noopener noreferrer">Abrir documentação técnica ↗</a></article>
+<article class="service reveal"><span class="tag">TELEFONIA</span><div class="service-photo"><img src="../assets/images/voip/20261106_182149.jpg" loading="lazy" decoding="async" alt="Telefone IP Grandstream no laboratório" width="640" height="360"></div><div class="service-mark" aria-hidden="true">AT</div><h3>Asterisk</h3><p>Telefonia IP com dois ramais Grandstream documentados na VLAN 50.</p><a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/servicos/asterisk-freeradius.md" target="_blank" rel="noopener noreferrer">Abrir documentação técnica ↗</a></article>
+<article class="service reveal"><span class="tag">AUTENTICAÇÃO</span><div class="service-photo"><img src="../assets/images/monitoring/grafana/grafana_dashboard_asterisk.png" loading="lazy" decoding="async" alt="Métricas do servidor Linux (não comprova autenticações RADIUS)" width="640" height="360"></div><div class="service-mark" aria-hidden="true">FR</div><h3>FreeRADIUS</h3><p>Serviço de autenticação de rede instalado com o Asterisk em Linux.</p><a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/servicos/asterisk-freeradius.md" target="_blank" rel="noopener noreferrer">Abrir documentação técnica ↗</a></article>
+<article class="service reveal"><span class="tag">DNS</span><div class="service-photo"><img src="../assets/images/services/pihole_dashboard.png" loading="lazy" decoding="async" alt="Dashboard de filtragem DNS Pi-hole" width="640" height="360"></div><div class="service-mark" aria-hidden="true">PH</div><h3>Pi-hole</h3><p>Filtragem DNS com capturas de consultas, bloqueios e atividade de clientes.</p><a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/servicos/dns-e-disponibilidade.md" target="_blank" rel="noopener noreferrer">Abrir documentação técnica ↗</a></article>
+<article class="service reveal"><span class="tag">DISPONIBILIDADE</span><div class="service-photo"><img src="../assets/images/services/UpTimeKuma.png" loading="lazy" decoding="async" alt="Dashboard de disponibilidade Uptime Kuma" width="640" height="360"></div><div class="service-mark" aria-hidden="true">UK</div><h3>Uptime Kuma</h3><p>Verificações de disponibilidade e histórico de eventos de serviços selecionados.</p><a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/servicos/dns-e-disponibilidade.md" target="_blank" rel="noopener noreferrer">Abrir documentação técnica ↗</a></article>
+<article class="service reveal"><span class="tag">CONTAINERS</span><div class="service-photo"><img src="../assets/images/docker/portainer-environment-summary.png" loading="lazy" decoding="async" alt="Resumo do ambiente Portainer" width="640" height="360"></div><div class="service-mark" aria-hidden="true">PT</div><h3>Portainer</h3><p>Visão operacional dos containers Docker, inventário de imagens e redes.</p><a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/containers/servicos-docker.md" target="_blank" rel="noopener noreferrer">Abrir documentação técnica ↗</a></article></div>
+</div></section>
+<section class="section" id="evidence"><div class="wrap">
+<div class="section-head reveal"><div><div class="kicker eyebrow">04 / EVIDÊNCIAS REAIS</div><h2>Não são fotos de banco de imagens.<br>É o laboratório de verdade.</h2></div><p>Fotografias e capturas coletadas no ambiente físico. Filtre por assunto e abra qualquer imagem para visualizar em tamanho ampliado. Todas apontam aos arquivos originais do projeto.</p></div>
+<div class="gallery-controls" role="group" aria-label="Fotografias e capturas coletadas no "><button class="filter" type="button" data-filter="all" aria-pressed="true">Todas</button>
+<button class="filter" type="button" data-filter="physical" aria-pressed="false">Infraestrutura</button>
+<button class="filter" type="button" data-filter="docker" aria-pressed="false">Containers</button>
+<button class="filter" type="button" data-filter="monitoring" aria-pressed="false">Monitoramento</button>
+<button class="filter" type="button" data-filter="services" aria-pressed="false">Serviços</button>
+<button class="filter" type="button" data-filter="endpoints" aria-pressed="false">Estações</button></div>
+<div class="gallery-grid"><button class="photo" type="button" data-category="physical" data-title="Rack e estação NOC" data-note="Ambiente físico" aria-label="Ver: Rack e estação NOC"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/physical/network-infrastructure-overview.jpg" alt="Rack e estação NOC" width="600" height="420"></span><span class="photo-info"><em>Infraestrutura</em><strong>Rack e estação NOC</strong><small>Ambiente físico · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="physical" data-title="Interior do rack" data-note="Organização dos equipamentos" aria-label="Ver: Interior do rack"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/physical/network-rack-interior.jpg" alt="Interior do rack" width="600" height="420"></span><span class="photo-info"><em>Infraestrutura</em><strong>Interior do rack</strong><small>Organização dos equipamentos · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="physical" data-title="Roteador, switch Cisco e patch panel" data-note="Infraestrutura física Cisco" aria-label="Ver: Roteador, switch Cisco e patch panel"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/physical/cisco-router-switch-patch-panel.jpg" alt="Roteador, switch Cisco e patch panel" width="600" height="420"></span><span class="photo-info"><em>Infraestrutura</em><strong>Roteador, switch Cisco e patch panel</strong><small>Infraestrutura física Cisco · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="docker" data-title="Resumo do ambiente Portainer" data-note="Ambiente de containers" aria-label="Ver: Resumo do ambiente Portainer"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/docker/portainer-environment-summary.png" alt="Resumo do ambiente Portainer" width="600" height="420"></span><span class="photo-info"><em>Containers</em><strong>Resumo do ambiente Portainer</strong><small>Ambiente de containers · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="docker" data-title="Containers Docker em execução" data-note="Dez em execução na captura" aria-label="Ver: Containers Docker em execução"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/docker/portainer-running-containers.png" alt="Containers Docker em execução" width="600" height="420"></span><span class="photo-info"><em>Containers</em><strong>Containers Docker em execução</strong><small>Dez em execução na captura · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="docker" data-title="Configuração das redes Docker" data-note="Redes bridge" aria-label="Ver: Configuração das redes Docker"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/docker/portainer-docker-networks.png" alt="Configuração das redes Docker" width="600" height="420"></span><span class="photo-info"><em>Containers</em><strong>Configuração das redes Docker</strong><small>Redes bridge · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="monitoring" data-title="Zabbix — Monitoramento unificado" data-note="Dashboard da infraestrutura" aria-label="Ver: Zabbix — Monitoramento unificado"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/monitoring/zabbix/zabbix_dashboard1.png" alt="Zabbix — Monitoramento unificado" width="600" height="420"></span><span class="photo-info"><em>Monitoramento</em><strong>Zabbix — Monitoramento unificado</strong><small>Dashboard da infraestrutura · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="monitoring" data-title="Zabbix — Interfaces do roteador Cisco" data-note="Tráfego do roteador e VLANs" aria-label="Ver: Zabbix — Interfaces do roteador Cisco"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/monitoring/zabbix/zabbix_dashboard2.png" alt="Zabbix — Interfaces do roteador Cisco" width="600" height="420"></span><span class="photo-info"><em>Monitoramento</em><strong>Zabbix — Interfaces do roteador Cisco</strong><small>Tráfego do roteador e VLANs · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="monitoring" data-title="Zabbix — Catalyst 9200L" data-note="Monitoramento do switch Cisco" aria-label="Ver: Zabbix — Catalyst 9200L"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/monitoring/zabbix/zabbix_dashboard3.png" alt="Zabbix — Catalyst 9200L" width="600" height="420"></span><span class="photo-info"><em>Monitoramento</em><strong>Zabbix — Catalyst 9200L</strong><small>Monitoramento do switch Cisco · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="monitoring" data-title="Zabbix — Tráfego e incidentes" data-note="Eventos e telemetria da rede" aria-label="Ver: Zabbix — Tráfego e incidentes"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/monitoring/zabbix/zabbix_dashboard4.png" alt="Zabbix — Tráfego e incidentes" width="600" height="420"></span><span class="photo-info"><em>Monitoramento</em><strong>Zabbix — Tráfego e incidentes</strong><small>Eventos e telemetria da rede · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="monitoring" data-title="Zabbix — Hosts cadastrados" data-note="Inventário de hosts" aria-label="Ver: Zabbix — Hosts cadastrados"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/monitoring/zabbix/zabbix_hosts.png" alt="Zabbix — Hosts cadastrados" width="600" height="420"></span><span class="photo-info"><em>Monitoramento</em><strong>Zabbix — Hosts cadastrados</strong><small>Inventário de hosts · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="monitoring" data-title="Grafana — Serviços web" data-note="Métricas HTTP e Docker" aria-label="Ver: Grafana — Serviços web"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/monitoring/grafana/grafana_dashboard_web_containers.png" alt="Grafana — Serviços web" width="600" height="420"></span><span class="photo-info"><em>Monitoramento</em><strong>Grafana — Serviços web</strong><small>Métricas HTTP e Docker · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="monitoring" data-title="Grafana — Roteador Cisco" data-note="Métricas do roteador" aria-label="Ver: Grafana — Roteador Cisco"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/monitoring/grafana/grafana_dashboard_router1.png" alt="Grafana — Roteador Cisco" width="600" height="420"></span><span class="photo-info"><em>Monitoramento</em><strong>Grafana — Roteador Cisco</strong><small>Métricas do roteador · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="monitoring" data-title="Grafana — Tráfego do switch" data-note="Throughput das interfaces" aria-label="Ver: Grafana — Tráfego do switch"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/monitoring/grafana/grafana_dashboard_switch2.png" alt="Grafana — Tráfego do switch" width="600" height="420"></span><span class="photo-info"><em>Monitoramento</em><strong>Grafana — Tráfego do switch</strong><small>Throughput das interfaces · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="monitoring" data-title="Grafana — Asterisk e Linux" data-note="Métricas dos servidores" aria-label="Ver: Grafana — Asterisk e Linux"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/monitoring/grafana/grafana_dashboard_asterisk.png" alt="Grafana — Asterisk e Linux" width="600" height="420"></span><span class="photo-info"><em>Monitoramento</em><strong>Grafana — Asterisk e Linux</strong><small>Métricas dos servidores · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="monitoring" data-title="Grafana — Estações de trabalho" data-note="Painéis históricos das estações" aria-label="Ver: Grafana — Estações de trabalho"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/monitoring/grafana/grafana_dashboard_pcs1.png" alt="Grafana — Estações de trabalho" width="600" height="420"></span><span class="photo-info"><em>Monitoramento</em><strong>Grafana — Estações de trabalho</strong><small>Painéis históricos das estações · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="services" data-title="Pi-hole — Filtragem DNS" data-note="Dashboard DNS" aria-label="Ver: Pi-hole — Filtragem DNS"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/services/pihole_dashboard.png" alt="Pi-hole — Filtragem DNS" width="600" height="420"></span><span class="photo-info"><em>Serviços</em><strong>Pi-hole — Filtragem DNS</strong><small>Dashboard DNS · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="services" data-title="Pi-hole — Clientes e domínios" data-note="Estatísticas DNS" aria-label="Ver: Pi-hole — Clientes e domínios"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/services/pihole_dashboard_tops.png" alt="Pi-hole — Clientes e domínios" width="600" height="420"></span><span class="photo-info"><em>Serviços</em><strong>Pi-hole — Clientes e domínios</strong><small>Estatísticas DNS · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="services" data-title="Uptime Kuma — Disponibilidade" data-note="Verificações de serviços" aria-label="Ver: Uptime Kuma — Disponibilidade"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/services/UpTimeKuma.png" alt="Uptime Kuma — Disponibilidade" width="600" height="420"></span><span class="photo-info"><em>Serviços</em><strong>Uptime Kuma — Disponibilidade</strong><small>Verificações de serviços · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="services" data-title="Telefone IP Grandstream — TI" data-note="Dispositivo VoIP na VLAN 50" aria-label="Ver: Telefone IP Grandstream — TI"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/voip/20261106_182149.jpg" alt="Telefone IP Grandstream — TI" width="600" height="420"></span><span class="photo-info"><em>Serviços</em><strong>Telefone IP Grandstream — TI</strong><small>Dispositivo VoIP na VLAN 50 · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="services" data-title="Telefone IP Grandstream — Vendas" data-note="Dispositivo VoIP na VLAN 50" aria-label="Ver: Telefone IP Grandstream — Vendas"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/voip/20261106_182236.jpg" alt="Telefone IP Grandstream — Vendas" width="600" height="420"></span><span class="photo-info"><em>Serviços</em><strong>Telefone IP Grandstream — Vendas</strong><small>Dispositivo VoIP na VLAN 50 · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="endpoints" data-title="Estação TI — Configuração IP" data-note="Configuração de rede da estação" aria-label="Ver: Estação TI — Configuração IP"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/endpoints/it-02-network.jpg" alt="Estação TI — Configuração IP" width="600" height="420"></span><span class="photo-info"><em>Estações</em><strong>Estação TI — Configuração IP</strong><small>Configuração de rede da estação · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="endpoints" data-title="Contabilidade — Inventário de hardware" data-note="Evidência da estação Windows" aria-label="Ver: Contabilidade — Inventário de hardware"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/endpoints/accounting-02-hardware.png" alt="Contabilidade — Inventário de hardware" width="600" height="420"></span><span class="photo-info"><em>Estações</em><strong>Contabilidade — Inventário de hardware</strong><small>Evidência da estação Windows · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="endpoints" data-title="Financeiro — Inventário de hardware" data-note="Evidência da estação Windows" aria-label="Ver: Financeiro — Inventário de hardware"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/endpoints/finance-01-hardware.png" alt="Financeiro — Inventário de hardware" width="600" height="420"></span><span class="photo-info"><em>Estações</em><strong>Financeiro — Inventário de hardware</strong><small>Evidência da estação Windows · 06.11.2026</small></span></button>
+<button class="photo" type="button" data-category="endpoints" data-title="Vendas — Inventário de hardware" data-note="Evidência da estação Windows" aria-label="Ver: Vendas — Inventário de hardware"><span class="photo-media"><img loading="lazy" decoding="async" src="../assets/images/endpoints/sales-01-hardware.png" alt="Vendas — Inventário de hardware" width="600" height="420"></span><span class="photo-info"><em>Estações</em><strong>Vendas — Inventário de hardware</strong><small>Evidência da estação Windows · 06.11.2026</small></span></button></div>
+<div class="gallery-bottom"><p><b data-count>25</b> imagens nesta seleção · As imagens são históricas, coletadas principalmente em 06/11/2026. Cada captura registra o que estava visível naquele momento, não uma transmissão ao vivo.</p><span class="chip">REGISTRO REAL DO LABORATÓRIO</span></div>
+</div></section>
+<section class="section" id="cabling"><div class="wrap">
+<div class="section-head reveal"><div><div class="kicker eyebrow">05 / CABEAMENTO</div><h2>A base física importa.<br>Até a ordem dos fios.</h2></div></div>
+<div class="cable-layout"><div class="cable-art reveal"><div class="rj45-shell"><div class="pin-grid" role="img" aria-label="T568A — ordem dos pinos RJ45"><div class="wire wg"><span>1</span></div><div class="wire g"><span>2</span></div><div class="wire wo"><span>3</span></div><div class="wire b"><span>4</span></div><div class="wire wb"><span>5</span></div><div class="wire o"><span>6</span></div><div class="wire wbr"><span>7</span></div><div class="wire br"><span>8</span></div></div></div><p class="caption" style="text-align:center;margin:45px 0 0">T568A — ordem dos pinos RJ45 · 1 → 8</p></div>
+<div class="cable-copy reveal"><span class="chip">ANSI/TIA-568 · T568A</span><h3 style="margin-top:20px">O padrão de conexão T568A</h3><p>Os cabos Ethernet confeccionados no laboratório seguem o padrão de pinagem T568A. Em um cabo direto, as duas extremidades utilizam a mesma sequência T568A. O desenho representa a posição dos oito condutores, com os contatos do conector voltados para o observador.</p><ol class="wire-legend"><li><b>1.</b> Branco/verde</li>
+<li><b>2.</b> Verde</li>
+<li><b>3.</b> Branco/laranja</li>
+<li><b>4.</b> Azul</li>
+<li><b>5.</b> Branco/azul</li>
+<li><b>6.</b> Laranja</li>
+<li><b>7.</b> Branco/marrom</li>
+<li><b>8.</b> Marrom</li></ol><span class="caution">Diagrama técnico ilustrativo, não fotografia ou laudo de certificação dos cabos confeccionados no laboratório.</span><div style="margin-top:22px"><a class="btn btn-outline" href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/evidencias/infraestrutura-fisica.md" target="_blank" rel="noopener noreferrer">Ver evidências do rack ↗</a></div></div></div>
+</div></section>
+<section class="section" id="monitoring"><div class="wrap">
+<div class="section-head reveal"><div><div class="kicker eyebrow">06 / OPERAÇÕES E OBSERVABILIDADE</div><h2>Visibilidade é construída.<br>Não presumida.</h2></div><p>Zabbix, Grafana, SNMP e Uptime Kuma apresentam visões complementares do ambiente. Os números abaixo foram preservados dos registros de monitoramento de 06/11/2026.</p></div>
+<div class="metrics-band"><div class="metric-box"><strong>12</strong><span>Hosts cadastrados no Zabbix</span></div><div class="metric-box"><strong>1.820</strong><span>Itens do Zabbix</span></div><div class="metric-box"><strong>113</strong><span>Itens não suportados na captura</span></div><div class="metric-box"><strong>34</strong><span>Problemas registrados</span></div></div>
+<div class="monitor-flow"><div class="monitor-chip"><b>SNMP</b><small>Métricas dos equipamentos Cisco</small></div>
+<div class="monitor-chip"><b>Zabbix</b><small>Hosts, agentes e dados de monitoramento</small></div>
+<div class="monitor-chip"><b>Grafana</b><small>Visualização das métricas registradas</small></div>
+<div class="monitor-chip"><b>Uptime Kuma</b><small>Verificações de HTTP e serviços</small></div></div>
+<div class="caution" style="margin-top:25px">As capturas mostram hosts indisponíveis e painéis sem dados. As estações utilizam DHCP, e endereços antigos podem contribuir para divergências; não atribuímos uma causa única a todas as falhas. Não há estado ao vivo nem SLA de disponibilidade comprovado.</div>
+<div style="margin-top:23px"><a class="btn btn-outline" href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/monitoramento/zabbix.md" target="_blank" rel="noopener noreferrer">Explorar capturas de monitoramento ↗</a></div>
+</div></section>
+<section class="section" id="timeline"><div class="wrap"><div class="section-head"><div><div class="kicker eyebrow">07 / HISTÓRICO DOCUMENTADO</div><h2>Uma linha do tempo<br>baseada em registros.</h2></div></div><div class="timeline"><div class="timeline-item"><time>04 NOV 2026</time><h4>Configuração do switch</h4><p>Sete VLANs e atribuições de portas registradas no Cisco Catalyst C9200L.</p></div>
+<div class="timeline-item"><time>06 NOV 2026</time><h4>Coleta de evidências</h4><p>Fotografias do rack, inventários, Docker/Portainer e capturas do monitoramento.</p></div>
+<div class="timeline-item"><time>09 NOV 2026</time><h4>Consolidação documental</h4><p>Registros técnicos bilíngues e arquitetura de redes organizados no repositório.</p></div></div></div></section>
+<section class="section" id="documentation"><div class="wrap"><div class="section-head"><div><div class="kicker eyebrow">08 / DOCUMENTAÇÃO ABERTA</div><h2>Da configuração à captura.<br>Tudo pode ser consultado.</h2></div><p>O repositório contém descrições técnicas, fragmentos de configurações datadas, inventários e evidências. Navegue por assunto ou consulte o histórico completo.</p></div>
+<div class="docs-layout"><div class="docs-primary"><span class="chip">OPEN SOURCE DOCUMENTATION</span><h3>Enterprise NOC — From Scratch</h3><p>O GitHub é a fonte documental do projeto. As páginas públicas explicam o que foi construído e coletado, separando os fatos do laboratório físico do cenário empresarial fictício.</p><a class="btn btn-main" href="https://github.com/kayo-willian/enterprise-noc-from-scratch" target="_blank" rel="noopener noreferrer">Explorar repositório no GitHub ↗</a></div><div class="docs-list"><a class="docs-link" href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/arquitetura/visao-geral-da-infraestrutura.md" target="_blank" rel="noopener noreferrer">Arquitetura de rede<span aria-hidden="true">↗</span></a>
+<a class="docs-link" href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/redes/registro-switch-vlans-2026-11-04.md" target="_blank" rel="noopener noreferrer">Configuração das VLANs<span aria-hidden="true">↗</span></a>
+<a class="docs-link" href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/containers/servicos-docker.md" target="_blank" rel="noopener noreferrer">Infraestrutura Docker<span aria-hidden="true">↗</span></a>
+<a class="docs-link" href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/monitoramento/zabbix.md" target="_blank" rel="noopener noreferrer">Monitoramento Zabbix<span aria-hidden="true">↗</span></a>
+<a class="docs-link" href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/monitoramento/grafana.md" target="_blank" rel="noopener noreferrer">Dashboards Grafana<span aria-hidden="true">↗</span></a>
+<a class="docs-link" href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/servicos/asterisk-freeradius.md" target="_blank" rel="noopener noreferrer">VoIP e FreeRADIUS<span aria-hidden="true">↗</span></a>
+<a class="docs-link" href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/servicos/dns-e-disponibilidade.md" target="_blank" rel="noopener noreferrer">DNS e disponibilidade<span aria-hidden="true">↗</span></a>
+<a class="docs-link" href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/evidencias/infraestrutura-fisica.md" target="_blank" rel="noopener noreferrer">Infraestrutura física<span aria-hidden="true">↗</span></a></div></div>
+</div></section>
+<section class="section" id="faq"><div class="wrap"><div class="section-head"><div><div class="kicker eyebrow">PERGUNTAS E CONTEXTO</div><h2>O projeto sem<br>interpretações erradas.</h2></div></div><div class="faq"><details><summary>A Tapajós Inovações é uma empresa real?</summary><p>Não. A empresa e seus requisitos de modernização compõem um cenário corporativo fictício. Os equipamentos e as capturas documentam um laboratório físico real de treinamento.</p></details>
+<details><summary>Este site é um dashboard NOC ao vivo?</summary><p>Não. O portal é uma apresentação técnica estática hospedada no GitHub Pages. As imagens de monitoramento são capturas datadas, não telemetria em tempo real.</p></details>
+<details><summary>O projeto comprova todas as ACLs e autenticações wireless?</summary><p>Não. A arquitetura física e as atribuições do switch estão documentadas. Não apresentamos aplicação de ACLs e testes de autenticação como concluídos quando não existe registro correspondente.</p></details>
+<details><summary>Todas as estações estavam disponíveis nas capturas?</summary><p>Não. Os registros históricos incluem agentes indisponíveis e itens não suportados. O portal apresenta essas constatações sem adulterar os resultados.</p></details></div></div></section>
+<section class="end-cta"><div class="wrap"><div class="kicker eyebrow" style="justify-content:center">LABORATÓRIO REAL · EMPRESA FICTÍCIA</div><h2>Engenharia do rack<br>à observabilidade.</h2><p>Explore as evidências, consulte os registros de configuração e conheça um projeto prático de redes empresariais construído em laboratório físico, com contexto corporativo fictício.</p><div class="actions"><a class="btn btn-main" href="https://github.com/kayo-willian/enterprise-noc-from-scratch" target="_blank" rel="noopener noreferrer">Ver projeto no GitHub ↗</a><a class="btn btn-outline" href="#evidence">Explorar fotografias ↗</a></div></div></section>
 </main>
-<div id="dossier-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-heading" aria-hidden="true"><div class="modal-window"><div class="modal-header"><div style="display:flex;align-items:center;gap:10px"><i class="fa-solid fa-book-atlas" style="color:var(--primary)" aria-hidden="true"></i><h3 id="modal-heading" style="font-family:var(--font-display);font-size:1.12rem;color:var(--text-dark)">Enterprise NOC — Dossiê da arquitetura</h3></div><button class="modal-close-btn" id="modal-close-btn" type="button" aria-label="Fechar janela">&times;</button></div><div class="modal-tabs" role="tablist"><button class="modal-tab-btn active" data-tab="tab-hosts" type="button">Inventário</button><button class="modal-tab-btn" data-tab="tab-domains" type="button">Serviços</button><button class="modal-tab-btn" data-tab="tab-recovery" type="button">Limitações</button></div><div class="modal-body"><div class="tab-pane active" id="tab-hosts"><h4 style="margin-bottom:12px;color:var(--primary)">O registro identifica 10 computadores e a infraestrutura Cisco de roteamento e switching:</h4><ul style="list-style:none;display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:.8rem"><li>• TI / NOC: 2 computadores (1 host Debian 13, 1 estação Windows).</li><li>• Contabilidade: 3 estações Windows.</li><li>• Financeiro: 2 estações Windows.</li><li>• Vendas: 2 estações Windows.</li><li>• VoIP / autenticação: 1 servidor Linux separado.</li><li>• Rede: roteador Cisco Catalyst C8200L e switch C9200L.</li></ul></div><div class="tab-pane" id="tab-domains" style="display:none"><h4 style="margin-bottom:12px;color:var(--primary)">O proxy e os domínios DNS internos pertencem ao laboratório. Não são acessíveis publicamente pelo GitHub Pages.</h4><ul style="list-style:none;display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:.8rem"><li>• Nginx → roteamento interno das aplicações (somente laboratório).</li><li>• Zabbix + MariaDB → backend de monitoramento e interface web.</li><li>• Grafana → dashboards de monitoramento.</li><li>• Uptime Kuma → verificações de disponibilidade.</li><li>• Pi-hole → serviços relacionados ao DNS.</li><li>• Portainer → gerenciamento do Docker.</li><li>• Apache (site-estatico) → portal interno original.</li></ul></div><div class="tab-pane" id="tab-recovery" style="display:none"><h4 style="margin-bottom:12px;color:var(--primary)">O que as evidências NÃO comprovam:</h4><ul style="list-style:none;display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:.8rem"><li>• Não há comprovação de SLA de 99,9% ou disponibilidade contínua.</li><li>• Alguns hosts Zabbix tinham IPs antigos; foram registrados 113 itens não suportados.</li><li>• Não foi comprovada a comunicação integral entre todas as VLANs e stacks Docker.</li><li>• Não há validação de restauração completa a partir dos backups.</li><li>• Algumas especificações de hardware das estações permanecem desconhecidas.</li></ul></div></div></div></div>
-<footer id="contato" class="site-footer"><div class="container"><div class="footer-grid"><div class="footer-col"><div class="brand-logo" style="margin-bottom:16px"><div class="brand-icon"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></div><div class="brand-text"><h1 style="color:#fff">Enterprise NOC</h1><span>Organização simulada · Enterprise NOC</span></div></div><p style="font-size:.83rem;line-height:1.6;color:#94a3b8">Documentação pública de uma infraestrutura corporativa simulada. A marca e o cenário institucional são fictícios; os equipamentos e capturas foram registrados em laboratório de formação. Não é serviço oficial.</p></div><div class="footer-col"><h4>Explorar</h4><ul><li><a href="#physical">Evidências</a></li><li><a href="#topologia">Rede</a></li><li><a href="#fleet">Docker</a></li><li><a href="#noc-live">Monitoramento</a></li></ul></div><div class="footer-col"><h4>Tecnologias</h4><ul><li><a href="#solucoes">Cisco Catalyst</a></li><li><a href="#fleet">Docker / Portainer</a></li><li><a href="#noc-live">Zabbix / Grafana</a></li><li><a href="#solucoes">Asterisk / FreeRADIUS</a></li></ul></div><div class="footer-col"><h4>Links</h4><div class="contact-item"><i class="fa-solid fa-github" aria-hidden="true"></i> <a href="https://github.com/kayo-willian/enterprise-noc-from-scratch" target="_blank" rel="noopener noreferrer">Repositório no GitHub</a></div><div class="contact-item"><i class="fa-solid fa-user" aria-hidden="true"></i> <a href="https://www.linkedin.com/in/kayo-willian/" target="_blank" rel="noopener noreferrer">Perfil no LinkedIn</a></div></div></div><div class="footer-bottom"><p>© 2026 Enterprise NOC — From Scratch. Documentação do projeto por Kayo Willian.</p><p>Evidências coletadas em 06/11/2026 · Apresentação estática</p></div></div></footer>
-<script>
-(function() {
-  'use strict';
-  const htmlEl=document.documentElement;
-  const themeBtn=document.getElementById('theme-toggle');
-  let selected='dark';
-  try { const stored=localStorage.getItem('enterprise_noc_theme'); if (stored==='light'||stored==='dark') selected=stored; } catch(e) {}
-  function applyTheme(theme) { htmlEl.setAttribute('data-theme',theme); themeBtn.innerHTML=theme==='dark' ? '<i class="fa-solid fa-sun" aria-hidden="true"></i>' : '<i class="fa-solid fa-moon" aria-hidden="true"></i>'; }
-  applyTheme(selected);
-  themeBtn.addEventListener('click',()=>{ selected=htmlEl.getAttribute('data-theme')==='dark' ? 'light':'dark'; applyTheme(selected); try{localStorage.setItem('enterprise_noc_theme',selected)}catch(e){} });
-  const menuBtn=document.getElementById('menu-toggle');
-  const nav=document.getElementById('primary-nav');
-  function closeMenu() {nav.classList.remove('is-open');menuBtn.setAttribute('aria-expanded','false');}
-  menuBtn.addEventListener('click',()=>{ const opened=nav.classList.toggle('is-open'); menuBtn.setAttribute('aria-expanded',String(opened)); });
-  nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
-  document.addEventListener('click',(e)=>{ if(!nav.contains(e.target) && !menuBtn.contains(e.target)) closeMenu(); });
-  const modal=document.getElementById('dossier-modal'); const closeBtn=document.getElementById('modal-close-btn'); let previousFocus=null;
-  function openModal() { previousFocus=document.activeElement; modal.classList.add('active'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; closeBtn.focus(); }
-  function closeModal() { modal.classList.remove('active'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; if(previousFocus&&typeof previousFocus.focus==='function') previousFocus.focus(); }
-  document.querySelectorAll('#btn-open-modal-hero,#btn-open-modal-showcase').forEach(b=>b.addEventListener('click',openModal));
-  closeBtn.addEventListener('click',closeModal);
-  modal.addEventListener('click',(e)=>{if(e.target===modal) closeModal();});
-  document.addEventListener('keydown',(e)=>{ if(e.key==='Escape'){closeModal();closeMenu();} if(e.key==='Tab' && modal.classList.contains('active')) { const focusables=Array.from(modal.querySelectorAll('button:not([disabled]),a[href]')).filter(x=>x.offsetParent!==null); if(focusables.length){ const f=focusables[0],last=focusables[focusables.length-1]; if(e.shiftKey && document.activeElement===f){last.focus();e.preventDefault();} else if(!e.shiftKey && document.activeElement===last){f.focus();e.preventDefault();} } } });
-  document.querySelectorAll('.modal-tab-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.modal-tab-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.tab-pane').forEach(p=>p.style.display='none');btn.classList.add('active');const target=document.getElementById(btn.getAttribute('data-tab')); if(target)target.style.display='block';}));
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) { document.querySelectorAll('.solution-card,.fleet-card,.terminal-window').forEach(card=>{card.addEventListener('mousemove',(e)=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left-r.width/2)/r.width;const y=(e.clientY-r.top-r.height/2)/r.height;card.style.transform=`perspective(800px) rotateX(${(-y*6).toFixed(2)}deg) rotateY(${(x*6).toFixed(2)}deg) translateY(-4px)`;});card.addEventListener('mouseleave',()=>{card.style.transform='';});}); }
-})();
-</script>
-</body></html>
+<footer class="site-foot"><div class="wrap"><div class="foot-main"><div><a class="brand" href="#top"><img src="../assets/brand/tapajos-emblem.svg" width="51" height="51" alt=""><span><span class="brand-name">Tapajós Inovações</span><span class="brand-sub">Enterprise NOC · From Scratch</span></span></a><p style="margin-top:20px">Identidade fictícia criada para um laboratório real e documentado de infraestrutura empresarial. Equipamentos físicos, serviços Linux e evidências operacionais.</p></div><div><h4 class="foot-head">Explorar</h4><nav class="foot-links" aria-label="Explorar"><a href="#about">Projeto</a><a href="#architecture">Arquitetura</a><a href="#services">Serviços</a><a href="#evidence">Evidências</a></nav></div><div><h4 class="foot-head">Registros técnicos</h4><nav class="foot-links" aria-label="Registros técnicos"><a href="https://github.com/kayo-willian/enterprise-noc-from-scratch" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/monitoramento/zabbix.md" target="_blank" rel="noopener noreferrer">Zabbix</a><a href="https://github.com/kayo-willian/enterprise-noc-from-scratch/blob/main/docs/pt-BR/monitoramento/grafana.md" target="_blank" rel="noopener noreferrer">Grafana</a><a href="../index.html">English</a></nav></div></div><div class="foot-bottom"><span>© 2026 Tapajós Inovações · Cenário empresarial fictício · Laboratório real documentado.</span><a href="#top" class="back-top">Voltar ao topo ↑</a></div></div></footer>
+<dialog class="lightbox" id="gallery-dialog" aria-label="04 / EVIDÊNCIAS REAIS"><div class="lightbox-body"><button class="modal-close" type="button" data-close aria-label="Fechar imagem ampliada">✕</button><img class="lightbox-img" data-dialog-image alt=""><div class="lightbox-info"><div><b data-dialog-title></b><small data-dialog-subtitle></small></div><div class="modal-controls"><button type="button" data-prev aria-label="Imagem anterior">←</button><button type="button" data-next aria-label="Próxima imagem">→</button></div></div></div></dialog>
+</body>
+</html>
