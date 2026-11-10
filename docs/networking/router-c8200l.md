@@ -126,7 +126,7 @@ This page documents the physical C8200L equipment, the switch-side trunk (Gi1/0/
 
 The screenshots establish monitoring observations at their collection time, not uninterrupted availability or a complete running configuration.
 
-## 10. Related Documentation
+## 9. Related Documentation
 
 - [Physical infrastructure](../evidence/physical-infrastructure.md)
 - [Cisco switch and VLAN configuration snapshot](switch-vlan-snapshot-2026-11-04.md)
