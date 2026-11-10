@@ -669,7 +669,7 @@ It does not claim:
 - Resolution of all historical alerts.
 - Execution of the hypothetical incident examples.
 
-The framework provides a foundation for the project's future operational documentation.
+This framework is accompanied by the six technical runbooks and the incident simulation and recovery validation procedure. Their publication documents the proposed operational method; it does not demonstrate live execution or recovery.
 
 ## 17. Related Documentation
 
@@ -689,7 +689,7 @@ The framework provides a foundation for the project's future operational documen
 
 **Document classification:** Proposed NOC operational process.  
 **Historical evidence references:** November 4–6, 2026.  
-**Next workstream:** Technical Troubleshooting and Runbooks.
+**Related NOC procedures:** Six bilingual technical runbooks and the incident simulation and recovery validation framework, linked in Section 15.
 
 **Enterprise NOC — From Scratch**  
 *From physical infrastructure to network operations.*
