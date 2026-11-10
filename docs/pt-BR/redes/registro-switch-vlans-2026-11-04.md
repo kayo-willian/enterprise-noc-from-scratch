@@ -22,7 +22,7 @@ A infraestrutura documentada inclui:
 | Switch | Cisco Catalyst C9200L-24T-4G | Comutação Ethernet e segmentação por VLANs |
 | Cabeamento estruturado | Patch panel Categoria 6 | Terminação física do cabeamento |
 | Roteador Wi-Fi | TP-Link Archer AX53 | Rede Wi-Fi corporativa |
-| Equipamento sem fio adicional | Modelo não confirmado | Rede IoT |
+| Roteador wireless dedicado ao IoT | TP-Link Archer AX53 (inventário de rede) | Rede IoT |
 
 A configuração coletada identifica o Cisco IOS XE versão `17.15` e a plataforma `c9200l-24t-4g`.
 
@@ -156,7 +156,7 @@ switchport mode access
 
 Além disso, o comando `spanning-tree portfast trunk` difere daquele utilizado nas outras portas de computadores.
 
-**O modo operacional de comutação da interface Gi1/0/11 precisa ser confirmado.**
+**Interpretação histórica:** os comandos coletados não permitem determinar o modo operacional efetivo da Gi1/0/11.
 
 A configuração original foi preservada nesta documentação, sem modificações ou suposições sobre seu comportamento operacional.
 
@@ -171,8 +171,8 @@ As fotografias dos computadores e os inventários Linux de 6 de novembro apresen
 | 30 | 192.168.30.0/24 | Financeiro: 192.168.30.10–11 |
 | 40 | 192.168.40.0/24 | Vendas: 192.168.40.10–11 |
 | 50 | 192.168.50.0/24 | Asterisk: 192.168.50.2; VoIP: 192.168.50.10–11 |
-| 60 | Não confirmado | Wi-Fi corporativo |
-| 70 | Não confirmado | Rede IoT |
+| 60 | Não registrado nas capturas de endereçamento das estações | Wi-Fi corporativo |
+| 70 | Não registrado nas capturas de endereçamento das estações | Rede IoT |
 
 As redes `/24` foram derivadas dos endereços e das máscaras registrados nos computadores.
 
@@ -235,22 +235,13 @@ Entretanto, não apresentam a configuração final completa do SNMP.
 
 Alguns painéis do Grafana também possuem identificações repetidas de interfaces, que precisam ser verificadas nos respectivos itens de monitoramento.
 
-## 8. Limitações Conhecidas
+## 8. Escopo da Captura Histórica
 
-| Componente | Limitação |
-|---|---|
-| Configuração do roteador | Running-config atual completo não disponível |
-| Roteamento entre VLANs | Configuração detalhada não verificada independentemente |
-| ACLs | Políticas efetivas de controle de acesso não confirmadas |
-| DHCP | Configuração completa não disponível |
-| Gerenciamento do switch | Endereço de gerenciamento exige confirmação na configuração atual |
-| VLAN 60 | Endereçamento e autenticação Wi-Fi não totalmente verificados |
-| VLAN 70 | Modelo e endereçamento do equipamento IoT não confirmados |
-| Gi1/0/11 | Modo operacional da interface exige confirmação |
-| SNMP | Configuração de 4 de novembro anterior à ativação do monitoramento |
-| Cabeamento físico | Mapeamento completo entre cabos, patch panel e equipamentos não verificado |
+A configuração do switch coletada em 04/11/2026 registra sete VLANs, o trunk para o roteador e atribuições das interfaces. A captura antecede a configuração posterior de monitoramento SNMP. O arquivo histórico não contém a configuração do C8200L, os parâmetros internos dos roteadores wireless ou o mapa completo dos cabos.
 
-As limitações foram mantidas para distinguir configurações documentadas de suposições.
+A configuração de Gi1/0/11 foi preservada como capturada, sem convertê-la em uma porta access presumida. As divergências de endereçamento entre Zabbix e estações são observações históricas; mudanças por DHCP podem explicar parte delas, sem estabelecer a causa de cada alerta.
+
+O equipamento da VLAN 70 consta no inventário consolidado como um TP-Link Archer AX53 dedicado. Essa identificação não foi extraída dos comandos Cisco de 04/11.
 
 ## 9. Documentação Relacionada
 
@@ -264,4 +255,4 @@ As limitações foram mantidas para distinguir configurações documentadas de s
 
 **Evidências complementares da infraestrutura:** 6 de novembro de 2026.
 
-**Estado da documentação:** Registro histórico de configuração, não uma verificação da configuração final em execução.
+**Tipo de registro:** Captura histórica da configuração do switch, datada de 04/11/2026.

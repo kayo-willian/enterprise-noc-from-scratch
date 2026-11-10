@@ -5,7 +5,7 @@
 > **Equipamento:** Cisco Catalyst C8200L-1N-4T  
 > **Período das evidências:** 04 a 06 de novembro de 2026  
 > **Documentação atualizada:** 08 de novembro de 2026  
-> **Situação:** Parcialmente documentado — validações pendentes
+> **Registro:** Equipamento físico, trunk no switch, funções da rede e evidências de monitoramento
 
 ## 1. Visão Geral
 
@@ -59,9 +59,6 @@ As fotografias dos computadores coletadas em 06/11/2026 apresentam configuraçõ
 | 20 | `192.168.20.1` | Configuração IP de estações da Contabilidade |
 | 30 | `192.168.30.1` | Configuração IP de estações do Financeiro |
 | 40 | `192.168.40.1` | Configuração IP de estações de Vendas |
-| 50 | Não confirmado de forma independente neste conjunto | Validação pendente |
-| 60 | Não verificado | Validação pendente |
-| 70 | Não verificado | Validação pendente |
 
 Os registros técnicos de 04/11/2026 também associam o endereço `192.168.10.1` ao roteador.
 
@@ -121,49 +118,13 @@ A configuração completa do SNMP e suas restrições de acesso ainda não foram
 
 ## 7. DHCP, NAT e Conectividade Externa
 
-A participação do roteador nos serviços DHCP, na distribuição de endereços IP, no NAT e na conectividade externa faz parte das verificações previstas para a infraestrutura.
+As estações do laboratório utilizam DHCP. Os gateways das VLANs 10, 20, 30 e 40 foram registrados nas capturas das estações em 06/11/2026, não em uma exportação da configuração atual do roteador. A coleta não identifica qual equipamento atende ou retransmite DHCP, os pools, traduções NAT, interface externa ou rota padrão do C8200L. Nenhum comando correspondente é apresentado como implantado.
 
-Entretanto, as evidências disponíveis não permitem confirmar:
+## 8. Escopo do Registro do Roteador
 
-- Se os pools DHCP estão configurados diretamente no C8200L.
-- Se existe utilização de DHCP Relay.
-- Quais são os escopos e exclusões de endereços DHCP.
-- Qual configuração NAT está efetivamente aplicada.
-- Como está configurada a interface externa.
-- Qual é a tabela completa de roteamento e a rota padrão utilizada.
+A página documenta o C8200L físico, o trunk no lado do switch (Gi1/0/1), o projeto de VLANs, os gateways observados nas estações e os registros de Zabbix/Grafana relacionados ao roteador. Não atribui nome à interface física do lado do C8200L nem afirma conhecer as subinterfaces dot1Q. A seção de controle de acesso descreve a política lógica, não o conteúdo ou a aplicação efetiva de ACLs.
 
-Nenhum exemplo de configuração será apresentado como efetivamente implementado sem evidências correspondentes.
-
-## 8. Possibilidades de Validação
-
-Verificações futuras podem utilizar registros já disponíveis, histórico de monitoramento e testes autorizados de conectividade.
-
-| Área | Objetivo da validação |
-|---|---|
-| Roteamento entre VLANs | Identificar as interfaces utilizadas e confirmar o encaminhamento autorizado |
-| Gateways | Confirmar os endereços e os equipamentos responsáveis por cada gateway |
-| ACLs | Verificar se as restrições de acesso pretendidas estão sendo aplicadas |
-| DHCP | Identificar o mecanismo responsável pela distribuição dos endereços |
-| NAT | Determinar se existe tradução de endereços configurada e operacional |
-| SNMP | Confirmar os parâmetros de monitoramento e as métricas esperadas |
-| Troubleshooting | Registrar falhas observadas e suas respectivas evidências |
-
-Os testes de conectividade devem considerar firewalls dos computadores e o comportamento dos serviços antes de atribuir falhas exclusivamente às ACLs.
-
-Uma resposta ICMP bem-sucedida também não comprova, isoladamente, que todos os serviços necessários estejam acessíveis.
-
-## 9. Limitações Conhecidas
-
-Na data desta atualização:
-
-1. A configuração atual do roteador não está disponível.
-2. As subinterfaces VLAN e os parâmetros de encapsulamento do roteador não foram verificados.
-3. As políticas de ACL pretendidas ainda não foram comprovadas por configurações e testes controlados.
-4. A implementação dos serviços DHCP e NAT permanece sem confirmação.
-5. As evidências de monitoramento representam registros históricos, não garantia de disponibilidade contínua.
-6. A interface física do roteador utilizada na ligação com o switch não foi identificada nos registros disponíveis.
-
-Essas limitações são mantidas na documentação para preservar a precisão técnica.
+As capturas registram estados de monitoramento no momento da coleta, sem representar garantia de disponibilidade contínua ou cópia integral da configuração do roteador.
 
 ## 10. Documentação Relacionada
 
@@ -173,6 +134,3 @@ Essas limitações são mantidas na documentação para preservar a precisão t�
 - [Monitoramento Zabbix](../monitoramento/zabbix.md)
 - [Monitoramento Grafana](../monitoramento/grafana.md)
 
----
-
-**Princípio da documentação:** Este registro descreve a infraestrutura observada no laboratório e sua arquitetura de rede pretendida. Configurações não verificadas não são apresentadas como implementadas ou validadas.

@@ -22,7 +22,7 @@ The documented infrastructure includes:
 | Switch | Cisco Catalyst C9200L-24T-4G | Ethernet switching and VLAN segmentation |
 | Structured cabling | Category 6 patch panel | Physical network termination |
 | Wireless router | TP-Link Archer AX53 | Corporate Wi-Fi |
-| Additional wireless equipment | Model not verified | IoT network |
+| Dedicated IoT wireless router | TP-Link Archer AX53 (network inventory) | IoT network |
 
 The switch configuration identifies Cisco IOS XE version `17.15` and a provisioned `c9200l-24t-4g` platform.
 
@@ -156,7 +156,7 @@ switchport mode access
 
 The presence of `spanning-tree portfast trunk` also differs from the configuration used on the other workstation ports.
 
-**The operational switching mode of Gi1/0/11 requires verification.**
+**Historical interpretation:** The recorded statements do not establish the effective switching mode of Gi1/0/11.
 
 This document preserves the original configuration without silently modifying or interpreting it as a standard access-port configuration.
 
@@ -171,8 +171,8 @@ Network photographs and Linux inventory records collected on November 6 provide 
 | 30 | 192.168.30.0/24 | Finance: 192.168.30.10–11 |
 | 40 | 192.168.40.0/24 | Sales: 192.168.40.10–11 |
 | 50 | 192.168.50.0/24 | Asterisk: 192.168.50.2; VoIP: 192.168.50.10–11 |
-| 60 | Not established | Corporate wireless network |
-| 70 | Not established | IoT network |
+| 60 | Not captured in workstation addressing evidence | Corporate wireless network |
+| 70 | Not captured in workstation addressing evidence | IoT network |
 
 The `/24` networks are derived from the observed host addresses and subnet masks.
 
@@ -235,22 +235,13 @@ They do not provide the complete final SNMP configuration.
 
 Some Grafana interface panels also contain repeated labels, which require verification against the underlying monitoring items.
 
-## 8. Known Limitations
+## 8. Scope of the Historical Snapshot
 
-| Component | Limitation |
-|---|---|
-| Router configuration | Complete current running configuration not available |
-| Inter-VLAN routing | Detailed routing configuration not independently verified |
-| ACLs | Effective access-control policies not established |
-| DHCP | Complete DHCP configuration not available |
-| Switch management | Management address requires confirmation against current configuration |
-| VLAN 60 | Complete wireless addressing and authentication not verified |
-| VLAN 70 | IoT equipment model and addressing not verified |
-| Gi1/0/11 | Operational interface mode requires confirmation |
-| SNMP | November 4 configuration predates monitoring activation |
-| Physical cabling | Complete end-to-end cable and patch-panel mapping not verified |
+The November 4, 2026, switch configuration records seven VLANs, a router-facing trunk, and interface assignments. It predates the subsequent SNMP monitoring configuration. The collected switch file is a snapshot and contains no C8200L running configuration, Wi-Fi router settings or end-to-end cable map.
 
-These limitations are preserved to distinguish documented configuration from assumptions.
+The Gi1/0/11 configuration is preserved exactly as captured rather than normalized into an assumed access-port mode. Address differences between Zabbix host entries and workstation screenshots are historical observations; DHCP address changes may explain some differences, but no single cause was established for every monitoring alert.
+
+The VLAN 70 device is identified in the consolidated network inventory as a dedicated TP-Link Archer AX53. That model does not come from the November 4 Cisco switch commands.
 
 ## 9. Related Documentation
 
@@ -264,4 +255,4 @@ These limitations are preserved to distinguish documented configuration from ass
 
 **Additional infrastructure evidence:** November 6, 2026.
 
-**Documentation status:** Historical configuration snapshot, not a verified final running configuration.
+**Record type:** Historical switch configuration snapshot, dated November 4, 2026.

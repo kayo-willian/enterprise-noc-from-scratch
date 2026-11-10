@@ -21,10 +21,10 @@ The environment consists of:
 | Device | VLAN | IPv4 address | Operating system | Processor | RAM | Storage evidence |
 |---|---|---|---|---|---|---|
 | IT 1 — Main NOC | 10 | 192.168.10.12 | Debian 13 | Intel Core i5-4590 | ~8 GB | 210.27 GiB root filesystem |
-| IT 2 | 10 | 192.168.10.13 | Windows | Not verified | Not verified | Not verified |
-| Accounting 1 | 20 | 192.168.20.11 | Windows 11 Pro 21H2 | Intel Core i5-4590 | 8 GB | Not verified |
+| IT 2 | 10 | 192.168.10.13 | Windows | — | — | — |
+| Accounting 1 | 20 | 192.168.20.11 | Windows 11 Pro 21H2 | Intel Core i5-4590 | 8 GB | — |
 | Accounting 2 | 20 | 192.168.20.12 | Windows | Intel Core i5-4590 | 8 GB DDR3 | 224 GB displayed |
-| Accounting 3 | 20 | 192.168.20.13 | Windows 11 Pro 21H2 | Intel Core i5-4590 | 8 GB | Not verified |
+| Accounting 3 | 20 | 192.168.20.13 | Windows 11 Pro 21H2 | Intel Core i5-4590 | 8 GB | — |
 | Finance 1 | 30 | 192.168.30.10 | Windows | Intel Core i5-4590 | 8 GB | 224 GB displayed |
 | Finance 2 | 30 | 192.168.30.11 | Windows | Intel Core i5-4590 | 8 GB | 224 GB displayed |
 | Sales 1 | 40 | 192.168.40.11 | Windows | Intel Core i5-4590 | 8 GB | 224 GB displayed |
@@ -128,19 +128,14 @@ The evidence collection revealed differences between the IPv4 addresses photogra
 
 Six of the eight Windows workstations had differing addresses in the two records.
 
-This inconsistency requires verification because it may contribute to unavailable agents or missing monitoring data.
+The laboratory uses DHCP for its workstations. The observed IP differences can contribute to unavailable monitoring agents or missing metrics when Zabbix host entries retain older addresses.
 
 However, the address differences alone do not establish the cause of every monitoring problem.
 
-## 6. Inventory Limitations
+## 6. Inventory Coverage
 
-The following details remain unverified:
+The dash (—) in the hardware table means the attribute was not recorded in the November 6 evidence, not that the computer lacks the component. Individual CPU, RAM, storage type and capacity fields are reported only when supported by the collected records.
 
-- Processor, RAM, and storage specifications of IT workstation 2.
-- Physical drive types for the documented computers.
-- Complete storage specifications for Accounting 1 and Accounting 3.
-- Current device availability after the evidence collection date.
-
-Unknown values are intentionally left unverified rather than estimated.
+The IP addresses and availability reflect the dated collection, not static DHCP reservations or the current operating state of every device.
 
 **Evidence collection date:** November 6, 2026.

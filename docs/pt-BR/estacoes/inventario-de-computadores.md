@@ -21,10 +21,10 @@ O ambiente possui:
 | Equipamento | VLAN | Endereço IPv4 | Sistema operacional | Processador | RAM | Evidência de armazenamento |
 |---|---|---|---|---|---|---|
 | TI 1 — NOC Principal | 10 | 192.168.10.12 | Debian 13 | Intel Core i5-4590 | ~8 GB | Sistema de arquivos raiz de 210,27 GiB |
-| TI 2 | 10 | 192.168.10.13 | Windows | Não verificado | Não verificada | Não verificado |
-| Contabilidade 1 | 20 | 192.168.20.11 | Windows 11 Pro 21H2 | Intel Core i5-4590 | 8 GB | Não verificado |
+| TI 2 | 10 | 192.168.10.13 | Windows | — | — | — |
+| Contabilidade 1 | 20 | 192.168.20.11 | Windows 11 Pro 21H2 | Intel Core i5-4590 | 8 GB | — |
 | Contabilidade 2 | 20 | 192.168.20.12 | Windows | Intel Core i5-4590 | 8 GB DDR3 | 224 GB exibidos |
-| Contabilidade 3 | 20 | 192.168.20.13 | Windows 11 Pro 21H2 | Intel Core i5-4590 | 8 GB | Não verificado |
+| Contabilidade 3 | 20 | 192.168.20.13 | Windows 11 Pro 21H2 | Intel Core i5-4590 | 8 GB | — |
 | Financeiro 1 | 30 | 192.168.30.10 | Windows | Intel Core i5-4590 | 8 GB | 224 GB exibidos |
 | Financeiro 2 | 30 | 192.168.30.11 | Windows | Intel Core i5-4590 | 8 GB | 224 GB exibidos |
 | Vendas 1 | 40 | 192.168.40.11 | Windows | Intel Core i5-4590 | 8 GB | 224 GB exibidos |
@@ -128,19 +128,14 @@ A coleta identificou diferenças entre os endereços IPv4 fotografados nas esta�
 
 Seis dos oito computadores Windows apresentavam endereços diferentes entre os dois registros.
 
-Essa inconsistência precisa ser verificada, pois pode contribuir para a indisponibilidade de agentes ou ausência de dados de monitoramento.
+O laboratório utiliza DHCP nas estações. Divergências de endereço podem contribuir para agentes indisponíveis ou métricas ausentes quando os cadastros do Zabbix mantêm endereços anteriores.
 
 Entretanto, as diferenças de endereçamento não comprovam, isoladamente, a causa de todos os problemas de monitoramento.
 
-## 6. Limitações do Inventário
+## 6. Abrangência do Inventário
 
-As seguintes informações permanecem sem comprovação:
+O traço (—) na tabela de hardware indica característica não registrada nas evidências de 06/11, e não ausência física do componente. CPU, RAM, tipo e capacidade de armazenamento são apresentados somente quando documentados nas capturas.
 
-- Processador, memória RAM e armazenamento da estação TI 2.
-- Tipos de unidades físicas de armazenamento dos computadores.
-- Especificações completas de armazenamento das estações Contabilidade 1 e Contabilidade 3.
-- Disponibilidade atual dos equipamentos após a coleta.
-
-As informações desconhecidas foram mantidas como não verificadas, sem estimativas.
+Os endereços IP e a disponibilidade representam a coleta datada, não reservas fixas de DHCP nem o estado atual de todas as estações.
 
 **Data da coleta das evidências:** 6 de novembro de 2026.
