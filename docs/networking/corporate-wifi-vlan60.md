@@ -32,8 +32,6 @@ A photograph collected on November 6, 2026, identifies the following equipment:
 | Product class | AX3000 |
 | Network role | Corporate wireless connectivity |
 | Associated network segment | VLAN 60 |
-| Operating mode | Not verified |
-| Active wireless security configuration | Not verified |
 
 The device was identified from physical evidence rather than an assumed equipment inventory.
 
@@ -54,11 +52,11 @@ The Cisco Catalyst C9200L configuration snapshot collected on November 4, 2026, 
 
 This record establishes the VLAN assignment visible in the historical switch configuration.
 
-This dated switch record identifies the VLAN assignment. The device's uplink settings and operating mode are not included in the collected configuration.
+The dated switch record identifies the VLAN 60 switch connection. Internal Archer AX53 settings are outside this switch snapshot.
 
 ## 4. Network Architecture
 
-The intended corporate wireless architecture separates wireless devices from other internal network segments.
+The documented architecture assigns wireless devices to a dedicated corporate Wi-Fi segment, VLAN 60.
 
 The laboratory distinguishes:
 
@@ -70,9 +68,7 @@ The laboratory distinguishes:
 
 The available switch evidence documents VLAN 60 as a dedicated segment.
 
-However, it does not establish whether the Archer AX53 operated in access point mode, router mode, or another supported configuration.
-
-The equipment photograph and switch snapshot do not include the router's DHCP, NAT, wireless client addressing, or operating-mode settings.
+The collected record identifies the device and VLAN assignment, without an Archer AX53 configuration export. Device-specific operating modes and addressing are therefore not presented as installed settings.
 
 ## 5. Network Segmentation and Access
 
@@ -84,7 +80,7 @@ FreeRADIUS is hosted on the separately documented Linux server in VLAN 50. The p
 
 ## 7. Monitoring
 
-The Zabbix and Grafana records document monitoring of Cisco network infrastructure. Direct monitoring of the Archer AX53 is not shown in the collected dashboards. The wireless equipment is therefore documented as a network component, not as a verified monitoring target.
+The dated Zabbix/Grafana captures document Cisco infrastructure monitoring, without a separate Archer AX53 dashboard. This page describes the wireless device as a network component.
 
 ## 8. Record Boundaries
 

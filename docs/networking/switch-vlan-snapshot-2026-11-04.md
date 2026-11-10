@@ -50,7 +50,7 @@ The switch configuration contains the following VLAN assignments:
 
 The VLAN assignments above come directly from the collected switch configuration.
 
-The existence and operation of every VLAN across the complete network require additional validation using VLAN status and routing information.
+The November 4, 2026 snapshot documents switch-side VLAN definitions and port assignments. It is not an end-to-end routing or live interface-state report.
 
 ### 3.1 Logical Organization
 
@@ -97,7 +97,7 @@ The following table reproduces the interface assignments identified in the Novem
 | Gi1/0/8 | Access VLAN 30 | Finance computers |
 | Gi1/0/9 | Access VLAN 40 | Sales computers |
 | Gi1/0/10 | Access VLAN 40 | Sales computers |
-| Gi1/0/11 | VLAN 50 assigned; operating mode not established by the available snapshot | Debian Asterisk/FreeRADIUS server |
+| Gi1/0/11 | VLAN 50 assigned in the recorded configuration | Debian Asterisk/FreeRADIUS server |
 | Gi1/0/12 | Access VLAN 50 | VoIP / Grandstream |
 | Gi1/0/13 | Access VLAN 50 | VoIP / Grandstream |
 | Gi1/0/14 | Access VLAN 70 | IoT wireless equipment |
@@ -206,7 +206,7 @@ Most documented access interfaces also contain `spanning-tree portfast`.
 
 This configuration evidence does not include a complete spanning-tree operational status report.
 
-The root bridge, blocked interfaces, and complete spanning-tree topology were not independently verified.
+The snapshot records spanning-tree configuration commands, without an accompanying operational output for the root bridge or blocked ports.
 
 ## 7. Switch Monitoring
 
@@ -233,7 +233,7 @@ These screenshots demonstrate that monitoring data was available at the time of 
 
 They do not provide the complete final SNMP configuration.
 
-Some Grafana interface panels also contain repeated labels, which require verification against the underlying monitoring items.
+Some Grafana interface panels display repeated labels; the screenshots are preserved as recorded without treating those labels as independent physical-interface measurements.
 
 ## 8. Scope of the Historical Snapshot
 

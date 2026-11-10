@@ -16,7 +16,7 @@ A VLAN 60 foi designada para o Wi-Fi corporativo, permitindo a separação lógi
 
 As evidências disponíveis identificam um **TP-Link Archer AX53** como equipamento associado à rede wireless corporativa.
 
-Este documento reúne as informações identificadas sobre o equipamento, a configuração registrada no switch e a arquitetura de rede pretendida.
+Este documento reúne a identificação do equipamento, a configuração registrada no switch e o projeto da rede wireless corporativa.
 
 Não se presume que a autenticação wireless, o roteamento ou as restrições de segurança tenham sido integralmente implementados.
 
@@ -32,8 +32,6 @@ Uma fotografia coletada em 06/11/2026 permitiu identificar o equipamento abaixo.
 | Classe do produto | AX3000 |
 | Função na rede | Conectividade Wi-Fi corporativa |
 | Segmento associado | VLAN 60 |
-| Modo de operação | Não verificado |
-| Configuração ativa de segurança | Não verificada |
 
 O equipamento foi identificado por evidência física, não por suposição baseada no inventário.
 
@@ -54,11 +52,11 @@ O registro de configuração do Cisco Catalyst C9200L, coletado em 04/11/2026, a
 
 O registro comprova a atribuição da VLAN no momento da coleta da configuração do switch.
 
-O registro datado identifica a atribuição da VLAN no switch. O modo operacional e os parâmetros de uplink do equipamento wireless não constam das configurações coletadas.
+O registro datado identifica a conexão do switch para a VLAN 60. Os parâmetros internos do Archer AX53 não integram essa captura.
 
 ## 4. Arquitetura da Rede
 
-A arquitetura pretendida estabelece um segmento independente para a conectividade wireless corporativa.
+A arquitetura documentada destina a VLAN 60 à conectividade wireless corporativa.
 
 A infraestrutura diferencia:
 
@@ -70,9 +68,7 @@ A infraestrutura diferencia:
 
 O registro do switch documenta a VLAN 60 como segmento dedicado.
 
-Porém, não permite determinar se o Archer AX53 estava operando em modo access point, roteador ou outra modalidade compatível.
-
-A fotografia e a captura do switch não incluem os parâmetros de DHCP, NAT, endereçamento dos clientes ou modo de operação do roteador wireless.
+O material coletado identifica o modelo do equipamento e a VLAN associada, sem exportação da configuração do Archer AX53. Os modos de operação e o endereçamento interno não são apresentados como parâmetros implantados.
 
 ## 5. Segmentação e Controle de Acesso
 
@@ -84,7 +80,7 @@ O FreeRADIUS integra o servidor Linux documentado na VLAN 50. A existência dess
 
 ## 7. Monitoramento
 
-Os registros do Zabbix e Grafana documentam o monitoramento da infraestrutura Cisco. As capturas coletadas não apresentam monitoramento direto do Archer AX53. Por isso, o equipamento wireless é descrito como componente da rede, não como alvo de monitoramento comprovado.
+As capturas do Zabbix e Grafana registram o monitoramento Cisco, sem dashboard dedicado ao Archer AX53. O documento apresenta o equipamento wireless como componente da rede.
 
 ## 8. Escopo do Registro
 

@@ -41,7 +41,7 @@ The Cisco Catalyst C9200L configuration snapshot from November 4, 2026, assigns 
 
 The switch snapshot documents the VLAN assignment; it does not contain the wireless device operating mode, client addressing, DHCP, or authentication configuration.
 
-The intended network architecture restricts unauthorized access between the corporate wireless network and other internal VLANs.
+The access-policy design restricts unauthorized communication between corporate Wi-Fi and other internal VLANs.
 
 ## IoT Network — VLAN 70
 
@@ -55,9 +55,9 @@ The switch configuration snapshot from November 4, 2026, assigns interface `Gi1/
 
 The switch snapshot documents the VLAN assignment; it does not contain the wireless router's internal addressing, DHCP, NAT, or operating-mode settings.
 
-The IoT network is intended to remain isolated from sensitive corporate infrastructure.
+The IoT network design separates IoT devices from sensitive corporate resources.
 
-The intended network isolation is an architectural policy, not a demonstrated ACL enforcement result.
+The switch record documents the VLAN assignment; the access-policy requirements are documented separately from router ACL implementation.
 
 
 ## Record Scope

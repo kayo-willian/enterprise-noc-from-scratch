@@ -50,7 +50,7 @@ A configuração do switch apresenta as seguintes atribuições:
 
 As atribuições foram obtidas diretamente da configuração coletada do switch.
 
-A existência e a operação de todas as VLANs na infraestrutura completa exigem verificações adicionais de estado das VLANs e roteamento.
+A captura de 04/11/2026 documenta as VLANs e portas no lado do switch. Não representa um registro do roteamento ponta a ponta nem do estado atual das interfaces.
 
 ### 3.1 Organização Lógica
 
@@ -97,7 +97,7 @@ A tabela apresenta as interfaces identificadas na configuração de 4 de novembr
 | Gi1/0/8 | Access VLAN 30 | Computadores Financeiro |
 | Gi1/0/9 | Access VLAN 40 | Computadores Vendas |
 | Gi1/0/10 | Access VLAN 40 | Computadores Vendas |
-| Gi1/0/11 | VLAN 50 atribuída; modo operacional não confirmado | Servidor Debian Asterisk/FreeRADIUS |
+| Gi1/0/11 | VLAN 50 atribuída conforme configuração registrada | Servidor Debian Asterisk/FreeRADIUS |
 | Gi1/0/12 | Access VLAN 50 | VoIP / Grandstream |
 | Gi1/0/13 | Access VLAN 50 | VoIP / Grandstream |
 | Gi1/0/14 | Access VLAN 70 | Equipamento Wi-Fi IoT |
@@ -206,7 +206,7 @@ A maioria das portas de acesso documentadas também apresenta o comando `spannin
 
 O arquivo coletado não contém um relatório completo do estado operacional do Spanning Tree.
 
-A identificação do root bridge, de interfaces bloqueadas e da topologia completa não foi verificada independentemente.
+A captura registra comandos de spanning-tree, sem saída operacional correspondente para o root bridge ou portas bloqueadas.
 
 ## 7. Monitoramento do Switch
 
