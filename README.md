@@ -137,6 +137,7 @@ The cost analysis is a scoped financial simulation based on reference prices and
 - [Workstations](docs/endpoints/workstation-inventory.md) · [Docker](docs/containers/docker-services.md)
 - [Zabbix](docs/monitoring/zabbix-monitoring.md) · [Grafana](docs/monitoring/grafana-monitoring.md) · [SNMP troubleshooting](docs/monitoring/snmp-troubleshooting.md)
 - [Asterisk / FreeRADIUS](docs/services/asterisk-freeradius.md) · [Pi-hole / Uptime Kuma](docs/services/dns-and-availability.md) · [Physical evidence](docs/evidence/physical-infrastructure.md)
+- [NOC incident management](docs/noc-operations/incident-management.md) · [NOC runbooks and exercise validation](docs/noc-operations/incident-simulation-and-validation.md)
 - [GitHub Pages documentation portal](https://kayo-willian.github.io/enterprise-noc-from-scratch/)
 
 ### DHCP and Monitoring Snapshots
