@@ -33,7 +33,7 @@ O ambiente possui:
 
 Os endereços IPv4 representam as configurações observadas durante a coleta de evidências. Não garantem que o endereçamento permaneça igual atualmente.
 
-Os valores de armazenamento dos computadores Windows representam as capacidades exibidas nas capturas. Não comprovam se as unidades físicas são HDDs ou SSDs.
+Os valores de armazenamento dos computadores Windows correspondem às capacidades exibidas nas capturas; o tipo físico das unidades não consta desses registros.
 
 Os valores dos computadores Linux correspondem aos sistemas de arquivos raiz, não necessariamente à capacidade total dos discos físicos.
 
@@ -71,7 +71,7 @@ O relatório do sistema confirma:
 
 O servidor está associado aos serviços Asterisk VoIP e FreeRADIUS do laboratório.
 
-A documentação disponível descreve a configuração dessas aplicações, mas não comprova, isoladamente, a disponibilidade contínua dos serviços.
+A documentação registra a configuração das aplicações; os estados operacionais são apresentados nas evidências históricas de monitoramento.
 
 ## 3. Estações Windows — Evidências
 
@@ -130,7 +130,7 @@ Seis dos oito computadores Windows apresentavam endereços diferentes entre os d
 
 O laboratório utiliza DHCP nas estações. Divergências de endereço podem contribuir para agentes indisponíveis ou métricas ausentes quando os cadastros do Zabbix mantêm endereços anteriores.
 
-Entretanto, as diferenças de endereçamento não comprovam, isoladamente, a causa de todos os problemas de monitoramento.
+As divergências de endereçamento são observações históricas e não identificam, por si só, a causa de todos os alertas.
 
 ## 6. Abrangência do Inventário
 

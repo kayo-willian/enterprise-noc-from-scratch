@@ -73,7 +73,7 @@ A arquitetura documentada utiliza:
 | AMI/TCP | 5038 | Interface de gerenciamento do Asterisk, documentada como restrita ao localhost |
 | IAX2/UDP | 4569 | Funcionalidade IAX2 descrita na documentação técnica |
 
-As portas foram identificadas no relatório de configuração. A presença nessa documentação não comprova isoladamente que todos os protocolos estavam efetivamente em utilização.
+As portas constam do relatório técnico de configuração; o inventário não é um registro de tráfego de todos esses protocolos.
 
 ### 3.2 Ramais Documentados
 
@@ -88,7 +88,7 @@ O relatório técnico do Asterisk identifica os dois ramais como disponíveis no
 
 As fotografias coletadas em 6 de novembro confirmam a presença física dos aparelhos e os endereços IP apresentados nas telas.
 
-Entretanto, as fotografias não comprovam, isoladamente, o sucesso de chamadas entre os ramais.
+As fotografias identificam os aparelhos e endereços apresentados em suas telas; não são registros de chamadas entre ramais.
 
 ### 3.3 Telefone do Setor de TI
 
@@ -133,7 +133,7 @@ As chamadas documentadas utilizam timeout de 30 segundos e permitem funcionalida
 
 As extensões adicionais oferecem mecanismos para testar reprodução de áudio e comunicação bidirecional.
 
-Os registros disponíveis descrevem essas configurações, mas não incluem gravações ou registros independentes comprovando a execução bem-sucedida de todos os testes.
+Os registros preservam a configuração do plano de discagem e dos ramais, sem apresentar um histórico de execução de todos os testes de áudio.
 
 ## 5. FreeRADIUS — Autenticação de Rede
 
@@ -198,7 +198,7 @@ Para uma implantação segura, os clientes precisam validar o certificado aprese
 
 Uma orientação presente no documento original recomenda desabilitar a validação do certificado CA nos clientes Wi-Fi. Essa orientação não foi reproduzida aqui porque enfraquece a segurança da autenticação.
 
-A configuração precisa ser revisada antes de ser considerada adequada para um ambiente de produção.
+O material descreve o laboratório educacional; um ambiente de produção exige políticas próprias de certificados, autenticação e segurança.
 
 ## 6. Integração com o Monitoramento
 
@@ -228,7 +228,7 @@ O dashboard do Grafana apresenta informações de recursos e disponibilidade do 
 
 O painel contém informações históricas sobre utilização de CPU, consumo de memória RAM e disponibilidade do sistema.
 
-Essas métricas demonstram o monitoramento da infraestrutura, mas não comprovam isoladamente o sucesso de chamadas SIP ou transações de autenticação RADIUS.
+Essas métricas registram recursos e disponibilidade do servidor, não chamadas SIP ou transações RADIUS.
 
 Mais informações estão disponíveis em [Monitoramento com Grafana](../monitoramento/grafana.md) e [Monitoramento com Zabbix](../monitoramento/zabbix.md).
 
@@ -258,7 +258,7 @@ asterisk -rx "dialplan show interno"
 sudo ss -tulnp
 ```
 
-Esses comandos representam procedimentos de diagnóstico local. Suas saídas não foram coletadas independentemente para todas as verificações descritas neste documento.
+Os comandos apresentados são referências para diagnóstico local; o inventário histórico reúne as saídas explicitamente registradas.
 
 Antes de publicar resultados de diagnóstico, é necessário revisar informações de autenticação, identificadores internos e outros dados sensíveis.
 
@@ -274,7 +274,7 @@ Antes de publicar resultados de diagnóstico, é necessário revisar informaçõ
 | Fotografia do telefone Vendas | Equipamento Grandstream exibindo 192.168.50.10 |
 | Dashboard Grafana | Informações históricas de monitoramento do servidor Linux |
 
-Os registros coletados não contêm resultados independentes para:
+O conjunto documental inclui a configuração e as fotografias, não registros de execução para:
 
 - Realização bem-sucedida de chamadas entre os telefones Grandstream.
 - Autenticação IEEE 802.1X completa utilizando o equipamento Wi-Fi corporativo fotografado.
