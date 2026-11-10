@@ -636,22 +636,20 @@ These indicators should only be reported as actual NOC performance metrics once 
 
 ## 15. Relationship With Technical Runbooks
 
-Incident management defines the overall operational process.
+Incident management defines the lifecycle, priority and escalation model. The following six bilingual runbooks document recommended read-only diagnostics, interpretation, authorization requirements and validation criteria for the infrastructure.
 
-Technical runbooks provide detailed procedures for investigating particular symptoms.
+| Technical subject | Runbook |
+|---|---|
+| Zabbix Agent connectivity | [Investigate agent and host address](runbooks/zabbix-agent-connectivity.md) |
+| Cisco interface unavailable | [Investigate link, VLAN and interface mapping](runbooks/cisco-interface-unavailable.md) |
+| DNS resolution failures | [Investigate Pi-hole, DNS path and filtering](runbooks/dns-resolution-failure.md) |
+| Docker service failures | [Investigate Docker, Compose and dependencies](runbooks/docker-service-failure.md) |
+| High CPU, memory or disk | [Investigate resource consumption](runbooks/host-resource-utilization.md) |
+| Grafana `No data` | [Trace collection versus visualization](runbooks/grafana-no-data.md) |
 
-Planned runbook subjects include:
+The companion [Incident Simulation and Recovery Validation](incident-simulation-and-validation.md) document describes controlled exercise planning, authorization, baseline collection, result classification and evidence requirements.
 
-- Zabbix Agent connectivity failures.
-- Unavailable Cisco interfaces.
-- DNS resolution failures.
-- Docker service failures.
-- High CPU, memory, or disk utilization.
-- Grafana panels displaying `No data`.
-
-These runbooks should distinguish recommended diagnostic procedures from tests actually performed in the laboratory.
-
-A runbook is not proof that a specific incident occurred.
+**Publication of a runbook is not proof that its hypothetical diagnostic steps have been executed.** Previously recorded SNMP cases remain separately cited historical troubleshooting evidence.
 
 ## 16. Documentation Scope
 
@@ -671,7 +669,7 @@ It does not claim:
 - Resolution of all historical alerts.
 - Execution of the hypothetical incident examples.
 
-The framework provides a foundation for the project's future operational documentation.
+This framework is accompanied by the six technical runbooks and the incident simulation and recovery validation procedure. Their publication documents the proposed operational method; it does not demonstrate live execution or recovery.
 
 ## 17. Related Documentation
 
@@ -691,7 +689,7 @@ The framework provides a foundation for the project's future operational documen
 
 **Document classification:** Proposed NOC operational process.  
 **Historical evidence references:** November 4–6, 2026.  
-**Next workstream:** Technical Troubleshooting and Runbooks.
+**Related NOC procedures:** Six bilingual technical runbooks and the incident simulation and recovery validation framework, linked in Section 15.
 
 **Enterprise NOC — From Scratch**  
 *From physical infrastructure to network operations.*

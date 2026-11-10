@@ -636,22 +636,20 @@ Esses indicadores só devem ser apresentados como métricas reais de desempenho 
 
 ## 15. Relação com os Runbooks Técnicos
 
-O gerenciamento de incidentes define o processo operacional geral.
+O gerenciamento de incidentes define ciclo, prioridade e escalonamento. Os seis runbooks bilíngues abaixo documentam diagnósticos não disruptivos, interpretação de resultados, autorização e validação adaptados à infraestrutura.
 
-Os runbooks técnicos apresentam procedimentos detalhados para investigar sintomas específicos.
+| Assunto técnico | Runbook |
+|---|---|
+| Conectividade Zabbix Agent | [Investigar agente e endereçamento](runbooks/conectividade-zabbix-agent.md) |
+| Interface Cisco indisponível | [Investigar enlace, VLAN e mapeamento](runbooks/interface-cisco-indisponivel.md) |
+| Falhas de resolução DNS | [Investigar Pi-hole, consultas e filtragem](runbooks/falhas-resolucao-dns.md) |
+| Falhas de serviços Docker | [Investigar Docker, Compose e dependências](runbooks/falhas-servicos-docker.md) |
+| CPU, memória ou disco elevados | [Investigar utilização de recursos](runbooks/utilizacao-recursos-sistema.md) |
+| Grafana `No data` | [Distinguir coleta e visualização](runbooks/grafana-sem-dados.md) |
 
-Os assuntos previstos incluem:
+O documento complementar [Simulação de Incidentes e Validação da Recuperação](simulacao-e-validacao-de-incidentes.md) define planejamento, autorização, baseline, classificação de resultados e preservação de evidências.
 
-- Falhas de comunicação com o Zabbix Agent.
-- Interfaces Cisco indisponíveis.
-- Falhas de resolução DNS.
-- Falhas em serviços Docker.
-- Consumo elevado de CPU, memória ou disco.
-- Painéis do Grafana exibindo `No data`.
-
-Esses runbooks deverão diferenciar procedimentos recomendados dos testes realmente executados no laboratório.
-
-Um runbook não comprova que determinado incidente ocorreu.
+**A publicação de um runbook não comprova a execução dos procedimentos hipotéticos.** Os casos SNMP anteriores continuam documentados separadamente como troubleshooting histórico.
 
 ## 16. Escopo da Documentação
 
@@ -671,7 +669,7 @@ O documento não afirma:
 - Resolução de todos os alertas históricos.
 - Execução dos exemplos hipotéticos de incidentes.
 
-O modelo constitui a base para o desenvolvimento da documentação operacional do projeto.
+Este modelo é acompanhado por seis runbooks técnicos e pelo procedimento de simulação de incidentes e validação da recuperação. A publicação documenta os métodos propostos, sem comprovar execução ou recuperação operacional.
 
 ## 17. Documentação Relacionada
 
@@ -691,7 +689,7 @@ O modelo constitui a base para o desenvolvimento da documentação operacional d
 
 **Classificação do documento:** Processo operacional NOC proposto.  
 **Referências das evidências históricas:** 04 a 06/11/2026.  
-**Próxima área:** Technical Troubleshooting e Runbooks.
+**Procedimentos NOC relacionados:** Seis runbooks técnicos bilíngues e o modelo de simulação e validação de incidentes, vinculados na Seção 15.
 
 **Enterprise NOC — From Scratch**  
 *Da infraestrutura física às operações de rede.*

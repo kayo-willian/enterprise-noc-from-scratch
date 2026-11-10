@@ -137,6 +137,7 @@ A análise de custos é uma simulação financeira delimitada por premissas e re
 - [Estações](docs/pt-BR/estacoes/inventario-de-computadores.md) · [Docker](docs/pt-BR/containers/servicos-docker.md)
 - [Zabbix](docs/pt-BR/monitoramento/zabbix.md) · [Grafana](docs/pt-BR/monitoramento/grafana.md) · [Diagnóstico SNMP](docs/pt-BR/monitoramento/diagnostico-snmp.md)
 - [Asterisk / FreeRADIUS](docs/pt-BR/servicos/asterisk-freeradius.md) · [Pi-hole / Uptime Kuma](docs/pt-BR/servicos/dns-e-disponibilidade.md) · [Infraestrutura física](docs/pt-BR/evidencias/infraestrutura-fisica.md)
+- [Gerenciamento de incidentes NOC](docs/pt-BR/operacoes-noc/gerenciamento-de-incidentes.md) · [Runbooks e validação de exercícios](docs/pt-BR/operacoes-noc/simulacao-e-validacao-de-incidentes.md)
 - [Portal de documentação GitHub Pages](https://kayo-willian.github.io/enterprise-noc-from-scratch/pt-BR/)
 
 ### DHCP e registros de monitoramento
