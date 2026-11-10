@@ -71,7 +71,7 @@ The simulated business scenario identifies four main challenges:
 
 The project responds to these requirements through structured cabling, network segmentation, dedicated services, and centralized monitoring.
 
-These initial problems describe the fictional organization's requirements, not verified failures occurring continuously in the physical laboratory.
+These initial problems are requirements of the fictional organization; the physical laboratory and dated records document the implementation work.
 
 ### 05. Is the infrastructure intended for production use?
 
@@ -203,7 +203,7 @@ The Cisco Catalyst C9200L provides Ethernet switching and VLAN segmentation for 
 
 The switch configuration includes a trunk interface associated with the router connection.
 
-The complete router-side configuration was not included in the collected evidence.
+The router description is based on the recorded switch trunk and endpoint gateways rather than a complete C8200L configuration export.
 
 ### 14. Why does the infrastructure use seven VLANs?
 
@@ -330,7 +330,7 @@ The November 4 Catalyst C9200L configuration identifies:
 
 These assignments are visible in the recorded switch configuration.
 
-The switch evidence alone does not demonstrate the complete wireless configuration or successful enforcement of isolation policies.
+The switch snapshot records VLAN assignments, while wireless-device settings and router ACL enforcement belong to separate configuration records.
 
 ### 23. How is Amazon Alexa integrated into the network?
 
@@ -358,7 +358,7 @@ It does not independently establish the Alexa device's IP address or complete ap
 
 ### 24. Do the wireless routers operate in access point mode?
 
-The collected evidence does not establish their operating modes.
+The collected material identifies the wireless equipment and VLANs without an export of the devices' operating settings.
 
 A wireless device configured as an access point may bridge clients into the associated network segment.
 
@@ -372,7 +372,7 @@ The infrastructure includes a FreeRADIUS server and a documented network authent
 
 However, the collected evidence does not independently demonstrate successful authentication between the photographed Archer AX53 and FreeRADIUS.
 
-The presence of both components does not establish a completed wireless RADIUS integration.
+The wireless equipment and FreeRADIUS server are documented separately; the material contains no wireless RADIUS transaction log.
 
 Authentication behavior must be supported by configuration and transaction evidence before it can be represented as operationally verified.
 
@@ -537,7 +537,7 @@ A missing value does not necessarily mean that the corresponding computer was po
 
 Possible explanations include unavailable monitoring agents, address mismatches, item configuration problems, or missing data within the selected time range.
 
-The collected evidence does not establish one definitive cause for every panel.
+The screenshots record the affected panels without assigning a common cause to all of them.
 
 ### 38. How can DHCP affect Zabbix monitoring?
 
@@ -547,7 +547,7 @@ The evidence collection identified six differences between photographed workstat
 
 If a monitored host changes its IP address while the Zabbix host configuration retains the previous address, agent communication can be affected.
 
-This is a relevant explanation for some monitoring inconsistencies, but it does not prove the cause of every unavailable host.
+DHCP address changes may explain some historical inconsistencies, without being assigned as the cause of every unavailable host.
 
 ### 39. What do the 113 unsupported Zabbix items indicate?
 
@@ -567,7 +567,7 @@ Zabbix supports infrastructure metrics, triggers, and host-level monitoring.
 
 Uptime Kuma focuses on availability checks and their event history for selected targets.
 
-The laboratory's Uptime Kuma screenshot records four configured monitors. It does not establish that every container, workstation, or network device was monitored individually through that application.
+The laboratory's Uptime Kuma screenshot records four monitors, rather than individual coverage of every container, workstation and network device.
 
 **Related documentation:**
 
@@ -739,7 +739,7 @@ It distinguishes:
 - Technical designs and intended policies.
 - Historical monitoring measurements.
 - Documented troubleshooting results.
-- Implementation details not established by the available evidence.
+- Configuration details absent from the collected historical records.
 
 Answers should be updated when new validated information is added to the project.
 

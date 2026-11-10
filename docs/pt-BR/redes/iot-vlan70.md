@@ -39,7 +39,7 @@ A configuração do switch de 04/11 registra `Gi1/0/14` em access VLAN 70 e `Gi1
 | 60 | Wi-Fi corporativo | Conectividade wireless corporativa |
 | 70 | IoT | Conectividade dedicada à Alexa e a dispositivos inteligentes |
 
-A arquitetura separa os equipamentos IoT das redes administrativas e departamentais. A atribuição da VLAN consta do registro do switch; esse registro não comprova, por si só, a aplicação das ACLs do roteador.
+A arquitetura dedica a VLAN 70 aos equipamentos IoT, com `Gi1/0/14` atribuída ao segmento no registro do switch. A aplicação de ACLs pertence a outra camada de configuração do roteador.
 
 ## 4. Endereçamento IP e Modo de Operação
 

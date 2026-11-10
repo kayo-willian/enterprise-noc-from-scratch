@@ -144,7 +144,7 @@ A sequência dos condutores é:
 
 Em um cabo direto confeccionado nesse padrão, as duas extremidades utilizam a mesma sequência T568A.
 
-A identificação do padrão não comprova, isoladamente, o desempenho elétrico de todos os cabos confeccionados.
+A identificação T568A registra a ordem dos condutores; o inventário fotográfico não é um laudo elétrico dos enlaces.
 
 ### 10. Quantos computadores fazem parte do laboratório?
 
@@ -181,7 +181,7 @@ As fotografias documentam a presença e a organização física dos equipamentos
 
 Elas mostram o rack, os equipamentos Cisco, o patch panel, o cabeamento estruturado e determinadas estações de trabalho.
 
-Entretanto, fotografias isoladas não comprovam roteamento funcional entre todas as VLANs, aplicação correta das políticas de acesso, funcionamento de todas as interfaces ou disponibilidade contínua dos serviços.
+As fotografias documentam a instalação física; roteamento, políticas de acesso e disponibilidade pertencem aos respectivos registros técnicos.
 
 Essas propriedades dependem de configurações e testes operacionais correspondentes.
 
@@ -233,7 +233,7 @@ A configuração coletada do Catalyst C9200L identifica a interface `Gi1/0/1` co
 
 Isso sustenta a arquitetura prevista para múltiplas VLANs.
 
-Entretanto, a configuração do lado do switch não comprova, isoladamente, a configuração correspondente no roteador nem a comunicação bem-sucedida entre todas as VLANs.
+A captura registra o trunk no lado do switch, sem incluir a configuração correspondente do C8200L.
 
 ### 16. Como as interfaces do switch estão distribuídas?
 
@@ -275,7 +275,7 @@ As configurações de rede coletadas identificam gateways padrão como:
 
 Esses valores correspondem às configurações observadas nas estações.
 
-Os registros disponíveis não estabelecem a configuração completa do servidor DHCP, os pools de endereços ou eventuais mecanismos de relay.
+As capturas registram gateways nas estações; pools, servidores e mecanismos de relay DHCP não integram esse inventário.
 
 ### 19. As VLANs departamentais estão completamente isoladas?
 
@@ -330,7 +330,7 @@ A configuração do Catalyst C9200L de 04/11 identifica:
 
 Essas atribuições aparecem na configuração registrada do switch.
 
-A evidência do switch, isoladamente, não comprova a configuração wireless completa ou a aplicação efetiva das políticas de isolamento.
+A captura do switch registra as VLANs; parâmetros wireless e políticas do roteador pertencem a registros diferentes.
 
 ### 23. Como a Amazon Alexa está integrada à infraestrutura?
 
@@ -354,11 +354,11 @@ Cisco Catalyst C9200L
 
 A topologia descreve a relação física entre o dispositivo wireless e o switch.
 
-Ela não estabelece, isoladamente, o endereço IP da Alexa ou sua conectividade completa com aplicações externas.
+O inventário identifica a Alexa e sua rede IoT, sem registrar seu endereço IP ou testes com aplicações externas.
 
 ### 24. Os roteadores wireless funcionam em modo access point?
 
-As evidências coletadas não estabelecem os modos de operação dos equipamentos.
+Os registros identificam os equipamentos e as VLANs, mas não incluem exportações das configurações internas dos roteadores wireless.
 
 Um dispositivo configurado como access point pode conectar seus clientes ao segmento de rede associado.
 
@@ -370,9 +370,9 @@ Sem a exportação das configurações correspondentes, a documentação não at
 
 A infraestrutura possui um servidor FreeRADIUS e uma arquitetura documentada de autenticação de rede.
 
-Entretanto, as evidências coletadas não demonstram de forma independente autenticação bem-sucedida entre o Archer AX53 fotografado e o FreeRADIUS.
+Os registros descrevem o Archer AX53 e o servidor FreeRADIUS, sem logs de uma autenticação wireless entre eles.
 
-A presença dos dois componentes não comprova uma integração RADIUS wireless concluída.
+A autenticação wireless/RADIUS é uma função distinta da presença desses componentes no inventário.
 
 O comportamento da autenticação precisa ser sustentado por configurações e registros de transações antes de ser apresentado como operacionalmente validado.
 
@@ -537,7 +537,7 @@ A ausência de dados não significa necessariamente que o computador estivesse d
 
 Possíveis explicações incluem indisponibilidade do agente, divergências de endereçamento, problemas na configuração dos itens ou ausência de informações no intervalo consultado.
 
-Os registros disponíveis não estabelecem uma causa definitiva para todos os painéis.
+As capturas registram os painéis afetados, sem atribuir uma causa única para todos.
 
 ### 38. Como o DHCP pode afetar o monitoramento do Zabbix?
 
@@ -547,7 +547,7 @@ A coleta identificou seis divergências entre os endereços fotografados nos com
 
 Quando um computador recebe outro endereço IP e o cadastro no Zabbix mantém o endereço anterior, a comunicação com o agente pode ser afetada.
 
-Essa é uma explicação relevante para parte das inconsistências, mas não comprova a causa de todos os hosts indisponíveis.
+Mudanças de endereço DHCP podem explicar algumas divergências, sem identificar causa comum para todos os hosts indisponíveis.
 
 ### 39. O que significam os 113 itens não suportados no Zabbix?
 
@@ -567,7 +567,7 @@ O Zabbix permite monitorar métricas da infraestrutura, triggers e condições d
 
 O Uptime Kuma concentra-se em verificações de disponibilidade e no histórico de eventos dos alvos selecionados.
 
-A captura do laboratório registra quatro monitores configurados no Uptime Kuma. Isso não demonstra que todos os containers, computadores ou equipamentos de rede fossem monitorados individualmente pela ferramenta.
+A captura do Uptime Kuma apresenta quatro monitores configurados, em vez de cobertura individual de todos os containers, computadores e equipamentos de rede.
 
 **Documentação relacionada:**
 
@@ -621,7 +621,7 @@ A configuração documentada inclui RADIUS e tecnologias de autenticação como 
 
 Ele executa junto ao Asterisk no computador Linux associado à VLAN 50.
 
-Os registros técnicos descrevem a arquitetura de autenticação, mas não comprovam independentemente uma autenticação completa realizada a partir do equipamento wireless corporativo.
+Os registros documentam a arquitetura de autenticação, sem logs de uma sessão wireless completa com o equipamento corporativo.
 
 ### 45. O que o Pi-hole acrescenta à infraestrutura?
 
@@ -638,7 +638,7 @@ O dashboard de 06/11 registra:
 
 Esses valores correspondem ao período exibido no dashboard.
 
-Eles não comprovam que todos os clientes e VLANs utilizavam obrigatoriamente a filtragem DNS.
+Os registros mostram consultas no Pi-hole, sem caracterizar o uso obrigatório do serviço em todas as VLANs.
 
 ### 46. O Uptime Kuma garante que os serviços estejam sempre disponíveis?
 
@@ -739,7 +739,7 @@ O conteúdo diferencia:
 - Projetos técnicos e políticas previstas.
 - Métricas históricas de monitoramento.
 - Resultados documentados de troubleshooting.
-- Detalhes de implementação não estabelecidos pelas evidências disponíveis.
+- Detalhes de configuração ausentes dos registros históricos coletados.
 
 As respostas devem ser atualizadas quando novas informações tecnicamente validadas forem incorporadas ao projeto.
 
