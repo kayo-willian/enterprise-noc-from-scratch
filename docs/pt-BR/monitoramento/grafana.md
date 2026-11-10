@@ -83,7 +83,7 @@ O dashboard apresenta:
 
 A captura apresenta indicadores verdes `UP` para as interfaces representadas nos painéis de status.
 
-Esses resultados descrevem o estado das interfaces monitoradas durante o período observado. Não comprovam que todas as interfaces físicas ou funções de roteamento estavam operacionais.
+Esses resultados descrevem o estado das interfaces monitoradas durante o período registrado; a captura não é um inventário operacional de todas as interfaces físicas e funções de roteamento.
 
 ### 4.2 Histórico de Tráfego do Roteador
 
@@ -121,7 +121,7 @@ Uma interface em estado `DOWN` não representa necessariamente uma falha. Interf
 
 **Limitação identificada:** vários painéis de estado apresentam o mesmo rótulo, `Gi1/0/1 TRUNK-ROUTER`.
 
-Consequentemente, a captura não comprova isoladamente que cada painel represente uma interface física distinta do switch.
+A captura apresenta os painéis e seus rótulos originais, sem associar cada rótulo a uma interface física distinta.
 
 As capturas históricas não incluem a correspondência completa entre os itens do Zabbix e as interfaces físicas do switch; os rótulos repetidos são preservados.
 
@@ -174,7 +174,7 @@ Ambos os servidores aparecem como `ONLINE` na captura.
 
 As medições de CPU e RAM representam o estado dos sistemas durante o intervalo selecionado.
 
-Os indicadores de disponibilidade não comprovam isoladamente o sucesso de chamadas SIP, autenticações RADIUS ou disponibilidade contínua dos serviços.
+Os indicadores representam métricas de monitoramento e não registros de chamadas SIP ou transações RADIUS.
 
 As configurações das aplicações Asterisk e FreeRADIUS são documentadas separadamente dessas métricas de recursos.
 
@@ -204,7 +204,7 @@ Ele indica que a consulta correspondente do Grafana não retornou dados utilizá
 
 As possíveis explicações incluem referências incorretas aos hosts, ausência de itens de monitoramento, problemas de conectividade ou configuração das consultas.
 
-As capturas disponíveis não estabelecem uma causa única e definitiva.
+As capturas registram os sintomas observados, sem identificar uma causa única para todos os painéis com ausência de dados.
 
 ### 7.2 Histórico de CPU, RAM e Tráfego de Rede
 
@@ -219,9 +219,9 @@ A segunda captura apresenta:
 
 Os gráficos contêm séries históricas de determinadas estações Windows.
 
-Algumas legendas repetem identificadores de computadores e precisam ser conferidas com as consultas de monitoramento configuradas.
+Algumas legendas repetem identificadores de computadores. Os rótulos foram preservados conforme exibidos, sem atribuir a cada um uma medição independente.
 
-A existência dessas séries não comprova cobertura completa ou ininterrupta de monitoramento para todos os oito computadores.
+As séries apresentadas documentam a cobertura registrada durante a coleta, sem caracterizar medição contínua fora desse período.
 
 ### 7.3 Divergências de Endereçamento
 
@@ -246,8 +246,8 @@ As capturas coletadas apresentam as seguintes limitações:
 | Endereçamento dos hosts | Seis endereços divergiam entre os registros coletados |
 | Rótulos das interfaces do switch | Vários painéis utilizavam a mesma identificação |
 | Estado das interfaces do switch | Foram apresentados estados `UP` e `DOWN` |
-| Cobertura do monitoramento | Não foi comprovada cobertura completa de todos os sistemas |
-| Disponibilidade dos serviços | Não foi demonstrada disponibilidade contínua |
+| Cobertura do monitoramento | Hosts, painéis e séries presentes nas capturas datadas |
+| Disponibilidade dos serviços | Estados e valores exibidos no período histórico de coleta |
 
 Essas limitações foram preservadas como parte da documentação técnica.
 

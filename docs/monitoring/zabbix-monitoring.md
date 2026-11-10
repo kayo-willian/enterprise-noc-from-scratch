@@ -167,7 +167,7 @@ The dashboard includes:
 
 The collected screenshot also contains multiple indicators labeled with the same switch name.
 
-The relationship between those labels and their underlying monitoring items requires verification before interpreting them as independent measurements.
+The screenshots show repeated or truncated labels. Their values are preserved as displayed, without treating each label as a distinct monitoring item.
 
 The screenshot is retained as evidence of the dashboard configuration observed on November 6, 2026.
 
@@ -257,7 +257,7 @@ The collected evidence identifies several areas requiring further validation:
 | Workstation addressing | Six photographed addresses differed from Zabbix records |
 | Switch interfaces | Some monitored interfaces were reported as down |
 | Dashboard labels | Repeated or truncated indicators preserved from the collected dashboard |
-| Historical availability | Continuous service availability was not established |
+| Historical availability | Availability states recorded at the time of the November 6 capture |
 
 These limitations are documented rather than excluded from the project.
 
