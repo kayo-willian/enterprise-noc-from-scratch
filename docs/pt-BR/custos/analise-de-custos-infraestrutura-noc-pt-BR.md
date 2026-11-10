@@ -67,7 +67,7 @@ Uma empresa começa sem a infraestrutura de referência e precisa comprar os equ
 | ID | Item / referência | Qtd. | Preço unit. | A — subtotal | B — subtotal | Situação | Fonte |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | EQ-001 | Roteador Cisco Catalyst C8200L — C8200L-1N-4T, SKU específico não identificado no inventário | 1 un. | R$ 17.787,82 | R$ 17.787,82 | — | SKU do equipamento físico não registrado | RF-01 |
-| EQ-002 | Switch Cisco Catalyst 9200L — C9200L-24P-4G-A, SKU/PoE/licença do item usado como referência de preço | 1 un. | R$ 18.800,00 | R$ 18.800,00 | — | SKU exato pendente | RF-02 |
+| EQ-002 | Switch Cisco Catalyst 9200L — C9200L-24P-4G-A, SKU/PoE/licença do item usado como referência de preço | 1 un. | R$ 18.800,00 | R$ 18.800,00 | — | SKU não identificado no inventário | RF-02 |
 | EQ-033 | Módulos SFP/transceptores | 0 un. | Não estimado | — | — | Opcional / fora do subtotal | — |
 | EQ-034 | Cabos/console/serial de gerenciamento | 0 un. | Não estimado | — | — | Opcional / validar | — |
 
@@ -89,9 +89,9 @@ Uma empresa começa sem a infraestrutura de referência e precisa comprar os equ
 | ID | Item / referência | Qtd. | Preço unit. | A — subtotal | B — subtotal | Situação | Fonte |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | EQ-007 | Dois TP-Link Archer AX53 (VLAN 60 + VLAN 70) — preço de referência comparativo: Intelbras W5 1200 GS, não corresponde ao modelo instalado | 2 un. | R$ 232,76 | R$ 465,52 | — | Modelo de referência orçamentária | RF-03 |
-| EQ-008 | Dispositivo Alexa com tela — Echo Show 5 — modelo físico não identificado no inventário | 1 un. | R$ 599,00 | R$ 599,00 | — | Modelo a confirmar | RF-04 |
-| EQ-009 | Lâmpada inteligente — Lâmpada Wi-Fi E27 compatível Alexa, ilustrativa | 1 un. | R$ 42,66 | R$ 42,66 | — | Modelo a confirmar | RF-05 |
-| EQ-010 | Bocal / adaptador da lâmpada inteligente — Bocal E27, acessório orçado separadamente na simulação | 1 un. | R$ 8,12 | R$ 8,12 | — | Modelo a confirmar | RF-06 |
+| EQ-008 | Dispositivo Alexa com tela — Echo Show 5 — modelo físico não identificado no inventário | 1 un. | R$ 599,00 | R$ 599,00 | — | Modelo de referência orçamentária | RF-04 |
+| EQ-009 | Lâmpada inteligente — Lâmpada Wi-Fi E27 compatível Alexa, ilustrativa | 1 un. | R$ 42,66 | R$ 42,66 | — | Modelo de referência orçamentária | RF-05 |
+| EQ-010 | Bocal / adaptador da lâmpada inteligente — Bocal E27, acessório orçado separadamente na simulação | 1 un. | R$ 8,12 | R$ 8,12 | — | Modelo de referência orçamentária | RF-06 |
 
 **Observação da categoria:** A rede documentada utiliza **dois TP-Link Archer AX53** em equipamentos separados, um na VLAN 60 e outro na VLAN 70. O preço unitário exibido nesta simulação corresponde ao Intelbras W5 1200 GS usado como comparativo de mercado, e não ao Archer AX53. W5 1200 GS, Echo Show 5 e lâmpada E27 são **comparativos**, ainda não identificações reais. Conferir se o bocal é item separado.
 
@@ -101,10 +101,10 @@ Uma empresa começa sem a infraestrutura de referência e precisa comprar os equ
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | EQ-011 | Rack 19 polegadas — Rack 12U — só comparativo; verificar tipo e U | 1 un. | R$ 650,56 | R$ 650,56 | — | Qtd. e modelo estimados | RF-07 |
 | EQ-012 | Patch panel 24 portas — Patch panel 24p CAT6 referência econômica | 1 un. | R$ 202,35 | R$ 202,35 | — | Qtd. e modelo estimados | RF-08 |
-| EQ-013 | Régua de energia para rack (PDU) — Régua rack 19'' 8 tomadas | 1 un. | R$ 99,00 | R$ 99,00 | — | Modelo a confirmar | RF-09 |
-| EQ-014 | Organizador horizontal de cabos para rack — Organizador horizontal 1U | 1 un. | R$ 23,32 | R$ 23,32 | — | Modelo a confirmar | RF-10 |
+| EQ-013 | Régua de energia para rack (PDU) — Régua rack 19'' 8 tomadas | 1 un. | R$ 99,00 | R$ 99,00 | — | Modelo de referência orçamentária | RF-09 |
+| EQ-014 | Organizador horizontal de cabos para rack — Organizador horizontal 1U | 1 un. | R$ 23,32 | R$ 23,32 | — | Modelo de referência orçamentária | RF-10 |
 | EQ-015 | Bandeja/suporte de rack (se utilizada) — Bandeja 300mm, se houver | 0 un. | R$ 53,20 | — | — | Opcional / validar | RF-11 |
-| EQ-016 | Kit fixação rack (20 porcas/parafusos) — Kit 20 fixadores, preço do pacote | 1 un. | R$ 24,62 | R$ 24,62 | R$ 24,62 | Modelo a confirmar | RF-12 |
+| EQ-016 | Kit fixação rack (20 porcas/parafusos) — Kit 20 fixadores, preço do pacote | 1 un. | R$ 24,62 | R$ 24,62 | R$ 24,62 | Modelo de referência orçamentária | RF-12 |
 | EQ-017 | Nobreak / UPS | 0 un. | Não estimado | — | — | Opcional / validar | — |
 
 **Observação da categoria:** O rack 12U é apenas **referência de preço**; dimensões e componentes reais não foram medidos. O kit de fixadores é um **pacote de 20**, não o preço de cada parafuso. Bandejas e UPS só entram se existirem.
@@ -118,7 +118,7 @@ Uma empresa começa sem a infraestrutura de referência e precisa comprar os equ
 | EQ-020 | Keystone RJ45 CAT6 (unidade) — Keystone CAT6 simples, se houver | 0 un. | R$ 7,60 | — | — | Opcional / validar | RF-15 |
 | EQ-021 | Caixa/espelho de sobrepor para keystone — Caixa 2 pontos, sem keystones | 0 un. | R$ 7,15 | — | — | Opcional / validar | RF-16 |
 | EQ-022 | Protetores de conector (boots) | 0 un. | Não estimado | — | — | Opcional / validar | — |
-| EQ-023 | Velcro para organização de cabos (rolo) — Rolo velcro 3 metros | 1 un. | R$ 13,97 | R$ 13,97 | R$ 13,97 | Modelo a confirmar | RF-17 |
+| EQ-023 | Velcro para organização de cabos (rolo) — Rolo velcro 3 metros | 1 un. | R$ 13,97 | R$ 13,97 | R$ 13,97 | Modelo de referência orçamentária | RF-17 |
 | EQ-024 | Canaletas, conduítes e acessórios — Canaleta adesiva 2m, se houver | 0 un. | R$ 9,90 | — | — | Opcional / validar | RF-18 |
 | EQ-025 | Patch cords comerciais adicionais | 0 un. | Não estimado | — | — | Opcional / validar | — |
 | EQ-036 | Abraçadeiras nylon (pacote de 100) — 3,5×200mm, pacote 100 | 1 pacote | R$ 12,26 | R$ 12,26 | R$ 12,26 | Qtd. estimada | RF-24 |
@@ -267,9 +267,9 @@ A licença de uso de diversas soluções livres pode custar **R$ 0,00**, mas **i
 | SW-010 | Apache HTTP Server | Software livre | R$ 0,00 | Portal HTML estático. |
 | SW-011 | Asterisk | Software livre | R$ 0,00 | Licença de software distinta de configuração e telefonia. |
 | SW-012 | FreeRADIUS | Software livre | R$ 0,00 | Software de código aberto. |
-| SW-013 | Cisco IOS XE / DNA / SmartNet | A confirmar | Não estimado | Assinaturas, suporte e direito de uso dependem do SKU do hardware. |
-| SW-014 | Sistema operacional das estações | A confirmar | Não estimado | Se houver Windows, checar situação de licenciamento OEM/volume. |
-| SW-015 | Certificados TLS / PKI privada | A confirmar | Não estimado | Certificado autoassinado não implica pagamento, mas exige administração. |
+| SW-013 | Cisco IOS XE / DNA / SmartNet | Não especificado | Não estimado | Assinaturas, suporte e direito de uso dependem do SKU do hardware. |
+| SW-014 | Sistema operacional das estações | Não especificado | Não estimado | Se houver Windows, checar situação de licenciamento OEM/volume. |
+| SW-015 | Certificados TLS / PKI privada | Não especificado | Não estimado | Certificado autoassinado não implica pagamento, mas exige administração. |
 
 **Licenças iniciais precificadas nesta revisão:** **R$ 0,00** (somente soluções livres identificadas). Cisco IOS XE, contratos de suporte/licenciamento, sistema operacional das estações e eventuais certificados comerciais **não integram os subtotais calculados**.
 
