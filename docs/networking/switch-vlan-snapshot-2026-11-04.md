@@ -97,7 +97,7 @@ The following table reproduces the interface assignments identified in the Novem
 | Gi1/0/8 | Access VLAN 30 | Finance computers |
 | Gi1/0/9 | Access VLAN 40 | Sales computers |
 | Gi1/0/10 | Access VLAN 40 | Sales computers |
-| Gi1/0/11 | VLAN 50 assigned; operating mode requires verification | Debian Asterisk/FreeRADIUS server |
+| Gi1/0/11 | VLAN 50 assigned; operating mode not established by the available snapshot | Debian Asterisk/FreeRADIUS server |
 | Gi1/0/12 | Access VLAN 50 | VoIP / Grandstream |
 | Gi1/0/13 | Access VLAN 50 | VoIP / Grandstream |
 | Gi1/0/14 | Access VLAN 70 | IoT wireless equipment |
