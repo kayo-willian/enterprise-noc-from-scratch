@@ -72,7 +72,7 @@ O registro do switch documenta a VLAN 60 como segmento dedicado.
 
 Porém, não permite determinar se o Archer AX53 estava operando em modo access point, roteador ou outra modalidade compatível.
 
-Consequentemente, o comportamento DHCP, a utilização de NAT, o endereçamento dos clientes wireless e a associação efetiva à VLAN precisam de confirmação adicional.
+A fotografia e a captura do switch não incluem os parâmetros de DHCP, NAT, endereçamento dos clientes ou modo de operação do roteador wireless.
 
 ## 5. Segmentação e Controle de Acesso
 
@@ -93,6 +93,7 @@ Esta página reúne a identificação do TP-Link Archer AX53, a função da VLAN
 ## 9. Documentação Relacionada
 
 - [Roteador Cisco Catalyst C8200L](roteador-c8200l.md)
+- [Rede IoT — VLAN 70](iot-vlan70.md)
 - [Registro do switch Cisco Catalyst C9200L](registro-switch-vlans-2026-11-04.md)
 - [Infraestrutura física](../evidencias/infraestrutura-fisica.md)
 - [Serviços Asterisk e FreeRADIUS](../servicos/asterisk-freeradius.md)

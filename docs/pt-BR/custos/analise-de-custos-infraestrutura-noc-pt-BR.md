@@ -1,10 +1,12 @@
 # Análise de custos — Enterprise NOC From Scratch
 
-**Idioma:** Português (Brasil) · **Moeda:** real (BRL) · **Base de preços:** 6 de novembro de 2026 · **Situação:** estimativa preliminar e editável
+**Idioma:** Português (Brasil) · **Moeda:** real (BRL) · **Base de preços:** 6 de novembro de 2026 · **Tipo de documento:** simulação financeira com subtotais parciais
 
 > **Aviso:** este documento descreve uma **simulação financeira** baseada em preços de referência e premissas de implantação. **Não representa o valor efetivamente gasto**, uma proposta comercial, nem o custo final da infraestrutura. Totais são **parciais** enquanto existirem itens sem preço ou quantidade confirmada. Valores não confirmados **não devem ser interpretados como R$ 0,00**.
 
 **Planilha de cálculo:** [Análise de custos da infraestrutura NOC — Excel](./analise-de-custos-infraestrutura-noc-pt-BR.xlsx). O `.xlsx` é a fonte editável dos cálculos; este `.md` é uma versão de leitura da mesma revisão.
+
+> **Escopo financeiro:** Os valores abaixo são os subtotais de um cenário comparativo, não o orçamento integral do laboratório nem custos efetivamente pagos. O modelo financeiro mantém a premissa original de 9 computadores, enquanto o inventário físico identifica 10. Os valores de Wi-Fi foram calculados com referência comercial Intelbras W5 1200 GS; os equipamentos documentados da VLAN 60 e 70 são dois TP-Link Archer AX53. Portanto, os preços de Wi-Fi e os custos de computadores **não representam uma cotação completa da infraestrutura identificada**. A planilha XLSX permanece como fonte dos valores do cenário e precisa ser reconciliada antes de apresentar um custo total de implantação.
 
 ## 1. Objetivo e abrangência
 
@@ -86,12 +88,12 @@ Uma empresa começa sem a infraestrutura de referência e precisa comprar os equ
 
 | ID | Item / referência | Qtd. | Preço unit. | A — subtotal | B — subtotal | Situação | Fonte |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| EQ-007 | Roteadores Wi-Fi Intelbras (VLAN 60 + VLAN 70) — W5 1200 GS — modelo equivalente, não confirmado | 2 un. | R$ 232,76 | R$ 465,52 | — | Modelo a confirmar | RF-03 |
+| EQ-007 | Dois TP-Link Archer AX53 (VLAN 60 + VLAN 70) — preço de referência comparativo: Intelbras W5 1200 GS, não corresponde ao modelo instalado | 2 un. | R$ 232,76 | R$ 465,52 | — | Modelo a confirmar | RF-03 |
 | EQ-008 | Dispositivo Alexa com tela — Echo Show 5 — equipamento real não confirmado | 1 un. | R$ 599,00 | R$ 599,00 | — | Modelo a confirmar | RF-04 |
 | EQ-009 | Lâmpada inteligente — Lâmpada Wi-Fi E27 compatível Alexa, ilustrativa | 1 un. | R$ 42,66 | R$ 42,66 | — | Modelo a confirmar | RF-05 |
 | EQ-010 | Bocal / adaptador da lâmpada inteligente — Bocal E27, verificar se separado da lâmpada | 1 un. | R$ 8,12 | R$ 8,12 | — | Modelo a confirmar | RF-06 |
 
-**Observação da categoria:** Foram previstos **dois Intelbras do mesmo modelo** para VLAN 60 (corporativa) e VLAN 70 (IoT). W5 1200 GS, Echo Show 5 e lâmpada E27 são **comparativos**, ainda não identificações reais. Conferir se o bocal é item separado.
+**Observação da categoria:** A rede documentada utiliza **dois TP-Link Archer AX53** em equipamentos separados, um na VLAN 60 e outro na VLAN 70. O preço unitário exibido nesta simulação corresponde ao Intelbras W5 1200 GS usado como comparativo de mercado, e não ao Archer AX53. W5 1200 GS, Echo Show 5 e lâmpada E27 são **comparativos**, ainda não identificações reais. Conferir se o bocal é item separado.
 
 #### Rack e energia
 
@@ -196,7 +198,7 @@ Os valores abaixo são **hipóteses comerciais editáveis**, calculadas a partir
 | MO-011 | Configuração do Catalyst 9200L | 1 | 4 | R$ 90,00 | R$ 360,00 | VLANs, access/trunk, segurança e validação; papéis a conferir. |
 | MO-012 | Configuração do Catalyst C8200L | 1 | 4 | R$ 90,00 | R$ 360,00 | Roteamento, subinterfaces/ACLs conforme configuração real. |
 | MO-013 | Implementação e testes de ACLs | 1 | 2 | R$ 90,00 | R$ 180,00 | Somente ACLs adicionais não incluídas na configuração básica do roteador. |
-| MO-014 | Configuração dos dois roteadores Intelbras | 2 | 2 | R$ 90,00 | R$ 180,00 | Rede 60 e rede 70; modo roteador/AP ainda a confirmar. |
+| MO-014 | Configuração dos dois roteadores wireless | 2 | 2 | R$ 90,00 | R$ 180,00 | Rede 60 e rede 70; modo roteador/AP ainda a confirmar. |
 | MO-015 | Integração dos dispositivos de IoT | 1 | 1 | R$ 50,00 | R$ 50,00 | Configuração de Alexa/lâmpada por participantes; não atribuir autoria. |
 | MO-016 | Implantação do FreeRADIUS e testes | 1 | 3 | R$ 70,00 | R$ 210,00 | Autenticação e integração na rede corporativa. |
 | MO-017 | Implantação de Asterisk / VoIP | 1 | 4 | R$ 70,00 | R$ 280,00 | Instalação e configuração conforme evidências disponíveis. |
@@ -302,13 +304,13 @@ O orçamento dos PCs será preenchido por perfil ou máquina, registrando **proc
 
 **Regra de consistência:** quando a planilha estiver atualizada, este documento deve ser revisado **na mesma alteração**, pois Markdown não recalcula fórmulas. Não copiar valores antigos para uma versão nova do inventário.
 
-## 10. Pendências críticas para fechar o orçamento
+## 10. Exclusões e Premissas do Modelo Financeiro
 
 Os principais pontos a confirmar são:
 
 1. **Computadores:** quantidade efetiva, especificações, preços de compra e periféricos incluídos.
 2. **Cisco:** código completo dos modelos, PoE, módulos, licenciamento e condições comerciais.
-3. **Wi-Fi:** modelo dos dois roteadores Intelbras e confirmação de suas funções.
+3. **Wi-Fi:** os dois equipamentos são TP-Link Archer AX53; o preço de referência Intelbras não representa uma cotação do modelo documentado.
 4. **Rack:** altura em U, profundidade, tipo, equipamentos instalados, suportes e sistema elétrico.
 5. **Cabeamento:** CAT5e/CAT6, metragem, pontos de rede, conexões, patch panel, keystones e consumíveis realmente utilizados.
 6. **Telefonia:** quantidade e modelo dos telefones Grandstream; fontes e acessórios.

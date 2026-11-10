@@ -16,7 +16,7 @@ VLAN 60 is designated for corporate Wi-Fi, separating this network from departme
 
 The available evidence identifies a **TP-Link Archer AX53** as the equipment associated with the corporate wireless environment.
 
-This document records the available hardware and switching evidence, the intended network architecture, and the remaining verification requirements.
+This page consolidates the dated equipment identification, switch VLAN assignment, network role, and the scope of the collected technical evidence.
 
 It does not assume that wireless authentication, routing, or security restrictions have been fully implemented.
 
@@ -72,7 +72,7 @@ The available switch evidence documents VLAN 60 as a dedicated segment.
 
 However, it does not establish whether the Archer AX53 operated in access point mode, router mode, or another supported configuration.
 
-Consequently, DHCP behavior, NAT, wireless client addressing, and end-to-end VLAN membership require additional verification.
+The equipment photograph and switch snapshot do not include the router's DHCP, NAT, wireless client addressing, or operating-mode settings.
 
 ## 5. Network Segmentation and Access
 
@@ -93,6 +93,7 @@ This page consolidates the identified TP-Link Archer AX53 equipment, the VLAN 60
 ## 9. Related Documentation
 
 - [Cisco Catalyst C8200L router](router-c8200l.md)
+- [IoT network — VLAN 70](iot-vlan70.md)
 - [Cisco Catalyst C9200L VLAN snapshot](switch-vlan-snapshot-2026-11-04.md)
 - [Physical infrastructure](../evidence/physical-infrastructure.md)
 - [Asterisk and FreeRADIUS services](../services/asterisk-freeradius.md)

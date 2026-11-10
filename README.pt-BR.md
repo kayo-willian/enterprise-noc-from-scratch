@@ -133,7 +133,7 @@ A análise de custos é uma simulação financeira delimitada por premissas e re
 ## Documentação Técnica
 
 - [Arquitetura](docs/pt-BR/arquitetura/visao-geral-da-infraestrutura.md) · [VLANs](docs/pt-BR/redes/vlans.md) · [Configuração do switch](docs/pt-BR/redes/registro-switch-vlans-2026-11-04.md)
-- [Roteador C8200L](docs/pt-BR/redes/roteador-c8200l.md) · [Wi-Fi corporativo](docs/pt-BR/redes/wifi-corporativo-vlan60.md) · [Mapa de portas](docs/pt-BR/redes/mapa-de-portas-switch.md)
+- [Roteador C8200L](docs/pt-BR/redes/roteador-c8200l.md) · [Wi-Fi corporativo](docs/pt-BR/redes/wifi-corporativo-vlan60.md) · [IoT / VLAN 70](docs/pt-BR/redes/iot-vlan70.md) · [Mapa de portas](docs/pt-BR/redes/mapa-de-portas-switch.md)
 - [Estações](docs/pt-BR/estacoes/inventario-de-computadores.md) · [Docker](docs/pt-BR/containers/servicos-docker.md)
 - [Zabbix](docs/pt-BR/monitoramento/zabbix.md) · [Grafana](docs/pt-BR/monitoramento/grafana.md) · [Diagnóstico SNMP](docs/pt-BR/monitoramento/diagnostico-snmp.md)
 - [Asterisk / FreeRADIUS](docs/pt-BR/servicos/asterisk-freeradius.md) · [Pi-hole / Uptime Kuma](docs/pt-BR/servicos/dns-e-disponibilidade.md) · [Infraestrutura física](docs/pt-BR/evidencias/infraestrutura-fisica.md)

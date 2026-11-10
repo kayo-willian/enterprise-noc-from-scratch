@@ -133,7 +133,7 @@ The cost analysis is a scoped financial simulation based on reference prices and
 ## Technical Documentation
 
 - [Architecture](docs/architecture/infrastructure-overview.md) · [VLAN segmentation](docs/networking/vlans.md) · [Switch configuration](docs/networking/switch-vlan-snapshot-2026-11-04.md)
-- [Router C8200L](docs/networking/router-c8200l.md) · [Corporate Wi-Fi](docs/networking/corporate-wifi-vlan60.md) · [Switch port map](docs/networking/switch-port-map.md)
+- [Router C8200L](docs/networking/router-c8200l.md) · [Corporate Wi-Fi](docs/networking/corporate-wifi-vlan60.md) · [IoT / VLAN 70](docs/networking/iot-vlan70.md) · [Switch port map](docs/networking/switch-port-map.md)
 - [Workstations](docs/endpoints/workstation-inventory.md) · [Docker](docs/containers/docker-services.md)
 - [Zabbix](docs/monitoring/zabbix-monitoring.md) · [Grafana](docs/monitoring/grafana-monitoring.md) · [SNMP troubleshooting](docs/monitoring/snmp-troubleshooting.md)
 - [Asterisk / FreeRADIUS](docs/services/asterisk-freeradius.md) · [Pi-hole / Uptime Kuma](docs/services/dns-and-availability.md) · [Physical evidence](docs/evidence/physical-infrastructure.md)
