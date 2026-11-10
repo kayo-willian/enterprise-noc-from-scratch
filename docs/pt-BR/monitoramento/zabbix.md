@@ -239,13 +239,13 @@ As estações Contabilidade 1 e Financeiro 2 apresentavam endereços coincidente
 
 Essas divergências podem contribuir para problemas de disponibilidade dos agentes ou ausência de dados de monitoramento.
 
-Entretanto, não comprovam a causa de todas as falhas. Também devem ser considerados a configuração dos agentes, a identificação dos hosts, as regras de firewall, a conectividade e a configuração dos itens de monitoramento.
+Os registros não determinam uma causa única para todas as falhas; configurações dos agentes, endereçamento dos hosts, firewall, conectividade e itens cadastrados podem afetar a coleta.
 
 Os endereços fotografados representam registros históricos de 6 de novembro de 2026.
 
 Para consultar o inventário das estações, acesse [Inventário de Computadores e Servidores](../estacoes/inventario-de-computadores.md).
 
-## 7. Limitações Conhecidas
+## 7. Limites Históricos do Monitoramento
 
 As evidências identificaram situações que ainda exigem verificação:
 

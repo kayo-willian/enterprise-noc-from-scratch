@@ -123,7 +123,7 @@ Uma interface em estado `DOWN` não representa necessariamente uma falha. Interf
 
 Consequentemente, a captura não comprova isoladamente que cada painel represente uma interface física distinta do switch.
 
-É necessário verificar a relação entre os painéis do Grafana, os itens do Zabbix e as interfaces reais do equipamento.
+As capturas históricas não incluem a correspondência completa entre os itens do Zabbix e as interfaces físicas do switch; os rótulos repetidos são preservados.
 
 ### 5.2 Throughput das Interfaces
 
@@ -236,7 +236,7 @@ Documentações relacionadas:
 - [Monitoramento com Zabbix](zabbix.md)
 - [Inventário de Computadores e Servidores](../estacoes/inventario-de-computadores.md)
 
-## 8. Limitações Conhecidas do Monitoramento
+## 8. Limites dos Registros Históricos
 
 As capturas coletadas apresentam as seguintes limitações:
 
@@ -251,7 +251,7 @@ As capturas coletadas apresentam as seguintes limitações:
 
 Essas limitações foram preservadas como parte da documentação técnica.
 
-Elas fornecem uma base para futuras atividades de diagnóstico e melhorias no monitoramento.
+Elas documentam o contexto de diagnóstico dos registros coletados em 06/11/2026.
 
 ## 9. Integração entre Grafana e Zabbix
 

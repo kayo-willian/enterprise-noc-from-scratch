@@ -123,7 +123,7 @@ A `DOWN` interface does not necessarily represent an incident. Disconnected, unu
 
 Therefore, the screenshot cannot independently confirm that every panel corresponds to a distinct physical switch interface.
 
-The relationship between Grafana panels, Zabbix items, and actual switch interfaces requires verification.
+The dated screenshots do not include an item-to-interface cross-reference; repeated labels remain as observed.
 
 ### 5.2 Interface Throughput
 
@@ -236,7 +236,7 @@ For further information:
 - [Zabbix Monitoring](zabbix-monitoring.md)
 - [Workstation and Server Inventory](../endpoints/workstation-inventory.md)
 
-## 8. Known Monitoring Limitations
+## 8. Historical Monitoring Boundaries
 
 The collected screenshots identify the following limitations:
 
@@ -251,7 +251,7 @@ The collected screenshots identify the following limitations:
 
 These limitations are preserved as part of the technical documentation.
 
-They provide a basis for future troubleshooting and monitoring improvements.
+They document the diagnostic context of the monitoring snapshots collected on November 6, 2026.
 
 ## 9. Grafana and Zabbix Integration
 
