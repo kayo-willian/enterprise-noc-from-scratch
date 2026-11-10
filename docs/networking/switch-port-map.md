@@ -4,13 +4,13 @@
 
 ## Overview
 
-This document presents the preliminary interface mapping of the Cisco Catalyst 9200L switch used in the Enterprise NOC — From Scratch project.
+This document presents the historical interface mapping of the Cisco Catalyst 9200L switch used in the Enterprise NOC — From Scratch project.
 
 The switch connects departmental workstations, infrastructure servers, IP telephony devices, and wireless network equipment.
 
 **Device:** Cisco Catalyst 9200L  
 **Reference:** Technical implementation report — November 4, 2026  
-**Status:** Preliminary mapping — pending final verification
+**Scope:** Configuration snapshot from November 4, 2026; not live interface status
 
 ## Interface Inventory
 
@@ -22,51 +22,20 @@ The switch connects departmental workstations, infrastructure servers, IP teleph
 | Gi1/0/7–8 | Finance | 30 | Access |
 | Gi1/0/9–10 | Sales | 40 | Access |
 | Gi1/0/11 | Debian Server — VoIP & RADIUS | 50 | Access |
-| Gi1/0/12–13 | Grandstream IP Phones | 50 | To verify |
-| Gi1/0/14 | TP-Link Archer AX53 — IoT Network | 70 | To verify |
-| Gi1/0/15 | TP-Link Archer AX53 — Corporate Wi-Fi | 60 | To verify |
-| Gi1/0/16–24 | Spare / Reserved | To verify | To verify |
-| Gi1/1/1–4 | SFP Uplink Interfaces | To verify | To verify |
+| Gi1/0/12–13 | Grandstream IP Phones | 50 | Access VLAN 50 |
+| Gi1/0/14 | TP-Link Archer AX53 — IoT Network | 70 | Access VLAN 70 |
+| Gi1/0/15 | TP-Link Archer AX53 — Corporate Wi-Fi | 60 | Access VLAN 60 |
+| Gi1/0/16–24 | No device assignment established | — | No interface-specific statements recorded |
+| Gi1/1/1–4 | SFP interfaces | — | No interface-specific statements recorded |
 
 **Important:** This inventory combines interface descriptions from the November 4 technical report with the corrected VLAN design. It does not represent a verified running configuration.
 
-## VLAN 60 and VLAN 70 — Pending Verification
+## VLAN 60 and VLAN 70
 
-The original implementation report contains inconsistent VLAN assignments for the wireless and IoT interfaces.
+The November 4 switch configuration assigns Gi1/0/14 to VLAN 70 and Gi1/0/15 to VLAN 60. These are recorded interface settings, not a physical-link test.
 
-The current intended segmentation is:
+## Scope of the Port Map
 
-- **VLAN 60:** Corporate Wi-Fi.
-- **VLAN 70:** IoT network.
+Gi1/0/1 is configured as a trunk. Gi1/0/2–10 and Gi1/0/12–15 have documented access VLANs. Gi1/0/11 contains `switchport access vlan 50` and `spanning-tree portfast trunk`, but no explicit `switchport mode access`; the actual operational mode cannot be established from this snapshot alone.
 
-The physical assignments of Gi1/0/14 and Gi1/0/15 must be checked against the actual switch configuration.
-
-## Configuration Verification
-
-The following read-only Cisco IOS-XE commands can be used to inspect the switch:
-
-```text
-show interfaces status
-show vlan brief
-show interfaces trunk
-show interfaces switchport
-show running-config interface GigabitEthernet1/0/14
-show running-config interface GigabitEthernet1/0/15
-```
-
-Verification should establish:
-
-- Interface operational status.
-- Access and trunk port assignments.
-- Actual VLAN membership.
-- Trunk allowed VLANs.
-- Connected devices and interface descriptions.
-- Any differences between the documentation and running configuration.
-
-## Documentation Status
-
-**Status:** In Progress
-
-This document will be updated after the physical connections and switch configuration have been verified.
-
-Sensitive information will be excluded from public configuration examples.
+The absence of interface-specific statements for Gi1/0/16–24 and Gi1/1/1–4 does not prove that those ports were free, disconnected, or disabled. This is a historical configuration inventory, not a current link-state report.

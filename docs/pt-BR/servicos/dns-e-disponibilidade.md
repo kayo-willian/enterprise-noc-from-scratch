@@ -194,7 +194,7 @@ As configurações públicas não incluem segredos de autenticação nem configu
 
 Esses arquivos documentam a estrutura de implantação, enquanto as capturas coletadas comprovam a presença das aplicações no laboratório.
 
-## 7. Evidências e Limitações
+## 7. Escopo das Evidências Históricas
 
 | Evidência | O que demonstra |
 |---|---|

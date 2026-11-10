@@ -110,7 +110,7 @@ Os containers documentados atendem a diferentes funções.
 
 Os serviços Asterisk e FreeRADIUS são documentados separadamente, pois são executados em outro computador Linux.
 
-## 7. Evidências e Limitações
+## 7. Escopo das Evidências
 
 As evidências coletadas confirmam a presença de dez containers Docker em execução em 6 de novembro de 2026.
 
@@ -124,7 +124,7 @@ Entretanto, essas evidências não comprovam:
 - Funcionamento correto de todos os itens de monitoramento.
 - Alta disponibilidade ou redundância.
 
-Esses aspectos precisam de verificações e documentação específicas.
+Essas propriedades estão fora do escopo do inventário datado; a lista de containers em execução não as comprova.
 
 ## 8. Configuração do Docker Compose
 

@@ -3,14 +3,14 @@
 [English](../../evidence/evidence-collection-2026-11-06.md) | **Português (BR)**
 
 > **Projeto:** Enterprise NOC — From Scratch  
-> **Tipo de registro:** inventário preliminar da coleta  
-> **Situação:** análise e seleção de evidências para publicação
+> **Tipo de registro:** inventário datado da coleta  
+> **Situação:** registro técnico da coleta
 
 ## Visão geral
 
 Em 6 de novembro de 2026, foi realizada uma coleta de evidências da infraestrutura física e lógica do laboratório. O material reúne fotografias dos equipamentos, capturas de estações de trabalho e ferramentas de monitoramento, registros de hardware e documentos técnicos.
 
-Os arquivos originais são preservados em armazenamento privado de trabalho. As imagens e configurações somente serão incorporadas ao repositório após revisão de conteúdo e ocultação de identificadores ou informações sensíveis.
+Os arquivos originais são preservados em armazenamento privado de trabalho. A documentação publicada utiliza cópias selecionadas e sanitizadas das evidências, sem credenciais ou identificadores institucionais privados.
 
 ## Componentes documentados
 
@@ -24,21 +24,17 @@ Os arquivos originais são preservados em armazenamento privado de trabalho. As 
 | Observabilidade | Capturas de Zabbix, Grafana e Uptime Kuma, incluindo painéis de infraestrutura e serviços. |
 | Serviços adicionais | Evidências de Pi-hole, proxy reverso e serviço web em container. |
 
-## Limitações e pontos em revisão
+## Limites Históricos das Evidências
 
 - Alguns endereços IP exibidos nas estações divergem dos cadastrados no Zabbix na data da coleta.
 - Há hosts indisponíveis, itens não suportados e painéis sem dados no material capturado; esses estados serão descritos como observações do período, sem afirmar disponibilidade contínua.
-- As imagens precisam passar por revisão para ocultar informações institucionais, credenciais, identificadores de equipamentos e outros dados internos.
+- A seleção pública de imagens exclui credenciais, informações institucionais e identificadores privados.
 - A configuração histórica do switch não substitui uma exportação atualizada do equipamento.
-- Modelos e características não legíveis nas evidências permanecerão como **não confirmados** no inventário.
+- O inventário técnico apresenta modelos e especificações somente quando constam das evidências coletadas.
 
-## Próximas etapas
+## Inventário das Evidências Publicadas
 
-1. Selecionar as fotografias e capturas mais representativas de cada área.
-2. Preparar cópias para publicação, preservando os originais privados.
-3. Consolidar o inventário de computadores, equipamentos e serviços.
-4. Relacionar cada evidência à página técnica correspondente.
-5. Atualizar a apresentação do projeto no README e o acompanhamento das pendências nas Issues.
+O material datado está organizado na [infraestrutura física](infraestrutura-fisica.md), no [inventário de computadores](../estacoes/inventario-de-computadores.md), no [registro do switch](../redes/registro-switch-vlans-2026-11-04.md), em [serviços Docker](../containers/servicos-docker.md), no [Zabbix](../monitoramento/zabbix.md) e no [Grafana](../monitoramento/grafana.md). Este registro documenta a coleta, sem transformar estados momentâneos em garantias de disponibilidade contínua.
 
 ---
 

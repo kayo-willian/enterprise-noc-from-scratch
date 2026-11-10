@@ -262,7 +262,7 @@ These commands are examples of local diagnostic procedures. Their outputs were n
 
 Before publishing diagnostic output, authentication details, internal identities, and other sensitive information must be reviewed.
 
-## 8. Evidence and Limitations
+## 8. Evidence Scope
 
 | Evidence | What it establishes |
 |---|---|
@@ -274,7 +274,7 @@ Before publishing diagnostic output, authentication details, internal identities
 | Sales telephone photograph | Physical Grandstream device displaying 192.168.50.10 |
 | Grafana dashboard | Historical monitoring information for the Linux server |
 
-The following details remain unverified:
+The collected records do not contain independent results for:
 
 - Successful voice calls between the two Grandstream devices.
 - Successful end-to-end 802.1X authentication from the corporate wireless equipment.

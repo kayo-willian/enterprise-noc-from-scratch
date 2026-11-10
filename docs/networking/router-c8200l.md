@@ -5,7 +5,7 @@
 > **Device:** Cisco Catalyst C8200L-1N-4T  
 > **Evidence period:** November 4–6, 2026  
 > **Documentation updated:** November 8, 2026  
-> **Status:** Partially documented — configuration validation pending
+> **Record:** Router hardware, switch trunk, network roles and monitoring evidence
 
 ## 1. Overview
 
@@ -59,9 +59,6 @@ Workstation photographs collected on November 6, 2026, include IP configuration 
 | 20 | `192.168.20.1` | Accounting workstation IP configuration |
 | 30 | `192.168.30.1` | Finance workstation IP configuration |
 | 40 | `192.168.40.1` | Sales workstation IP configuration |
-| 50 | Not independently verified in this evidence set | Additional validation required |
-| 60 | Not verified | Additional validation required |
-| 70 | Not verified | Additional validation required |
 
 The November 4 technical records also identify `192.168.10.1` as the router's management-side address.
 
@@ -121,49 +118,13 @@ The router's complete SNMP configuration and access restrictions were not indepe
 
 ## 7. DHCP, NAT and External Connectivity
 
-The router's possible involvement in DHCP services, address allocation, NAT, and external connectivity is part of the network validation scope.
+The laboratory workstations use DHCP. Their recorded gateway addresses for VLANs 10, 20, 30 and 40 come from November 6 workstation captures, not from an exported router running configuration. The collection does not identify the DHCP server or relay mechanism, address pools, NAT translations, external interface or default route of the C8200L. No corresponding router commands are represented as deployed.
 
-However, the available evidence does not establish:
+## 8. Scope of the Router Record
 
-- Whether DHCP pools are configured directly on the C8200L.
-- Whether DHCP relay is used.
-- The configured DHCP scopes and excluded addresses.
-- The active NAT configuration.
-- The external interface configuration.
-- The complete routing table or default route.
+This page documents the physical C8200L equipment, the switch-side trunk (Gi1/0/1), the VLAN design, observed workstation default gateways, and router-related Zabbix/Grafana evidence. It does not claim identification of the router-side physical interface or precise dot1Q subinterfaces. The access-control section describes the segmentation policy, not the proven contents or enforcement of ACLs.
 
-No configuration examples are presented as deployed settings without supporting evidence.
-
-## 8. Verification Opportunities
-
-Future verification may use existing configuration records, monitoring history, and authorized connectivity tests.
-
-| Area | Verification objective |
-|---|---|
-| Inter-VLAN routing | Identify actual routing interfaces and confirm authorized forwarding |
-| Gateway addressing | Confirm gateway ownership and interface addresses |
-| ACLs | Establish whether intended access restrictions are enforced |
-| DHCP | Identify the active address assignment mechanism |
-| NAT | Establish whether address translation is configured and operational |
-| SNMP | Confirm router monitoring configuration and expected metrics |
-| Troubleshooting | Record observed failures and their supporting evidence |
-
-Connectivity tests should consider endpoint firewalls and service behavior before attributing a failed connection to an ACL.
-
-A successful ICMP response also does not prove that every required application is reachable.
-
-## 9. Known Limitations
-
-At the time of this documentation update:
-
-1. The router's current running configuration is unavailable.
-2. Its exact VLAN subinterfaces and trunk encapsulation settings have not been verified.
-3. Intended ACL policies have not been demonstrated through configuration evidence and controlled tests.
-4. DHCP and NAT implementations remain unverified.
-5. Monitoring evidence represents historical snapshots rather than continuous operational assurance.
-6. The router-side physical interface connected to the switch has not been identified from the available configuration records.
-
-These limitations are documented to preserve technical accuracy.
+The screenshots establish monitoring observations at their collection time, not uninterrupted availability or a complete running configuration.
 
 ## 10. Related Documentation
 
@@ -173,6 +134,3 @@ These limitations are documented to preserve technical accuracy.
 - [Zabbix monitoring](../monitoring/zabbix-monitoring.md)
 - [Grafana monitoring](../monitoring/grafana-monitoring.md)
 
----
-
-**Documentation principle:** This page describes an observed laboratory environment and its intended network architecture. Unverified configurations are not represented as implemented or validated.

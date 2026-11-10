@@ -262,7 +262,7 @@ Esses comandos representam procedimentos de diagnóstico local. Suas saídas nã
 
 Antes de publicar resultados de diagnóstico, é necessário revisar informações de autenticação, identificadores internos e outros dados sensíveis.
 
-## 8. Evidências e Limitações
+## 8. Escopo das Evidências
 
 | Evidência | O que comprova |
 |---|---|
@@ -274,7 +274,7 @@ Antes de publicar resultados de diagnóstico, é necessário revisar informaçõ
 | Fotografia do telefone Vendas | Equipamento Grandstream exibindo 192.168.50.10 |
 | Dashboard Grafana | Informações históricas de monitoramento do servidor Linux |
 
-As seguintes informações ainda não foram comprovadas:
+Os registros coletados não contêm resultados independentes para:
 
 - Realização bem-sucedida de chamadas entre os telefones Grandstream.
 - Autenticação IEEE 802.1X completa utilizando o equipamento Wi-Fi corporativo fotografado.

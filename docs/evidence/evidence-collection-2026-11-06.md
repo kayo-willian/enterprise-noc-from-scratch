@@ -3,14 +3,14 @@
 **English** | [Português (BR)](../pt-BR/evidencias/registro-coleta-2026-11-06.md)
 
 > **Project:** Enterprise NOC — From Scratch  
-> **Record type:** preliminary evidence collection inventory  
-> **Status:** evidence review and selection for publication
+> **Record type:** dated evidence collection inventory  
+> **Status:** technical evidence collection record
 
 ## Overview
 
 On November 6, 2026, physical and logical infrastructure evidence was collected from the lab. The materials include photographs of equipment, screenshots of workstations and monitoring tools, hardware records, and technical documents.
 
-The original files are preserved in private working storage. Images and configurations will only be added to the repository after reviewing their contents and redacting institutional identifiers or sensitive information.
+The original files are preserved in private working storage. Published documentation uses selected and sanitized copies of the collected material; private credentials and institution-specific identifiers are excluded.
 
 ## Documented components
 
@@ -24,21 +24,17 @@ The original files are preserved in private working storage. Images and configur
 | Observability | Zabbix, Grafana, and Uptime Kuma screenshots, including infrastructure and service dashboards. |
 | Additional services | Evidence of Pi-hole, a reverse proxy, and a containerized web service. |
 
-## Limitations and findings under review
+## Historical Evidence Boundaries
 
 - Some workstation IP addresses in the photographs differ from the addresses registered in Zabbix on the collection date.
 - The collected material includes unavailable hosts, unsupported items, and panels showing no data. These are point-in-time observations and do not establish continuous availability.
-- Images must be reviewed to remove institutional information, credentials, asset identifiers, and other internal details before publication.
+- Public image selection excludes credentials, institution-specific information, and private identifiers.
 - The historical switch configuration does not replace a current export of the device's configuration.
-- Models and specifications that cannot be read or confirmed from the evidence will remain **unverified** in the inventory.
+- The technical inventory includes models and specifications only where captured in the collected evidence.
 
-## Next steps
+## Published Evidence Inventory
 
-1. Select the most representative photographs and screenshots for each area.
-2. Prepare publication-safe copies while retaining the private originals.
-3. Consolidate the inventory of computers, network devices, and services.
-4. Link each piece of evidence to the corresponding technical documentation page.
-5. Update the project's README and track remaining work through Issues.
+The dated evidence is organized in the [physical infrastructure](physical-infrastructure.md), [workstation inventory](../endpoints/workstation-inventory.md), [switch snapshot](../networking/switch-vlan-snapshot-2026-11-04.md), [Docker services](../containers/docker-services.md), [Zabbix](../monitoring/zabbix-monitoring.md), and [Grafana](../monitoring/grafana-monitoring.md). This record documents the collected scope, without treating point-in-time states as continuous service guarantees.
 
 ---
 

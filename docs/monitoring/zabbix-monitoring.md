@@ -239,13 +239,13 @@ Accounting 1 and Finance 2 had matching addresses in the compared records.
 
 These inconsistencies may contribute to agent availability problems or missing monitoring data.
 
-However, they do not establish the root cause of every problem. Agent configuration, host identification, firewall policies, connectivity, and monitoring-item configuration also require verification.
+This collection does not establish a single root cause for every problem; agent settings, host addressing, firewall behavior, connectivity, and monitoring item configuration can all affect collection.
 
 The photographed addresses are historical observations from November 6, 2026.
 
 For the workstation inventory, see [Workstation and Server Inventory](../endpoints/workstation-inventory.md).
 
-## 7. Known Limitations
+## 7. Historical Monitoring Boundaries
 
 The collected evidence identifies several areas requiring further validation:
 
@@ -256,7 +256,7 @@ The collected evidence identifies several areas requiring further validation:
 | Trigger status | 34 triggers were in a problem state |
 | Workstation addressing | Six photographed addresses differed from Zabbix records |
 | Switch interfaces | Some monitored interfaces were reported as down |
-| Dashboard labels | Some indicators require source and label verification |
+| Dashboard labels | Repeated or truncated indicators preserved from the collected dashboard |
 | Historical availability | Continuous service availability was not established |
 
 These limitations are documented rather than excluded from the project.

@@ -117,4 +117,4 @@ Endereços IP internos, comunidades SNMP e outras informações sensíveis foram
 
 **Status:** Documentado com base no relatório técnico de implementação de 4 de novembro de 2026.
 
-Evidências adicionais poderão ser incorporadas após verificação.
+Este estudo de caso histórico documenta as etapas de diagnóstico e os resultados registrados.

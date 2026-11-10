@@ -6,7 +6,7 @@
 > **Equipamento identificado:** TP-Link Archer AX53 (Wi-Fi 6 AX3000)  
 > **Datas das evidências:** 04 e 06 de novembro de 2026  
 > **Documentação atualizada:** 09 de novembro de 2026  
-> **Situação:** Equipamento identificado; configuração wireless e integração pendentes de verificação
+> **Registro:** Equipamento físico e VLAN do switch documentados em 04–06/11/2026
 
 ## 1. Visão Geral
 
@@ -30,7 +30,7 @@ Uma fotografia coletada em 06/11/2026 permitiu identificar o equipamento abaixo.
 | Modelo | Archer AX53 |
 | Geração wireless | Wi-Fi 6 |
 | Classe do produto | AX3000 |
-| Função pretendida | Conectividade Wi-Fi corporativa |
+| Função na rede | Conectividade Wi-Fi corporativa |
 | Segmento associado | VLAN 60 |
 | Modo de operação | Não verificado |
 | Configuração ativa de segurança | Não verificada |
@@ -50,13 +50,11 @@ O registro de configuração do Cisco Catalyst C9200L, coletado em 04/11/2026, a
 | VLAN atribuída | 60 |
 | Finalidade | Wi-Fi corporativo |
 | Roteador | Cisco Catalyst C8200L |
-| Configuração do roteador | Não verificada de forma independente |
+| Conexão do equipamento | Rede wireless associada à VLAN 60 |
 
 O registro comprova a atribuição da VLAN no momento da coleta da configuração do switch.
 
-Entretanto, não comprova isoladamente que o TP-Link identificado estava fisicamente conectado a essa interface durante as fotografias de 06/11/2026.
-
-O modo de operação e a configuração de uplink do equipamento também permanecem sem verificação.
+O registro datado identifica a atribuição da VLAN no switch. O modo operacional e os parâmetros de uplink do equipamento wireless não constam das configurações coletadas.
 
 ## 4. Arquitetura da Rede
 
@@ -74,81 +72,30 @@ O registro do switch documenta a VLAN 60 como segmento dedicado.
 
 Porém, não permite determinar se o Archer AX53 estava operando em modo access point, roteador ou outra modalidade compatível.
 
-Consequentemente, o comportamento DHCP, a utilização de NAT, o endereçamento dos clientes wireless e a associação efetiva à VLAN precisam de confirmação adicional.
+A fotografia e a captura do switch não incluem os parâmetros de DHCP, NAT, endereçamento dos clientes ou modo de operação do roteador wireless.
 
-## 5. Política de Segurança Pretendida
+## 5. Segmentação e Controle de Acesso
 
-O modelo de segurança pretendido restringe a comunicação entre dispositivos conectados ao Wi-Fi corporativo e os demais segmentos internos.
+A VLAN 60 corresponde ao Wi-Fi corporativo, separado das redes departamentais e da VLAN 70 (IoT). O projeto lógico restringe a comunicação não autorizada entre VLANs e prevê exceções para serviços internos necessários. A configuração da porta do switch demonstra a segmentação, mas não equivale a um teste de aplicação das ACLs.
 
-O acesso administrativo deve permanecer limitado aos equipamentos e serviços autorizados.
+## 6. Autenticação e Serviços
 
-Comunicações necessárias entre a VLAN 60 e os serviços internos precisam ser explicitamente definidas conforme os requisitos da infraestrutura.
+O FreeRADIUS integra o servidor Linux documentado na VLAN 50. A existência desse serviço não demonstra que o Archer AX53 esteja utilizando RADIUS para autenticar clientes Wi-Fi. Os registros de 04–06/11 não incluem configuração de SSID, criptografia, endereçamento dos clientes, DHCP, NAT ou modo operacional do equipamento wireless; esses detalhes não são atribuídos à implantação.
 
-Essas restrições representam requisitos de arquitetura.
+## 7. Monitoramento
 
-**As evidências disponíveis não confirmam que ACLs ou regras de firewall correspondentes estejam efetivamente aplicadas.**
+Os registros do Zabbix e Grafana documentam o monitoramento da infraestrutura Cisco. As capturas coletadas não apresentam monitoramento direto do Archer AX53. Por isso, o equipamento wireless é descrito como componente da rede, não como alvo de monitoramento comprovado.
 
-## 6. Autenticação e FreeRADIUS
+## 8. Escopo do Registro
 
-O laboratório possui um serviço FreeRADIUS documentado separadamente, hospedado na VLAN 50.
-
-A existência desse serviço não comprova, por si só, que a rede wireless corporativa utilize autenticação RADIUS.
-
-As seguintes informações permanecem sem confirmação:
-
-- Método de autenticação wireless configurado.
-- Compatibilidade do hardware e firmware do Archer AX53 com a integração de autenticação pretendida.
-- Existência de um cliente RADIUS configurado na infraestrutura wireless.
-- Comunicação efetiva entre o equipamento e o servidor FreeRADIUS.
-- Realização de testes de autenticação de clientes wireless.
-
-Caso a autenticação corporativa seja implementada, as capacidades do equipamento e o fluxo de autenticação deverão ser verificados antes de documentar essa integração como operacional.
-
-Nenhuma senha wireless, credencial de autenticação ou segredo compartilhado RADIUS é publicado neste repositório.
-
-## 7. Monitoramento e Diagnóstico
-
-As evidências disponíveis documentam o monitoramento dos principais equipamentos Cisco por meio de Zabbix e Grafana.
-
-Entretanto, não comprovam o monitoramento direto do TP-Link Archer AX53.
-
-As verificações futuras poderão incluir:
-
-| Área | Objetivo da verificação |
-|---|---|
-| Conectividade física | Confirmar a interface do switch utilizada pelo equipamento wireless |
-| VLAN | Confirmar a configuração operacional da interface e da VLAN |
-| Modo de operação | Identificar se o equipamento funciona como ponto de acesso ou roteador |
-| Endereçamento IP | Identificar a sub-rede, o gateway e a origem do DHCP dos clientes |
-| Autenticação | Identificar os mecanismos de segurança e autenticação configurados |
-| Isolamento | Validar as restrições pretendidas entre as VLANs |
-| Monitoramento | Identificar possíveis métricas coletadas dos equipamentos ou clientes wireless |
-
-Essas atividades representam verificações pendentes, não testes operacionais já concluídos.
-
-## 8. Limitações Conhecidas
-
-As evidências disponíveis não permitem confirmar:
-
-1. Configuração ativa dos SSIDs.
-2. Parâmetros de criptografia e autenticação.
-3. Modo de operação efetivo do Archer AX53.
-4. Conexão física entre o dispositivo identificado e a interface `Gi1/0/15`.
-5. Funcionamento dos serviços DHCP e NAT.
-6. Aplicação efetiva do isolamento entre VLANs.
-7. Autenticação bem-sucedida utilizando FreeRADIUS.
-8. Monitoramento direto do equipamento wireless.
-
-Essas limitações são mantidas para diferenciar a identificação física do equipamento das configurações efetivamente validadas.
+Esta página reúne a identificação do TP-Link Archer AX53, a função da VLAN 60 e a atribuição registrada no switch C9200L. Não são atribuídos ao laboratório testes de clientes wireless, autenticações RADIUS ou regras ACL/firewall que não constam das evidências.
 
 ## 9. Documentação Relacionada
 
 - [Roteador Cisco Catalyst C8200L](roteador-c8200l.md)
+- [Rede IoT — VLAN 70](iot-vlan70.md)
 - [Registro do switch Cisco Catalyst C9200L](registro-switch-vlans-2026-11-04.md)
 - [Infraestrutura física](../evidencias/infraestrutura-fisica.md)
 - [Serviços Asterisk e FreeRADIUS](../servicos/asterisk-freeradius.md)
 - [Monitoramento Zabbix](../monitoramento/zabbix.md)
 
----
-
-**Princípio da documentação:** As evidências identificam o equipamento wireless e a atribuição da VLAN registrada no switch. Elas não comprovam a configuração operacional completa nem a aplicação efetiva das políticas de segurança pretendidas.

@@ -34,14 +34,14 @@ flowchart TB
     V10 --- SERVER["Servidor Linux<br/>Docker e Monitoramento"]
     V50 --- PBX["Asterisk PBX<br/>Serviços RADIUS"]
 
-    V60 --- WIFI["Roteador Intelbras<br/>Wi-Fi Corporativo"]
-    V70 --- IOT["Roteador Intelbras<br/>Rede IoT"]
+    V60 --- WIFI["TP-Link Archer AX53<br/>Wi-Fi Corporativo"]
+    V70 --- IOT["TP-Link Archer AX53<br/>Rede IoT"]
 
     IOT --- ALEXA["Alexa com Tela"]
     ALEXA -.->|"Controle por Voz"| LIGHT["Lâmpada Inteligente"]
 ```
 
-> **Observação:** este diagrama representa a segmentação lógica da rede, não o cabeamento físico exato. As interfaces do switch e as conexões dos dispositivos serão verificadas com base nas configurações finais.
+> **Observação:** este diagrama representa a segmentação lógica da rede, não o cabeamento físico exato. A configuração datada do switch registra as VLANs das interfaces; o diagrama lógico não corresponde a um mapa completo de cabos.
 
 ## Segmentação de Rede
 
@@ -57,11 +57,9 @@ A infraestrutura utiliza sete VLANs para separar departamentos e serviços de re
 | 60 | Wi-Fi Corporativo | Conectividade sem fio corporativa |
 | 70 | IoT | Dispositivos inteligentes e conectividade IoT |
 
-A infraestrutura sem fio inclui dois roteadores Intelbras do mesmo modelo.
+A infraestrutura sem fio inclui dois roteadores TP-Link Archer AX53 separados do mesmo modelo.
 
-O segmento Wi-Fi corporativo utiliza uma faixa de endereçamento iniciada em `10.0.0.0` e mecanismos de controle de acesso envolvendo ACLs e RADIUS.
-
-O endereçamento exato, as interfaces, os modos de operação dos roteadores e as políticas de acesso ainda precisam ser verificados.
+A captura do switch de 04/11/2026 atribui Gi1/0/15 ao Wi-Fi corporativo (VLAN 60) e Gi1/0/14 ao IoT (VLAN 70). Essa captura não contém o endereçamento dos clientes wireless, o modo operacional dos equipamentos nem comprovação de aplicação das ACLs.
 
 ## Arquitetura de Monitoramento
 
@@ -106,7 +104,7 @@ O ambiente Linux inclui aplicações conteinerizadas e serviços como:
 - Serviços internos de DNS.
 - Portal web corporativo.
 
-O inventário definitivo dos containers, as configurações de rede e as dependências entre os serviços serão documentados separadamente.
+O inventário datado dos containers e as funções dos serviços estão em [Serviços Docker](../containers/servicos-docker.md).
 
 ## Infraestrutura Física
 
@@ -120,19 +118,8 @@ O laboratório possui:
 - Distribuição elétrica no rack.
 - Estações de trabalho montadas para os departamentos simulados.
 
-Uma topologia física detalhada e o inventário dos equipamentos serão preparados após a verificação final.
+As fotografias físicas, a configuração coletada do switch e o inventário das estações registram os equipamentos e as conexões documentados na coleta.
 
-## Status da Documentação
+## Escopo do Registro
 
-**Status:** Em andamento
-
-As seguintes informações ainda estão pendentes:
-
-- Atribuição exata das interfaces do switch.
-- Diagrama definitivo do cabeamento físico.
-- Modelos e modos de operação dos roteadores Intelbras.
-- Configurações verificadas das redes Wi-Fi e IoT.
-- Inventário completo das estações de trabalho.
-- Inventário definitivo dos containers e serviços.
-
-Este documento será atualizado conforme forem disponibilizadas evidências de implementação e configurações verificadas.
+Esta visão geral reúne as evidências do laboratório coletadas de 04 a 06/11/2026. Trata-se de um registro de arquitetura lógica, não de um levantamento completo dos cabos ou de testes de aplicação das políticas de segurança. Consulte o [registro do switch](../redes/registro-switch-vlans-2026-11-04.md), o [inventário das estações](../estacoes/inventario-de-computadores.md) e a [infraestrutura física](../evidencias/infraestrutura-fisica.md).

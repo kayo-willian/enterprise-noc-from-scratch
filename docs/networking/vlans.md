@@ -39,7 +39,7 @@ The network uses a TP-Link Archer AX53, identified through physical equipment ev
 
 The Cisco Catalyst C9200L configuration snapshot from November 4, 2026, assigns interface `Gi1/0/15` to VLAN 60.
 
-The wireless router's operating mode, client addressing, DHCP configuration, and authentication settings require further verification.
+The switch snapshot documents the VLAN assignment; it does not contain the wireless device operating mode, client addressing, DHCP, or authentication configuration.
 
 The intended network architecture restricts unauthorized access between the corporate wireless network and other internal VLANs.
 
@@ -53,24 +53,13 @@ The wireless router connects to the Cisco Catalyst C9200L through Ethernet.
 
 The switch configuration snapshot from November 4, 2026, assigns interface `Gi1/0/14` to VLAN 70.
 
-The wireless router's operating mode, internal addressing, DHCP behavior, and NAT configuration remain pending verification.
+The switch snapshot documents the VLAN assignment; it does not contain the wireless router's internal addressing, DHCP, NAT, or operating-mode settings.
 
 The IoT network is intended to remain isolated from sensitive corporate infrastructure.
 
-The exact routing and access control implementation has not yet been validated.
+The intended network isolation is an architectural policy, not a demonstrated ACL enforcement result.
 
 
-## Documentation Status
+## Record Scope
 
-**Status:** In Progress
-
-Additional technical documentation will cover:
-
-- Physical network topology.
-- VLAN assignments and switch interfaces.
-- Trunk and access port configurations.
-- Routing and access control policies.
-- Wireless network configuration.
-- Connectivity and isolation tests.
-
-Configuration details will be documented after verification against the laboratory equipment.
+This VLAN inventory consolidates the design and historical Cisco switch configuration collected on November 4, 2026. Device-specific settings are described only where present in the collected evidence. The absence of wireless configuration exports is not presented as a pending publication task.

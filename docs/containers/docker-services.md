@@ -110,7 +110,7 @@ The documented containers support several functions:
 
 The Asterisk and FreeRADIUS services are documented separately because they run on a different Linux computer.
 
-## 7. Evidence and Limitations
+## 7. Evidence Scope
 
 The collected evidence confirms the presence of ten running Docker containers on November 6, 2026.
 
@@ -124,12 +124,11 @@ However, the evidence does not establish:
 - Correct operation of every monitoring item.
 - High availability or redundancy.
 
-These topics require separate verification and documentation.
+Those properties are outside the scope of the dated container inventory; the running-container list does not demonstrate them.
 
 ## 8. Docker Compose Configuration
 
-The following Docker Compose files document the deployment
-configuration used in the laboratory.
+The following Docker Compose files are sanitized public examples based on the laboratory configuration. They exclude local certificates, secrets, persistent data, and other machine-specific prerequisites.
 
 - [Monitoring and Infrastructure Stack](../../docker_configs/docker-compose.yml)
 - [Pi-hole](../../docker_configs/lab-ti/pihole/docker-compose.yml)
