@@ -107,7 +107,7 @@ The objective is to demonstrate practical network engineering, Linux administrat
 - Corporate Wi-Fi infrastructure.
 - IoT connectivity and smart device integration.
 
-Configuration details and implementation evidence will be documented as they become available and are verified.
+The implementation record is organized around dated configuration exports, hardware inventory, and monitoring evidence.
 
 ## Infrastructure Cost Analysis
 
@@ -119,7 +119,7 @@ The project also includes a financial analysis of the infrastructure, considerin
 | **B — Existing Equipment** | Deployment and configuration using hardware already owned by the organization. |
 | **C — Operations & Maintenance** | Recurring costs associated with maintaining and operating the infrastructure. |
 
-Cost estimates will be based on documented assumptions, equipment specifications, and market references.
+The cost analysis is a scoped financial simulation based on reference prices and stated assumptions; partial subtotals are not actual expenditures.
 
 ## Project Objectives
 
@@ -130,6 +130,19 @@ Cost estimates will be based on documented assumptions, equipment specifications
 - Produce technical documentation, diagrams, and implementation evidence.
 - Analyze the resources and costs involved in infrastructure deployment.
 
+## Technical Documentation
+
+- [Architecture](docs/architecture/infrastructure-overview.md) · [VLAN segmentation](docs/networking/vlans.md) · [Switch configuration](docs/networking/switch-vlan-snapshot-2026-11-04.md)
+- [Router C8200L](docs/networking/router-c8200l.md) · [Corporate Wi-Fi](docs/networking/corporate-wifi-vlan60.md) · [Switch port map](docs/networking/switch-port-map.md)
+- [Workstations](docs/endpoints/workstation-inventory.md) · [Docker](docs/containers/docker-services.md)
+- [Zabbix](docs/monitoring/zabbix-monitoring.md) · [Grafana](docs/monitoring/grafana-monitoring.md) · [SNMP troubleshooting](docs/monitoring/snmp-troubleshooting.md)
+- [Asterisk / FreeRADIUS](docs/services/asterisk-freeradius.md) · [Pi-hole / Uptime Kuma](docs/services/dns-and-availability.md) · [Physical evidence](docs/evidence/physical-infrastructure.md)
+- [GitHub Pages documentation portal](https://kayo-willian.github.io/enterprise-noc-from-scratch/)
+
+### DHCP and Monitoring Snapshots
+
+Workstations in the laboratory use DHCP. Their IP addresses may differ between collection dates and previously configured Zabbix host entries. Unavailable hosts and `No data` panels in the November 6 screenshots describe historical monitoring states; DHCP-related address changes are a possible explanation, not a proven cause of every alert.
+
 ## My Contributions
 
 My primary hands-on contributions include the deployment and integration of containerized services, development of monitoring dashboards, and troubleshooting of infrastructure and monitoring issues.
@@ -139,12 +152,12 @@ The repository documents the broader laboratory environment while distinguishing
 ## Development Status
 
 **Status:** Active Development  
-**Documentation:** In Progress  
+**Documentation:** Dated technical records published  
 **Laboratory Development Period:** Through November 17, 2026
 
 This repository is being developed incrementally.
 
-Technical documentation, configuration examples, diagrams, implementation evidence, and financial analysis will be added as the project evolves.
+Available configurations and screenshots are documented as dated observations. Information absent from the evidence is not presented as a deployed or tested configuration.
 
 The laboratory environment is used for educational and technical demonstration purposes. It does not represent a production deployment.
 

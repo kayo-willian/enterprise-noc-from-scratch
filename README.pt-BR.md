@@ -107,7 +107,7 @@ O objetivo é demonstrar conhecimentos práticos em engenharia de redes, adminis
 - Infraestrutura Wi-Fi corporativa.
 - Conectividade IoT e integração de dispositivos inteligentes.
 
-Os detalhes das configurações e as evidências de implementação serão documentados conforme sua disponibilidade e verificação.
+O registro de implementação está organizado por capturas de configuração datadas, inventário de equipamentos e evidências de monitoramento.
 
 ## Análise de Custos da Infraestrutura
 
@@ -119,7 +119,7 @@ O projeto também contempla uma análise financeira da infraestrutura, considera
 | **B — Equipamentos Existentes** | Implantação e configuração utilizando equipamentos já pertencentes à organização. |
 | **C — Operação e Manutenção** | Custos recorrentes necessários para manter e administrar a infraestrutura. |
 
-As estimativas serão fundamentadas em premissas documentadas, especificações dos equipamentos e referências de preços de mercado.
+A análise de custos é uma simulação financeira delimitada por premissas e referências de mercado; subtotais parciais não representam valores efetivamente gastos.
 
 ## Objetivos do Projeto
 
@@ -130,6 +130,19 @@ As estimativas serão fundamentadas em premissas documentadas, especificações 
 - Produzir documentação técnica, diagramas e evidências de implementação.
 - Analisar os recursos e custos envolvidos na implantação da infraestrutura.
 
+## Documentação Técnica
+
+- [Arquitetura](docs/pt-BR/arquitetura/visao-geral-da-infraestrutura.md) · [VLANs](docs/pt-BR/redes/vlans.md) · [Configuração do switch](docs/pt-BR/redes/registro-switch-vlans-2026-11-04.md)
+- [Roteador C8200L](docs/pt-BR/redes/roteador-c8200l.md) · [Wi-Fi corporativo](docs/pt-BR/redes/wifi-corporativo-vlan60.md) · [Mapa de portas](docs/pt-BR/redes/mapa-de-portas-switch.md)
+- [Estações](docs/pt-BR/estacoes/inventario-de-computadores.md) · [Docker](docs/pt-BR/containers/servicos-docker.md)
+- [Zabbix](docs/pt-BR/monitoramento/zabbix.md) · [Grafana](docs/pt-BR/monitoramento/grafana.md) · [Diagnóstico SNMP](docs/pt-BR/monitoramento/diagnostico-snmp.md)
+- [Asterisk / FreeRADIUS](docs/pt-BR/servicos/asterisk-freeradius.md) · [Pi-hole / Uptime Kuma](docs/pt-BR/servicos/dns-e-disponibilidade.md) · [Infraestrutura física](docs/pt-BR/evidencias/infraestrutura-fisica.md)
+- [Portal de documentação GitHub Pages](https://kayo-willian.github.io/enterprise-noc-from-scratch/pt-BR/)
+
+### DHCP e registros de monitoramento
+
+As estações do laboratório utilizam DHCP. Seus endereços IP podem variar entre as datas de coleta e os cadastros anteriores no Zabbix. Hosts indisponíveis e painéis `No data` nas capturas de 06/11 representam estados históricos de monitoramento; mudanças de endereço podem explicar parte das divergências, sem comprovar a causa de todos os alertas.
+
 ## Minhas Contribuições
 
 Minhas principais contribuições práticas incluem a implantação e integração dos serviços conteinerizados, o desenvolvimento dos dashboards de monitoramento e a resolução de problemas relacionados à infraestrutura e à observabilidade.
@@ -139,12 +152,12 @@ O repositório documenta o ambiente completo do laboratório, diferenciando o tr
 ## Status de Desenvolvimento
 
 **Status:** Em Desenvolvimento Ativo  
-**Documentação:** Em Andamento  
+**Documentação:** Registros técnicos datados publicados  
 **Período de Desenvolvimento do Laboratório:** Até 17 de novembro de 2026
 
 Este repositório está sendo desenvolvido de forma incremental.
 
-Documentações técnicas, exemplos de configuração, diagramas, evidências de implementação e análises financeiras serão adicionados conforme a evolução do projeto.
+As configurações e capturas disponíveis são documentadas como observações históricas. Informações ausentes das evidências não são apresentadas como configurações implantadas ou testadas.
 
 O ambiente é utilizado para fins educacionais e de demonstração técnica, não representando uma implantação em produção.
 

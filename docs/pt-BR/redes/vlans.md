@@ -39,7 +39,7 @@ A rede utiliza um TP-Link Archer AX53, identificado por evidência física colet
 
 O registro de configuração do Cisco Catalyst C9200L, coletado em 04/11/2026, atribui a interface `Gi1/0/15` à VLAN 60.
 
-O modo de operação do roteador wireless, o endereçamento dos clientes, a configuração DHCP e os mecanismos de autenticação ainda precisam de verificação.
+A captura do switch registra a atribuição da VLAN, mas não inclui o modo de operação do equipamento wireless, o endereçamento dos clientes, o DHCP nem a autenticação.
 
 A arquitetura de rede pretende restringir acessos não autorizados entre o Wi-Fi corporativo e as demais VLANs internas.
 
@@ -53,23 +53,12 @@ O roteador wireless conecta-se ao switch Cisco Catalyst C9200L por Ethernet.
 
 O registro de configuração do switch, coletado em 04/11/2026, atribui a interface `Gi1/0/14` à VLAN 70.
 
-O modo de operação do roteador wireless, o endereçamento interno, o comportamento DHCP e a configuração NAT ainda precisam de verificação.
+A captura do switch registra a atribuição da VLAN, mas não inclui o modo de operação, o endereçamento interno, o DHCP ou as regras NAT do roteador wireless.
 
 A rede IoT foi planejada para permanecer isolada dos recursos corporativos sensíveis.
 
-A implementação exata das políticas de roteamento e controle de acesso ainda não foi validada.
+O isolamento descrito corresponde à política lógica do projeto, não a um resultado comprovado de testes das ACLs.
 
-## Status da Documentação
+## Escopo do Registro
 
-**Status:** Em andamento
-
-A documentação técnica adicional contemplará:
-
-- Topologia física da rede.
-- Atribuição das VLANs e interfaces do switch.
-- Configurações das portas trunk e access.
-- Políticas de roteamento e controle de acesso.
-- Configuração das redes sem fio.
-- Testes de conectividade e isolamento.
-
-Os detalhes das configurações serão documentados após a verificação nos equipamentos do laboratório.
+Este inventário consolida o projeto lógico e a configuração histórica do switch Cisco coletada em 04/11/2026. Os parâmetros específicos dos roteadores wireless são descritos apenas quando constam das evidências. A ausência de exportações dessas configurações não é apresentada como tarefa de publicação pendente.

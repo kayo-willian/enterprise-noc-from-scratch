@@ -34,14 +34,14 @@ flowchart TB
     V10 --- SERVER["Linux Server<br/>Docker & Monitoring"]
     V50 --- PBX["Asterisk PBX<br/>RADIUS Services"]
 
-    V60 --- WIFI["Intelbras Router<br/>Corporate Wi-Fi"]
-    V70 --- IOT["Intelbras Router<br/>IoT Network"]
+    V60 --- WIFI["TP-Link Archer AX53<br/>Corporate Wi-Fi"]
+    V70 --- IOT["TP-Link Archer AX53<br/>IoT Network"]
 
     IOT --- ALEXA["Alexa with Display"]
     ALEXA -.->|"Voice Control"| LIGHT["Smart Light Bulb"]
 ```
 
-> **Note:** This diagram represents logical network segmentation, not an exact physical cabling diagram. Switch interface assignments and device connectivity will be verified against the final configurations.
+> **Note:** This diagram represents logical network segmentation, not an exact physical cabling diagram. The dated switch configuration records interface VLAN assignments; this logical diagram is not an end-to-end cable map.
 
 ## Network Segmentation
 
@@ -57,11 +57,9 @@ The infrastructure uses seven VLANs to separate different departments and networ
 | 60 | Corporate Wi-Fi | Corporate wireless connectivity |
 | 70 | IoT | Smart devices and IoT connectivity |
 
-The wireless infrastructure includes two Intelbras routers of the same model.
+The wireless infrastructure includes two separate TP-Link Archer AX53 routers of the same model.
 
-The corporate Wi-Fi segment uses an addressing range beginning with `10.0.0.0` and includes access control mechanisms involving ACLs and RADIUS.
-
-Exact addressing, interface assignments, wireless operating modes, and access policies require final verification.
+The November 4 switch snapshot assigns Gi1/0/15 to corporate Wi-Fi (VLAN 60) and Gi1/0/14 to IoT (VLAN 70). The snapshot does not contain wireless client addressing, device operating modes, or evidence of ACL enforcement.
 
 ## Monitoring Architecture
 
@@ -106,7 +104,7 @@ The Linux environment includes containerized applications and infrastructure ser
 - Internal DNS services.
 - Corporate web portal.
 
-The final container inventory, networking configuration, and service dependencies will be documented separately.
+The dated container inventory and service roles are recorded in [Docker services](../containers/docker-services.md).
 
 ## Physical Infrastructure
 
@@ -120,19 +118,8 @@ The laboratory includes:
 - Rack power distribution.
 - Workstations assembled for the simulated departments.
 
-A detailed physical topology and equipment inventory will be prepared after final verification.
+Physical photographs, the switch configuration snapshot, and the workstation inventory describe the equipment and connections documented during the collection.
 
-## Documentation Status
+## Record Scope
 
-**Status:** In Progress
-
-The following information remains pending:
-
-- Exact switch interface assignments.
-- Final physical cabling diagram.
-- Intelbras router models and operating modes.
-- Verified Wi-Fi and IoT configurations.
-- Complete workstation inventory.
-- Final container and service inventory.
-
-This document will be updated as implementation evidence and verified configurations become available.
+This overview consolidates the November 4–6, 2026, laboratory evidence. It is a logical architecture record, not an exhaustive cable survey or verification of network security policy enforcement. See the [switch snapshot](../networking/switch-vlan-snapshot-2026-11-04.md), [workstation inventory](../endpoints/workstation-inventory.md), and [physical infrastructure](../evidence/physical-infrastructure.md).
