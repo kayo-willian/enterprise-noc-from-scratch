@@ -21,7 +21,7 @@ The switch connects departmental workstations, infrastructure servers, IP teleph
 | Gi1/0/4–6 | Accounting | 20 | Access |
 | Gi1/0/7–8 | Finance | 30 | Access |
 | Gi1/0/9–10 | Sales | 40 | Access |
-| Gi1/0/11 | Debian Server — VoIP & RADIUS | 50 | Access |
+| Gi1/0/11 | Debian Server — VoIP & RADIUS | 50 |VLAN 50 assigned in recorded configuration|
 | Gi1/0/12–13 | Grandstream IP Phones | 50 | Access VLAN 50 |
 | Gi1/0/14 | TP-Link Archer AX53 — IoT Network | 70 | Access VLAN 70 |
 | Gi1/0/15 | TP-Link Archer AX53 — Corporate Wi-Fi | 60 | Access VLAN 60 |
