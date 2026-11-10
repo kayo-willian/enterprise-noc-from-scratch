@@ -1,1 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-labelledby="title desc"><title id="title">Tapajós Inovações — Network river emblem</title><desc id="desc">An abstract river and three connected network nodes enclosed in a hexagonal frame.</desc><defs><linearGradient id="river" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#a8f5ab"/><stop offset="1" stop-color="#45d28b"/></linearGradient></defs><path d="M50 5 87 26v48L50 95 13 74V26z" fill="#222824" stroke="#506959" stroke-width="2.2"/><path d="M29 26c9 13 28 14 34 27 5 12-5 19-16 24" fill="none" stroke="url(#river)" stroke-width="6" stroke-linecap="round"/><path d="M27 66 45 51 66 29" fill="none" stroke="#81e8ac" stroke-opacity=".55" stroke-width="2" stroke-dasharray="3 5"/><g fill="#1c2520" stroke="#b3f4b1" stroke-width="3"><circle cx="28" cy="25" r="5"/><circle cx="64" cy="28" r="5"/><circle cx="48" cy="77" r="5"/></g><path d="M26 82h48" stroke="#85bd8b" stroke-opacity=".28"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-labelledby="title desc">
+  <title id="title">Tapajós Inovações — Jaguar network sentinel</title>
+  <desc id="desc">A geometric jaguar face with luminous blue details and connected forehead nodes, symbolizing vigilance and network observability.</desc>
+  <defs>
+    <linearGradient id="shell" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#192a44"/><stop offset="1" stop-color="#0c1526"/></linearGradient>
+    <linearGradient id="fur" x1=".1" y1="0" x2=".9" y2="1"><stop stop-color="#315477"/><stop offset="1" stop-color="#1a2f4a"/></linearGradient>
+  </defs>
+  <rect x="3.5" y="3.5" width="93" height="93" rx="22" fill="url(#shell)" stroke="#345474" stroke-width="1.6"/>
+  <path d="M17 19 36 24 Q50 19 64 24 L83 19 81 41 C89 49 84 67 71 78 L60 87 Q50 93 40 87 L29 78 C16 67 11 49 19 41 Z" fill="url(#fur)" stroke="#7acbfa" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M23 27 35 31 26 43Z M77 27 65 31 74 43Z" fill="#0c1729" stroke="#4e91bd" stroke-width="1.4" stroke-linejoin="round"/>
+  <path d="M22 45 30 37 35 47 30 61 23 66Z M78 45 70 37 65 47 70 61 77 66Z" fill="#111f36" opacity=".85"/>
+  <path d="M33 60 40 64 43 72 50 78 57 72 60 64 67 60 65 76 57 84 50 87 43 84 35 76Z" fill="#13243b" opacity=".9"/>
+  <path d="M28 50 Q35 45 43 50 L39 55 33 55 Z M72 50 Q65 45 57 50 L61 55 67 55 Z" fill="#8bdcff"/>
+  <path d="M36 49 38 53 M64 49 62 53" stroke="#0c1930" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M43 67 Q50 63 57 67 L50 74 Z" fill="#90dcff"/>
+  <path d="M50 74 V79 M50 79 Q44 83 39 78 M50 79 Q56 83 61 78" stroke="#92c9e9" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+  <path d="M26 61 34 58 M30 68 37 63 M74 61 66 58 M70 68 63 63" stroke="#77b8e3" stroke-width="2.8" stroke-linecap="round" opacity=".8"/>
+  <path d="M37 36 50 31 63 36 M50 31 V43" fill="none" stroke="#5a94bd" stroke-width="1.7" stroke-linecap="round"/>
+  <circle cx="37" cy="36" r="3.2" fill="#80d1ff"/><circle cx="50" cy="31" r="3.2" fill="#80d1ff"/><circle cx="63" cy="36" r="3.2" fill="#80d1ff"/><circle cx="50" cy="43" r="2.5" fill="#80d1ff"/>
+  <path d="M46 41 42 46 M54 41 58 46" stroke="#0c1c34" stroke-width="3" stroke-linecap="round"/>
+</svg>
