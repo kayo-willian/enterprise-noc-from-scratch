@@ -21,7 +21,7 @@ O equipamento conecta estações de trabalho dos departamentos, servidores de in
 | Gi1/0/4–6 | Contabilidade | 20 | Access |
 | Gi1/0/7–8 | Financeiro | 30 | Access |
 | Gi1/0/9–10 | Vendas | 40 | Access |
-| Gi1/0/11 | Servidor Debian — VoIP e RADIUS | 50 | Access |
+| Gi1/0/11 | Servidor Debian — VoIP e RADIUS | 50 | VLAN 50 atribuída conforme configuração registrada |
 | Gi1/0/12–13 | Telefones IP Grandstream | 50 | Access VLAN 50 |
 | Gi1/0/14 | TP-Link Archer AX53 — Rede IoT | 70 | Access VLAN 70 |
 | Gi1/0/15 | TP-Link Archer AX53 — Wi-Fi Corporativo | 60 | Access VLAN 60 |
