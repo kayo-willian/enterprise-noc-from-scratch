@@ -669,7 +669,7 @@ O documento não afirma:
 - Resolução de todos os alertas históricos.
 - Execução dos exemplos hipotéticos de incidentes.
 
-O modelo constitui a base para o desenvolvimento da documentação operacional do projeto.
+Este modelo é acompanhado por seis runbooks técnicos e pelo procedimento de simulação de incidentes e validação da recuperação. A publicação documenta os métodos propostos, sem comprovar execução ou recuperação operacional.
 
 ## 17. Documentação Relacionada
 
@@ -689,7 +689,7 @@ O modelo constitui a base para o desenvolvimento da documentação operacional d
 
 **Classificação do documento:** Processo operacional NOC proposto.  
 **Referências das evidências históricas:** 04 a 06/11/2026.  
-**Próxima área:** Technical Troubleshooting e Runbooks.
+**Procedimentos NOC relacionados:** Seis runbooks técnicos bilíngues e o modelo de simulação e validação de incidentes, vinculados na Seção 15.
 
 **Enterprise NOC — From Scratch**  
 *Da infraestrutura física às operações de rede.*
