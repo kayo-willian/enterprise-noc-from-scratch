@@ -3,7 +3,7 @@
 **English** | [Português (Brasil)](../../pt-BR/operacoes-noc/runbooks/falhas-servicos-docker.md)
 
 **Project:** Enterprise NOC — From Scratch · Tapajós Inovações  
-**Category:** CNT / SYS / WEB · **Status:** Proposed runbook, not a resolved incident  
+**Category:** CNT / SYS / WEB · **Document type:** Operational troubleshooting runbook  
 **Environment:** Debian 13 NOC computer; Docker, Compose, Portainer; dependent infrastructure services
 
 ## 1. Purpose and evidence

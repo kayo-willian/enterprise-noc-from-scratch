@@ -3,7 +3,7 @@
 [English](../../../noc-operations/runbooks/grafana-no-data.md) | **Português (Brasil)**
 
 **Projeto:** Enterprise NOC — From Scratch · Tapajós Inovações  
-**Categoria:** MON · **Status:** Procedimento proposto; falhas históricas não são declaradas resolvidas  
+**Categoria:** MON · **Tipo de documento:** Runbook de diagnóstico operacional  
 **Ambiente:** Container Grafana OSS integrado ao Zabbix; host Debian do NOC
 
 ## 1. Objetivo e evidências históricas
@@ -127,4 +127,4 @@ Preservar identificadores dashboard/painel, intervalo, host/item Zabbix, horári
 - [Caso de troubleshooting SNMP](../../monitoramento/diagnostico-snmp.md)
 - [Infraestrutura Docker](../../containers/servicos-docker.md)
 
-**Status:** Processo de diagnóstico recomendado; nenhuma correção nova de painel é afirmada.
+**Escopo documental:** Procedimento de referência com base nos registros datados do laboratório; este arquivo não é um registro de incidente executado.

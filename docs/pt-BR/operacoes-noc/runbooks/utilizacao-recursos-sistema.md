@@ -3,7 +3,7 @@
 [English](../../../noc-operations/runbooks/host-resource-utilization.md) | **Português (Brasil)**
 
 **Projeto:** Enterprise NOC — From Scratch · Tapajós Inovações  
-**Categoria:** SYS / CNT / MON · **Status:** Procedimento proposto  
+**Categoria:** SYS / CNT / MON · **Tipo de documento:** Runbook de diagnóstico operacional  
 **Ambiente:** Host Debian 13 do NOC, servidor Linux Asterisk/FreeRADIUS, estações Windows e serviços Docker
 
 ## 1. Objetivo e contexto histórico
@@ -124,4 +124,4 @@ Incluir fuso, host, filesystem/container, medidas iniciais e finais, análise de
 - [Métricas Grafana](../../monitoramento/grafana.md)
 - [Falhas de serviços Docker](falhas-servicos-docker.md)
 
-**Status:** Runbook proposto; nenhum incidente de desempenho ou otimização concluída é afirmado.
+**Escopo documental:** Procedimento de referência com base nos registros datados do laboratório; este arquivo não é um registro de incidente executado.

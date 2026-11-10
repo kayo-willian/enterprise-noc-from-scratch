@@ -3,7 +3,7 @@
 [English](../../../noc-operations/runbooks/zabbix-agent-connectivity.md) | **Português (Brasil)**
 
 **Projeto:** Enterprise NOC — From Scratch · Tapajós Inovações  
-**Categoria:** MON · **Status:** Procedimento de diagnóstico proposto; não constitui incidente executado  
+**Categoria:** MON · **Tipo de documento:** Runbook de diagnóstico operacional  
 **Ambiente:** Servidor de monitoramento Debian na VLAN 10; estações Windows; servidor Linux de VoIP/autenticação na VLAN 50
 
 ## 1. Objetivo e limites das evidências
@@ -118,4 +118,4 @@ Registrar horário/fuso, identidade do equipamento, VLAN, IP atual observado, IP
 - [Infraestrutura Docker](../../containers/servicos-docker.md)
 - [Runbook Grafana sem dados](grafana-sem-dados.md)
 
-**Status:** Procedimento elaborado com base no repositório. Este documento não executou comandos no laboratório.
+**Escopo documental:** Procedimento de referência com base nos registros datados do laboratório; este arquivo não é um registro de incidente executado.

@@ -3,7 +3,7 @@
 **English** | [Português (Brasil)](../../pt-BR/operacoes-noc/runbooks/interface-cisco-indisponivel.md)
 
 **Project:** Enterprise NOC — From Scratch · Tapajós Inovações  
-**Category:** NET / PHY / MON · **Status:** Proposed diagnostic procedure  
+**Category:** NET / PHY / MON · **Document type:** Operational troubleshooting runbook  
 **Hardware:** Cisco Catalyst C9200L switch and C8200L router
 
 ## 1. Purpose and evidence

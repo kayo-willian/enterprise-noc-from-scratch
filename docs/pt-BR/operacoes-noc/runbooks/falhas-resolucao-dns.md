@@ -3,7 +3,7 @@
 [English](../../../noc-operations/runbooks/dns-resolution-failure.md) | **Português (Brasil)**
 
 **Projeto:** Enterprise NOC — From Scratch · Tapajós Inovações  
-**Categoria:** DNS / NET / CNT · **Status:** Runbook proposto; não constitui nova ocorrência comprovada  
+**Categoria:** DNS / NET / CNT · **Tipo de documento:** Runbook de diagnóstico operacional  
 **Ambiente:** Container Pi-hole no host Debian NOC, VLANs departamentais, proxy reverso e serviços web
 
 ## 1. Objetivo e ambiente registrado
@@ -126,4 +126,4 @@ Registrar cliente/VLAN, DNS recebido via DHCP, tipo de domínio de teste (públi
 - [Limites de DHCP e roteador](../../redes/roteador-c8200l.md)
 - [Falhas de serviços Docker](falhas-servicos-docker.md)
 
-**Status:** Procedimento proposto; nenhuma nova falha DNS ou correção é apresentada como executada.
+**Escopo documental:** Procedimento de referência com base nos registros datados do laboratório; este arquivo não é um registro de incidente executado.
