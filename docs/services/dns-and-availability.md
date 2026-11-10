@@ -194,7 +194,7 @@ The public configurations exclude authentication secrets and institution-specifi
 
 These files document the deployment structure; the collected screenshots provide evidence of the applications running in the laboratory.
 
-## 7. Evidence and Limitations
+## 7. Historical Evidence Scope
 
 | Evidence | What it demonstrates |
 |---|---|
