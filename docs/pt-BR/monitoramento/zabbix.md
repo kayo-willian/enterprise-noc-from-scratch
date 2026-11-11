@@ -105,6 +105,22 @@ As fotografias do `ipconfig` e os cadastros dos hosts no Zabbix divergem em seis
 
 Contabilidade 1 e Financeiro 2 apresentaram endereços coincidentes nos registros comparados. Mudanças de DHCP **podem** contribuir para agentes indisponíveis ou métricas ausentes, mas também devem ser analisadas configurações de agentes, conectividade, firewall e itens. A tabela representa as observações de 6 de novembro, não os IPs atuais.
 
+## Diferenças Entre Coleta, Alertas e Disponibilidade
+
+O laboratório utiliza **SNMP** para roteador/switch Cisco e **Zabbix Agent** para os dois servidores Debian e oito computadores Windows. O Zabbix Server processa itens e triggers com armazenamento no MariaDB; o Grafana apresenta séries selecionadas. Essa cadeia permite localizar problemas: no equipamento, interface agent/SNMP, processamento do Zabbix ou consulta do dashboard.
+
+A captura de 6 de novembro mostra **12 hosts habilitados**, mas somente **7 disponíveis**. Habilitação administrativa não equivale a alcance do agente. Os **113 itens não suportados** exigem inspeção de cada erro; o total não prova uma causa comum. As **34 triggers em problema** representam condições configuradas, não necessariamente 34 interrupções empresariais comprovadas.
+
+### Interpretando a Ausência de uma Métrica
+
+1. Identificar host, item, última amostra válida, endereço IP/DNS cadastrado e tipo de interface.
+2. Para agente, verificar cadastro hostname/IP, lease DHCP atual, serviço, roteamento e firewall. Seis endereços divergiam entre fotografias e cadastro Zabbix: são **hipóteses possíveis**, não causa comum comprovada dos cinco hosts indisponíveis.
+3. Para SNMP, separar alcance IP, autenticação, suporte ao item e descoberta. O [caso C9200L de 4/11](diagnostico-snmp.md) demonstra uma comunidade SNMP divergente e a correção, mas não explica automaticamente outros itens não suportados.
+4. Correlacionar a mensagem real de item/trigger com o serviço esperado. Uma porta não utilizada pode aparecer down sem incidente; host disponível pode ter aplicação falhando.
+5. Verificar a aplicação separadamente para encerrar incidentes: CPU não comprova chamada Asterisk ou autenticação RADIUS.
+
+São **princípios de diagnóstico**, não novos testes executados nesta revisão. O [runbook Zabbix Agent](../operacoes-noc/runbooks/conectividade-zabbix-agent.md) e a [gestão de incidentes](../operacoes-noc/gerenciamento-de-incidentes.md) definem procedimentos e evidências.
+
 ## Pendências de Monitoramento
 
 | Condição observada | Verificação necessária |

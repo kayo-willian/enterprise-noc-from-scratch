@@ -76,6 +76,17 @@ spanning-tree extend system-id
 
 Rapid PVST+ is configured, and several access ports use PortFast. No operational output establishes the root bridge, blocked interfaces, or convergence state.
 
+## Interpreting the Spanning Tree and Port Statements
+
+The commands `spanning-tree mode rapid-pvst` and `spanning-tree extend system-id` establish **Rapid PVST+ configuration** in this historical export. Rapid PVST+ is intended to prevent Layer 2 forwarding loops while maintaining per-VLAN spanning-tree behavior, but these global statements **do not identify** the actual root bridge, alternate/blocked paths or convergence events. Those require dated operational show-command output.
+
+The captured accounting port `Gi1/0/4` declares `switchport mode access`, `switchport access vlan 20` and `spanning-tree portfast`. PortFast is commonly applied to trusted endpoint-facing interfaces to speed the forwarding transition; it should not be interpreted as proof that all access links were free of loops.
+
+**Important exception — Gi1/0/11:** `switchport access vlan 50` and `spanning-tree portfast trunk` occur together, with **no explicit `switchport mode access`**. The PortFast command does not establish the effective interface mode. Confirming whether the live port is access or trunk would require an authorized operational interface-mode check and the current configuration. Neither was included in the November 4 capture.
+
+The historical snapshot is a **configuration record**, whereas later Zabbix/Grafana panels are **telemetry records**. A displayed `UP`/`DOWN` interface or historical throughput graph should be reconciled with an actual port identifier before drawing conclusions about physical links. The [port map](switch-port-map.md) retains the exact interface statements.
+
+
 ## Later monitoring evidence
 
 The Zabbix and Grafana screenshots below document switch metrics collected **after** the original configuration capture.

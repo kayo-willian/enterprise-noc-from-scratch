@@ -83,6 +83,22 @@ Alguns valores de CPU/RAM aparecem apesar da ausência de status. `No data` sign
 
 Existem séries históricas de CPU, RAM, download e upload para determinadas estações. Algumas legendas repetem identificadores; é preciso verificar a associação entre itens e hosts. Seis IPv4 também divergiam dos cadastros no Zabbix na [comparação de 6 de novembro](zabbix.md#divergências-de-endereçamento).
 
+## Interpretando os Dashboards como Evidência
+
+O Grafana **visualiza** dados coletados pelo Zabbix; os gráficos não comprovam, por si sós, que todos os itens Zabbix funcionaram corretamente. O dashboard está dividido em cinco áreas: aplicações/containers, C8200L, C9200L, servidores Linux/VoIP e estações Windows. Essa organização ajuda a relacionar sintomas de serviço com métricas de rede, host e aplicação.
+
+| Indicador | Leitura técnica | Ainda requer verificação |
+|---|---|---|
+| HTTP **200 OK** | A verificação web recebeu resposta HTTP bem-sucedida | Outras URLs, redes de origem e funções da aplicação |
+| Roteador `UP` e tráfego | Estados e amostras de interfaces selecionadas | Subinterfaces, NAT, roteamento e ACLs no C8200L |
+| CPU, RAM, temperatura, ventilação, erros e tráfego do switch | Telemetria disponível em itens selecionados | Correspondência de portas; rótulos repetidos `Gi1/0/1 TRUNK-ROUTER` |
+| Servidor Linux `ONLINE` | Disponibilidade de host/agente no período | Chamadas SIP ou autenticação RADIUS |
+| Windows `No data` | Consulta do painel sem valor útil | Energia do host, agente, item, consulta e intervalo |
+
+**Valores ausentes exigem duas verificações distintas.** Primeiro, conferir se o item Zabbix possui dados recentes válidos. Se não houver, investigar host/IP, interface de coleta, agent/SNMP e erro do item. Se houver, conferir fonte do Grafana, consulta, período, variáveis e filtros. Não “corrigir” rótulos repetidos antes de identificar o item original. Consulte o [runbook Grafana sem dados](../operacoes-noc/runbooks/grafana-sem-dados.md).
+
+As capturas **não** incluem configurações completas de fontes de dados ou exports JSON dos dashboards; um painel visualmente correto comprova a interface observada, não reprodução integral pelo GitHub. Os valores são de **6 de novembro de 2026**, sem novos testes nesta revisão.
+
 ## Pendências de Verificação
 
 | Sintoma registrado | Verificação necessária |

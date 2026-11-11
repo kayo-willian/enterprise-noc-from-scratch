@@ -83,6 +83,22 @@ Some CPU/RAM data appear despite missing status values. `No data` means the corr
 
 Historical CPU, RAM, download and upload series exist for selected stations. Some legends repeat workstation identifiers; item-to-host mapping needs verification. Six workstation IPv4 addresses also differed from their Zabbix registrations in the [November 6 comparison](zabbix-monitoring.md#workstation-address-discrepancies).
 
+## Reading the Dashboards as Evidence
+
+Grafana **visualizes** the Zabbix monitoring data; its graphs are not separate proof that Zabbix collected every item correctly. The recorded dashboard organizes data into five areas: web applications/containers, C8200L, C9200L, Linux servers/VoIP and Windows workstations. This organization supports cross-checking a service symptom against network, host and application metrics.
+
+| Dashboard indicator | Technical reading | What still needs verification |
+|---|---|---|
+| HTTP **200 OK** | The selected web check received a successful HTTP response | Other URLs, client networks and application functions |
+| Router `UP` and interface traffic | Selected interfaces had reported states and throughput samples | Router-side VLAN subinterfaces, NAT, routing and ACL operation |
+| Switch CPU, memory, temperature, fans, errors and traffic | Device telemetry was available for selected items | Physical interface mapping; duplicated `Gi1/0/1 TRUNK-ROUTER` labels |
+| Linux server `ONLINE` | Host/agent availability for the displayed interval | Successful SIP calls or RADIUS authentication |
+| Windows `No data` | The particular panel query had no usable result | Host power state, agent, item support, Grafana query and time range |
+
+**Missing values require two different checks.** First determine whether Zabbix has valid recent data for the affected item. If not, investigate the host/IP, collection interface, agent/SNMP and item error. If it does, check Grafana's data source, query, time range, variables and panel filters. Repeated interface labels should not be “corrected” without confirming the actual source item. Refer to the [Grafana No Data runbook](../noc-operations/runbooks/grafana-no-data.md).
+
+The collected screenshots do **not** include complete data-source settings or dashboard JSON exports; a visually correct panel is evidence of the observed interface, not proof that the dashboards are reproducible solely from GitHub. All values above refer to the **November 6, 2026** captures; no new live test is claimed.
+
 ## Monitoring Findings Requiring Verification
 
 | Recorded symptom | Required check |

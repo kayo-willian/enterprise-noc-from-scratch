@@ -31,6 +31,24 @@ The procedures cover the Cisco C8200L/C9200L network, VLANs 10–70, Debian serv
 
 **Monitoring failure is not necessarily infrastructure failure.** An unavailable agent, unsupported item or empty Grafana panel requires validation before declaring a service outage. Conversely, a responsive monitoring interface does not prove the application is functioning end-to-end.
 
+### Distinguishing a Technical Signal from an Incident
+
+These concepts were expanded in the earlier incident-management document and are important for interpreting the NOC's historical screenshots.
+
+- **Event:** an observed transition or sample, such as a port changing state, a container restarting or a host losing an agent response. An event may be expected.
+- **Alert:** a monitoring condition that met a threshold or trigger rule. The alert identifies a **condition to triage**, not necessarily a user-facing outage.
+- **Incident:** a confirmed interruption or degradation of expected service. Establish the affected function, period and operational impact before declaring one.
+- **Problem:** the underlying or suspected cause of one or more incidents. A proposed cause stays a hypothesis until diagnostic evidence supports it.
+
+**Example — five Windows panels with `No data`:** this is a Grafana/Zabbix **monitoring finding**. It does not by itself show whether five PCs were powered off, whether agent IP registrations were stale, or whether dashboards were filtered incorrectly. The operator should compare Zabbix item state, current addresses, agent reachability and, if there is a complaint, the workstation's **actual application access**.
+
+**Example — switch port marked `DOWN`:** the operational significance depends on whether the port is expected to have an active endpoint. An unused port can be down normally; a confirmed required trunk or production uplink loss would warrant impact investigation. The switch's recorded port map and current state need to be considered together.
+
+**Example — historical SNMP community mismatch:** the [November 4 case study](../monitoring/snmp-troubleshooting.md) records a specific monitoring failure, identified cause, correction and restored discovery. That completed technical case must not be generalized to all other unavailable agents, unsupported items or incidents in the November 6 snapshots.
+
+The NOC workflow should therefore preserve **observed signal → independently verified impact → root-cause evidence → authorized action → functional validation**, distinguishing the report's facts from hypotheses. The six [runbooks](runbooks/zabbix-agent-connectivity.md) supply domain-specific checks rather than duplicating all troubleshooting commands in this management framework.
+
+
 ## 4. Incident Management Objectives
 
 Detect and validate service impact; classify severity; investigate using collected evidence; authorize corrective action; verify recovery; and record the outcome. Each stage is detailed in the incident lifecycle below.

@@ -67,6 +67,23 @@ These captures document metrics from the collection period; they do not establis
 
 A complete C8200L running configuration was not collected. Router-side interfaces, routing statements, NAT translations, WAN settings, default route, DHCP configuration, ACL enforcement, and SNMP configuration are therefore **not asserted as verified**. The network design and observed endpoint gateways remain documented in their respective records.
 
+## Router Service Dependencies: Verification Matrix
+
+The router's role as the enterprise Layer 3 integration point explains why DHCP, routing, NAT and access control matter, but the evidence supporting those functions differs.
+
+| Function | Recorded evidence | Missing before reporting it as validated |
+|---|---|---|
+| Router connection | Switch `Gi1/0/1` declared as trunk | C8200L physical port, matching `802.1Q` subinterfaces and operational status |
+| Default gateways | Addresses observed on workstations and voice server | Interface ownership and successful forwarding for each VLAN |
+| DHCP | Workstation IP/gateway snapshots; changing addresses | DHCP pool, relay/server, reservations and leases |
+| NAT / WAN | Router equipment and historical telemetry | NAT statements/translations, WAN interface and default route |
+| Inter-VLAN access | Segment roles and access-policy requirements | Applied ACLs and allowed/denied flow results |
+
+Consider a workstation in VLAN 20 accessing the Docker host in VLAN 10: it depends on its gateway, a viable routed path, permitted policy and the application's own listening endpoint. A recorded host gateway **cannot establish** the C8200L's complete forwarding configuration. Similarly, SNMP throughput on an interface is **not** an ACL, NAT or DHCP validation.
+
+The available evidence therefore supports **router architecture and historical monitoring**, not a complete production routing/security implementation. A future authorized review should use a dated, sanitized router configuration and route/ACL outputs, not reconstructed commands or assumed defaults.
+
+
 ## References
 
 [Networking overview](README.md) · [Logical topology](consolidated-logical-topology.md) · [VLANs](vlans.md) · [Switch snapshot](switch-vlan-snapshot-2026-11-04.md) · [Switch port map](switch-port-map.md) · [Workstation inventory](../endpoints/workstation-inventory.md) · [Zabbix](../monitoring/zabbix-monitoring.md) · [Grafana](../monitoring/grafana-monitoring.md)

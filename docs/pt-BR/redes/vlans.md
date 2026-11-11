@@ -52,6 +52,19 @@ Os Archer AX53 das VLANs 60 e 70 são equipamentos físicos separados. Seus modo
 
 As estações utilizam DHCP. Endereços do inventário de 6 de novembro podem divergir dos registros anteriores do Zabbix; nenhuma reserva estática é presumida.
 
+## Funcionamento das VLANs e Limites de Segurança
+
+As sete VLANs separam **TI/NOC (10)**, **Contabilidade (20)**, **Financeiro (30)**, **Vendas (40)**, **voz/autenticação (50)**, **Wi-Fi corporativo (60)** e **IoT (70)** em domínios de broadcast Layer 2 distintos. Essa organização serve de base às políticas; **VLAN não bloqueia automaticamente tráfego Layer 3** quando existe roteamento.
+
+A diferença entre **porta access** e **trunk** é importante para interpretar a configuração. O exemplo de `Gi1/0/4` inclui `switchport access vlan 20` e `switchport mode access`; `Gi1/0/1`, voltada ao roteador, declara `switchport mode trunk`. O snapshot não apresenta lista customizada de VLANs permitidas nem subinterfaces correspondentes do roteador.
+
+`Gi1/0/11` exige atenção: `switchport access vlan 50` aparece com `spanning-tree portfast trunk` e **sem comando explícito de modo access**. O modo efetivo precisa ser conferido; nem a VLAN nem o PortFast comprovam trunk ou access operacional.
+
+Os Archer AX53 de Wi-Fi corporativo e IoT usam **portas e VLANs diferentes**. Modos AP/roteador, sub-redes dos clientes, DHCP e NAT não foram coletados. Assim, o número da VLAN upstream não substitui o endereçamento IP real dos clientes wireless.
+
+**Uma validação útil separaria configuração e aplicação das regras:** consultar os modos efetivos das interfaces e ACLs do roteador e realizar testes autorizados e documentados de tráfego permitido/negado entre VLANs. Os registros históricos não incluem esses testes.
+
+
 ## Referências
 
 [Visão geral de Redes](README.md) · [Topologia lógica](topologia-logica-consolidada.md) · [Registro do switch](registro-switch-vlans-2026-11-04.md) · [Mapa de portas](mapa-de-portas-switch.md) · [Roteador](roteador-c8200l.md) · [Wi-Fi corporativo](wifi-corporativo-vlan60.md) · [IoT](iot-vlan70.md) · [Inventário de computadores](../estacoes/inventario-de-computadores.md)

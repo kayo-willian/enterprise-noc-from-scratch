@@ -31,6 +31,24 @@ Os procedimentos abrangem a rede Cisco C8200L/C9200L, VLANs 10–70, servidores 
 
 **Falha de monitoramento não significa necessariamente falha de infraestrutura.** Agente indisponível, item não suportado ou painel vazio do Grafana precisam ser verificados antes de declarar uma interrupção. Da mesma forma, um indicador ativo não comprova funcionamento ponta a ponta da aplicação.
 
+### Diferenciando Sinal Técnico de Incidente
+
+Esses conceitos estavam detalhados na versão anterior da gestão de incidentes e são importantes para interpretar os screenshots históricos do NOC.
+
+- **Evento:** transição ou amostra observada, como mudança de porta, reinício de container ou ausência de resposta do agente. Pode ser esperado.
+- **Alerta:** condição que atingiu regra de monitoramento ou trigger. Indica uma **situação a investigar**, não necessariamente indisponibilidade para usuários.
+- **Incidente:** interrupção ou degradação confirmada do serviço esperado. Antes de declarar, identificar função afetada, período e impacto.
+- **Problema:** causa subjacente ou suspeita de um ou mais incidentes. Sem diagnóstico, continua sendo hipótese.
+
+**Exemplo — cinco painéis Windows com `No data`:** é uma **observação de monitoramento** Grafana/Zabbix. Não demonstra que cinco PCs estavam desligados, que endereços de agentes ficaram desatualizados ou que filtros estavam incorretos. Deve-se comparar estado do item Zabbix, endereços atuais, alcance do agente e, havendo reclamação, **acesso real da estação à aplicação**.
+
+**Exemplo — porta do switch em `DOWN`:** a relevância depende de haver endpoint ativo esperado. Porta sem uso pode estar down normalmente; perda confirmada de trunk/uplink necessário exigiria análise de impacto. É preciso correlacionar mapa de portas registrado e estado atual.
+
+**Exemplo — divergência de comunidade SNMP:** o [caso de 4 de novembro](../monitoramento/diagnostico-snmp.md) registra uma falha específica de monitoramento, causa, correção e recuperação da descoberta. Não explica automaticamente agentes indisponíveis, itens não suportados ou outros incidentes das capturas de 6 de novembro.
+
+O fluxo NOC deve preservar **sinal observado → impacto verificado → evidência da causa → ação autorizada → validação funcional**, separando fatos e hipóteses. Os seis [runbooks](runbooks/conectividade-zabbix-agent.md) trazem verificações específicas sem duplicar todos os comandos neste documento de gestão.
+
+
 ## 4. Objetivos do Gerenciamento de Incidentes
 
 Detectar e confirmar impacto, classificar gravidade, investigar com evidências, autorizar a correção, verificar a recuperação e registrar o resultado. As etapas estão detalhadas no ciclo de vida abaixo.
