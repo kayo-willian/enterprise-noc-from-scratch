@@ -111,7 +111,7 @@ O laboratório utiliza **SNMP** para roteador/switch Cisco e **Zabbix Agent** pa
 
 A captura de 6 de novembro mostra **12 hosts habilitados**, mas somente **7 disponíveis**. Habilitação administrativa não equivale a alcance do agente. Os **113 itens não suportados** exigem inspeção de cada erro; o total não prova uma causa comum. As **34 triggers em problema** representam condições configuradas, não necessariamente 34 interrupções empresariais comprovadas.
 
-### Interpretando a Ausência de uma Métrica
+### Métricas Ausentes: Verificações de Diagnóstico
 
 1. Identificar host, item, última amostra válida, endereço IP/DNS cadastrado e tipo de interface.
 2. Para agente, verificar cadastro hostname/IP, lease DHCP atual, serviço, roteamento e firewall. Seis endereços divergiam entre fotografias e cadastro Zabbix: são **hipóteses possíveis**, não causa comum comprovada dos cinco hosts indisponíveis.

@@ -191,7 +191,7 @@ The public configurations exclude authentication secrets and site-specific DNS s
 
 These files document the deployment structure; the collected screenshots provide evidence of the applications running in the laboratory.
 
-## 7. Technical Interpretation, Incident Correlation and Validation
+## 7. Incident Correlation and Validation
 
 ### Why Both Tools Are Used
 

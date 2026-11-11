@@ -83,7 +83,7 @@ Alguns valores de CPU/RAM aparecem apesar da ausência de status. `No data` sign
 
 Existem séries históricas de CPU, RAM, download e upload para determinadas estações. Algumas legendas repetem identificadores; é preciso verificar a associação entre itens e hosts. Seis IPv4 também divergiam dos cadastros no Zabbix na [comparação de 6 de novembro](zabbix.md#divergências-de-endereçamento).
 
-## Interpretando os Dashboards como Evidência
+## Registros dos Dashboards e Escopo do Monitoramento
 
 O Grafana **visualiza** dados coletados pelo Zabbix; os gráficos não comprovam, por si sós, que todos os itens Zabbix funcionaram corretamente. O dashboard está dividido em cinco áreas: aplicações/containers, C8200L, C9200L, servidores Linux/VoIP e estações Windows. Essa organização ajuda a relacionar sintomas de serviço com métricas de rede, host e aplicação.
 
