@@ -1,120 +1,62 @@
-# Cisco Catalyst 9200L — SNMP Troubleshooting
+# Cisco Catalyst C9200L — SNMP Troubleshooting
 
-**English | [Português (Brasil)](../pt-BR/monitoramento/diagnostico-snmp.md)**
+**English** | [Português (Brasil)](../pt-BR/monitoramento/diagnostico-snmp.md)
 
-## Overview
+**Recorded intervention:** November 4, 2026 · **Device:** Cisco Catalyst C9200L · **Protocol:** SNMPv2c · **Monitoring:** Zabbix 7.0 LTS / Grafana
 
-This case study documents troubleshooting activities performed during the integration of a Cisco Catalyst 9200L switch into an enterprise NOC monitoring environment.
+This record describes **three documented troubleshooting outcomes**, not current switch availability or the resolution of later monitoring alerts.
 
-The infrastructure uses Zabbix 7.0 LTS for monitoring and Grafana for data visualization.
+## Case 1 — SNMP Interface Unavailable
 
-**Equipment:** Cisco Catalyst 9200L  
-**Monitoring protocol:** SNMPv2c  
-**Monitoring platform:** Zabbix 7.0 LTS  
-**Date:** November 4, 2026
+**Symptom:** After the C9200L was registered in Zabbix, the SNMP interface remained unavailable and switch metrics could not be collected.
 
-## Incident 1 — SNMP Monitoring Unavailable
+**Investigation recorded:**
+1. Check IP connectivity between the monitoring Linux server and switch.
+2. Check SNMP accessibility and run queries from the Linux terminal.
+3. Compare switch SNMP configuration with the Zabbix host configuration.
 
-### Problem
+**Confirmed cause:** The Zabbix host inherited an SNMP community different from the value configured on the switch.
 
-After registering the Catalyst 9200L in Zabbix, the SNMP interface remained unavailable.
-
-Monitoring requests failed, preventing the collection of equipment metrics.
-
-### Investigation
-
-The troubleshooting process involved:
-
-1. Verifying IP connectivity between the Linux monitoring server and the switch.
-2. Checking SNMP accessibility.
-3. Testing SNMP queries from the Linux terminal.
-4. Reviewing the switch configuration.
-5. Inspecting the SNMP community configured in Zabbix.
-
-### Root Cause
-
-The switch and Zabbix were configured with different SNMP community values.
-
-The Zabbix host inherited a community value that did not match the switch configuration.
-
-### Resolution
-
-The SNMP configuration was aligned between both systems.
-
-A host-level `{$SNMP_COMMUNITY}` macro was configured in Zabbix.
-
-The monitoring server configuration cache was subsequently reloaded:
+**Correction:** Align the community values, configure the host-level `{$SNMP_COMMUNITY}` macro and reload the Zabbix Server configuration cache:
 
 ```bash
 docker exec zabbix-server zabbix_server -R config_cache_reload
 ```
 
-### Result
+**Recorded result:** The SNMP interface became available; switch metric collection and automatic interface discovery resumed.
 
-The SNMP interface became available, enabling metric collection and automatic interface discovery.
+## Case 2 — Incorrect Switch Uptime
 
-## Incident 2 — Incorrect Switch Uptime
+**Symptom:** The uptime widget showed `0` although the switch was running.
 
-### Problem
+**Recorded cause:** The selected monitoring item returned an incorrect value for this Cisco IOS-XE device.
 
-The monitoring dashboard displayed an uptime value of zero, even though the switch was operational.
+**Item changed:**
 
-### Root Cause
+| Previous item | Replacement item |
+|---|---|
+| `system.hw.uptime[hrSystemUptime.0]` | `system.net.uptime[sysUpTime.0]` |
 
-The configured monitoring item used an uptime metric that returned an incorrect value for the Cisco IOS-XE device.
+**Recorded result:** The dashboard began displaying the uptime value reported by the switch.
 
-### Resolution
+## Case 3 — Empty Event Widgets
 
-The monitoring item was changed from:
+**Symptom:** Some dashboard event widgets were empty while monitoring was operational.
 
-`system.hw.uptime[hrSystemUptime.0]`
+**Confirmed cause:** The widget filters selected only the recently added switch, which had no active problems at the time.
 
-To:
+**Correction:** Broaden the filters to include the NOC infrastructure rather than the switch alone.
 
-`system.net.uptime[sysUpTime.0]`
+**Recorded result:** The widgets displayed relevant monitoring entries and operational alerts.
 
-### Result
+## Operational Notes
 
-The dashboard began displaying the switch's reported uptime correctly.
+- Reachable IP does not guarantee functional SNMP collection; community values and Zabbix macros must match.
+- Item keys need to be compatible with the device metrics; validate values after changing an item.
+- Empty problem widgets can reflect filter scope rather than a collection fault.
+- The recorded deployment used **SNMPv2c**. SNMPv3 with authentication and encryption is preferable for production systems.
+- Actual community strings and sensitive switch configuration are not included in this public case study.
 
-## Incident 3 — Empty Dashboard Widgets
+**Source:** November 4, 2026 technical implementation report. Later Zabbix unsupported items, unavailable agents and Grafana `No data` panels remain separate observations.
 
-### Problem
-
-Some monitoring widgets displayed empty results despite the monitoring infrastructure being operational.
-
-### Root Cause
-
-The affected widgets were configured to display information only from the newly registered switch.
-
-The switch had no active problems, resulting in empty alarm lists.
-
-### Resolution
-
-The dashboard filters were adjusted to include the broader NOC environment.
-
-### Result
-
-The widgets began displaying relevant monitoring information and operational alerts.
-
-## Technical Lessons Learned
-
-- IP connectivity does not guarantee successful application-layer monitoring.
-- SNMP credentials and monitoring macros must be consistent.
-- Monitoring items must be validated against the equipment's supported metrics.
-- Dashboard filters can affect the visibility of operational information.
-- Monitoring changes require functional verification.
-
-## Security Considerations
-
-The original laboratory implementation used SNMPv2c.
-
-For production environments, SNMPv3 with authentication and encryption should be considered.
-
-Internal IP addresses, SNMP community values, and other sensitive configuration details are excluded from this public case study.
-
-## Documentation Status
-
-**Status:** Documented from the November 4, 2026 technical implementation report.
-
-This historical incident report documents the troubleshooting process and its recorded results.
+**Related evidence:** [Zabbix](zabbix-monitoring.md) · [Grafana](grafana-monitoring.md) · [Switch snapshot](../networking/switch-vlan-snapshot-2026-11-04.md)

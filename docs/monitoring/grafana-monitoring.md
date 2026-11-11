@@ -1,264 +1,98 @@
-# Grafana Monitoring and Dashboards
+# Grafana — NOC Dashboards
 
-[English](grafana-monitoring.md) | [Português (Brasil)](../pt-BR/monitoramento/grafana.md)
+**English** | [Português (Brasil)](../pt-BR/monitoramento/grafana.md)
 
-## 1. Overview
+**Evidence date:** November 6, 2026 · **Deployment:** Grafana on Debian 13 / Docker · **Data source:** Zabbix integration
 
-The Enterprise NOC — From Scratch laboratory uses Grafana to visualize monitoring data from its networking equipment, Linux servers, Windows workstations, and infrastructure services.
+Grafana visualizes the collected infrastructure metrics. These are **dated dashboard screenshots**, not a live feed; complete data-source settings and dashboard JSON exports are not included in the collected evidence.
 
-Grafana is deployed as a Docker container on the main infrastructure computer running Debian GNU/Linux 13.
-
-The monitoring environment integrates Grafana with Zabbix, allowing collected metrics to be presented through customized dashboards.
-
-This document presents the Grafana environment observed on **November 6, 2026**, using the original screenshots collected from the laboratory.
-
-All screenshots represent historical observations rather than live monitoring feeds.
-
-## 2. Dashboard Organization
+## Dashboard Organization
 
 ![Grafana dashboard organization](../assets/images/monitoring/grafana/grafana_order.png)
 
-The Grafana environment contains a consolidated NOC dashboard organized into five monitoring sections:
-
-| Section | Monitored components |
+| Dashboard section | Recorded targets |
 |---|---|
-| Web Application & Container Ecosystem | Web applications, Docker services, and availability checks |
-| Cisco Router | Catalyst C8200L interfaces, VLANs, and network traffic |
-| Cisco Switch | Catalyst C9200L hardware, interfaces, and throughput |
-| Servers & VoIP | Asterisk server and Zabbix infrastructure server |
-| Windows Workstations & Endpoints | Departmental computers, resource utilization, and network traffic |
+| Web Applications & Containers | Website, Docker services, HTTP checks |
+| Cisco Router | Catalyst C8200L interfaces, VLAN traffic |
+| Cisco Switch | Catalyst C9200L hardware and interfaces |
+| Servers & VoIP | Debian NOC server and Asterisk/FreeRADIUS host |
+| Windows Workstations & Endpoints | Departmental PCs, CPU/RAM, network traffic |
 
-The screenshot documents the dashboard structure available at the time of collection.
+## Web Applications and Containers
 
-## 3. Web Applications and Containers
+![Web applications and containers](../assets/images/monitoring/grafana/grafana_dashboard_web_containers.png)
 
-![Grafana web applications and containers dashboard](../assets/images/monitoring/grafana/grafana_dashboard_web_containers.png)
+The panels display HTTP response status and time, web performance history, service availability and Docker heartbeat indicators.
 
-This section presents monitoring information related to the corporate website and selected Docker services.
+- **HTTP result:** `200 OK` for the monitored web application during the recorded check.
+- **Services represented:** corporate website, Pi-hole, Grafana, Zabbix Web and Portainer.
+- **Scope:** selected services, **not** all ten containers in the [Docker inventory](../containers/docker-services.md). A successful HTTP request does not verify every application function.
 
-The dashboard includes:
+## Cisco Catalyst C8200L — Router
 
-- HTTP response status.
-- Web application response time.
-- Service availability indicators.
-- Historical web performance graphs.
-- Docker service heartbeat information.
+![Router interface status and traffic](../assets/images/monitoring/grafana/grafana_dashboard_router1.png)
 
-### 3.1 HTTP Monitoring
+The first view contains `UP` indicators for selected interfaces/subinterfaces and throughput related to WAN, trunk and VLAN connections.
 
-The collected screenshot displays an HTTP status of **200 OK** for the monitored web application.
+![Router throughput history](../assets/images/monitoring/grafana/grafana_dashboard_router2.png)
 
-It also presents response-time information and historical graphs associated with web performance checks.
+The second view contains historical interface and VLAN-subinterface traffic series. These readings document monitored paths in the selected time window, not the router's full configuration, ACL behavior or continuous bandwidth.
 
-HTTP 200 indicates that the corresponding request received a successful HTTP response during the observed check. It does not guarantee that every application feature was functioning correctly.
+## Cisco Catalyst C9200L — Switch
 
-### 3.2 Container Availability
+![Switch hardware and interface status](../assets/images/monitoring/grafana/grafana_dashboard_switch1.png)
 
-The dashboard displays availability indicators for selected services, including:
+Includes CPU, RAM, temperature, fans, power supplies, interface status and network throughput. Both `UP` and `DOWN` are visible; a down port can be unused or administratively disabled.
 
-- Corporate website.
-- Pi-hole.
-- Grafana.
-- Zabbix Web.
-- Portainer.
+**Mapping issue:** multiple status panels show the identical label `Gi1/0/1 TRUNK-ROUTER`. The screenshots alone cannot map each panel to a distinct physical interface.
 
-These indicators do not represent the complete inventory of ten containers documented in the Docker environment.
+![Switch interface throughput](../assets/images/monitoring/grafana/grafana_dashboard_switch2.png)
 
-For the complete container inventory, see [Docker Infrastructure and Services](../containers/docker-services.md).
+Historical traffic series for selected trunk, departmental and infrastructure interfaces. Panel labels and physical switch ports require cross-checking against monitoring items and the [switch port map](../networking/switch-port-map.md).
 
-## 4. Cisco Catalyst C8200L Router
+![Switch interface errors and temperature](../assets/images/monitoring/grafana/grafana_dashboard_switch3.png)
 
-The Cisco router monitoring section is documented in two consecutive screenshots.
+Interface errors, CRC-related readings and temperature history provide diagnostic context for the observed period.
 
-### 4.1 Router Interfaces
+## Linux Servers and VoIP
 
-![Cisco router interfaces and network traffic](../assets/images/monitoring/grafana/grafana_dashboard_router1.png)
+![Asterisk and Zabbix Linux servers](../assets/images/monitoring/grafana/grafana_dashboard_asterisk.png)
 
-The dashboard presents:
+| System | Function | Displayed status |
+|---|---|---|
+| Asterisk / FreeRADIUS host | IP telephony and network authentication | `ONLINE` |
+| Zabbix infrastructure server | Debian/Docker monitoring stack | `ONLINE` |
 
-- Operational status indicators for selected interfaces and subinterfaces.
-- WAN interface traffic.
-- Trunk interface traffic.
-- VLAN subinterface throughput.
+The panels include CPU, RAM, availability and Zabbix Agent history. Host availability does **not** verify a completed SIP call or RADIUS authentication; see [Asterisk/FreeRADIUS](../services/asterisk-freeradius.md).
 
-The screenshot contains green `UP` indicators for the interfaces represented by its status panels.
+## Windows Workstations
 
-These results describe the monitored interfaces during the observation period. They do not prove that every physical interface or routing function was operational.
+![Windows workstation availability and resources](../assets/images/monitoring/grafana/grafana_dashboard_pcs1.png)
 
-### 4.2 Router Traffic History
+Eight departmental Windows systems appear in the captured dashboard:
 
-![Cisco router traffic history](../assets/images/monitoring/grafana/grafana_dashboard_router2.png)
-
-The second screenshot continues the router monitoring section.
-
-It contains historical throughput graphs associated with network interfaces and VLAN subinterfaces.
-
-The graphs demonstrate that the monitoring platform received traffic measurements during the selected time window.
-
-The displayed throughput values are historical samples, not guaranteed bandwidth or continuous performance measurements.
-
-## 5. Cisco Catalyst C9200L Switch
-
-The switch monitoring section is documented in three consecutive screenshots.
-
-### 5.1 Hardware and Interface Status
-
-![Cisco Catalyst 9200L hardware and interface monitoring](../assets/images/monitoring/grafana/grafana_dashboard_switch1.png)
-
-This dashboard includes:
-
-- CPU utilization.
-- Memory utilization.
-- Temperature readings.
-- Cooling fan indicators.
-- Power supply indicators.
-- Interface operational status.
-- Network throughput.
-
-The screenshot displays both `UP` and `DOWN` interface indicators.
-
-A `DOWN` interface does not necessarily represent an incident. Disconnected, unused, or administratively disabled interfaces may be down during normal operation.
-
-**Important limitation:** multiple interface-status panels display the same label, `Gi1/0/1 TRUNK-ROUTER`.
-
-Therefore, the screenshot cannot independently confirm that every panel corresponds to a distinct physical switch interface.
-
-The dated screenshots do not include an item-to-interface cross-reference; repeated labels remain as observed.
-
-### 5.2 Interface Throughput
-
-![Cisco switch interface throughput](../assets/images/monitoring/grafana/grafana_dashboard_switch2.png)
-
-This screenshot continues the switch dashboard with historical traffic graphs.
-
-The graphs include traffic measurements associated with selected trunk, departmental, and infrastructure interfaces.
-
-The historical values demonstrate the presence of collected traffic series.
-
-They do not independently validate the interface descriptions or the complete physical port mapping.
-
-### 5.3 Errors and Temperature
-
-![Cisco switch interface errors and temperature](../assets/images/monitoring/grafana/grafana_dashboard_switch3.png)
-
-The final switch screenshot presents:
-
-- Interface error indicators.
-- CRC-related monitoring data.
-- Switch temperature history.
-
-These panels provide additional information relevant to network troubleshooting and hardware monitoring.
-
-The displayed measurements are limited to the selected monitoring interval and configured data sources.
-
-## 6. Linux Servers and VoIP
-
-![Grafana Asterisk and Zabbix server monitoring](../assets/images/monitoring/grafana/grafana_dashboard_asterisk.png)
-
-This section presents monitoring data for two Linux computers:
-
-| System | Main function |
-|---|---|
-| Asterisk server | VoIP and FreeRADIUS services |
-| Zabbix infrastructure server | Monitoring and Docker infrastructure |
-
-The dashboard includes:
-
-- Availability indicators.
-- CPU utilization.
-- RAM utilization.
-- Historical resource consumption.
-- Zabbix Agent availability history.
-
-Both servers are displayed as `ONLINE` in the collected screenshot.
-
-The CPU and RAM measurements provide a snapshot of the monitored systems during the selected time window.
-
-The availability indicators do not independently prove successful SIP calls, RADIUS authentication, or continuous service availability.
-
-The Asterisk and FreeRADIUS application configurations are documented separately from these system-resource metrics.
-
-## 7. Windows Workstations and Endpoints
-
-The Windows monitoring section is documented in two consecutive screenshots.
-
-### 7.1 Workstation Availability and Resource Utilization
-
-![Grafana Windows workstations and endpoints](../assets/images/monitoring/grafana/grafana_dashboard_pcs1.png)
-
-The dashboard includes eight departmental Windows workstations.
-
-The screenshot displays:
-
-| Dashboard state | Workstations |
+| Status panel | Workstations |
 |---|---:|
 | `ONLINE` | 3 |
 | `No data` | 5 |
 | **Total** | **8** |
 
-Some CPU and RAM measurements are available even though several status panels display `No data`.
+Some CPU/RAM data appear despite missing status values. `No data` means the corresponding query returned no usable result for that panel and time range; it does **not** establish that the computer was powered off. Possible causes include item/query configuration, agents, networking and host references; none was confirmed as a common cause.
 
-**`No data` does not automatically mean a computer is powered off.**
+![Windows CPU, RAM and traffic history](../assets/images/monitoring/grafana/grafana_dashboard_pcs2.png)
 
-It indicates that the corresponding Grafana query did not return usable data for the displayed panel and time range.
+Historical CPU, RAM, download and upload series exist for selected stations. Some legends repeat workstation identifiers; item-to-host mapping needs verification. Six workstation IPv4 addresses also differed from their Zabbix registrations in the [November 6 comparison](zabbix-monitoring.md#workstation-address-discrepancies).
 
-Possible explanations include incorrect host references, missing monitoring items, connectivity issues, or query configuration problems.
+## Monitoring Findings Requiring Verification
 
-The available screenshots do not establish a single definitive cause.
-
-### 7.2 Historical CPU, RAM, and Network Traffic
-
-![Windows workstation resource and traffic history](../assets/images/monitoring/grafana/grafana_dashboard_pcs2.png)
-
-The second screenshot presents:
-
-- CPU utilization over time.
-- RAM utilization over time.
-- Download traffic.
-- Upload traffic.
-
-The graphs contain historical series for selected Windows workstations.
-
-Some panel legends repeat workstation identifiers, which should be verified against the configured monitoring queries.
-
-The existence of these series does not establish complete or uninterrupted monitoring coverage across all eight computers.
-
-### 7.3 Addressing Inconsistencies
-
-The evidence review identified differences between workstation addresses photographed using `ipconfig` and addresses configured in Zabbix.
-
-Six of the eight Windows workstations had inconsistent addresses between the compared records.
-
-These differences may contribute to unavailable monitoring data, but additional verification is required.
-
-For further information:
-
-- [Zabbix Monitoring](zabbix-monitoring.md)
-- [Workstation and Server Inventory](../endpoints/workstation-inventory.md)
-
-## 8. Historical Results
-
-The November 6 screenshots include **five workstation panels showing `No data`**, repeated Cisco interface labels, and both `UP`/`DOWN` indications. Six workstation addresses also differed from Zabbix registrations, as documented in [Zabbix Monitoring](zabbix-monitoring.md). The captures do not establish one cause for these observations.
-
-## 9. Grafana and Zabbix Integration
-
-Grafana visualizes metrics from the Zabbix monitoring environment, including devices monitored through SNMP and Zabbix Agent. The published evidence consists of dashboard screenshots; complete data-source settings and dashboard JSON exports were not collected.
-
-## 10. Evidence Summary
-
-| Evidence | Original filename |
+| Recorded symptom | Required check |
 |---|---|
-| Dashboard organization | `grafana_order.png` |
-| Web applications and containers | `grafana_dashboard_web_containers.png` |
-| Cisco router — Part 1 | `grafana_dashboard_router1.png` |
-| Cisco router — Part 2 | `grafana_dashboard_router2.png` |
-| Cisco switch — Part 1 | `grafana_dashboard_switch1.png` |
-| Cisco switch — Part 2 | `grafana_dashboard_switch2.png` |
-| Cisco switch — Part 3 | `grafana_dashboard_switch3.png` |
-| Linux servers and Asterisk | `grafana_dashboard_asterisk.png` |
-| Windows workstations — Part 1 | `grafana_dashboard_pcs1.png` |
-| Windows workstations — Part 2 | `grafana_dashboard_pcs2.png` |
+| Five Windows status panels with `No data` | Zabbix item status, Grafana query, host identity and selected time range |
+| Repeated Cisco interface labels | Zabbix item/interface identity and physical switch port mapping |
+| Mixed `UP`/`DOWN` ports | Expected operational state against the current topology |
+| Historical availability and HTTP readings | Independent service-specific functional tests when required |
+| Incomplete exported dashboard configuration | Obtain data-source settings / dashboard JSON before claiming a reproducible dashboard |
 
-**Evidence collection date:** November 6, 2026.
+**Related records:** [Zabbix monitoring](zabbix-monitoring.md) · [Cisco SNMP troubleshooting](snmp-troubleshooting.md) · [Docker services](../containers/docker-services.md)
 
-All images retain their original filenames and are presented as historical evidence of the laboratory environment.
+The ten original screenshots above are preserved from **November 6, 2026**. They do not demonstrate subsequent incident resolution.
