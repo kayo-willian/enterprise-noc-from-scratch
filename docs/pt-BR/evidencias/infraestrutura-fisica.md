@@ -50,7 +50,13 @@ O roteador e o switch integram a infraestrutura de rede do projeto.
 
 A presença física desses equipamentos está comprovada pelas fotografias. Entretanto, a verificação de configurações lógicas, VLANs, políticas de roteamento e estados das interfaces depende de registros de configuração ou evidências de monitoramento.
 
-## 4. Escopo das Evidências
+## 4. Cabeamento e Registros de Conexão do Switch
+
+A [configuração do C9200L coletada em 4 de novembro](../redes/registro-switch-vlans-2026-11-04.md) registra a **Gi1/0/1 do switch** como trunk em direção ao Cisco C8200L. A interface do lado do roteador não foi identificada nessa coleta. As atribuições das interfaces, incluindo as VLANs 10–70, estão registradas no [mapa de portas do switch](../redes/mapa-de-portas-switch.md).
+
+As fotografias do rack apresentam cabos de conexão, o patch panel Categoria 6 e os componentes de organização. Elas não estabelecem um mapa completo entre interfaces do switch, posições no patch panel e tomadas das estações. Os registros de hardware e rede dos dez computadores estão no [inventário de computadores e servidores](../estacoes/inventario-de-computadores.md).
+
+## 5. Escopo das Evidências
 
 As fotografias confirmam a presença e a disposição física dos equipamentos documentados em 6 de novembro de 2026.
 
@@ -63,7 +69,7 @@ As fotografias registram os equipamentos e o cabeamento, não os seguintes resul
 
 Esses aspectos devem ser avaliados por meio dos registros de configuração, testes e dados de monitoramento correspondentes.
 
-## 5. Observações sobre a Documentação
+## 6. Observações sobre a Documentação
 
 As fotografias originais são preservadas separadamente das cópias preparadas para a documentação pública.
 

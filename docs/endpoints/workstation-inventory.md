@@ -112,15 +112,15 @@ Additional evidence:
 
 The documented computers are distributed across the following VLANs:
 
-| VLAN | Department or purpose |
-|---|---|
-| 10 | IT and infrastructure |
-| 20 | Accounting |
-| 30 | Finance |
-| 40 | Sales |
-| 50 | VoIP and locally hosted authentication services |
+| VLAN | Department or purpose | C9200L ports (November 4 configuration) |
+|---|---|---|
+| 10 | IT and infrastructure | Gi1/0/2–3 |
+| 20 | Accounting | Gi1/0/4–6 |
+| 30 | Finance | Gi1/0/7–8 |
+| 40 | Sales | Gi1/0/9–10 |
+| 50 | VoIP and locally hosted authentication services | Gi1/0/11–13 |
 
-These assignments are consistent with the collected switch configuration and workstation addressing evidence.
+The port assignments are documented in the [November 4 switch record](../networking/switch-port-map.md). Gi1/0/11 has access VLAN 50 configured, but its effective switchport mode is not established by the captured statements. A complete patch-panel-to-workstation cable map was not included in the collected records.
 
 ## 5. Monitoring Consistency
 
@@ -133,6 +133,8 @@ The laboratory uses DHCP for its workstations. The observed IP differences can c
 However, the address differences alone do not establish the cause of every monitoring problem.
 
 ## 6. Inventory Coverage
+
+The ten-computer inventory comprises eight Windows workstations and two Linux computers. The [Zabbix host inventory](../monitoring/zabbix-monitoring.md#host-inventory-and-interface-availability) also includes the C8200L and C9200L, resulting in twelve registered hosts.
 
 The dash (—) in the hardware table means the attribute was not recorded in the November 6 evidence, not that the computer lacks the component. Individual CPU, RAM, storage type and capacity fields are reported only when supported by the collected records.
 

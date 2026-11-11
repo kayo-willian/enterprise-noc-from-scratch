@@ -50,7 +50,13 @@ The router and switch form part of the project's network infrastructure.
 
 Their physical presence is confirmed by the photographs. Logical configurations, VLAN assignments, routing policies, and interface status require configuration records or monitoring evidence for verification.
 
-## 4. Evidence Scope
+## 4. Cabling and Switch Connection Records
+
+The [November 4 C9200L configuration](../networking/switch-vlan-snapshot-2026-11-04.md) records **Gi1/0/1 on the switch** as the trunk toward the Cisco C8200L. The router-side interface is not identified in that snapshot. Departmental switchport assignments, including VLANs 10–70, are maintained in the [switch port map](../networking/switch-port-map.md).
+
+The rack photographs show patch cables, the Category 6 patch panel and cable organization. They do not provide a cable-by-cable map from switch interfaces through patch-panel positions to workstation outlets. Hardware and network records for the ten computers are maintained in the [workstation and server inventory](../endpoints/workstation-inventory.md).
+
+## 5. Evidence Scope
 
 The photographs confirm the presence and physical arrangement of the documented equipment on November 6, 2026.
 
@@ -63,7 +69,7 @@ They do not, by themselves, establish:
 
 These aspects must be evaluated using the corresponding configuration records, tests, and monitoring data.
 
-## 5. Documentation Notes
+## 6. Documentation Notes
 
 The original photographs are preserved separately from the copies prepared for public documentation.
 
