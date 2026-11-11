@@ -67,7 +67,7 @@ Zabbix e Grafana apresentam observações históricas de equipamentos Cisco, hos
 
 ![Roteador Cisco, switch e patch panel](../../assets/images/physical/cisco-router-switch-patch-panel.jpg)
 
-## Interpretando a Topologia como Arquitetura Operacional
+## Arquitetura Operacional da Rede e Fluxos de Monitoramento
 
 O trunk **Gi1/0/1 do C9200L** comprova a associação registrada no lado do switch com o C8200L. Os gateways observados nas VLANs 10–50 descrevem configurações de hosts, mas **não** comprovam interfaces e subinterfaces 802.1Q do roteador, ACLs ou fluxos permitidos entre VLANs. Uma ligação desenhada representa uma associação documentada, não um teste de conectividade concluído.
 

@@ -83,7 +83,7 @@ Some CPU/RAM data appear despite missing status values. `No data` means the corr
 
 Historical CPU, RAM, download and upload series exist for selected stations. Some legends repeat workstation identifiers; item-to-host mapping needs verification. Six workstation IPv4 addresses also differed from their Zabbix registrations in the [November 6 comparison](zabbix-monitoring.md#workstation-address-discrepancies).
 
-## Reading the Dashboards as Evidence
+## Dashboard Records and Monitoring Scope
 
 Grafana **visualizes** the Zabbix monitoring data; its graphs are not separate proof that Zabbix collected every item correctly. The recorded dashboard organizes data into five areas: web applications/containers, C8200L, C9200L, Linux servers/VoIP and Windows workstations. This organization supports cross-checking a service symptom against network, host and application metrics.
 

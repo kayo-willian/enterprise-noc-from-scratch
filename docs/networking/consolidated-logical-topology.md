@@ -67,7 +67,7 @@ Zabbix and Grafana provide historical monitoring views of Cisco equipment, hosts
 
 ![Cisco router, switch and patch panel](../assets/images/physical/cisco-router-switch-patch-panel.jpg)
 
-## Reading the Topology as an Operational Architecture
+## Operational Network Architecture and Monitoring Paths
 
 The C9200L's **Gi1/0/1 trunk** establishes the switch-side association with the C8200L. Endpoint gateways observed in VLANs 10–50 describe configured host routes, but do **not** establish the router-side interfaces, 802.1Q subinterfaces, ACLs or permitted inter-VLAN flows. Likewise, a diagram edge represents a documented association, not a completed connectivity test.
 

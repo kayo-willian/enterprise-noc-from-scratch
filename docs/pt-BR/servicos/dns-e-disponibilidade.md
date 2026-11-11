@@ -191,7 +191,7 @@ As configurações públicas não incluem segredos de autenticação nem configu
 
 Esses arquivos documentam a estrutura de implantação, enquanto as capturas coletadas comprovam a presença das aplicações no laboratório.
 
-## 7. Interpretação Técnica, Correlação de Incidentes e Validação
+## 7. Correlação de Incidentes e Validação
 
 ### Por que Essas Ferramentas São Complementares
 

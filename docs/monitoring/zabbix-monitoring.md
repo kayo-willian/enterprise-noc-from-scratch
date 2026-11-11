@@ -111,7 +111,7 @@ The infrastructure uses **SNMP** for the Cisco router/switch and **Zabbix Agent*
 
 The November 6 screenshot reports **12 enabled hosts** but only **7 available**. Administrative enablement is not the same as agent reachability. Similarly, **113 unsupported items** identify items not returning usable data; the cause must be inspected for each item rather than assigned from the aggregate count. **34 triggers in a problem state** indicate configured monitoring conditions, not necessarily 34 independently verified business outages.
 
-### Interpreting a Missing Measurement
+### Missing Metrics: Diagnostic Checks
 
 1. Identify the affected host and item, the last successful sample, the configured monitored IP/DNS and interface type.
 2. For an agent check, examine hostname/IP registration, current DHCP lease, agent service, routing and firewall. Six addresses differ between photographed workstations and Zabbix records; they are **possible contributors**, not a proved common cause for five unavailable hosts.

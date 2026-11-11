@@ -76,7 +76,7 @@ spanning-tree extend system-id
 
 O Rapid PVST+ está configurado, e diversas portas de acesso utilizam PortFast. Não há saída operacional para estabelecer root bridge, portas bloqueadas ou estado de convergência.
 
-## Interpretando o Spanning Tree e as Portas
+## Rapid PVST+ e Configuração das Interfaces
 
 Os comandos `spanning-tree mode rapid-pvst` e `spanning-tree extend system-id` comprovam que o **Rapid PVST+ foi configurado** no export histórico. A finalidade do protocolo é evitar loops em Layer 2, considerando a árvore de encaminhamento por VLAN; porém esses comandos globais **não identificam** bridge raiz, caminhos alternativos/bloqueados ou eventos de convergência. Isso exigiria saídas operacionais datadas.
 
