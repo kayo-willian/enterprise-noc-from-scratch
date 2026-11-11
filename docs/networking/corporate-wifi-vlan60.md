@@ -261,4 +261,52 @@ The presence of monitoring information for the Cisco infrastructure does not est
 
 - [Zabbix Monitoring](../monitoring/zabbix-monitoring.md)
 - [Grafana Monitoring](../monitoring/grafana-monitoring.md)
-- [SNMP Troubleshooting](../
+- [SNMP Troubleshooting](../monitoring/snmp-troubleshooting.md)
+
+## 9. Technical Evidence and Scope
+
+The corporate Wi-Fi documentation combines the following historical records.
+
+| Evidence Source | Date | Documented Information |
+|---|---|---|
+| Cisco Catalyst C9200L configuration | November 4, 2026 | Access VLAN 60 assignment on `Gi1/0/15` |
+| Wireless equipment photograph | November 6, 2026 | Identification of the corporate TP-Link Archer AX53 |
+| Consolidated network inventory | November 2026 | Separate corporate and IoT wireless equipment |
+| Network architecture records | November 2026 | VLAN organization and intended segmentation |
+| Zabbix/Grafana screenshots | November 2026 | Cisco infrastructure monitoring observations |
+
+The collected evidence supports:
+
+- Identification of the corporate wireless equipment.
+- The equipment's documented role in the network.
+- VLAN 60 assignment on the C9200L.
+- Separation of the corporate and IoT wireless equipment in the architecture.
+
+The available records do not independently establish the installed wireless operating mode, client addressing, authentication transactions, NAT configuration, ACL enforcement, or direct monitoring of the Archer AX53.
+
+These boundaries define the scope of the historical technical documentation and do not constitute outstanding steps required to complete this record.
+
+## 10. Related Documentation
+
+### Networking & Architecture
+
+- [Networking & Architecture — Overview](README.md)
+- [Consolidated Logical Topology](consolidated-logical-topology.md)
+- [VLAN Segmentation](vlans.md)
+- [Cisco Catalyst C8200L](router-c8200l.md)
+- [Cisco Catalyst C9200L — Configuration Snapshot](switch-vlan-snapshot-2026-11-04.md)
+- [Cisco Catalyst C9200L — Switch Port Mapping](switch-port-map.md)
+- [IoT Network — VLAN 70](iot-vlan70.md)
+
+### Infrastructure and Monitoring
+
+- [Infrastructure Architecture](../architecture/infrastructure-overview.md)
+- [Physical Infrastructure](../evidence/physical-infrastructure.md)
+- [Asterisk and FreeRADIUS](../services/asterisk-freeradius.md)
+- [Zabbix Monitoring](../monitoring/zabbix-monitoring.md)
+- [Grafana Monitoring](../monitoring/grafana-monitoring.md)
+
+---
+
+**Evidence reference:** November 4–6, 2026  
+**Document type:** Corporate wireless network architecture and historical evidence.
