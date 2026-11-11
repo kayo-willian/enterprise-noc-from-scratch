@@ -45,6 +45,19 @@ A VLAN 60 é um segmento separado em camada 2. O projeto de acesso restringe tr�
 
 Os registros de Zabbix e Grafana documentam o monitoramento de equipamentos Cisco. Não há dashboard dedicado com métricas diretas do Archer AX53 corporativo no inventário coletado.
 
+## Funcionamento Previsto e Requisitos de Validação
+
+A configuração **Gi1/0/15 access VLAN 60** identifica a ligação do Archer AX53 corporativo ao Catalyst C9200L. Ela não define o **modo de operação** do AX53 ou o endereçamento Layer 3 dos clientes wireless.
+
+**Modo AP versus roteador:** em AP, o equipamento poderia fazer bridge dos clientes para o segmento upstream; como roteador, poderia oferecer seu próprio DHCP, sub-rede privada e limite NAT. Essas alternativas alteram onde gateways e controles de segurança precisam ser verificados. Nenhum desses modos é afirmado como implantado; a configuração do AX53 não foi exportada.
+
+**Dependência de autenticação:** FreeRADIUS 3.2.10 está registrado no servidor Debian de voz/autenticação `192.168.50.2`, VLAN 50, usando RADIUS UDP `1812/1813`. Isso confirma o servidor, **não** autenticação Wi-Fi 802.1X funcional. A verificação exigiria confirmar recursos/configurações reais do AX53, cadastro de cliente RADIUS compatível, certificados validados nos clientes, roteamento permitido entre VLANs e resultados de autenticação datados.
+
+**Dependência de monitoramento:** painéis SNMP dos Cisco comprovam dados desses equipamentos, não associação de clientes, RSSI, leases DHCP ou login wireless do AX53. Avaliar o Wi-Fi requer evidências específicas do equipamento e dos clientes.
+
+A pergunta técnica principal é se a VLAN da porta do switch coincide com a **rede IP dos clientes Wi-Fi** ou apenas com o **uplink do AX53**. A captura comprova o uplink; não responde ao lado dos clientes. Veja [VLANs](vlans.md) e [FreeRADIUS](../servicos/asterisk-freeradius.md).
+
+
 ## Referências
 
 [Visão geral de Redes](README.md) · [VLANs](vlans.md) · [Mapa de portas](mapa-de-portas-switch.md) · [Registro do switch](registro-switch-vlans-2026-11-04.md) · [IoT · VLAN 70](iot-vlan70.md) · [Asterisk / FreeRADIUS](../servicos/asterisk-freeradius.md) · [Infraestrutura física](../evidencias/infraestrutura-fisica.md)

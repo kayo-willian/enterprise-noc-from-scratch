@@ -49,6 +49,18 @@ docker exec zabbix-server zabbix_server -R config_cache_reload
 
 **Resultado registrado:** Os widgets passaram a apresentar registros de monitoramento e alertas operacionais relevantes.
 
+## O que as Três Investigações Demonstram
+
+O registro de **4 de novembro de 2026** é importante porque separa **três falhas diferentes**:
+
+**1. Falha de coleta SNMP:** após cadastrar o C9200L, a interface SNMP permanecia indisponível. Foram consideradas conectividade IP, consultas SNMP a partir do Linux, configuração do switch e comunidade herdada no host Zabbix. A **divergência confirmada de comunidade** foi corrigida pela macro `{$SNMP_COMMUNITY}` e atualização do cache de configuração Zabbix. O resultado registrado foi retorno da descoberta de interfaces e da coleta. Apenas testar ping não identificaria a divergência de configuração.
+
+**2. Métrica de uptime incorreta:** o switch operava, mas o widget mostrava **0**. O problema era o item selecionado, não indisponibilidade comprovada. A substituição de `system.hw.uptime[hrSystemUptime.0]` por `system.net.uptime[sysUpTime.0]` normalizou o uptime exibido no caso histórico. Um SNMP acessível não garante compatibilidade de todos os itens com o dispositivo.
+
+**3. Widgets vazios:** os filtros consideravam apenas o switch recém-adicionado, sem problemas ativos naquele momento. Ampliar os alvos para o ambiente NOC fez aparecer alertas relevantes. Lista de problemas vazia pode resultar de **filtro/visão**, não falha de coleta.
+
+São **resultados de correções documentadas**, não novos testes. O relatório não inclui captura de pacotes ou SNMP walk bruto. Não confundir esses casos com os itens não suportados ou painéis Windows `No data` de 6 de novembro. Comunidades reais permanecem fora da documentação pública.
+
 ## Observações Operacionais
 
 - Conectividade IP não garante coleta SNMP; comunidade e macro Zabbix precisam corresponder.

@@ -105,6 +105,22 @@ The photographed `ipconfig` addresses and Zabbix host registrations differ for s
 
 Accounting 1 and Finance 2 matched in the compared records. DHCP changes **may** contribute to unavailable agents or missing metrics, but agent configuration, reachability, firewalls and item settings also require inspection. The table represents November 6 observations, not currently assigned IPs.
 
+## How Collection, Alerts and Availability Differ
+
+The infrastructure uses **SNMP** for the Cisco router/switch and **Zabbix Agent** for the two Debian servers and eight Windows computers. Zabbix Server processes monitoring items and triggers and uses MariaDB for storage; Grafana presents selected Zabbix series. This chain helps an investigator locate a failure: at the monitored device, in the agent/SNMP interface, in Zabbix item processing or in a dashboard query.
+
+The November 6 screenshot reports **12 enabled hosts** but only **7 available**. Administrative enablement is not the same as agent reachability. Similarly, **113 unsupported items** identify items not returning usable data; the cause must be inspected for each item rather than assigned from the aggregate count. **34 triggers in a problem state** indicate configured monitoring conditions, not necessarily 34 independently verified business outages.
+
+### Interpreting a Missing Measurement
+
+1. Identify the affected host and item, the last successful sample, the configured monitored IP/DNS and interface type.
+2. For an agent check, examine hostname/IP registration, current DHCP lease, agent service, routing and firewall. Six addresses differ between photographed workstations and Zabbix records; they are **possible contributors**, not a proved common cause for five unavailable hosts.
+3. For an SNMP check, distinguish IP connectivity from SNMP authentication, item support and discovery. The [November 4 C9200L case](snmp-troubleshooting.md) describes an actual SNMP community mismatch and correction, but it does not explain later unsupported items without further evidence.
+4. Correlate the actual trigger/item message with the intended service. A down, unused switch interface can be normal; an available host can still have an application failure.
+5. Verify the application separately when closing an incident: CPU metrics alone do not prove a successful Asterisk call or RADIUS authentication.
+
+These are **diagnostic principles**, not new tests executed as part of the documentation review. The [Zabbix Agent runbook](../noc-operations/runbooks/zabbix-agent-connectivity.md) and [incident process](../noc-operations/incident-management.md) define the operational checks and evidence requirements.
+
 ## Open Monitoring Findings
 
 | Observed condition | Verification still required |

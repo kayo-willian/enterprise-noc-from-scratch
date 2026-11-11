@@ -67,6 +67,38 @@ Zabbix and Grafana provide historical monitoring views of Cisco equipment, hosts
 
 ![Cisco router, switch and patch panel](../assets/images/physical/cisco-router-switch-patch-panel.jpg)
 
+## Reading the Topology as an Operational Architecture
+
+The C9200L's **Gi1/0/1 trunk** establishes the switch-side association with the C8200L. Endpoint gateways observed in VLANs 10–50 describe configured host routes, but do **not** establish the router-side interfaces, 802.1Q subinterfaces, ACLs or permitted inter-VLAN flows. Likewise, a diagram edge represents a documented association, not a completed connectivity test.
+
+A user reaching the NOC web portal from a departmental workstation would depend on **four distinct layers**: correct workstation addressing and gateway, permitted Layer 3 path to `192.168.10.12`, DNS resolution for the service name and a functioning Nginx/application upstream. The November 4–6 records establish parts of that chain separately; a successful cross-VLAN transaction was not recorded.
+
+The corporate Wi-Fi Archer AX53 is connected on **Gi1/0/15 / VLAN 60**. FreeRADIUS is recorded in **VLAN 50** on `192.168.50.2`. This is an intended authentication dependency, not evidence that the AX53 acted as a RADIUS authenticator or that 802.1X succeeded.
+
+### Monitoring Is a Different Data Path
+
+```mermaid
+flowchart LR
+    CISCO["Cisco C8200L / C9200L"] -->|"SNMP"| Z["Zabbix Server"]
+    HOSTS["Debian / Windows hosts"] -->|"Zabbix Agent"| Z
+    Z --> DB[("MariaDB")]
+    WEB["Zabbix Web / API"] <--> DB
+    G["Grafana"] -->|"Zabbix data source"| WEB
+    K["Uptime Kuma"] -.->|"Independent endpoint checks"| SERVICES["Selected services"]
+```
+
+This diagram restores the **service-to-monitoring relationships** documented before the networking consolidation. It describes a logical data flow, not a packet capture or a guarantee that all items were supported. The recorded Zabbix deployment contained unsupported items and unavailable hosts.
+
+| Evidence | Supported conclusion | Not yet demonstrated |
+|---|---|---|
+| C9200L `show running-config` (November 4) | VLAN assignments, trunk, Spanning Tree settings | Router configuration, effective policy enforcement, all link states |
+| System/endpoint inventory (November 6) | Host IPs, subnet masks and several gateways | DHCP pools and current lease allocation |
+| Docker inventory (November 6) | Ten running containers and published ports | Application reachability from each VLAN |
+| Monitoring screenshots (November 6) | Historical telemetry and alert conditions | Uninterrupted availability and complete coverage |
+
+Command transcripts and full per-port records remain in the [switch snapshot](switch-vlan-snapshot-2026-11-04.md); host addresses remain in the [endpoint inventory](../endpoints/workstation-inventory.md). They are linked rather than copied into this architecture page.
+
+
 ## Evidence boundaries
 
 - The C9200L snapshot documents VLANs, port assignments, and a trunk; it does not prove router ACL enforcement or all inter-VLAN paths.

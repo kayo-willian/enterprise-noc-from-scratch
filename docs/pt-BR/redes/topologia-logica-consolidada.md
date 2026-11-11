@@ -67,6 +67,38 @@ Zabbix e Grafana apresentam observações históricas de equipamentos Cisco, hos
 
 ![Roteador Cisco, switch e patch panel](../../assets/images/physical/cisco-router-switch-patch-panel.jpg)
 
+## Interpretando a Topologia como Arquitetura Operacional
+
+O trunk **Gi1/0/1 do C9200L** comprova a associação registrada no lado do switch com o C8200L. Os gateways observados nas VLANs 10–50 descrevem configurações de hosts, mas **não** comprovam interfaces e subinterfaces 802.1Q do roteador, ACLs ou fluxos permitidos entre VLANs. Uma ligação desenhada representa uma associação documentada, não um teste de conectividade concluído.
+
+Um usuário acessando o portal NOC a partir de uma estação departamental dependeria de **quatro camadas**: endereçamento e gateway corretos, caminho Layer 3 permitido até `192.168.10.12`, DNS do serviço e funcionamento do Nginx/backend. Os registros de 4–6 de novembro documentam partes separadas dessa cadeia; não há uma transação validada entre VLANs.
+
+O Archer AX53 corporativo usa **Gi1/0/15 / VLAN 60**. O FreeRADIUS está registrado na **VLAN 50**, em `192.168.50.2`. Trata-se de uma dependência de autenticação pretendida, não de comprovação de que o AX53 atuava como autenticador RADIUS ou que o 802.1X funcionou.
+
+### O Monitoramento Usa Outro Fluxo
+
+```mermaid
+flowchart LR
+    CISCO["Cisco C8200L / C9200L"] -->|"SNMP"| Z["Zabbix Server"]
+    HOSTS["Hosts Debian / Windows"] -->|"Zabbix Agent"| Z
+    Z --> DB[("MariaDB")]
+    WEB["Zabbix Web / API"] <--> DB
+    G["Grafana"] -->|"Fonte de dados Zabbix"| WEB
+    K["Uptime Kuma"] -.->|"Verificações independentes"| SERVICES["Serviços selecionados"]
+```
+
+O diagrama recupera as **relações entre serviços e monitoramento** presentes antes da consolidação de redes. Representa o fluxo lógico, não captura de pacotes ou garantia de todos os itens. O Zabbix registrava itens não suportados e hosts indisponíveis.
+
+| Evidência | Conclusão permitida | Ainda não demonstrado |
+|---|---|---|
+| `show running-config` C9200L (4/11) | VLANs, trunk e Spanning Tree | Configuração do roteador, políticas efetivas e todos os estados de link |
+| Inventário de sistemas (6/11) | IPs, máscaras e alguns gateways | Pools DHCP e leases atuais |
+| Inventário Docker (6/11) | Dez containers em execução e portas publicadas | Alcance dos serviços em cada VLAN |
+| Capturas de monitoramento (6/11) | Telemetria e alarmes históricos | Disponibilidade ininterrupta e cobertura completa |
+
+Os comandos e portas permanecem no [snapshot do switch](registro-switch-vlans-2026-11-04.md), e os endereços no [inventário de endpoints](../estacoes/inventario-de-computadores.md). Aqui são referenciados, não duplicados.
+
+
 ## Limites das evidências
 
 - O registro do C9200L documenta VLANs, portas e trunk, mas não comprova aplicação de ACLs no roteador nem todas as rotas entre VLANs.

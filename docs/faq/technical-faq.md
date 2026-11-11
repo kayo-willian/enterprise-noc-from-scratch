@@ -44,11 +44,24 @@ No. Tapajós Inovações is the fictional business scenario; the equipment and l
 
 ### 03. Why was the project designed around a Network Operations Center?
 
-To connect network deployment, service availability, monitoring and troubleshooting in one documented environment. The NOC model organizes those operational activities.
+A Network Operations Center (NOC) provides centralized visibility into infrastructure availability, operational events, and network performance.
+
+The project uses this concept to integrate network administration with monitoring and troubleshooting.
+
+Rather than documenting isolated configurations, the infrastructure demonstrates how network devices, operating systems, applications, and monitoring platforms relate to one another.
 
 ### 04. Which business problems does the project address?
 
-The fictional scenario identifies four issues: unreliable cabling, insecure Wi-Fi, unstable IP telephony and insufficient monitoring. These are scenario requirements, not verified current failures.
+The simulated business scenario identifies four main challenges:
+
+- Unreliable structured cabling and physical connectivity.
+- Inadequate wireless network security.
+- Instability affecting internal IP telephony.
+- Limited infrastructure monitoring and operational visibility.
+
+The project responds to these requirements through structured cabling, network segmentation, dedicated services, and centralized monitoring.
+
+These initial problems are requirements of the fictional organization; the physical laboratory and dated records document the implementation work.
 
 ### 05. Is the infrastructure intended for production use?
 
@@ -242,7 +255,15 @@ The NOC host is a Dell OptiPlex 3020 with Intel i5-4590, approximately 8 GB RAM,
 
 ### 27. Why is Docker used in the project?
 
-Docker runs the infrastructure applications as containers, with Compose defining services and dependencies. It does not imply high availability. See [Docker services](../containers/docker-services.md).
+Docker provides an organized environment for deploying infrastructure applications as containers.
+
+The project uses containers to host monitoring services, management interfaces, DNS applications, databases, and web components.
+
+This approach separates application environments and simplifies the organization of service dependencies.
+
+Containerization does not automatically provide high availability, complete security isolation, or persistent data protection.
+
+See [Docker services](../containers/docker-services.md).
 
 ### 28. Which containers were running during evidence collection?
 
@@ -276,7 +297,15 @@ Not as a verified one-command deployment. Public Compose files are sanitized and
 
 ### 33. Why are Zabbix and Grafana used together?
 
-Zabbix collects and processes monitoring items; Grafana visualizes them through the Zabbix integration. See [Zabbix](../monitoring/zabbix-monitoring.md) and [Grafana](../monitoring/grafana-monitoring.md).
+Zabbix is responsible for collecting and processing monitoring information through configured hosts, interfaces, items, templates, and triggers.
+
+Grafana provides a separate visualization layer through its Zabbix integration.
+
+Combining these tools allows infrastructure metrics to be collected centrally and displayed through dashboards organized by network equipment, operating systems, and services.
+
+Grafana does not replace the underlying monitoring data collection performed by Zabbix.
+
+See [Zabbix](../monitoring/zabbix-monitoring.md).
 
 ### 34. How extensive was the Zabbix monitoring environment?
 
@@ -296,11 +325,27 @@ On November 6, three workstation panels showed `ONLINE` and five `No data`. Miss
 
 ### 38. How can DHCP affect Zabbix monitoring?
 
-Six workstation IPv4 addresses differed between captured endpoint data and Zabbix host registrations. DHCP changes are a possible contributor, not a proven common cause. See [workstation inventory](../endpoints/workstation-inventory.md).
+The laboratory uses DHCP for workstation addressing.
+
+The evidence collection identified six differences between photographed workstation addresses and the addresses registered in Zabbix.
+
+If a monitored host changes its IP address while the Zabbix host configuration retains the previous address, agent communication can be affected.
+
+DHCP address changes may explain some historical inconsistencies, without being assigned as the cause of every unavailable host.
+
+See [workstation inventory](../endpoints/workstation-inventory.md).
 
 ### 39. What do the 113 unsupported Zabbix items indicate?
 
-The **113 unsupported items** could not produce valid data under their recorded collection configurations. Their individual causes were not established by the screenshot; each requires item-level diagnosis. See [Zabbix](../monitoring/zabbix-monitoring.md).
+An unsupported item is a monitoring item that cannot currently provide valid data through its configured collection method.
+
+Possible causes include incompatible keys, unsupported device metrics, incorrect interfaces, insufficient permissions, or configuration errors.
+
+The November 6 screenshot records 113 unsupported items.
+
+However, the screenshot does not individually identify the causes of those items. A specific diagnosis requires inspecting the affected monitoring configurations.
+
+See [Zabbix](../monitoring/zabbix-monitoring.md).
 
 ### 40. Why is Uptime Kuma used if Zabbix already monitors availability?
 

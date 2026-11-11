@@ -67,6 +67,23 @@ Essas capturas documentam métricas do período de coleta, sem comprovar disponi
 
 Não foi coletada uma configuração completa do C8200L. Assim, interfaces do roteador, comandos de roteamento, traduções NAT, parâmetros WAN, rota padrão, DHCP, aplicação de ACLs e configuração SNMP **não são apresentados como verificados**. O projeto de rede e os gateways observados permanecem documentados nos respectivos registros.
 
+## Dependências do Roteador: Matriz de Verificação
+
+A função do roteador como ponto de integração Layer 3 explica a importância de DHCP, roteamento, NAT e controle de acesso, mas as evidências sobre essas funções são diferentes.
+
+| Função | Evidência registrada | Falta antes de afirmar validação |
+|---|---|---|
+| Conexão ao roteador | `Gi1/0/1` do switch declarada trunk | Porta física C8200L, subinterfaces `802.1Q` correspondentes e estado operacional |
+| Gateways | Endereços observados em estações e servidor de voz | Titularidade das interfaces e encaminhamento real por VLAN |
+| DHCP | Fotos de IP/gateway e variações de endereços | Pool, servidor/relay, reservas e leases |
+| NAT / WAN | Equipamento do roteador e telemetria histórica | Regras/traduções NAT, interface WAN e rota padrão |
+| Acesso entre VLANs | Funções dos segmentos e requisitos de política | ACLs aplicadas e testes de tráfego permitido/negado |
+
+Considere uma estação na VLAN 20 acessando o host Docker da VLAN 10: ela depende do gateway, caminho roteado, permissões e endpoint da aplicação. O gateway observado **não estabelece** a configuração completa do C8200L. Da mesma forma, tráfego SNMP registrado em uma interface **não equivale** a validar ACL, NAT ou DHCP.
+
+Os registros sustentam **a arquitetura do roteador e o monitoramento histórico**, não a implantação completa de roteamento/segurança para produção. Uma futura revisão autorizada deve usar configuração e saídas de rotas/ACLs datadas e sanitizadas, não comandos reconstruídos ou padrões presumidos.
+
+
 ## Referências
 
 [Visão geral de Redes](README.md) · [Topologia lógica](topologia-logica-consolidada.md) · [VLANs](vlans.md) · [Registro do switch](registro-switch-vlans-2026-11-04.md) · [Mapa de portas](mapa-de-portas-switch.md) · [Inventário de computadores](../estacoes/inventario-de-computadores.md) · [Zabbix](../monitoramento/zabbix.md) · [Grafana](../monitoramento/grafana.md)

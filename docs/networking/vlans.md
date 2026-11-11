@@ -52,6 +52,19 @@ The VLAN 60 and 70 Archer AX53 devices are separate physical units. Their operat
 
 Workstations use DHCP. Addresses in the November 6 inventory may differ from earlier Zabbix registrations; no static reservation is inferred.
 
+## VLAN Behavior and Security Boundaries
+
+The seven VLANs separate **IT/NOC (10)**, **Accounting (20)**, **Finance (30)**, **Sales (40)**, **voice/authentication (50)**, **corporate Wi-Fi (60)** and **IoT (70)** into different Layer 2 broadcast domains. This provides structure for an access policy; **a VLAN does not automatically block Layer 3 traffic** once routing is enabled.
+
+The difference between a **switch access port** and a **trunk** matters when interpreting the recorded config. The captured accounting interface `Gi1/0/4` includes `switchport access vlan 20` and `switchport mode access`; the router-facing `Gi1/0/1` instead declares `switchport mode trunk`. The snapshot does not show a custom allowed-VLAN list or the matching router subinterfaces.
+
+`Gi1/0/11` deserves particular care: `switchport access vlan 50` occurs alongside `spanning-tree portfast trunk` and **without an explicit access-mode command**. Its effective mode must be verified; neither the VLAN assignment nor the PortFast variant proves that it operated as a trunk or as a confirmed access port.
+
+The corporate and IoT AX53 devices connect to **different ports and VLANs**. Their AP/router modes, client subnets, DHCP and NAT were not captured. Therefore, the upstream VLAN number cannot be substituted for the actual wireless-client subnet.
+
+**A useful validation would distinguish configuration from enforcement:** read the current effective interface modes and router ACLs, then perform approved, documented allowed/denied connectivity checks between source/destination VLANs. The historical evidence does not include those tests.
+
+
 ## References
 
 [Networking overview](README.md) · [Logical topology](consolidated-logical-topology.md) · [Switch snapshot](switch-vlan-snapshot-2026-11-04.md) · [Port map](switch-port-map.md) · [Router](router-c8200l.md) · [Corporate Wi-Fi](corporate-wifi-vlan60.md) · [IoT](iot-vlan70.md) · [Workstation inventory](../endpoints/workstation-inventory.md)

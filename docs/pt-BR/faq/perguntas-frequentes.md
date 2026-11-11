@@ -44,11 +44,24 @@ Não. A Tapajós Inovações é o cenário empresarial fictício; os equipamento
 
 ### 03. Por que o projeto foi desenvolvido em torno de um NOC?
 
-Para integrar implantação de redes, disponibilidade dos serviços, monitoramento e diagnóstico em um mesmo ambiente documentado. O modelo NOC organiza essas atividades operacionais.
+Um Network Operations Center (NOC), ou Centro de Operações de Rede, permite centralizar a observação da disponibilidade, dos eventos operacionais e do desempenho da infraestrutura.
+
+O projeto utiliza esse conceito para integrar administração de redes, monitoramento e troubleshooting.
+
+Em vez de apresentar configurações isoladas, a infraestrutura demonstra como equipamentos de rede, sistemas operacionais, aplicações e plataformas de monitoramento se relacionam.
 
 ### 04. Quais problemas empresariais o projeto procura resolver?
 
-O cenário fictício apresenta quatro problemas: cabeamento instável, Wi-Fi sem proteção adequada, telefonia IP instável e monitoramento insuficiente. São requisitos do cenário, não falhas atuais comprovadas.
+O cenário empresarial simulado apresenta quatro desafios:
+
+- Cabeamento estruturado com problemas de confiabilidade.
+- Rede wireless com controles de segurança insuficientes.
+- Instabilidade na telefonia IP interna.
+- Ausência de monitoramento centralizado da infraestrutura.
+
+O projeto responde a essas necessidades por meio de cabeamento estruturado, segmentação de redes, serviços dedicados e monitoramento centralizado.
+
+Esses problemas fazem parte dos requisitos iniciais da empresa fictícia. Não representam falhas comprovadamente contínuas no laboratório físico.
 
 ### 05. A infraestrutura foi desenvolvida para utilização em produção?
 
@@ -242,7 +255,15 @@ O NOC utiliza um Dell OptiPlex 3020 com Intel i5-4590, aproximadamente 8 GB de R
 
 ### 27. Por que o Docker é utilizado no projeto?
 
-Docker executa aplicações de infraestrutura em containers, e o Compose define serviços e dependências. Isso não implica alta disponibilidade. Veja [serviços Docker](../containers/servicos-docker.md).
+O Docker oferece uma estrutura organizada para executar aplicações de infraestrutura em containers.
+
+O projeto utiliza containers para hospedar serviços de monitoramento, interfaces de gerenciamento, aplicações DNS, bancos de dados e componentes web.
+
+Essa abordagem separa os ambientes das aplicações e facilita a organização das dependências.
+
+A conteinerização não fornece automaticamente alta disponibilidade, isolamento completo de segurança ou proteção dos dados persistentes.
+
+Veja [serviços Docker](../containers/servicos-docker.md).
 
 ### 28. Quais containers estavam em execução durante a coleta?
 
@@ -276,7 +297,15 @@ Não como implantação verificada em um único comando. Os arquivos Compose pú
 
 ### 33. Por que Zabbix e Grafana são utilizados juntos?
 
-Zabbix coleta e processa itens de monitoramento; Grafana os apresenta por meio da integração com o Zabbix. Veja [Zabbix](../monitoramento/zabbix.md) e [Grafana](../monitoramento/grafana.md).
+O Zabbix é responsável pela coleta e pelo processamento das informações de monitoramento por meio de hosts, interfaces, itens, templates e triggers.
+
+O Grafana fornece uma camada de visualização através de sua integração com o Zabbix.
+
+A combinação permite centralizar a coleta das métricas e apresentá-las em dashboards organizados por equipamentos de rede, sistemas operacionais e serviços.
+
+O Grafana não substitui a coleta de informações realizada pelo Zabbix.
+
+Veja [Zabbix](../monitoramento/zabbix.md).
 
 ### 34. Qual era a dimensão do ambiente de monitoramento Zabbix?
 
@@ -296,11 +325,25 @@ Em 6 de novembro, três painéis de estações mostravam `ONLINE` e cinco `No da
 
 ### 38. Como o DHCP pode afetar o monitoramento do Zabbix?
 
-Seis endereços IPv4 divergiam entre os registros das estações e os cadastros do Zabbix. Alterações por DHCP podem contribuir, sem comprovar causa comum. Veja o [inventário](../estacoes/inventario-de-computadores.md).
+O laboratório utiliza DHCP para atribuir endereços IP às estações.
+
+A coleta identificou seis divergências entre os endereços fotografados nos computadores e os endereços registrados nos respectivos hosts do Zabbix.
+
+Quando um computador recebe outro endereço IP e o cadastro no Zabbix mantém o endereço anterior, a comunicação com o agente pode ser afetada.
+
+Mudanças de endereço DHCP podem explicar algumas divergências, sem identificar causa comum para todos os hosts indisponíveis.
 
 ### 39. O que significam os 113 itens não suportados no Zabbix?
 
-Os **113 itens não suportados** não forneciam dados válidos nas configurações de coleta registradas. A captura não estabelece a causa individual de cada item; o diagnóstico deve ser feito por item. Veja [Zabbix](../monitoramento/zabbix.md).
+Um item não suportado é um item de monitoramento que não consegue fornecer dados válidos através do método configurado.
+
+Entre as possíveis causas estão chaves incompatíveis, métricas não suportadas, interfaces incorretas, permissões insuficientes e problemas de configuração.
+
+A captura de 06/11 registra 113 itens nessa condição.
+
+Entretanto, a imagem não identifica individualmente as causas. Um diagnóstico específico depende da análise da configuração dos itens afetados.
+
+Veja [Zabbix](../monitoramento/zabbix.md).
 
 ### 40. Por que utilizar Uptime Kuma se o Zabbix já monitora disponibilidade?
 
