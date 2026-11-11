@@ -36,60 +36,27 @@ The FAQ complements the technical documentation. It does not replace configurati
 
 ### 01. What is Enterprise NOC — From Scratch?
 
-Enterprise NOC — From Scratch is a practical enterprise infrastructure project developed in a physical training laboratory.
-
-It integrates Cisco networking equipment, departmental workstations, Linux servers, containerized applications, IP telephony, DNS services, and centralized monitoring.
-
-The project documents infrastructure implementation, network segmentation, service integration, operational observations, and technical troubleshooting.
+A physical enterprise infrastructure laboratory covering Cisco networking, Linux, Docker services, VoIP, DNS and centralized monitoring. The repository contains configurations, inventories, troubleshooting records and dated evidence.
 
 ### 02. Is Tapajós Inovações a real company?
 
-No. Tapajós Inovações is the fictional organization used to establish the business requirements and corporate context of the project.
-
-The infrastructure laboratory itself is real.
-
-The equipment, physical installation, system inventories, and published monitoring screenshots represent technical activities performed in the training environment.
-
-The fictional business scenario must not be confused with an actual production deployment.
+No. Tapajós Inovações is the fictional business scenario; the equipment and laboratory records are real.
 
 ### 03. Why was the project designed around a Network Operations Center?
 
-A Network Operations Center (NOC) provides centralized visibility into infrastructure availability, operational events, and network performance.
-
-The project uses this concept to integrate network administration with monitoring and troubleshooting.
-
-Rather than documenting isolated configurations, the infrastructure demonstrates how network devices, operating systems, applications, and monitoring platforms relate to one another.
+To connect network deployment, service availability, monitoring and troubleshooting in one documented environment. The NOC model organizes those operational activities.
 
 ### 04. Which business problems does the project address?
 
-The simulated business scenario identifies four main challenges:
-
-- Unreliable structured cabling and physical connectivity.
-- Inadequate wireless network security.
-- Instability affecting internal IP telephony.
-- Limited infrastructure monitoring and operational visibility.
-
-The project responds to these requirements through structured cabling, network segmentation, dedicated services, and centralized monitoring.
-
-These initial problems are requirements of the fictional organization; the physical laboratory and dated records document the implementation work.
+The fictional scenario identifies four issues: unreliable cabling, insecure Wi-Fi, unstable IP telephony and insufficient monitoring. These are scenario requirements, not verified current failures.
 
 ### 05. Is the infrastructure intended for production use?
 
-The environment was developed for technical education and practical infrastructure implementation.
-
-It demonstrates enterprise networking concepts using real equipment and services, but it is not presented as a production-certified environment.
-
-Production adoption would require additional security validation, backup procedures, availability requirements, configuration reviews, and operational testing.
+No production certification is claimed. The project demonstrates deployment and monitoring on physical laboratory equipment; production use would require its own security, backup, resilience and operational validation.
 
 ### 06. Which period does the project documentation cover?
 
-The repository contains technical records from October and November 2026.
-
-Important evidence includes the Cisco switch configuration collected on November 4 and the infrastructure, workstation, service, and monitoring records collected on November 6.
-
-The documented laboratory development period extends through November 17, 2026.
-
-Individual screenshots and configuration records represent their respective collection dates, not a continuously updated infrastructure state.
+Records cover October–November 2026, including the November 4 switch configuration and November 6 infrastructure inventory and monitoring captures. Each record represents its collection date.
 
 **Related documentation:**
 
@@ -197,105 +164,35 @@ Those properties require corresponding configuration records and operational tes
 
 ### 13. What are the roles of the Cisco router and switch?
 
-The Cisco Catalyst C8200L is the routing platform associated with communication between the enterprise network segments.
-
-The Cisco Catalyst C9200L provides Ethernet switching and VLAN segmentation for departmental workstations, servers, telephones, and wireless devices.
-
-The switch configuration includes a trunk interface associated with the router connection.
-
-The router description is based on the recorded switch trunk and endpoint gateways rather than a complete C8200L configuration export.
+The C8200L is the router in the architecture; the C9200L records switching, VLAN assignments and the router-facing trunk. The complete C8200L configuration was not collected. See [router](../networking/router-c8200l.md) and [switch snapshot](../networking/switch-vlan-snapshot-2026-11-04.md).
 
 ### 14. Why does the infrastructure use seven VLANs?
 
-VLANs logically separate different departments and infrastructure functions at Layer 2.
-
-The documented organization is:
-
-| VLAN | Purpose |
-|---|---|
-| 10 | IT / NOC |
-| 20 | Accounting |
-| 30 | Finance |
-| 40 | Sales |
-| 50 | VoIP and authentication services |
-| 60 | Corporate Wi-Fi |
-| 70 | IoT |
-
-This structure helps organize traffic and provides a foundation for applying network access policies.
-
-VLAN separation alone does not guarantee security between routed networks.
+VLANs **10/20/30/40/50/60/70** separate IT/NOC, Accounting, Finance, Sales, VoIP/Authentication, corporate Wi-Fi and IoT at Layer 2. See the [VLAN inventory](../networking/vlans.md).
 
 ### 15. What is the purpose of the trunk between the router and switch?
 
-A trunk interface can carry traffic associated with multiple VLANs using VLAN tagging.
-
-The collected Catalyst C9200L configuration identifies `Gi1/0/1` as the router-facing trunk.
-
-This supports the intended multi-VLAN architecture.
-
-However, the switch-side configuration does not independently establish the router's corresponding interface configuration or successful communication between all VLANs.
+A trunk can carry multiple tagged VLANs. Switch interface `Gi1/0/1` is configured as the router-facing trunk; its allowed-VLAN list and the router-side interface were not captured. See the [switch snapshot](../networking/switch-vlan-snapshot-2026-11-04.md).
 
 ### 16. How are the switch interfaces distributed?
 
-The November 4 configuration records departmental and infrastructure port assignments.
-
-Interfaces `Gi1/0/2–3` are associated with VLAN 10, `Gi1/0/4–6` with VLAN 20, `Gi1/0/7–8` with VLAN 30, and `Gi1/0/9–10` with VLAN 40.
-
-The remaining documented assignments include VLAN 50 for voice services, `Gi1/0/14` for IoT, and `Gi1/0/15` for corporate Wi-Fi.
-
-The detailed interface inventory is maintained separately.
+The November 4 snapshot assigns `Gi1/0/2–3` to VLAN 10, `4–6` to 20, `7–8` to 30, `9–10` to 40, `11–13` to 50, `14` to 70 and `15` to 60. See the [port map](../networking/switch-port-map.md).
 
 ### 17. Why is interface Gi1/0/11 treated differently?
 
-The historical configuration for `Gi1/0/11` includes:
-
-```cisco
-switchport access vlan 50
-spanning-tree portfast trunk
-```
-
-Unlike the other documented access interfaces, it does not contain an explicit `switchport mode access` statement.
-
-The configuration also includes a PortFast trunk command.
-
-Therefore, the records preserve the VLAN 50 association without claiming an operating mode that was not independently established.
+`Gi1/0/11` contains `switchport access vlan 50` and `spanning-tree portfast trunk`, but no explicit `switchport mode access`. Its effective switching mode is not established by that snapshot. See the [port map](../networking/switch-port-map.md).
 
 ### 18. How are IP addresses assigned to workstations?
 
-The laboratory uses DHCP for workstation addressing.
-
-The collected workstation configurations identify default gateways including:
-
-| VLAN | Observed gateway |
-|---|---|
-| 10 | `192.168.10.1` |
-| 20 | `192.168.20.1` |
-| 30 | `192.168.30.1` |
-| 40 | `192.168.40.1` |
-
-These are observed endpoint settings.
-
-The collected records do not establish the complete DHCP server configuration, address pools, or relay mechanisms.
+Workstations use DHCP. Captured endpoint gateways were `192.168.10.1`, `.20.1`, `.30.1` and `.40.1`; the DHCP server and pools were not established. See [VLANs](../networking/vlans.md).
 
 ### 19. Are departmental VLANs completely isolated?
 
-The intended architecture restricts unauthorized communication between departments and limits access to administrative resources.
-
-However, a VLAN configuration is not equivalent to an independently verified access-control policy.
-
-The available router evidence does not include a complete ACL configuration or comprehensive inter-VLAN access tests.
-
-Consequently, the project documents departmental isolation as an architectural requirement rather than a fully demonstrated security result.
+The switch VLANs provide Layer 2 separation. Complete Layer 3 isolation and router ACL enforcement were not verified; those restrictions remain architectural requirements. See [VLANs](../networking/vlans.md).
 
 ### 20. Is inter-VLAN routing and NAT fully documented?
 
-No.
-
-The available evidence identifies the Cisco router, switch-side trunk, VLAN design, observed workstation gateways, and router monitoring dashboards.
-
-It does not include the complete C8200L running configuration.
-
-The router's exact subinterfaces, NAT translation rules, external connectivity configuration, and successful forwarding between every VLAN are not independently established by the collected records.
+No. The records document the C8200L hardware, the switch-side trunk and observed gateways, but not complete router subinterfaces, NAT rules or end-to-end routing tests. See [C8200L](../networking/router-c8200l.md).
 
 **Related documentation:**
 
@@ -311,70 +208,23 @@ The router's exact subinterfaces, NAT translation rules, external connectivity c
 
 ### 21. Why are two TP-Link Archer AX53 devices used?
 
-The infrastructure separates corporate wireless connectivity from IoT connectivity.
-
-One TP-Link Archer AX53 is associated with VLAN 60, while another dedicated device is associated with VLAN 70.
-
-The devices belong to different physical wireless segments in the laboratory design.
-
-Using separate equipment allows the two network functions to be documented and administered independently.
+They provide separate corporate Wi-Fi (VLAN 60) and IoT (VLAN 70) roles. The devices are distinct physical Archer AX53 units.
 
 ### 22. Which switch interfaces connect the wireless networks?
 
-The November 4 Catalyst C9200L configuration identifies:
-
-| Interface | VLAN | Function |
-|---|---|---|
-| `Gi1/0/15` | 60 | Corporate Wi-Fi |
-| `Gi1/0/14` | 70 | IoT connectivity |
-
-These assignments are visible in the recorded switch configuration.
-
-The switch snapshot records VLAN assignments, while wireless-device settings and router ACL enforcement belong to separate configuration records.
+The C9200L records corporate Wi-Fi on `Gi1/0/15` (VLAN 60) and IoT on `Gi1/0/14` (VLAN 70). See the [port map](../networking/switch-port-map.md).
 
 ### 23. How is Amazon Alexa integrated into the network?
 
-The laboratory includes an Amazon Alexa associated with the dedicated IoT wireless network.
-
-The documented connectivity is:
-
-```text
-Amazon Alexa
-     |
-   Wi-Fi
-     |
-TP-Link Archer AX53
-     |
-  Ethernet
-     |
-Cisco Catalyst C9200L
-     |
-   VLAN 70
-```
-
-The topology describes the physical wireless-to-switch relationship.
-
-It does not independently establish the Alexa device's IP address or complete application connectivity.
+Amazon Alexa is associated with the dedicated IoT Archer AX53, connected to the C9200L on VLAN 70. Alexa's IP address and application-level connectivity were not recorded. See [IoT](../networking/iot-vlan70.md).
 
 ### 24. Do the wireless routers operate in access point mode?
 
-The collected material identifies the wireless equipment and VLANs without an export of the devices' operating settings.
-
-A wireless device configured as an access point may bridge clients into the associated network segment.
-
-A device operating as a router may instead use NAT and provide a separate client subnet.
-
-Without the corresponding configuration export, the project's documentation does not attribute either behavior to the installed equipment.
+Their configurations were not captured. AP mode could bridge clients onto the upstream VLAN; router/NAT mode could place them on separate subnets. Neither mode is confirmed. See [Wi-Fi](../networking/corporate-wifi-vlan60.md) and [IoT](../networking/iot-vlan70.md).
 
 ### 25. Does corporate Wi-Fi authentication use FreeRADIUS?
 
-The infrastructure includes a FreeRADIUS server and a documented network authentication architecture.
-
-However, the collected evidence does not independently demonstrate successful authentication between the photographed Archer AX53 and FreeRADIUS.
-
-The wireless equipment and FreeRADIUS server are documented separately; the material contains no wireless RADIUS transaction log.
-
-Authentication behavior must be supported by configuration and transaction evidence before it can be represented as operationally verified.
+A FreeRADIUS service is documented in VLAN 50, but there is no AX53 RADIUS client configuration or successful wireless-authentication log to confirm that integration. See [Asterisk/FreeRADIUS](../services/asterisk-freeradius.md).
 
 **Related documentation:**
 
@@ -388,88 +238,31 @@ Authentication behavior must be supported by configuration and transaction evide
 
 ### 26. What is the main NOC server configuration?
 
-The principal infrastructure computer is a Dell OptiPlex 3020 running Debian GNU/Linux 13.
-
-Its documented specifications include:
-
-| Component | Specification |
-|---|---|
-| Processor | Intel Core i5-4590 |
-| Memory | Approximately 8 GB |
-| Operating system | Debian 13 |
-| IPv4 address | `192.168.10.12/24` |
-| Network segment | VLAN 10 |
-
-This computer hosts the principal Docker environment and several infrastructure services.
+The NOC host is a Dell OptiPlex 3020 with Intel i5-4590, approximately 8 GB RAM, Debian 13, and `192.168.10.12/24`. It hosts the main Docker/monitoring services. See [inventory](../endpoints/workstation-inventory.md).
 
 ### 27. Why is Docker used in the project?
 
-Docker provides an organized environment for deploying infrastructure applications as containers.
-
-The project uses containers to host monitoring services, management interfaces, DNS applications, databases, and web components.
-
-This approach separates application environments and simplifies the organization of service dependencies.
-
-Containerization does not automatically provide high availability, complete security isolation, or persistent data protection.
+Docker runs the infrastructure applications as containers, with Compose defining services and dependencies. It does not imply high availability. See [Docker services](../containers/docker-services.md).
 
 ### 28. Which containers were running during evidence collection?
 
-The November 6 inventory recorded ten running containers:
-
-1. `reverse-proxy`
-2. `zabbix-web`
-3. `zabbix-server`
-4. `uptime-kuma`
-5. `zabbix-db`
-6. `grafana`
-7. `zabbix-agent`
-8. `site-estatico`
-9. `pihole`
-10. `portainer`
-
-These names come from the recorded Docker inventory.
-
-The snapshot confirms their running state at collection time, not continuous operation.
+Ten containers were recorded as running on November 6: `reverse-proxy`, `zabbix-web`, `zabbix-server`, `uptime-kuma`, `zabbix-db`, `grafana`, `zabbix-agent`, `site-estatico`, `pihole` and `portainer`. See [Docker inventory](../containers/docker-services.md).
 
 ### 29. What are the differences between Docker Compose and Portainer?
 
-Docker Compose defines and manages multi-container applications through declarative configuration files.
-
-Portainer provides a graphical interface for inspecting and managing Docker environments.
-
-In the laboratory, the two tools complement each other.
-
-Compose describes deployment structure, while Portainer provides operational visibility into containers, images, and networks.
+Compose defines multi-container deployments in YAML; Portainer provides a graphical interface for Docker administration. Both are present in the laboratory.
 
 ### 30. Why are Nginx and Apache both present?
 
-They perform different functions.
-
-Nginx is used as a reverse proxy, providing a centralized access layer for selected web services.
-
-Apache HTTP Server is used to host a static corporate website through the `site-estatico` container.
-
-This organization separates the responsibility of routing web requests from serving the website content.
+Nginx acts as the reverse proxy; Apache serves the static corporate site through `site-estatico`. See [Docker services](../containers/docker-services.md).
 
 ### 31. What is MariaDB used for?
 
-MariaDB provides database storage for the Zabbix monitoring environment.
-
-The documented Docker deployment contains a dedicated `zabbix-db` container.
-
-Zabbix Server processes monitoring information, while the database supports the storage requirements of the monitoring platform.
-
-The project's architecture distinguishes the database from the monitoring interface and visualization tools.
+MariaDB stores Zabbix monitoring data in the `zabbix-db` container. See [Docker services](../containers/docker-services.md).
 
 ### 32. Can the Docker infrastructure be reproduced directly from GitHub?
 
-The repository contains sanitized Docker Compose files and supporting configuration examples.
-
-However, these files are not presented as a complete, independently validated, one-command reproduction of the laboratory.
-
-Local certificates, secrets, persistent application data, machine-specific settings, and other prerequisites are excluded from the public configuration.
-
-A new deployment requires review and adaptation of those dependencies.
+Not as a verified one-command deployment. Public Compose files are sanitized and omit local secrets, certificates, persistent data and machine-specific prerequisites. See [Docker services](../containers/docker-services.md).
 
 **Related documentation:**
 
@@ -483,91 +276,35 @@ A new deployment requires review and adaptation of those dependencies.
 
 ### 33. Why are Zabbix and Grafana used together?
 
-Zabbix is responsible for collecting and processing monitoring information through configured hosts, interfaces, items, templates, and triggers.
-
-Grafana provides a separate visualization layer through its Zabbix integration.
-
-Combining these tools allows infrastructure metrics to be collected centrally and displayed through dashboards organized by network equipment, operating systems, and services.
-
-Grafana does not replace the underlying monitoring data collection performed by Zabbix.
+Zabbix collects and processes monitoring items; Grafana visualizes them through the Zabbix integration. See [Zabbix](../monitoring/zabbix-monitoring.md) and [Grafana](../monitoring/grafana-monitoring.md).
 
 ### 34. How extensive was the Zabbix monitoring environment?
 
-The November 6 system information screenshot records:
-
-| Metric | Value |
-|---|---:|
-| Registered hosts | 12 |
-| Total items | 1,820 |
-| Enabled items | 1,698 |
-| Unsupported items | 113 |
-| Triggers in problem state | 34 |
-
-These are historical system measurements.
-
-The presence of unsupported items and active problems demonstrates that the monitoring environment still contained operational issues requiring investigation.
+The November 6 snapshot recorded **12 hosts, 1,820 items, 1,698 enabled items, 113 unsupported items and 34 triggers in problem state**. See [Zabbix evidence](../monitoring/zabbix-monitoring.md).
 
 ### 35. How are Cisco devices and operating systems monitored?
 
-The Cisco router and switch are represented through SNMP monitoring interfaces.
-
-The Linux and Windows systems use Zabbix Agent interfaces for system monitoring.
-
-SNMP provides access to supported network-device metrics, while agents collect operating-system information.
-
-The available dashboards include CPU usage, memory consumption, network traffic, interface status, and service indicators.
+Cisco equipment uses SNMP interfaces in Zabbix; Linux/Windows hosts use Zabbix Agent interfaces. Dashboards include CPU, memory, traffic and interface status. See [Zabbix](../monitoring/zabbix-monitoring.md).
 
 ### 36. Was the Cisco switch SNMP problem resolved?
 
-The November 4 troubleshooting record documents an SNMP connectivity problem caused by inconsistent community values between the switch and Zabbix.
-
-The configuration was aligned, a host-level `{$SNMP_COMMUNITY}` macro was configured, and the monitoring configuration cache was reloaded.
-
-The documented result was restored SNMP availability and interface discovery.
-
-This is a recorded troubleshooting case, distinct from problems for which no completed resolution was documented.
+Yes, for the **November 4 recorded SNMP case**: the community mismatch was corrected, `{$SNMP_COMMUNITY}` was configured and the monitoring cache refreshed, restoring discovery. This does not imply that unrelated later alerts were resolved. See [SNMP case study](../monitoring/snmp-troubleshooting.md).
 
 ### 37. Why did some Grafana workstation panels display `No data`?
 
-The November 6 Grafana evidence includes eight Windows workstations.
-
-Three were displayed as `ONLINE`, while five panels showed `No data`.
-
-A missing value does not necessarily mean that the corresponding computer was powered off.
-
-Possible explanations include unavailable monitoring agents, address mismatches, item configuration problems, or missing data within the selected time range.
-
-The screenshots record the affected panels without assigning a common cause to all of them.
+On November 6, three workstation panels showed `ONLINE` and five `No data`. Missing samples may arise from agents, host addressing, item configuration or time-range selection; the screenshots do not determine one cause. See [Grafana](../monitoring/grafana-monitoring.md).
 
 ### 38. How can DHCP affect Zabbix monitoring?
 
-The laboratory uses DHCP for workstation addressing.
-
-The evidence collection identified six differences between photographed workstation addresses and the addresses registered in Zabbix.
-
-If a monitored host changes its IP address while the Zabbix host configuration retains the previous address, agent communication can be affected.
-
-DHCP address changes may explain some historical inconsistencies, without being assigned as the cause of every unavailable host.
+Six workstation IPv4 addresses differed between captured endpoint data and Zabbix host registrations. DHCP changes are a possible contributor, not a proven common cause. See [workstation inventory](../endpoints/workstation-inventory.md).
 
 ### 39. What do the 113 unsupported Zabbix items indicate?
 
-An unsupported item is a monitoring item that cannot currently provide valid data through its configured collection method.
-
-Possible causes include incompatible keys, unsupported device metrics, incorrect interfaces, insufficient permissions, or configuration errors.
-
-The November 6 screenshot records 113 unsupported items.
-
-However, the screenshot does not individually identify the causes of those items. A specific diagnosis requires inspecting the affected monitoring configurations.
+The **113 unsupported items** could not produce valid data under their recorded collection configurations. Their individual causes were not established by the screenshot; each requires item-level diagnosis. See [Zabbix](../monitoring/zabbix-monitoring.md).
 
 ### 40. Why is Uptime Kuma used if Zabbix already monitors availability?
 
-The two applications provide complementary monitoring functions.
-
-Zabbix supports infrastructure metrics, triggers, and host-level monitoring.
-
-Uptime Kuma focuses on availability checks and their event history for selected targets.
-
-The laboratory's Uptime Kuma screenshot records four monitors, rather than individual coverage of every container, workstation and network device.
+Zabbix collects broader infrastructure metrics and alerts; Uptime Kuma performs targeted availability checks and records events. The captured Kuma dashboard included four monitors. See [DNS and availability](../services/dns-and-availability.md).
 
 **Related documentation:**
 
@@ -582,75 +319,27 @@ The laboratory's Uptime Kuma screenshot records four monitors, rather than indiv
 
 ### 41. What is Asterisk used for?
 
-Asterisk provides the laboratory's IP telephony functionality.
-
-The documented configuration uses SIP/PJSIP for endpoint registration and call signaling, with RTP supporting voice media transport.
-
-The server is associated with VLAN 50 and is hosted on a dedicated Linux computer.
-
-The technical documentation also describes an internal dialplan for extension routing and testing.
+Asterisk provides the documented SIP/PJSIP IP telephony service on the Debian voice server in VLAN 50. See [Asterisk/FreeRADIUS](../services/asterisk-freeradius.md).
 
 ### 42. Which telephone extensions are configured?
 
-The documented telephone environment contains two Grandstream devices:
-
-| Extension | Department | IP address |
-|---|---|---|
-| 1001 | Sales | `192.168.50.10` |
-| 1002 | IT | `192.168.50.11` |
-
-The November 6 photographs confirm the presence of both physical devices and their displayed network addresses.
-
-The exact telephone models were not reliably established from the available photographs.
+Extensions **1001 (Sales)** and **1002 (IT)** are associated with Grandstream phones at `192.168.50.10` and `192.168.50.11`. See [Asterisk](../services/asterisk-freeradius.md).
 
 ### 43. Were successful telephone calls independently verified?
 
-The technical records describe the Asterisk configuration, extensions, and dialplan.
-
-An earlier technical report identifies the extensions as available during its observation.
-
-However, the collected evidence does not include independent call recordings or call-detail records proving successful execution of every configured test.
-
-Therefore, the configuration is documented without claiming a complete end-to-end telephony validation.
+No independent call-detail records or recordings verify successful calls between both photographed phones. The configuration and extensions are documented. See [voice services](../services/asterisk-freeradius.md).
 
 ### 44. What is the purpose of FreeRADIUS?
 
-FreeRADIUS provides centralized network authentication functionality.
-
-The documented server configuration includes RADIUS and authentication technologies such as EAP-PEAP and MSCHAPv2.
-
-It runs alongside Asterisk on the Linux computer associated with VLAN 50.
-
-The available technical records describe the authentication architecture but do not independently verify successful end-to-end authentication from the corporate wireless equipment.
+FreeRADIUS supplies network authentication services on the VLAN 50 Debian host. Successful authentication of corporate Wi-Fi clients through the AX53 was not independently verified. See [FreeRADIUS](../services/asterisk-freeradius.md).
 
 ### 45. What does Pi-hole contribute to the infrastructure?
 
-Pi-hole provides DNS filtering and query visibility.
-
-The November 6 dashboard records:
-
-| Metric | Observed value |
-|---|---:|
-| DNS queries | 12,293 |
-| Blocked queries | 1,827 |
-| Blocked percentage | 14.9% |
-| Active clients | 13 |
-
-These figures describe the selected dashboard period.
-
-They do not establish complete DNS filtering coverage across every VLAN or client.
+Pi-hole filters DNS queries and records client/domain activity. The November 6 dashboard showed **12,293 queries, 1,827 blocked (14.9%) and 13 active clients** in its displayed interval. See [DNS evidence](../services/dns-and-availability.md).
 
 ### 46. Does Uptime Kuma guarantee service availability?
 
-No.
-
-The collected Uptime Kuma dashboard displays four configured monitors, with all four shown as `Up` at the time of the screenshot.
-
-The application also contains historical availability events, including unsuccessful checks.
-
-A positive availability indicator only represents the configured monitoring conditions and reporting period.
-
-It does not guarantee continuous availability or the correct operation of every application function.
+No. Kuma recorded checks for **four monitored targets**; an observed successful check is not a guarantee of ongoing application health or an SLA. See [availability monitoring](../services/dns-and-availability.md).
 
 **Related documentation:**
 
@@ -663,13 +352,7 @@ It does not guarantee continuous availability or the correct operation of every 
 
 ### 47. Does a green monitoring indicator prove that a service is working correctly?
 
-Not necessarily.
-
-A green indicator usually means that a particular monitoring condition was satisfied.
-
-For example, a service may respond to an HTTP request while another application function remains unavailable.
-
-Infrastructure monitoring results should be interpreted together with service-specific checks, configuration evidence, logs, and operational tests.
+No. A green result confirms only the monitored condition. Functional checks and logs are still needed to establish application behavior.
 
 ### 48. Why are credentials and sensitive configurations excluded from GitHub?
 

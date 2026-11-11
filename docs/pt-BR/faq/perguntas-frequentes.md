@@ -36,60 +36,27 @@ O FAQ complementa a documentação do projeto. Ele não substitui os registros d
 
 ### 01. O que é o Enterprise NOC — From Scratch?
 
-O Enterprise NOC — From Scratch é um projeto prático de infraestrutura empresarial desenvolvido em laboratório físico de treinamento.
-
-Ele integra equipamentos de rede Cisco, estações de trabalho, servidores Linux, aplicações conteinerizadas, telefonia IP, serviços DNS e monitoramento centralizado.
-
-O projeto documenta a implantação da infraestrutura, a segmentação da rede, a integração entre serviços, as observações operacionais e as atividades de diagnóstico técnico.
+Laboratório físico de infraestrutura corporativa com redes Cisco, Linux, Docker, VoIP, DNS e monitoramento centralizado. O repositório reúne configurações, inventários, registros de diagnóstico e evidências datadas.
 
 ### 02. A Tapajós Inovações é uma empresa real?
 
-Não. A Tapajós Inovações é uma organização fictícia criada para estabelecer os requisitos empresariais e contextualizar o projeto.
-
-Entretanto, o laboratório de infraestrutura é real.
-
-Os equipamentos, a instalação física, os inventários e as capturas de monitoramento representam atividades técnicas realizadas no ambiente de treinamento.
-
-O cenário empresarial fictício não deve ser confundido com uma implantação corporativa em produção.
+Não. A Tapajós Inovações é o cenário empresarial fictício; os equipamentos e os registros do laboratório são reais.
 
 ### 03. Por que o projeto foi desenvolvido em torno de um NOC?
 
-Um Network Operations Center (NOC), ou Centro de Operações de Rede, permite centralizar a observação da disponibilidade, dos eventos operacionais e do desempenho da infraestrutura.
-
-O projeto utiliza esse conceito para integrar administração de redes, monitoramento e troubleshooting.
-
-Em vez de apresentar configurações isoladas, a infraestrutura demonstra como equipamentos de rede, sistemas operacionais, aplicações e plataformas de monitoramento se relacionam.
+Para integrar implantação de redes, disponibilidade dos serviços, monitoramento e diagnóstico em um mesmo ambiente documentado. O modelo NOC organiza essas atividades operacionais.
 
 ### 04. Quais problemas empresariais o projeto procura resolver?
 
-O cenário empresarial simulado apresenta quatro desafios:
-
-- Cabeamento estruturado com problemas de confiabilidade.
-- Rede wireless com controles de segurança insuficientes.
-- Instabilidade na telefonia IP interna.
-- Ausência de monitoramento centralizado da infraestrutura.
-
-O projeto responde a essas necessidades por meio de cabeamento estruturado, segmentação de redes, serviços dedicados e monitoramento centralizado.
-
-Esses problemas fazem parte dos requisitos iniciais da empresa fictícia. Não representam falhas comprovadamente contínuas no laboratório físico.
+O cenário fictício apresenta quatro problemas: cabeamento instável, Wi-Fi sem proteção adequada, telefonia IP instável e monitoramento insuficiente. São requisitos do cenário, não falhas atuais comprovadas.
 
 ### 05. A infraestrutura foi desenvolvida para utilização em produção?
 
-O ambiente foi desenvolvido para educação técnica e implementação prática de infraestrutura.
-
-Ele demonstra conceitos de redes empresariais utilizando equipamentos e serviços reais, mas não é apresentado como uma infraestrutura certificada para produção.
-
-Uma implantação em produção exigiria validações adicionais de segurança, procedimentos de backup, requisitos de disponibilidade, revisão de configurações e testes operacionais.
+Não há certificação de ambiente produtivo. O projeto demonstra implantação e monitoramento em equipamentos físicos de laboratório; produção exigiria validação própria de segurança, backup, resiliência e operação.
 
 ### 06. Qual é o período abrangido pela documentação?
 
-O repositório contém registros técnicos produzidos em outubro e novembro de 2026.
-
-Entre as principais evidências estão a configuração do switch Cisco coletada em 04/11 e os inventários, registros de serviços e capturas de monitoramento de 06/11.
-
-O período documentado de desenvolvimento do laboratório se estende até 17/11/2026.
-
-Cada fotografia, captura ou configuração representa seu respectivo momento de coleta, não necessariamente o estado atual da infraestrutura.
+Os registros abrangem outubro e novembro de 2026, incluindo a configuração do switch de 4 de novembro e os inventários e dashboards coletados em 6 de novembro. Cada registro corresponde à sua data de coleta.
 
 **Documentação relacionada:**
 
@@ -197,105 +164,35 @@ Essas propriedades dependem de configurações e testes operacionais corresponde
 
 ### 13. Qual é a função do roteador e do switch Cisco?
 
-O Cisco Catalyst C8200L é a plataforma de roteamento associada à comunicação entre os segmentos da rede corporativa.
-
-O Cisco Catalyst C9200L fornece comutação Ethernet e segmentação por VLANs para estações, servidores, telefones IP e equipamentos wireless.
-
-A configuração do switch contém uma interface trunk associada à conexão com o roteador.
-
-A configuração completa do lado do roteador não foi incluída nas evidências disponíveis.
+O C8200L é o roteador da arquitetura; o C9200L documenta comutação, VLANs e o trunk voltado ao roteador. Não foi coletada a configuração completa do C8200L. Veja [roteador](../redes/roteador-c8200l.md) e [registro do switch](../redes/registro-switch-vlans-2026-11-04.md).
 
 ### 14. Por que a infraestrutura utiliza sete VLANs?
 
-As VLANs permitem separar logicamente departamentos e serviços da infraestrutura em camada 2.
-
-A organização documentada é:
-
-| VLAN | Finalidade |
-|---|---|
-| 10 | TI / NOC |
-| 20 | Contabilidade |
-| 30 | Financeiro |
-| 40 | Vendas |
-| 50 | VoIP e autenticação |
-| 60 | Wi-Fi corporativo |
-| 70 | IoT |
-
-Essa estrutura organiza o tráfego e estabelece uma base para a aplicação de políticas de acesso.
-
-A separação por VLAN, isoladamente, não garante segurança entre redes que possuem roteamento.
+As VLANs **10/20/30/40/50/60/70** separam TI/NOC, Contabilidade, Financeiro, Vendas, VoIP/Autenticação, Wi-Fi corporativo e IoT em camada 2. Veja o [inventário de VLANs](../redes/vlans.md).
 
 ### 15. Qual é a função do trunk entre o roteador e o switch?
 
-Uma interface trunk pode transportar tráfego associado a diferentes VLANs utilizando identificação por tags.
-
-A configuração coletada do Catalyst C9200L identifica a interface `Gi1/0/1` como trunk conectado ao roteador.
-
-Isso sustenta a arquitetura prevista para múltiplas VLANs.
-
-A captura registra o trunk no lado do switch, sem incluir a configuração correspondente do C8200L.
+Um trunk pode transportar várias VLANs identificadas por tags. A interface `Gi1/0/1` do switch está configurada como trunk para o roteador; a lista de VLANs permitidas e a interface correspondente no roteador não foram coletadas. Veja o [registro do switch](../redes/registro-switch-vlans-2026-11-04.md).
 
 ### 16. Como as interfaces do switch estão distribuídas?
 
-A configuração de 04/11 registra atribuições para os departamentos e serviços da infraestrutura.
-
-As interfaces `Gi1/0/2–3` estão associadas à VLAN 10, `Gi1/0/4–6` à VLAN 20, `Gi1/0/7–8` à VLAN 30 e `Gi1/0/9–10` à VLAN 40.
-
-As demais atribuições documentadas incluem a VLAN 50 para telefonia, `Gi1/0/14` para IoT e `Gi1/0/15` para Wi-Fi corporativo.
-
-O mapeamento detalhado é mantido em documento específico.
+A captura de 4 de novembro atribui `Gi1/0/2–3` à VLAN 10, `4–6` à 20, `7–8` à 30, `9–10` à 40, `11–13` à 50, `14` à 70 e `15` à 60. Veja o [mapa de portas](../redes/mapa-de-portas-switch.md).
 
 ### 17. Por que a interface Gi1/0/11 recebe uma observação especial?
 
-A configuração histórica da interface `Gi1/0/11` apresenta:
-
-```cisco
-switchport access vlan 50
-spanning-tree portfast trunk
-```
-
-Diferentemente das outras interfaces de acesso documentadas, ela não apresenta o comando explícito `switchport mode access`.
-
-Além disso, possui uma instrução de PortFast para trunk.
-
-Por isso, a documentação preserva a associação à VLAN 50 sem afirmar um modo operacional que não tenha sido estabelecido de forma independente.
+A `Gi1/0/11` contém `switchport access vlan 50` e `spanning-tree portfast trunk`, mas não apresenta `switchport mode access` explícito. A captura não estabelece seu modo operacional efetivo. Veja o [mapa de portas](../redes/mapa-de-portas-switch.md).
 
 ### 18. Como os endereços IP são atribuídos às estações?
 
-O laboratório utiliza DHCP para o endereçamento dos computadores.
-
-As configurações de rede coletadas identificam gateways padrão como:
-
-| VLAN | Gateway observado |
-|---|---|
-| 10 | `192.168.10.1` |
-| 20 | `192.168.20.1` |
-| 30 | `192.168.30.1` |
-| 40 | `192.168.40.1` |
-
-Esses valores correspondem às configurações observadas nas estações.
-
-As capturas registram gateways nas estações; pools, servidores e mecanismos de relay DHCP não integram esse inventário.
+As estações utilizam DHCP. Os gateways observados foram `192.168.10.1`, `.20.1`, `.30.1` e `.40.1`; o servidor e os pools DHCP não foram estabelecidos. Veja [VLANs](../redes/vlans.md).
 
 ### 19. As VLANs departamentais estão completamente isoladas?
 
-A arquitetura prevista restringe a comunicação não autorizada entre departamentos e limita o acesso aos recursos administrativos.
-
-Entretanto, uma configuração de VLAN não equivale à comprovação de uma política de controle de acesso.
-
-As evidências disponíveis do roteador não incluem uma configuração completa de ACLs nem testes abrangentes de comunicação entre VLANs.
-
-Por isso, o isolamento departamental é documentado como requisito arquitetural, e não como uma implementação de segurança integralmente validada.
+As VLANs do switch separam os segmentos em camada 2. O isolamento completo em camada 3 e a aplicação das ACLs não foram verificados; essas restrições permanecem requisitos arquiteturais. Veja [VLANs](../redes/vlans.md).
 
 ### 20. O roteamento entre VLANs e o NAT estão completamente documentados?
 
-Não.
-
-As evidências identificam o roteador Cisco, o trunk no lado do switch, o projeto das VLANs, os gateways observados e os dashboards de monitoramento do roteador.
-
-Entretanto, não incluem o `running-config` completo do C8200L.
-
-As subinterfaces exatas, regras de NAT, configuração de conectividade externa e comunicação entre todas as VLANs não foram estabelecidas de forma independente pelos registros coletados.
+Não. Há registros do C8200L físico, do trunk no lado do switch e dos gateways observados, mas não das subinterfaces completas do roteador, regras NAT ou testes de roteamento ponta a ponta. Veja [C8200L](../redes/roteador-c8200l.md).
 
 **Documentação relacionada:**
 
@@ -311,70 +208,23 @@ As subinterfaces exatas, regras de NAT, configuração de conectividade externa 
 
 ### 21. Por que são utilizados dois TP-Link Archer AX53?
 
-A infraestrutura separa a conectividade wireless corporativa da conectividade IoT.
-
-Um TP-Link Archer AX53 está associado à VLAN 60, enquanto outro equipamento dedicado está associado à VLAN 70.
-
-Os dois dispositivos representam segmentos físicos wireless distintos no projeto do laboratório.
-
-Essa separação permite documentar e administrar as funções das redes de maneira independente.
+Eles atendem funções distintas: Wi-Fi corporativo (VLAN 60) e IoT (VLAN 70). São dois Archer AX53 físicos separados.
 
 ### 22. Quais interfaces do switch conectam as redes wireless?
 
-A configuração do Catalyst C9200L de 04/11 identifica:
-
-| Interface | VLAN | Função |
-|---|---|---|
-| `Gi1/0/15` | 60 | Wi-Fi corporativo |
-| `Gi1/0/14` | 70 | Conectividade IoT |
-
-Essas atribuições aparecem na configuração registrada do switch.
-
-A captura do switch registra as VLANs; parâmetros wireless e políticas do roteador pertencem a registros diferentes.
+O C9200L registra Wi-Fi corporativo em `Gi1/0/15` (VLAN 60) e IoT em `Gi1/0/14` (VLAN 70). Veja o [mapa de portas](../redes/mapa-de-portas-switch.md).
 
 ### 23. Como a Amazon Alexa está integrada à infraestrutura?
 
-O laboratório possui uma Amazon Alexa associada à rede wireless dedicada aos dispositivos IoT.
-
-A conectividade documentada é:
-
-```text
-Amazon Alexa
-     |
-   Wi-Fi
-     |
-TP-Link Archer AX53
-     |
-  Ethernet
-     |
-Cisco Catalyst C9200L
-     |
-   VLAN 70
-```
-
-A topologia descreve a relação física entre o dispositivo wireless e o switch.
-
-O inventário identifica a Alexa e sua rede IoT, sem registrar seu endereço IP ou testes com aplicações externas.
+A Amazon Alexa está associada ao Archer AX53 de IoT, ligado ao C9200L na VLAN 70. O endereço IP da Alexa e a conectividade em nível de aplicação não foram registrados. Veja [IoT](../redes/iot-vlan70.md).
 
 ### 24. Os roteadores wireless funcionam em modo access point?
 
-Os registros identificam os equipamentos e as VLANs, mas não incluem exportações das configurações internas dos roteadores wireless.
-
-Um dispositivo configurado como access point pode conectar seus clientes ao segmento de rede associado.
-
-Já um equipamento funcionando como roteador pode utilizar NAT e disponibilizar uma sub-rede própria aos clientes.
-
-Sem a exportação das configurações correspondentes, a documentação não atribui nenhum desses comportamentos aos equipamentos instalados.
+As configurações não foram coletadas. O modo AP pode conectar clientes à VLAN upstream; o modo roteador/NAT pode usar sub-redes próprias. Nenhum modo foi confirmado. Veja [Wi-Fi](../redes/wifi-corporativo-vlan60.md) e [IoT](../redes/iot-vlan70.md).
 
 ### 25. A autenticação do Wi-Fi corporativo utiliza FreeRADIUS?
 
-A infraestrutura possui um servidor FreeRADIUS e uma arquitetura documentada de autenticação de rede.
-
-Os registros descrevem o Archer AX53 e o servidor FreeRADIUS, sem logs de uma autenticação wireless entre eles.
-
-A autenticação wireless/RADIUS é uma função distinta da presença desses componentes no inventário.
-
-O comportamento da autenticação precisa ser sustentado por configurações e registros de transações antes de ser apresentado como operacionalmente validado.
+Há um serviço FreeRADIUS documentado na VLAN 50, mas não há configuração de cliente RADIUS no AX53 ou logs de autenticação wireless para confirmar essa integração. Veja [Asterisk/FreeRADIUS](../servicos/asterisk-freeradius.md).
 
 **Documentação relacionada:**
 
@@ -388,88 +238,31 @@ O comportamento da autenticação precisa ser sustentado por configurações e r
 
 ### 26. Qual é a configuração do computador principal do NOC?
 
-O computador principal da infraestrutura é um Dell OptiPlex 3020 executando Debian GNU/Linux 13.
-
-As especificações documentadas incluem:
-
-| Componente | Especificação |
-|---|---|
-| Processador | Intel Core i5-4590 |
-| Memória | Aproximadamente 8 GB |
-| Sistema operacional | Debian 13 |
-| Endereço IPv4 | `192.168.10.12/24` |
-| Segmento | VLAN 10 |
-
-Esse computador hospeda o principal ambiente Docker e diversos serviços de infraestrutura.
+O NOC utiliza um Dell OptiPlex 3020 com Intel i5-4590, aproximadamente 8 GB de RAM, Debian 13 e `192.168.10.12/24`. Ele hospeda os serviços principais de Docker/monitoramento. Veja o [inventário](../estacoes/inventario-de-computadores.md).
 
 ### 27. Por que o Docker é utilizado no projeto?
 
-O Docker oferece uma estrutura organizada para executar aplicações de infraestrutura em containers.
-
-O projeto utiliza containers para hospedar serviços de monitoramento, interfaces de gerenciamento, aplicações DNS, bancos de dados e componentes web.
-
-Essa abordagem separa os ambientes das aplicações e facilita a organização das dependências.
-
-A conteinerização não fornece automaticamente alta disponibilidade, isolamento completo de segurança ou proteção dos dados persistentes.
+Docker executa aplicações de infraestrutura em containers, e o Compose define serviços e dependências. Isso não implica alta disponibilidade. Veja [serviços Docker](../containers/servicos-docker.md).
 
 ### 28. Quais containers estavam em execução durante a coleta?
 
-O inventário de 06/11 registrou dez containers ativos:
-
-1. `reverse-proxy`
-2. `zabbix-web`
-3. `zabbix-server`
-4. `uptime-kuma`
-5. `zabbix-db`
-6. `grafana`
-7. `zabbix-agent`
-8. `site-estatico`
-9. `pihole`
-10. `portainer`
-
-Os nomes foram obtidos do inventário Docker registrado.
-
-A captura comprova o estado de execução naquele momento, não a continuidade da operação.
+Em 6 de novembro, dez containers foram registrados em execução: `reverse-proxy`, `zabbix-web`, `zabbix-server`, `uptime-kuma`, `zabbix-db`, `grafana`, `zabbix-agent`, `site-estatico`, `pihole` e `portainer`. Veja o [inventário Docker](../containers/servicos-docker.md).
 
 ### 29. Qual é a diferença entre Docker Compose e Portainer?
 
-O Docker Compose permite definir e administrar aplicações compostas por múltiplos containers utilizando arquivos declarativos de configuração.
-
-O Portainer fornece uma interface gráfica para inspecionar e gerenciar ambientes Docker.
-
-No laboratório, as duas ferramentas possuem funções complementares.
-
-O Compose descreve a estrutura de implantação, enquanto o Portainer facilita a visualização operacional de containers, imagens e redes.
+O Compose define implantações de containers em YAML; o Portainer fornece uma interface gráfica de administração Docker. Ambos estão presentes no laboratório.
 
 ### 30. Por que Nginx e Apache são utilizados simultaneamente?
 
-Eles possuem funções diferentes.
-
-O Nginx é utilizado como proxy reverso, disponibilizando uma camada centralizada de acesso a determinados serviços web.
-
-O Apache HTTP Server hospeda um site corporativo estático através do container `site-estatico`.
-
-Essa organização separa o encaminhamento das requisições web da disponibilização do conteúdo do site.
+Nginx funciona como proxy reverso; Apache serve o site corporativo estático pelo container `site-estatico`. Veja [serviços Docker](../containers/servicos-docker.md).
 
 ### 31. Qual é a função do MariaDB?
 
-O MariaDB fornece armazenamento de banco de dados para o ambiente Zabbix.
-
-A implantação Docker documentada possui um container específico chamado `zabbix-db`.
-
-O Zabbix Server processa as informações de monitoramento, enquanto o banco de dados atende às necessidades de armazenamento da plataforma.
-
-A arquitetura separa o banco de dados da interface de monitoramento e das ferramentas de visualização.
+MariaDB armazena os dados de monitoramento do Zabbix no container `zabbix-db`. Veja [serviços Docker](../containers/servicos-docker.md).
 
 ### 32. É possível reproduzir toda a infraestrutura Docker diretamente pelo GitHub?
 
-O repositório disponibiliza arquivos Docker Compose sanitizados e exemplos de configurações.
-
-Entretanto, esses arquivos não são apresentados como uma reprodução completa do laboratório, validada para execução automática com um único comando.
-
-Certificados locais, credenciais, dados persistentes das aplicações, parâmetros específicos das máquinas e outros pré-requisitos foram excluídos da configuração pública.
-
-Uma nova implantação exige análise e adaptação dessas dependências.
+Não como implantação verificada em um único comando. Os arquivos Compose públicos foram sanitizados e não incluem segredos locais, certificados, dados persistentes e requisitos específicos dos hosts. Veja [serviços Docker](../containers/servicos-docker.md).
 
 **Documentação relacionada:**
 
@@ -483,91 +276,35 @@ Uma nova implantação exige análise e adaptação dessas dependências.
 
 ### 33. Por que Zabbix e Grafana são utilizados juntos?
 
-O Zabbix é responsável pela coleta e pelo processamento das informações de monitoramento por meio de hosts, interfaces, itens, templates e triggers.
-
-O Grafana fornece uma camada de visualização através de sua integração com o Zabbix.
-
-A combinação permite centralizar a coleta das métricas e apresentá-las em dashboards organizados por equipamentos de rede, sistemas operacionais e serviços.
-
-O Grafana não substitui a coleta de informações realizada pelo Zabbix.
+Zabbix coleta e processa itens de monitoramento; Grafana os apresenta por meio da integração com o Zabbix. Veja [Zabbix](../monitoramento/zabbix.md) e [Grafana](../monitoramento/grafana.md).
 
 ### 34. Qual era a dimensão do ambiente de monitoramento Zabbix?
 
-A captura das informações do sistema em 06/11 registra:
-
-| Métrica | Valor |
-|---|---:|
-| Hosts cadastrados | 12 |
-| Total de itens | 1.820 |
-| Itens habilitados | 1.698 |
-| Itens não suportados | 113 |
-| Triggers em estado de problema | 34 |
-
-Esses números representam uma observação histórica do sistema.
-
-A presença de itens não suportados e problemas ativos demonstra que o ambiente ainda apresentava situações operacionais que exigiam investigação.
+A captura de 6 de novembro registrou **12 hosts, 1.820 itens, 1.698 habilitados, 113 não suportados e 34 triggers em estado de problema**. Veja as [evidências do Zabbix](../monitoramento/zabbix.md).
 
 ### 35. Como os equipamentos Cisco e os sistemas operacionais são monitorados?
 
-O roteador e o switch Cisco aparecem no monitoramento por meio de interfaces SNMP.
-
-Os sistemas Linux e Windows utilizam interfaces do Zabbix Agent para o monitoramento do sistema operacional.
-
-O SNMP fornece acesso a métricas suportadas pelos equipamentos de rede, enquanto os agentes coletam informações dos sistemas.
-
-Os dashboards incluem consumo de CPU, memória, tráfego, estado de interfaces e indicadores de serviços.
+Equipamentos Cisco utilizam interfaces SNMP no Zabbix; hosts Linux/Windows utilizam interfaces Zabbix Agent. Os dashboards apresentam CPU, memória, tráfego e estado de interfaces. Veja [Zabbix](../monitoramento/zabbix.md).
 
 ### 36. O problema de SNMP do switch Cisco foi resolvido?
 
-O registro de troubleshooting de 04/11 documenta um problema de conectividade SNMP causado pela divergência entre os valores de comunidade configurados no switch e no Zabbix.
-
-As configurações foram alinhadas, a macro `{$SNMP_COMMUNITY}` foi definida no host e o cache de configuração do monitoramento foi recarregado.
-
-O resultado documentado foi a recuperação da disponibilidade SNMP e da descoberta de interfaces.
-
-Esse é um caso de troubleshooting registrado, diferente de problemas que não possuem resolução documentada.
+Sim, no **caso SNMP registrado em 4 de novembro**: a divergência da comunidade foi corrigida, configurou-se `{$SNMP_COMMUNITY}` e o cache de monitoramento foi atualizado, restabelecendo a descoberta. Isso não implica correção de outros alertas posteriores. Veja o [caso SNMP](../monitoramento/diagnostico-snmp.md).
 
 ### 37. Por que alguns computadores apareciam como `No data` no Grafana?
 
-As evidências do Grafana de 06/11 incluem oito estações Windows.
-
-Três apareciam como `ONLINE`, enquanto cinco painéis exibiam `No data`.
-
-A ausência de dados não significa necessariamente que o computador estivesse desligado.
-
-Possíveis explicações incluem indisponibilidade do agente, divergências de endereçamento, problemas na configuração dos itens ou ausência de informações no intervalo consultado.
-
-As capturas registram os painéis afetados, sem atribuir uma causa única para todos.
+Em 6 de novembro, três painéis de estações mostravam `ONLINE` e cinco `No data`. A ausência de valores pode envolver agentes, endereçamento, itens ou intervalo selecionado; as capturas não estabelecem causa única. Veja [Grafana](../monitoramento/grafana.md).
 
 ### 38. Como o DHCP pode afetar o monitoramento do Zabbix?
 
-O laboratório utiliza DHCP para atribuir endereços IP às estações.
-
-A coleta identificou seis divergências entre os endereços fotografados nos computadores e os endereços registrados nos respectivos hosts do Zabbix.
-
-Quando um computador recebe outro endereço IP e o cadastro no Zabbix mantém o endereço anterior, a comunicação com o agente pode ser afetada.
-
-Mudanças de endereço DHCP podem explicar algumas divergências, sem identificar causa comum para todos os hosts indisponíveis.
+Seis endereços IPv4 divergiam entre os registros das estações e os cadastros do Zabbix. Alterações por DHCP podem contribuir, sem comprovar causa comum. Veja o [inventário](../estacoes/inventario-de-computadores.md).
 
 ### 39. O que significam os 113 itens não suportados no Zabbix?
 
-Um item não suportado é um item de monitoramento que não consegue fornecer dados válidos através do método configurado.
-
-Entre as possíveis causas estão chaves incompatíveis, métricas não suportadas, interfaces incorretas, permissões insuficientes e problemas de configuração.
-
-A captura de 06/11 registra 113 itens nessa condição.
-
-Entretanto, a imagem não identifica individualmente as causas. Um diagnóstico específico depende da análise da configuração dos itens afetados.
+Os **113 itens não suportados** não forneciam dados válidos nas configurações de coleta registradas. A captura não estabelece a causa individual de cada item; o diagnóstico deve ser feito por item. Veja [Zabbix](../monitoramento/zabbix.md).
 
 ### 40. Por que utilizar Uptime Kuma se o Zabbix já monitora disponibilidade?
 
-As duas aplicações oferecem funcionalidades complementares.
-
-O Zabbix permite monitorar métricas da infraestrutura, triggers e condições dos hosts.
-
-O Uptime Kuma concentra-se em verificações de disponibilidade e no histórico de eventos dos alvos selecionados.
-
-A captura do Uptime Kuma apresenta quatro monitores configurados, em vez de cobertura individual de todos os containers, computadores e equipamentos de rede.
+Zabbix coleta métricas e alertas de infraestrutura; Uptime Kuma verifica alvos específicos e registra eventos. O dashboard coletado do Kuma tinha quatro monitores. Veja [DNS e disponibilidade](../servicos/dns-e-disponibilidade.md).
 
 **Documentação relacionada:**
 
@@ -582,75 +319,27 @@ A captura do Uptime Kuma apresenta quatro monitores configurados, em vez de cobe
 
 ### 41. Para que o Asterisk é utilizado?
 
-O Asterisk fornece a funcionalidade de telefonia IP do laboratório.
-
-A configuração documentada utiliza SIP/PJSIP para registro dos dispositivos e sinalização de chamadas, enquanto o RTP é utilizado para o transporte de mídia de voz.
-
-O servidor está associado à VLAN 50 e executa em um computador Linux dedicado.
-
-A documentação também descreve um dialplan interno para encaminhamento entre ramais e testes.
+Asterisk disponibiliza telefonia IP SIP/PJSIP no servidor Debian de voz da VLAN 50. Veja [Asterisk/FreeRADIUS](../servicos/asterisk-freeradius.md).
 
 ### 42. Quais ramais telefônicos estão configurados?
 
-O ambiente documentado possui dois telefones Grandstream:
-
-| Ramal | Departamento | Endereço IP |
-|---|---|---|
-| 1001 | Vendas | `192.168.50.10` |
-| 1002 | TI | `192.168.50.11` |
-
-As fotografias de 06/11 comprovam a presença física dos dispositivos e os endereços apresentados em suas telas.
-
-Os modelos exatos dos telefones não foram estabelecidos com segurança pelas fotografias disponíveis.
+Os ramais **1001 (Vendas)** e **1002 (TI)** correspondem aos telefones Grandstream em `192.168.50.10` e `192.168.50.11`. Veja [Asterisk](../servicos/asterisk-freeradius.md).
 
 ### 43. O funcionamento das chamadas telefônicas foi comprovado?
 
-Os registros técnicos descrevem a configuração do Asterisk, os ramais e o dialplan.
-
-Um relatório técnico anterior identifica os ramais como disponíveis durante sua observação.
-
-Entretanto, as evidências coletadas não incluem gravações independentes ou registros detalhados que comprovem a execução bem-sucedida de todos os testes configurados.
-
-Por isso, a implementação é documentada sem afirmar uma validação completa de telefonia ponta a ponta.
+Não há registros de chamadas ou gravações independentes que comprovem chamadas entre os dois telefones fotografados. As configurações e os ramais estão documentados. Veja [telefonia](../servicos/asterisk-freeradius.md).
 
 ### 44. Qual é a função do FreeRADIUS?
 
-O FreeRADIUS fornece funcionalidades de autenticação centralizada de rede.
-
-A configuração documentada inclui RADIUS e tecnologias de autenticação como EAP-PEAP e MSCHAPv2.
-
-Ele executa junto ao Asterisk no computador Linux associado à VLAN 50.
-
-Os registros documentam a arquitetura de autenticação, sem logs de uma sessão wireless completa com o equipamento corporativo.
+FreeRADIUS oferece autenticação de rede no servidor Debian da VLAN 50. A autenticação bem-sucedida de clientes Wi-Fi pelo AX53 não foi comprovada de forma independente. Veja [FreeRADIUS](../servicos/asterisk-freeradius.md).
 
 ### 45. O que o Pi-hole acrescenta à infraestrutura?
 
-O Pi-hole fornece filtragem DNS e visibilidade sobre consultas realizadas pelos clientes.
-
-O dashboard de 06/11 registra:
-
-| Métrica | Valor observado |
-|---|---:|
-| Consultas DNS | 12.293 |
-| Consultas bloqueadas | 1.827 |
-| Percentual bloqueado | 14,9% |
-| Clientes ativos | 13 |
-
-Esses valores correspondem ao período exibido no dashboard.
-
-Os registros mostram consultas no Pi-hole, sem caracterizar o uso obrigatório do serviço em todas as VLANs.
+Pi-hole filtra consultas DNS e registra atividade de clientes/domínios. Em 6 de novembro, o dashboard mostrava **12.293 consultas, 1.827 bloqueadas (14,9%) e 13 clientes ativos** no período exibido. Veja [evidências DNS](../servicos/dns-e-disponibilidade.md).
 
 ### 46. O Uptime Kuma garante que os serviços estejam sempre disponíveis?
 
-Não.
-
-O dashboard coletado mostra quatro monitores configurados, todos apresentados como `Up` no momento da captura.
-
-A aplicação também possui registros históricos de verificações de disponibilidade, incluindo ocorrências sem sucesso.
-
-Um indicador positivo representa apenas as condições de monitoramento configuradas e o período correspondente.
-
-Ele não garante disponibilidade contínua nem funcionamento correto de todas as funcionalidades de uma aplicação.
+Não. O Kuma registrava verificações de **quatro alvos**; um resultado positivo não garante saúde contínua das aplicações ou SLA. Veja [monitoramento de disponibilidade](../servicos/dns-e-disponibilidade.md).
 
 **Documentação relacionada:**
 
@@ -663,13 +352,7 @@ Ele não garante disponibilidade contínua nem funcionamento correto de todas as
 
 ### 47. Um indicador verde no monitoramento comprova que o serviço funciona corretamente?
 
-Não necessariamente.
-
-Um indicador verde geralmente representa o atendimento de uma condição específica de monitoramento.
-
-Por exemplo, uma aplicação pode responder a uma requisição HTTP enquanto outra funcionalidade permanece indisponível.
-
-Os resultados de monitoramento devem ser interpretados em conjunto com verificações específicas dos serviços, configurações, logs e testes operacionais.
+Não. O indicador verde confirma somente a condição monitorada. Testes funcionais e logs continuam necessários para avaliar o comportamento da aplicação.
 
 ### 48. Por que credenciais e configurações sensíveis não são publicadas no GitHub?
 

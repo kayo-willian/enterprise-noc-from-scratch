@@ -245,50 +245,13 @@ Os endereços fotografados representam registros históricos de 6 de novembro de
 
 Para consultar o inventário das estações, acesse [Inventário de Computadores e Servidores](../estacoes/inventario-de-computadores.md).
 
-## 7. Limites Históricos do Monitoramento
+## 7. Interpretação dos Resultados Históricos
 
-As evidências identificaram situações que ainda exigem verificação:
-
-| Área | Observação |
-|---|---|
-| Disponibilidade dos agentes | Cinco hosts foram identificados como indisponíveis |
-| Itens de monitoramento | 113 itens não suportados |
-| Estado das triggers | 34 triggers em estado de problema |
-| Endereçamento das estações | Seis divergências entre fotografias e cadastros |
-| Interfaces do switch | Algumas interfaces foram apresentadas como down |
-| Rótulos dos dashboards | Indicadores repetidos ou truncados preservados conforme a captura |
-| Disponibilidade histórica | Estados de disponibilidade registrados na captura de 06/11 |
-
-Essas limitações foram mantidas na documentação, em vez de serem omitidas.
-
-Elas representam oportunidades de diagnóstico e demonstram a importância de validar as configurações de monitoramento com o estado real da infraestrutura.
-
-### Considerações sobre DHCP e monitoramento
-
-O ambiente do laboratório utiliza endereçamento dinâmico (DHCP) para estações de trabalho.
-
-Por esse motivo, os endereços IP observados nas capturas podem diferir daqueles registrados anteriormente no Zabbix.
-
-Essa característica pode ocasionar inconsistências temporárias no monitoramento quando os hosts são identificados por endereços IP que não acompanham as mudanças de concessão DHCP.
-
-Consequentemente, estados de indisponibilidade e ausência de métricas devem ser interpretados considerando o contexto do laboratório e a data de coleta das evidências.
-
-As capturas documentam o comportamento observado naquele momento e não representam uma avaliação definitiva da disponibilidade dos equipamentos.
+A captura de 6 de novembro registra **cinco hosts indisponíveis, 113 itens não suportados, 34 triggers em estado de problema, seis divergências de endereçamento** e algumas interfaces do switch indicadas como down. O DHCP nas estações pode contribuir para divergências, mas não estabelece a causa de cada alerta. As métricas representam o estado coletado; cada item e interface exige diagnóstico próprio.
 
 ## 8. Integração com Grafana
 
-O Zabbix também funciona como fonte de dados para os dashboards do Grafana utilizados no laboratório.
-
-O ambiente Grafana apresenta visualizações relacionadas a:
-
-- Estações Windows.
-- Interfaces do roteador Cisco.
-- Interfaces do switch Cisco.
-- Servidores Linux.
-- Asterisk.
-- Serviços web e containers.
-
-As capturas do Grafana e as limitações dos dados apresentados serão documentadas separadamente.
+O Zabbix fornece dados aos dashboards do Grafana sobre equipamentos Cisco, hosts Windows e Linux, Asterisk e serviços web. Consulte as [evidências do Grafana](grafana.md) para observações específicas dos painéis.
 
 ## 9. Resumo das Evidências
 

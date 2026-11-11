@@ -185,15 +185,7 @@ O [registro de troubleshooting SNMP do Cisco C9200L](../monitoramento/diagnostic
 
 São estudos de caso úteis, mas **não** equivalem a novas execuções EX-01 a EX-06. Os 113 itens não suportados e painéis `No data` de 06/11 não devem ser descritos como resolvidos sem evidência posterior.
 
-## 10. Critérios de conclusão da seção NOC
-
-A documentação está estruturalmente concluída quando o gerenciamento de incidentes, os seis runbooks e este método de simulação/validação estiverem publicados em português e inglês, com links válidos.
-
-Isso é **conclusão documental**, não certificação da infraestrutura, tempo de recuperação, estrutura de pessoal, resolução de todos os incidentes ou conformidade com SLA.
-
-Resultados de exercícios registrados separadamente pertencem aos documentos de incidentes ou evidências correspondentes, sem gerar relatórios hipotéticos adicionais.
-
-## 11. Referências
+## 10. Referências
 
 - [Gerenciamento de Incidentes](gerenciamento-de-incidentes.md)
 - [Topologia Lógica Consolidada](../redes/topologia-logica-consolidada.md)

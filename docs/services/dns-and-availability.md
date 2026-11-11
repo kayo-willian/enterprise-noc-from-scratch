@@ -1,6 +1,6 @@
 # DNS Filtering and Service Availability
 
-[English](dns-and-availability.md) | [Português (Brasil)](../pt-BR/servicos/dns-e-disponibilidade.md)
+**English** | [Português (Brasil)](../pt-BR/servicos/dns-e-disponibilidade.md)
 
 ## 1. Overview
 
@@ -162,23 +162,7 @@ The application complements Zabbix rather than replacing the broader infrastruct
 
 ## 5. Relationship with Zabbix and Grafana
 
-The laboratory uses several complementary monitoring and infrastructure applications:
-
-| Application | Responsibility |
-|---|---|
-| Pi-hole | DNS filtering and DNS query activity |
-| Uptime Kuma | Service and endpoint availability checks |
-| Zabbix | Infrastructure metrics, monitoring items, and triggers |
-| Grafana | Visualization of monitoring data |
-
-The tools provide different perspectives on the same infrastructure.
-
-A successful Uptime Kuma check does not independently guarantee that all corresponding Zabbix items are supported or that every Grafana panel contains valid data.
-
-Related documentation:
-
-- [Zabbix Monitoring](../monitoring/zabbix-monitoring.md)
-- [Grafana Monitoring](../monitoring/grafana-monitoring.md)
+Pi-hole records DNS filtering activity; Uptime Kuma checks selected service endpoints. Zabbix collects infrastructure metrics and Grafana visualizes them. Each tool has a distinct monitoring scope; see [Zabbix](../monitoring/zabbix-monitoring.md) and [Grafana](../monitoring/grafana-monitoring.md).
 
 ## 6. Deployment Configuration
 
@@ -190,7 +174,7 @@ The Uptime Kuma container is described in the main Docker Compose configuration:
 
 [Infrastructure Docker Compose](../../docker_configs/docker-compose.yml)
 
-The public configurations exclude authentication secrets and institution-specific DNS settings.
+The public configurations exclude authentication secrets and site-specific DNS settings.
 
 These files document the deployment structure; the collected screenshots provide evidence of the applications running in the laboratory.
 
@@ -203,16 +187,7 @@ These files document the deployment structure; the collected screenshots provide
 | `UpTimeKuma.png` | Four configured monitors, current statuses, and historical events |
 | Docker container inventory | Presence of Pi-hole and Uptime Kuma containers in the infrastructure |
 
-The evidence does not independently establish:
-
-- Continuous availability of either application.
-- Complete DNS filtering coverage across every VLAN.
-- Complete visibility into all client DNS traffic.
-- A verified service-level agreement.
-- Successful operation of every Docker application.
-- An absence of historical incidents.
-
-The screenshots represent the laboratory environment documented on November 6, 2026.
+The November 6 screenshots document query activity and four Uptime Kuma monitors. They do not establish DNS coverage across every VLAN, uninterrupted availability or a verified SLA.
 
 ## 8. Related Documentation
 
@@ -223,4 +198,3 @@ The screenshots represent the laboratory environment documented on November 6, 2
 
 **Evidence collection date:** November 6, 2026.
 
-**Documentation scope:** DNS filtering, service monitoring, and historical laboratory evidence.

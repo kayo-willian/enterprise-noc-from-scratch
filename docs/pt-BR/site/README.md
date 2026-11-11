@@ -202,16 +202,6 @@ A marca atual utiliza a **cabeça de uma onça estilizada, de perfil**, associan
 
 Os dois SVGs anteriores continuam em `docs/assets/brand/` como referência histórica: `tapajos-emblem.svg` e `tapajos-favicon.svg`. **Não são os arquivos utilizados atualmente** pelo HTML publicado.
 
-### 6.4 Evolução visual e decisões registradas
-
-| Etapa | Alteração | Elementos preservados |
-| --- | --- | --- |
-| Identidade inicial | Interface verde/oliva escura e símbolo abstrato de rio com pontos de rede conectados. | Estrutura do conteúdo e evidências do laboratório. |
-| 10/11/2026 — revisão da paleta | As cores verdes da interface foram substituídas por azul-noturno, grafite e azul elétrico no CSS compartilhado. Foi introduzida uma identidade temporária com onça azul. | Organização das seções, textos, fotografias, JavaScript e cores funcionais dos fios T568A. |
-| 10/11/2026 — marca final aprovada | A onça temporária foi substituída pela **onça dourada aprovada**, com logo PNG e favicon próprios, em inglês e português. | Tema azul, conteúdo existente, estrutura de 11 seções e funcionalidades do navegador. |
-
-A revisão de cores e a identidade temporária constam no commit `ed8d10ae9ba38aaa9634dbbd8573bfe62b5530e0`. A integração da onça dourada consta no commit `08d2aedafa8ce2a71277293816a287575782c9c0`. Esses identificadores são referências históricas, não instruções de publicação.
-
 ## 7. Responsividade e movimento
 
 O CSS compartilhado inclui pontos de adaptação em **1050 px**, **760 px** e **480 px**, além de regras complementares para evidências e FAQ:
@@ -314,21 +304,11 @@ Depois de uma edição local, é importante conferir os dois idiomas, a navegaç
 
 Esta lista auxilia a manutenção; não afirma que todos os testes já foram executados em todos os navegadores.
 
-## 12. Integridade das evidências, privacidade e limites
+## 12. Publicação e limites das evidências
 
-O portal público é um estudo de caso técnico, não uma interface de controle da infraestrutura. Ele aponta para documentação sanitizada do repositório em vez de publicar senhas, certificados privados, dumps de bancos de dados ou volumes brutos persistentes. As capturas são evidências de observação; não devem ser apresentadas como estado atual da rede ou prova de correção de incidentes.
+O site público é um estudo de caso técnico estático e bilíngue, não uma interface de controle da infraestrutura ou dashboard em tempo real. Ele utiliza documentação sanitizada e capturas datadas; não publicar senhas, chaves privadas, comunidades SNMP reais ou credenciais wireless identificáveis. Capturas históricas não devem ser apresentadas como saúde atual dos equipamentos ou recuperação comprovada de incidentes.
 
-Na inclusão de novas imagens, devem ser evitadas credenciais, tokens secretos, comunidades SNMP reais, dados desnecessários que identifiquem dispositivos ou detalhes internos excessivos. As explicações devem permanecer alinhadas aos documentos técnicos de origem. Informações que não podem ser recuperadas devem ser delimitadas quando relevante, sem virar tarefas eternas de verificação.
-
-Tapajós Inovações é o cenário corporativo fictício apresentado no portal; os equipamentos, as fotografias, as configurações e as capturas de monitoramento registram a implementação física do laboratório do projeto.
-
-## 13. Escopo histórico e possíveis evoluções
-
-O site **já implementado** possui arquitetura estática bilíngue, navegação, cartões, seleção de VLANs, galeria de evidências, diálogo de imagens, ilustração T568A, explicação de monitoramento, FAQ, CSS responsivo, arquivos atuais da onça dourada e URLs públicas no GitHub Pages.
-
-Este README documenta esses componentes e sua manutenção. Ele não cria novas funcionalidades, novos dados de monitoramento nem arquiteturas alternativas. Alterações visuais ou funcionais posteriores podem ser registradas como novas decisões datadas sem reescrever evidências históricas.
-
-## 14. Documentação técnica relacionada
+## 13. Documentação técnica relacionada
 
 - [README principal em português](../../../README.pt-BR.md)
 - [README principal em inglês](../../../README.md)

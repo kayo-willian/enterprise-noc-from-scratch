@@ -185,15 +185,7 @@ The [Cisco Catalyst C9200L SNMP troubleshooting record](../monitoring/snmp-troub
 
 These are useful case studies, but they are **not** newly executed EX-01 through EX-06 exercises. The 113 unsupported Zabbix items and Grafana `No data` panels in the November 6 collection must not be described as resolved without later evidence.
 
-## 10. Completion criteria for NOC documentation
-
-Documentation is structurally complete when the incident-management framework, six runbooks and this exercise/validation method are published in English and Brazilian Portuguese and all links work.
-
-That is **documentation completeness**, not certification of the operational infrastructure, recovery time, staffing, incident resolution or SLA compliance.
-
-Any separately documented exercise results belong in the corresponding incident or evidence record, not as unbounded hypothetical reports.
-
-## 11. References
+## 10. References
 
 - [Incident Management](incident-management.md)
 - [Consolidated Network Topology](../networking/consolidated-logical-topology.md)

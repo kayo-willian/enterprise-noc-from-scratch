@@ -12,125 +12,28 @@
 
 ## 1. Overview
 
-The Enterprise NOC — From Scratch project includes infrastructure monitoring and technical troubleshooting as part of its operational scope.
+This document defines incident classification, prioritization, triage, escalation, recovery validation and reporting for the Enterprise NOC laboratory. It is an operational reference, not a record of an active production NOC.
 
-The laboratory combines Cisco networking equipment, departmental VLANs, Linux servers, Docker containers, Windows workstations, IP telephony, DNS services, and centralized monitoring.
-
-This document establishes a structured incident management model for that environment.
-
-The objective is to define how infrastructure events can be identified, assessed, prioritized, investigated, resolved, validated, and documented.
-
-A consistent incident management process improves:
-
-- Operational visibility.
-- Technical response organization.
-- Incident prioritization.
-- Troubleshooting traceability.
-- Communication between responsible technical functions.
-- Documentation of corrective actions.
-- Preservation of evidence.
-- Identification of recurring problems.
-
-**Document scope:** This chapter provides the laboratory's incident-management reference process. Dated interventions and executed exercises, where available, are documented separately.
-
-Historical troubleshooting activities are distinguished from reusable response procedures.
+The procedures apply to the network, Linux systems, Docker services and monitoring components documented in the repository.
 
 ## 2. Operational Environment
 
-The incident management model is based on the infrastructure documented in the repository.
-
-| Infrastructure Layer | Documented Components |
-|---|---|
-| Routing | Cisco Catalyst C8200L |
-| Switching | Cisco Catalyst C9200L |
-| Network segmentation | VLANs 10, 20, 30, 40, 50, 60, and 70 |
-| Linux infrastructure | Main Debian NOC computer and dedicated Asterisk/FreeRADIUS server |
-| Container platform | Docker, Docker Compose, and Portainer |
-| Monitoring | Zabbix, Grafana, and Uptime Kuma |
-| Network monitoring | SNMP and Zabbix Agent |
-| Database | MariaDB |
-| DNS | Pi-hole |
-| Telephony | Asterisk and Grandstream IP phones |
-| Authentication | FreeRADIUS |
-| Endpoints | Departmental Windows workstations |
-
-The infrastructure inventory and monitoring screenshots are based primarily on evidence collected in November 2026.
-
-The documentation distinguishes historical observations from the current operational state of the laboratory.
+The procedures cover the Cisco C8200L/C9200L network, VLANs 10–70, Debian servers, Docker applications, Windows endpoints, IP telephony, DNS and Zabbix/Grafana monitoring. Refer to the [network topology](../networking/consolidated-logical-topology.md) and [service documentation](../containers/docker-services.md) for equipment assignments and dependencies; this process does not duplicate those inventories.
 
 ## 3. Events, Alerts, Incidents, and Problems
 
-These terms describe different stages or aspects of infrastructure operation.
+| Term | Operational meaning |
+|---|---|
+| **Event** | Observable state change, such as an interface transition or container restart. |
+| **Alert** | Monitoring indication that a configured condition was met; requires assessment. |
+| **Incident** | Confirmed unplanned service interruption or degradation. |
+| **Problem** | Underlying or suspected cause of one or more incidents. |
 
-### 3.1 Event
-
-An event is an observable occurrence or state change within the infrastructure.
-
-Examples include:
-
-- A network interface changing state.
-- A host becoming unreachable.
-- A monitoring item returning an error.
-- A container restarting.
-- A service responding with an unexpected status.
-
-An event does not necessarily indicate a service failure.
-
-### 3.2 Alert
-
-An alert is a notification or monitoring indication generated when a configured condition is met.
-
-For example, Zabbix may generate a problem event when a monitored metric satisfies a trigger expression.
-
-An alert requires assessment before it is classified as an operational incident.
-
-### 3.3 Incident
-
-An incident is an unplanned interruption, degradation, or loss of expected functionality affecting an infrastructure component or service.
-
-Examples include:
-
-- Confirmed loss of departmental network connectivity.
-- Unavailability of a required DNS service.
-- Failure of an application container providing a business service.
-- Loss of access to a required internal web application.
-
-An alert is not automatically an incident.
-
-### 3.4 Problem
-
-A problem refers to an underlying cause, or potential underlying cause, of one or more incidents.
-
-For example, recurring monitoring failures associated with outdated workstation addresses may justify a separate investigation into host identification and DHCP-related configuration.
-
-### 3.5 Monitoring Failure Versus Infrastructure Failure
-
-A monitoring failure can occur even when the monitored service remains operational.
-
-Examples include:
-
-- An unreachable Zabbix Agent.
-- An incompatible monitoring item.
-- An incorrect SNMP community value.
-- A Grafana panel without matching data.
-- A dashboard filter excluding relevant hosts.
-
-Incident classification must distinguish loss of monitoring visibility from confirmed loss of the underlying service.
+**Monitoring failure is not necessarily infrastructure failure.** An unavailable agent, unsupported item or empty Grafana panel requires validation before declaring a service outage. Conversely, a responsive monitoring interface does not prove the application is functioning end-to-end.
 
 ## 4. Incident Management Objectives
 
-The incident management framework has six objectives:
-
-1. Detect potentially relevant infrastructure events.
-2. Determine whether an actual service disruption exists.
-3. Prioritize incidents according to impact and urgency.
-4. Investigate the affected component using available technical evidence.
-5. Restore the expected service condition where possible.
-6. Record the investigation and validate the outcome.
-
-Additional objectives include identifying recurring failures, improving monitoring configurations, and supporting future operational reviews.
-
-The process should not prioritize rapid ticket closure over technical validation.
+Detect and validate service impact; classify severity; investigate using collected evidence; authorize corrective action; verify recovery; and record the outcome. Each stage is detailed in the incident lifecycle below.
 
 ## 5. Incident Classification
 
@@ -424,97 +327,15 @@ Original evidence should remain separate from sanitized copies prepared for the 
 
 ## 10. Historical Troubleshooting Evidence
 
-The project contains documented troubleshooting activities involving the Cisco Catalyst C9200L monitoring integration.
+Three completed Cisco SNMP troubleshooting cases were recorded on **November 4, 2026**: monitoring unavailable because of a community mismatch; incorrect switch uptime; and dashboard widgets without expected values. The investigation, corrective steps and recorded results are maintained in the [SNMP troubleshooting case study](../monitoring/snmp-troubleshooting.md).
 
-The corresponding technical record is dated November 4, 2026.
+These cases are historical interventions, not executions of the hypothetical procedures in this document.
 
-These cases provide examples of observed technical problems with recorded corrective actions.
+## 11. Historical Monitoring Conditions
 
-### 10.1 SNMP Monitoring Unavailable
+The **November 6, 2026** evidence includes six differences between workstation addresses and Zabbix registrations, Grafana panels displaying `No data`, and Cisco interface `UP`/`DOWN` indicators. None is sufficient on its own to establish a shared root cause or service incident.
 
-**Recorded symptom:** The switch's SNMP monitoring interface was unavailable after registration in Zabbix.
-
-**Identified cause:** The configured SNMP community values were inconsistent between the Cisco switch and Zabbix.
-
-**Recorded correction:** The SNMP configurations were aligned, a host-level `{$SNMP_COMMUNITY}` macro was configured, and the Zabbix configuration cache was reloaded.
-
-**Documented result:** The monitoring interface became available, enabling metric collection and interface discovery.
-
-### 10.2 Incorrect Switch Uptime
-
-**Recorded symptom:** The monitoring dashboard displayed an incorrect uptime value.
-
-**Identified cause:** The selected monitoring item returned an unsuitable value for the Cisco IOS-XE device.
-
-**Recorded correction:** The monitoring item was replaced with an appropriate uptime metric.
-
-**Documented result:** The dashboard began displaying the switch's reported uptime correctly.
-
-### 10.3 Empty Monitoring Widgets
-
-**Recorded symptom:** Certain Zabbix dashboard widgets did not display expected events.
-
-**Identified cause:** The widgets used restrictive filtering associated with the newly registered switch.
-
-**Recorded correction:** The dashboard filters were adjusted to include the broader NOC environment.
-
-**Documented result:** The widgets began displaying relevant monitoring events.
-
-The recorded outcomes apply to these historical cases only.
-
-They do not establish that all subsequent monitoring issues were resolved.
-
-**Technical reference:** [Cisco Catalyst C9200L — SNMP Troubleshooting](../monitoring/snmp-troubleshooting.md)
-
-## 11. Historical Monitoring Conditions Requiring Investigation
-
-The monitoring evidence collected on November 6, 2026, records:
-
-| Observation | Recorded Value |
-|---|---:|
-| Hosts registered in Zabbix | 12 |
-| Available hosts | 7 |
-| Unavailable hosts | 5 |
-| Unsupported monitoring items | 113 |
-| Triggers in problem state | 34 |
-| Windows workstation panels displaying `No data` in Grafana | 5 |
-
-These observations identify conditions relevant to operational investigation.
-
-They do not, by themselves, establish the root causes or final outcomes of individual incidents.
-
-### 11.1 DHCP Address Differences
-
-The workstation inventory identifies differences between photographed IPv4 addresses and addresses previously registered in Zabbix.
-
-Because the laboratory uses DHCP, changing workstation addresses may contribute to monitoring communication problems when host definitions retain older addresses.
-
-This is a plausible contributing factor, not a verified explanation for every unavailable agent.
-
-### 11.2 Missing Dashboard Data
-
-Grafana dashboards contain panels without valid data during the collected monitoring period.
-
-Possible investigation areas include:
-
-- Monitoring host availability.
-- Agent communication.
-- Monitoring item configuration.
-- Data source integration.
-- Dashboard queries and time ranges.
-- Differences between current and recorded host addresses.
-
-The collected evidence does not support assigning one cause to all missing measurements.
-
-### 11.3 Network Interface Indicators
-
-Cisco monitoring dashboards contain interfaces displayed as both `UP` and `DOWN`.
-
-An interface marked `DOWN` may be expected when a port is unused or administratively disabled.
-
-Its operational significance depends on the documented role of the interface and the expected network topology.
-
-A monitoring status must be evaluated in context before an incident is declared.
+Use the dedicated [Zabbix](../monitoring/zabbix-monitoring.md), [Grafana](../monitoring/grafana-monitoring.md) and [Cisco interface runbook](runbooks/cisco-interface-unavailable.md) records for the observations and diagnostic criteria.
 
 ## 12. Incident Record Template
 
@@ -615,24 +436,9 @@ They are **hypothetical scenarios**, not additional incidents claimed to have oc
 
 Final priority must be determined from the actual impact and urgency.
 
-## 14. Operational Review and Continuous Improvement
+## 14. Operational Review and Improvement
 
-Incident management should produce information that improves future infrastructure operation.
-
-A periodic technical review may examine:
-
-- Recurring alert patterns.
-- Monitoring false positives.
-- Repeated service interruptions.
-- Incomplete incident reports.
-- Gaps in monitoring coverage.
-- Configuration inconsistencies.
-- Effectiveness of corrective actions.
-- Opportunities to improve operational documentation.
-
-Reference indicators for this framework include incident counts by category, repeated failures, validation outcomes, and time spent investigating documented incidents.
-
-These indicators should only be reported as actual NOC performance metrics once they are measured from corresponding operational records.
+Review recurring incidents, monitoring false positives, incomplete records and the effectiveness of corrective actions. Report counts, recurrence or response time as operational metrics only when supported by dated incident records.
 
 ## 15. Relationship With Technical Runbooks
 
@@ -653,23 +459,7 @@ The companion [Incident Simulation and Recovery Validation](incident-simulation-
 
 ## 16. Documentation Scope
 
-This document defines the incident-management reference framework for the Enterprise NOC infrastructure.
-
-It defines classification, prioritization, triage, investigation, escalation, validation, closure, and incident reporting.
-
-The document also references previously recorded troubleshooting results.
-
-It does not claim:
-
-- An operating production NOC with assigned staff.
-- A contracted SLA or guaranteed response time.
-- A deployed incident ticketing platform.
-- Continuous incident monitoring.
-- Completed validation of every infrastructure service.
-- Resolution of all historical alerts.
-- Execution of the hypothetical incident examples.
-
-This framework is accompanied by the six technical runbooks and the incident simulation and recovery validation procedure. Their publication documents the operational method; historical execution or recovery is described only in the relevant dated evidence records.
+This document describes a reference incident-management process and links to six diagnostic runbooks and an exercise catalog. It does not establish a staffed production NOC, a ticketing platform, a contracted SLA, or completed recoveries beyond the separate historical case records.
 
 ## 17. Related Documentation
 
