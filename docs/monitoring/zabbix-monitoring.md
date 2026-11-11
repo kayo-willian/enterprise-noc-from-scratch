@@ -245,50 +245,13 @@ The photographed addresses are historical observations from November 6, 2026.
 
 For the workstation inventory, see [Workstation and Server Inventory](../endpoints/workstation-inventory.md).
 
-## 7. Historical Monitoring Boundaries
+## 7. Interpretation of Historical Results
 
-The collected evidence identifies several areas requiring further validation:
-
-| Area | Observation |
-|---|---|
-| Agent availability | Five hosts were reported as unavailable |
-| Monitoring items | 113 items were unsupported |
-| Trigger status | 34 triggers were in a problem state |
-| Workstation addressing | Six photographed addresses differed from Zabbix records |
-| Switch interfaces | Some monitored interfaces were reported as down |
-| Dashboard labels | Repeated or truncated indicators preserved from the collected dashboard |
-| Historical availability | Availability states recorded at the time of the November 6 capture |
-
-These limitations are documented rather than excluded from the project.
-
-They provide useful evidence for troubleshooting and demonstrate the importance of validating monitoring configurations against the actual network environment.
-
-### DHCP and Monitoring Considerations
-
-The laboratory uses dynamic IP addressing (DHCP) for its workstations.
-
-As a result, IP addresses observed in screenshots may differ from addresses previously registered in Zabbix.
-
-This behavior can cause temporary monitoring inconsistencies when hosts are identified by IP addresses that are not updated following DHCP lease changes.
-
-Consequently, unavailable host states and missing metrics should be interpreted in the context of the laboratory environment and the evidence collection date.
-
-The screenshots document conditions observed at a specific point in time and do not represent a definitive assessment of device availability.
+The November 6 capture records **five unavailable hosts, 113 unsupported items, 34 problem triggers, six address discrepancies** and some switch interfaces shown as down. The DHCP-based workstation addressing may contribute to mismatches but does not establish the cause of every alert. These measurements describe the captured state; individual item and interface status requires its own diagnosis.
 
 ## 8. Relationship with Grafana
 
-Zabbix also acts as a monitoring data source for Grafana dashboards used in the laboratory.
-
-The Grafana environment provides additional visualizations for:
-
-- Windows workstations.
-- Cisco router interfaces.
-- Cisco switch interfaces.
-- Linux servers.
-- Asterisk.
-- Web services and containers.
-
-Grafana screenshots and the limitations of their displayed data are documented separately.
+Zabbix supplies monitoring data for Grafana dashboards covering Cisco equipment, Windows and Linux hosts, Asterisk and web services. See the [Grafana evidence](grafana-monitoring.md) for panel-specific observations.
 
 ## 9. Evidence Summary
 

@@ -202,16 +202,6 @@ The current identity uses a **stylized jaguar head in profile**, reflecting the 
 
 Two earlier SVG files remain in `docs/assets/brand/` for historical reference: `tapajos-emblem.svg` and `tapajos-favicon.svg`. They are **not** the assets referenced by the current HTML pages.
 
-### 6.4 Visual evolution and decisions
-
-| Phase | Change | What was intentionally preserved |
-| --- | --- | --- |
-| Initial identity | Dark olive/green interface with an abstract river-and-network-node symbol. | Content structure and laboratory evidence. |
-| November 10, 2026 — palette revision | Replaced green-oriented UI colors with midnight-blue, graphite and electric-blue styling across the shared stylesheet. Introduced a temporary blue jaguar identity. | Section layout, page copy, photographs, JavaScript behavior and T568A wire colors. |
-| November 10, 2026 — approved final mark | Replaced the temporary jaguar with the selected **golden jaguar** PNG logo and matching favicon for English and Portuguese. | The blue theme, existing content, 11-section structure and client-side behavior. |
-
-The palette and temporary jaguar revision are recorded in repository commit `ed8d10ae9ba38aaa9634dbbd8573bfe62b5530e0`. The approved golden-jaguar integration is recorded in commit `08d2aedafa8ce2a71277293816a287575782c9c0`. These identifiers are provenance, not deployment instructions.
-
 ## 7. Responsive behavior and motion
 
 The shared CSS includes breakpoints at **1050 px**, **760 px** and **480 px**, with additional rules for the evidence/FAQ components:
@@ -314,21 +304,11 @@ After a local change, inspect both languages, test navigation and interactive el
 
 This is a maintenance checklist, not a statement that every test above has already been executed in every browser.
 
-## 12. Evidence integrity, privacy and boundaries
+## 12. Publication and evidence boundaries
 
-The public site is a technical case study, not an infrastructure control plane. It deliberately links to sanitized repository documentation rather than embedding passwords, private certificates, database dumps or raw persistent volumes. Its screenshots are observational evidence; do not reinterpret them as current system health or use them to claim an incident was fixed.
+The public website is a static bilingual technical case study, not an infrastructure control plane or live monitoring dashboard. It links to sanitized documentation and dated captures; do not publish passwords, private keys, actual SNMP communities or identifying wireless credentials. Historical screenshots must not be presented as current device health or verified incident recovery.
 
-Avoid exposing credentials, secret tokens, real SNMP community strings, personally identifying device information or unnecessary internal configuration details when adding new captures. Keep technical explanations aligned with the corresponding source documentation; unknown facts that cannot reasonably be recovered should be described once as documentation boundaries, not carried indefinitely as mandatory future tasks.
-
-Tapajós Inovações is the fictional corporate scenario presented by the site; the equipment, photographs, configurations and monitoring captures document the project's physical laboratory implementation.
-
-## 13. Historical scope and future changes
-
-The **implemented** site already has its bilingual static architecture, navigation, cards, VLAN interactions, evidence gallery, image dialog, cabling illustration, monitoring narrative, FAQ, responsive stylesheet, current golden-jaguar assets and published GitHub Pages URLs.
-
-This document describes those components and their maintenance. It does not add new website features, new monitoring data or alternative architectures. Further visual or functional changes can be recorded as new dated decisions without rewriting historical evidence.
-
-## 14. Related project documentation
+## 13. Related project documentation
 
 - [Main project README](../../README.md)
 - [Portuguese project README](../../README.pt-BR.md)

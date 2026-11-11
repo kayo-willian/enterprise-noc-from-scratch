@@ -1,6 +1,6 @@
 # Asterisk and FreeRADIUS — VoIP and Network Authentication
 
-[English](asterisk-freeradius.md) | [Português (Brasil)](../pt-BR/servicos/asterisk-freeradius.md)
+**English** | [Português (Brasil)](../pt-BR/servicos/asterisk-freeradius.md)
 
 ## 1. Overview
 
@@ -192,45 +192,15 @@ The original configuration documentation contains authentication secrets and use
 
 ### 5.3 Authentication Security
 
-The original technical documentation describes PEAP/MSCHAPv2 authentication.
-
-For secure client deployment, the authentication server's certificate must be validated against a trusted certificate authority, and clients should verify the expected server identity.
-
-The source documentation contains a recommendation to disable CA certificate validation on wireless clients. That recommendation is not reproduced here because it would weaken authentication security.
-
-The configuration should be reviewed before being treated as an appropriate production deployment.
+The recorded PEAP/MSCHAPv2 architecture requires clients to validate a trusted CA certificate and the expected authentication-server identity. Disabling certificate validation would weaken protection against rogue servers.
 
 ## 6. Monitoring Integration
 
-The Asterisk/FreeRADIUS computer is monitored through Zabbix Agent.
-
-The collected configuration report identifies the main monitoring server at:
-
-`192.168.10.12`
-
-The monitoring relationship is represented below:
-
-```text
-Asterisk / FreeRADIUS Server
-     192.168.50.2
-           |
-       Zabbix Agent
-           |
-       Zabbix Server
-     192.168.10.12
-           |
-      Grafana Dashboard
-```
-
-The Grafana dashboard includes resource and availability indicators for the Asterisk server.
+The Asterisk/FreeRADIUS host (`192.168.50.2`) is monitored through Zabbix Agent; the main Zabbix server was recorded at `192.168.10.12`. The Grafana dashboard shows historical resource and availability metrics:
 
 ![Grafana monitoring of Asterisk and Linux servers](../assets/images/monitoring/grafana/grafana_dashboard_asterisk.png)
 
-The dashboard provides historical information about CPU utilization, memory consumption, and system availability.
-
-These metrics demonstrate infrastructure monitoring but do not independently confirm successful SIP calls or RADIUS authentication transactions.
-
-Additional details are available in [Grafana Monitoring](../monitoring/grafana-monitoring.md) and [Zabbix Monitoring](../monitoring/zabbix-monitoring.md).
+These host metrics do not verify SIP calls or RADIUS authentication. See [Grafana](../monitoring/grafana-monitoring.md) and [Zabbix](../monitoring/zabbix-monitoring.md).
 
 ## 7. Diagnostic Procedures
 
@@ -291,6 +261,3 @@ The original technical PDFs and service report are not published directly becaus
 - [Grafana Monitoring](../monitoring/grafana-monitoring.md)
 - [Docker Infrastructure and Services](../containers/docker-services.md)
 
-**Photographic evidence collected:** November 6, 2026.
-
-**Documentation scope:** Historical laboratory configuration and observed infrastructure.

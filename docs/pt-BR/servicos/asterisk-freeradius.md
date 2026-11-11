@@ -1,6 +1,6 @@
 # Asterisk e FreeRADIUS — Telefonia IP e Autenticação de Rede
 
-[English](../../services/asterisk-freeradius.md) | [Português (Brasil)](asterisk-freeradius.md)
+[English](../../services/asterisk-freeradius.md) | **Português (Brasil)**
 
 ## 1. Visão Geral
 
@@ -192,45 +192,15 @@ Os documentos originais contêm segredos de autenticação e senhas de usuários
 
 ### 5.3 Segurança da Autenticação
 
-A documentação original descreve a utilização de PEAP/MSCHAPv2.
-
-Para uma implantação segura, os clientes precisam validar o certificado apresentado pelo servidor de autenticação, utilizando uma autoridade certificadora confiável e verificando a identidade esperada do servidor.
-
-Uma orientação presente no documento original recomenda desabilitar a validação do certificado CA nos clientes Wi-Fi. Essa orientação não foi reproduzida aqui porque enfraquece a segurança da autenticação.
-
-O material descreve o laboratório educacional; um ambiente de produção exige políticas próprias de certificados, autenticação e segurança.
+A arquitetura PEAP/MSCHAPv2 registrada exige que os clientes validem o certificado de uma CA confiável e a identidade esperada do servidor. Desabilitar essa validação enfraquece a proteção contra servidores fraudulentos.
 
 ## 6. Integração com o Monitoramento
 
-O computador Asterisk/FreeRADIUS é monitorado por meio do Zabbix Agent.
-
-O relatório de configuração identifica o servidor principal de monitoramento no endereço:
-
-`192.168.10.12`
-
-A relação entre os componentes pode ser representada assim:
-
-```text
-Servidor Asterisk / FreeRADIUS
-        192.168.50.2
-              |
-          Zabbix Agent
-              |
-          Zabbix Server
-        192.168.10.12
-              |
-        Dashboard Grafana
-```
-
-O dashboard do Grafana apresenta informações de recursos e disponibilidade do servidor Asterisk.
+O host Asterisk/FreeRADIUS (`192.168.50.2`) é monitorado por Zabbix Agent; o servidor principal Zabbix foi registrado em `192.168.10.12`. O dashboard Grafana apresenta métricas históricas de recursos e disponibilidade:
 
 ![Monitoramento do Asterisk e dos servidores Linux no Grafana](../../assets/images/monitoring/grafana/grafana_dashboard_asterisk.png)
 
-O painel contém informações históricas sobre utilização de CPU, consumo de memória RAM e disponibilidade do sistema.
-
-Essas métricas registram recursos e disponibilidade do servidor, não chamadas SIP ou transações RADIUS.
-
-Mais informações estão disponíveis em [Monitoramento com Grafana](../monitoramento/grafana.md) e [Monitoramento com Zabbix](../monitoramento/zabbix.md).
+Essas métricas do host não verificam chamadas SIP ou autenticação RADIUS. Veja [Grafana](../monitoramento/grafana.md) e [Zabbix](../monitoramento/zabbix.md).
 
 ## 7. Procedimentos de Diagnóstico
 
@@ -291,6 +261,3 @@ Os PDFs técnicos e o relatório de serviços originais não foram publicados di
 - [Monitoramento com Grafana](../monitoramento/grafana.md)
 - [Infraestrutura Docker e Serviços](../containers/servicos-docker.md)
 
-**Data da coleta fotográfica:** 6 de novembro de 2026.
-
-**Escopo da documentação:** Configurações históricas e infraestrutura observada no laboratório.

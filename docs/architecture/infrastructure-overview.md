@@ -1,125 +1,54 @@
 # Enterprise Infrastructure — Architecture Overview
 
-**English | [Português (Brasil)](../pt-BR/arquitetura/visao-geral-da-infraestrutura.md)**
+**English** | [Português (Brasil)](../pt-BR/arquitetura/visao-geral-da-infraestrutura.md)
 
-## Overview
+## Architecture
 
-This document presents the logical architecture of the **Enterprise NOC — From Scratch** project.
+**Enterprise NOC — From Scratch** documents the physical enterprise laboratory developed around the fictional Tapajós Inovações scenario. Its infrastructure consists of:
 
-The laboratory simulates an enterprise IT environment, integrating physical network equipment, structured cabling, departmental VLANs, Linux servers, containerized services, and centralized network monitoring.
-
-The architecture is organized into three main areas:
-
-- **Physical Infrastructure:** Network equipment, workstations, rack, and structured cabling.
-- **Network Infrastructure:** Cisco routing and switching, VLAN segmentation, corporate Wi-Fi, and IoT connectivity.
-- **Systems & Monitoring:** Linux servers, Docker services, and NOC monitoring platforms.
-
-## Logical Network Architecture
+| Layer | Components |
+|---|---|
+| Physical | Network rack, Cisco equipment, patch panel, structured cabling and departmental workstations |
+| Network | Cisco Catalyst C8200L router, C9200L-24T-4G switch and VLANs 10–70 |
+| Systems | Debian Linux infrastructure server, dedicated Asterisk/FreeRADIUS server and Windows endpoints |
+| Services | Docker/Compose, Zabbix, Grafana, MariaDB, Pi-hole, Uptime Kuma, Nginx, Portainer and web services |
+| Wireless and voice | Two separate TP-Link Archer AX53 devices, Amazon Alexa and Grandstream IP phones |
 
 ```mermaid
 flowchart TB
-    R["Cisco Catalyst C8200L<br/>Enterprise Router"]
-    SW["Cisco Catalyst 9200L<br/>Enterprise Switch"]
-
-    R ---|"802.1Q Trunk"| SW
-
-    SW --- V10["VLAN 10<br/>IT & Monitoring"]
-    SW --- V20["VLAN 20<br/>Accounting"]
-    SW --- V30["VLAN 30<br/>Finance"]
-    SW --- V40["VLAN 40<br/>Sales"]
-    SW --- V50["VLAN 50<br/>VoIP"]
-    SW --- V60["VLAN 60<br/>Corporate Wi-Fi"]
-    SW --- V70["VLAN 70<br/>IoT"]
-
-    V10 --- SERVER["Linux Server<br/>Docker & Monitoring"]
-    V50 --- PBX["Asterisk PBX<br/>RADIUS Services"]
-
-    V60 --- WIFI["TP-Link Archer AX53<br/>Corporate Wi-Fi"]
-    V70 --- IOT["TP-Link Archer AX53<br/>IoT Network"]
-
-    IOT --- ALEXA["Alexa with Display"]
-    ALEXA -.->|"Voice Control"| LIGHT["Smart Light Bulb"]
+    R["Cisco Catalyst C8200L<br/>Routing infrastructure"]
+    S["Cisco Catalyst C9200L<br/>VLAN segmentation"]
+    DEPT["VLANs 10–40<br/>IT / Accounting / Finance / Sales"]
+    VOICE["VLAN 50<br/>Asterisk / FreeRADIUS / IP phones"]
+    WIFI["VLAN 60<br/>Corporate Archer AX53"]
+    IOT["VLAN 70<br/>Dedicated IoT Archer AX53 / Alexa"]
+    NOC["Debian 13<br/>Docker infrastructure"]
+    MON["Zabbix / Grafana<br/>Infrastructure monitoring"]
+    R ---|"Trunk on switch Gi1/0/1"| S
+    S --> DEPT
+    S --> VOICE
+    S --> WIFI
+    S --> IOT
+    DEPT --> NOC
+    NOC --> MON
 ```
 
-> **Note:** This diagram represents logical network segmentation, not an exact physical cabling diagram. The dated switch configuration records interface VLAN assignments; this logical diagram is not an end-to-end cable map.
+The diagram shows documented logical associations, **not** a verified cable-by-cable map or all traffic paths. The November 4 switch configuration establishes a router-facing trunk on **switch Gi1/0/1**, not the C8200L interface or router-side VLAN subinterfaces.
 
-## Network Segmentation
+### Network and access design
 
-The infrastructure uses seven VLANs to separate different departments and network services.
+VLANs 10–40 separate IT/NOC, Accounting, Finance and Sales. VLAN 50 serves voice/authentication, VLAN 60 corporate Wi-Fi and VLAN 70 IoT. The two AX53 devices are separate physical units. Their operating modes and client addressing were not captured; router ACL enforcement and end-to-end inter-VLAN isolation were not verified.
 
-| VLAN | Segment | Purpose |
-|---|---|---|
-| 10 | IT & Monitoring | IT infrastructure and monitoring services |
-| 20 | Accounting | Accounting workstations |
-| 30 | Finance | Financial department workstations |
-| 40 | Sales | Sales department workstations |
-| 50 | VoIP | IP telephony and associated services |
-| 60 | Corporate Wi-Fi | Corporate wireless connectivity |
-| 70 | IoT | Smart devices and IoT connectivity |
+See [Consolidated Network Topology](../networking/consolidated-logical-topology.md), [VLAN Inventory](../networking/vlans.md) and [Switch Port Map](../networking/switch-port-map.md) for interfaces, addressing and equipment relationships.
 
-The wireless infrastructure includes two separate TP-Link Archer AX53 routers of the same model.
+### Monitoring and services
 
-The November 4 switch snapshot assigns Gi1/0/15 to corporate Wi-Fi (VLAN 60) and Gi1/0/14 to IoT (VLAN 70). The snapshot does not contain wireless client addressing, device operating modes, or evidence of ACL enforcement.
+Zabbix collects host and network-device metrics through monitored interfaces, including SNMP on supported Cisco equipment. MariaDB stores Zabbix data; Grafana visualizes monitoring information through the Zabbix integration. Uptime Kuma performs separate availability checks for selected services.
 
-## Monitoring Architecture
+The main Debian 13 system hosts the Docker infrastructure; a separate Linux computer provides Asterisk and FreeRADIUS. Recorded deployment details, dependencies and dashboard evidence are in [Docker Services](../containers/docker-services.md), [Zabbix](../monitoring/zabbix-monitoring.md), [Grafana](../monitoring/grafana-monitoring.md) and [Asterisk/FreeRADIUS](../services/asterisk-freeradius.md).
 
-```mermaid
-flowchart TB
-    CISCO["Cisco Network Equipment"]
-    ZABBIX["Zabbix Server"]
-    DB[("MariaDB")]
-    WEB["Zabbix Web / API"]
-    GRAFANA["Grafana"]
-    KUMA["Uptime Kuma"]
-    SERVICES["Monitored Services"]
+### Physical records
 
-    CISCO <-->|"SNMPv2c"| ZABBIX
+The laboratory includes rack power distribution, a patch panel, terminated Ethernet cables and departmental workstations. Equipment identification and photographs are documented in [Physical Infrastructure](../evidence/physical-infrastructure.md) and [Workstation Inventory](../endpoints/workstation-inventory.md).
 
-    ZABBIX -->|"Monitoring Data"| DB
-    WEB <-->|"Database Access"| DB
-
-    GRAFANA -->|"Zabbix Data Source"| WEB
-
-    KUMA -.->|"Availability Checks"| SERVICES
-```
-
-The monitoring architecture combines several complementary components:
-
-- **Zabbix:** Collection of infrastructure metrics and monitoring information.
-- **MariaDB:** Storage of Zabbix monitoring data.
-- **Grafana:** Visualization of monitoring metrics through the Zabbix integration.
-- **Uptime Kuma:** Availability monitoring for selected services.
-- **SNMP:** Collection of network equipment information.
-
-The monitoring environment also includes dashboards for analyzing infrastructure status and operational metrics.
-
-## Additional Infrastructure Services
-
-The Linux environment includes containerized applications and infrastructure services such as:
-
-- Docker and Docker Compose.
-- Portainer.
-- Pi-hole.
-- Nginx reverse proxy.
-- Internal DNS services.
-- Corporate web portal.
-
-The dated container inventory and service roles are recorded in [Docker services](../containers/docker-services.md).
-
-## Physical Infrastructure
-
-The laboratory includes:
-
-- Network rack.
-- Cisco networking equipment.
-- Patch panel.
-- Structured Ethernet cabling.
-- Manually terminated network cables.
-- Rack power distribution.
-- Workstations assembled for the simulated departments.
-
-Physical photographs, the switch configuration snapshot, and the workstation inventory describe the equipment and connections documented during the collection.
-
-## Record Scope
-
-This overview consolidates the November 4–6, 2026, laboratory evidence. It is a logical architecture record, not an exhaustive cable survey or verification of network security policy enforcement. See the [switch snapshot](../networking/switch-vlan-snapshot-2026-11-04.md), [workstation inventory](../endpoints/workstation-inventory.md), and [physical infrastructure](../evidence/physical-infrastructure.md).
+**Evidence period:** November 4–6, 2026. The records reflect dated configurations and observations rather than continuous operational availability.

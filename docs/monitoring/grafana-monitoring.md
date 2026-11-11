@@ -236,42 +236,13 @@ For further information:
 - [Zabbix Monitoring](zabbix-monitoring.md)
 - [Workstation and Server Inventory](../endpoints/workstation-inventory.md)
 
-## 8. Historical Monitoring Boundaries
+## 8. Historical Results
 
-The collected screenshots identify the following limitations:
-
-| Area | Observation |
-|---|---|
-| Windows availability | Five workstation status panels displayed `No data` |
-| Host addressing | Six workstation IP addresses differed between collected records |
-| Switch interface labels | Multiple panels used the same interface label |
-| Switch interface status | Both `UP` and `DOWN` states were displayed |
-| Monitoring coverage | Recorded hosts, panels, and data series visible in the dated screenshots |
-| Service availability | Status and values displayed during the historical capture period |
-
-These limitations are preserved as part of the technical documentation.
-
-They document the diagnostic context of the monitoring snapshots collected on November 6, 2026.
+The November 6 screenshots include **five workstation panels showing `No data`**, repeated Cisco interface labels, and both `UP`/`DOWN` indications. Six workstation addresses also differed from Zabbix registrations, as documented in [Zabbix Monitoring](zabbix-monitoring.md). The captures do not establish one cause for these observations.
 
 ## 9. Grafana and Zabbix Integration
 
-The laboratory uses Zabbix as a monitoring platform and Grafana as a visualization interface.
-
-The documented architecture includes:
-
-```text
-Network Equipment / Linux / Windows
-                |
-       SNMP / Zabbix Agent
-                |
-              Zabbix
-                |
-          Grafana Dashboards
-```
-
-This diagram presents the monitoring relationship at a conceptual level.
-
-The screenshots demonstrate the resulting dashboards but do not include complete Grafana data-source configurations or dashboard JSON exports.
+Grafana visualizes metrics from the Zabbix monitoring environment, including devices monitored through SNMP and Zabbix Agent. The published evidence consists of dashboard screenshots; complete data-source settings and dashboard JSON exports were not collected.
 
 ## 10. Evidence Summary
 

@@ -236,42 +236,13 @@ Documentações relacionadas:
 - [Monitoramento com Zabbix](zabbix.md)
 - [Inventário de Computadores e Servidores](../estacoes/inventario-de-computadores.md)
 
-## 8. Limites dos Registros Históricos
+## 8. Resultados Históricos
 
-As capturas coletadas apresentam as seguintes limitações:
-
-| Área | Observação |
-|---|---|
-| Disponibilidade das estações Windows | Cinco painéis apresentavam `No data` |
-| Endereçamento dos hosts | Seis endereços divergiam entre os registros coletados |
-| Rótulos das interfaces do switch | Vários painéis utilizavam a mesma identificação |
-| Estado das interfaces do switch | Foram apresentados estados `UP` e `DOWN` |
-| Cobertura do monitoramento | Hosts, painéis e séries presentes nas capturas datadas |
-| Disponibilidade dos serviços | Estados e valores exibidos no período histórico de coleta |
-
-Essas limitações foram preservadas como parte da documentação técnica.
-
-Elas documentam o contexto de diagnóstico dos registros coletados em 06/11/2026.
+As capturas de 6 de novembro incluem **cinco painéis de estações com `No data`**, rótulos repetidos de interfaces Cisco e indicações `UP`/`DOWN`. Seis endereços de estações também divergiam dos cadastros do Zabbix, conforme o [monitoramento Zabbix](zabbix.md). As capturas não estabelecem uma causa comum.
 
 ## 9. Integração entre Grafana e Zabbix
 
-O laboratório utiliza o Zabbix como plataforma de monitoramento e o Grafana como interface de visualização.
-
-A arquitetura documentada inclui:
-
-```text
-Equipamentos de Rede / Linux / Windows
-                    |
-          SNMP / Zabbix Agent
-                    |
-                  Zabbix
-                    |
-             Dashboards Grafana
-```
-
-O diagrama representa a relação conceitual entre os componentes de monitoramento.
-
-As capturas demonstram os dashboards resultantes, mas não incluem as configurações completas das fontes de dados do Grafana ou as exportações JSON dos painéis.
+O Grafana apresenta métricas do ambiente Zabbix, incluindo equipamentos monitorados por SNMP e Zabbix Agent. As evidências publicadas consistem em capturas dos dashboards; não foram coletadas configurações completas das fontes de dados ou exportações JSON dos painéis.
 
 ## 10. Resumo das Evidências
 
