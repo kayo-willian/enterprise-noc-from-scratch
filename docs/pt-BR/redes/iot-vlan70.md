@@ -1,65 +1,51 @@
 # Rede IoT — VLAN 70
 
-**Projeto:** Enterprise NOC — From Scratch  
-**Segmento:** VLAN 70 — Internet das Coisas (IoT)  
-**Equipamento de rede:** TP-Link Archer AX53 dedicado (Wi-Fi 6 AX3000)  
-**Dispositivo conectado:** Amazon Alexa  
-**Switch:** Cisco Catalyst C9200L  
-**Registro:** 09/11/2026
+**Enterprise NOC — From Scratch**
 
-## 1. Visão Geral
+[English](../../networking/iot-vlan70.md) | **Português (Brasil)**
 
-A VLAN 70 é o segmento dedicado aos dispositivos IoT do laboratório Enterprise NOC. Uma Amazon Alexa conecta-se por Wi-Fi a um TP-Link Archer AX53 separado, interligado por Ethernet ao switch Cisco Catalyst C9200L. O Wi-Fi corporativo da VLAN 60 utiliza outro Archer AX53; são dois equipamentos wireless físicos distintos.
+## Equipamento e conexão
 
-## 2. Conectividade
+| Característica | Registro documentado |
+|---|---|
+| Segmento de rede | VLAN 70 · IoT |
+| Equipamento wireless | TP-Link Archer AX53 dedicado · Wi-Fi 6 AX3000 |
+| Dispositivo associado | Amazon Alexa |
+| Switch | Cisco Catalyst C9200L-24T-4G |
+| Porta | `Gi1/0/14` — access VLAN 70 |
+| Evidências | Configuração do switch de 04/11 e inventário dos equipamentos de novembro |
 
-```text
-Amazon Alexa
-    |
-    | Wi-Fi
-    v
-TP-Link Archer AX53 — IoT
-    |
-    | Ethernet
-    v
-Cisco Catalyst C9200L
-Gi1/0/14 — Access VLAN 70
-    |
-    | Trunk para o roteador: Gi1/0/1
-    v
-Cisco Catalyst C8200L
+O Wi-Fi corporativo utiliza **outro** Archer AX53 na VLAN 60 (`Gi1/0/15`).
+
+```mermaid
+flowchart TB
+    SW["Cisco Catalyst C9200L"]
+    P["Gi1/0/14 · Access VLAN 70"]
+    AX["TP-Link Archer AX53 · IoT"]
+    A["Amazon Alexa"]
+    SW --> P --> AX
+    AX ---|"Wi-Fi"| A
 ```
 
-A configuração do switch de 04/11 registra `Gi1/0/14` em access VLAN 70 e `Gi1/0/1` como trunk para o roteador. A ligação wireless–switch e a associação da Alexa descrevem a topologia física do laboratório. O desenho não presume que o endereço IP da Alexa pertença diretamente à sub-rede da VLAN 70.
+O diagrama registra a associação do dispositivo IoT e a conexão Ethernet ao switch. Não pressupõe que a Alexa utilize endereço IP diretamente de uma sub-rede upstream da VLAN 70.
 
-## 3. Segmentação da Rede
+## Endereçamento e segmentação
 
-| VLAN | Segmento | Função |
-|---|---|---|
-| 60 | Wi-Fi corporativo | Conectividade wireless corporativa |
-| 70 | IoT | Conectividade dedicada à Alexa e a dispositivos inteligentes |
+A configuração do Archer AX53 não foi exportada. Seu modo de operação AP/roteador, parâmetros DHCP, NAT, sub-rede dos clientes, gateway padrão, SSID e endereço IP da Alexa **não estão estabelecidos**.
 
-A arquitetura dedica a VLAN 70 aos equipamentos IoT, com `Gi1/0/14` atribuída ao segmento no registro do switch. A aplicação de ACLs pertence a outra camada de configuração do roteador.
+- **Modo AP:** clientes wireless podem participar da sub-rede da VLAN upstream.
+- **Modo roteador com NAT:** clientes podem utilizar uma sub-rede interna separada.
 
-## 4. Endereçamento IP e Modo de Operação
+São configurações possíveis, não parâmetros verificados do equipamento do laboratório.
 
-As evidências coletadas não incluem exportação de configuração do Archer AX53 IoT. Em modo access point, os clientes Wi-Fi podem participar diretamente da rede IP da VLAN 70. Em modo roteador com NAT, os clientes podem utilizar uma sub-rede independente atrás do equipamento.
+A VLAN 70 separa o segmento Ethernet IoT do Wi-Fi corporativo da VLAN 60 em camada 2. Restringir o tráfego aos demais recursos corporativos exige política de camada 3; a aplicação das ACLs do roteador não foi verificada nos registros coletados.
 
-O modo efetivo, endereço da Alexa, serviço DHCP, regras NAT e gateway da rede IoT não são atribuídos à implantação sem configuração correspondente. Esses parâmetros estão **fora do escopo da captura histórica**, e não representam tarefas editoriais abertas para concluir esta página.
+## Monitoramento e escopo da publicação
 
-## 5. Monitoramento
+As capturas do Zabbix/Grafana apresentam o monitoramento da infraestrutura Cisco. O inventário publicado não contém métricas diretas da Alexa ou do Archer AX53 IoT.
 
-As capturas disponíveis apresentam a infraestrutura Cisco monitorada por Zabbix e Grafana. O inventário de monitoramento publicado não apresenta métricas diretas do Archer AX53 IoT ou da Alexa. A VLAN 70 é documentada conforme a segmentação lógica do switch e a conectividade IoT do laboratório.
+Este registro documenta a atribuição da interface no switch e a associação dos equipamentos, não testes bem-sucedidos dos clientes IoT nem a configuração wireless completa. SSIDs, senhas, segredos RADIUS e identificadores exclusivos não são publicados.
 
-## 6. Escopo das Evidências
+## Referências
 
-A página reúne o registro datado da configuração do C9200L e o inventário dos equipamentos de rede. Descreve a ligação implantada e diferencia os detalhes presentes nas evidências dos parâmetros não incluídos nas exportações coletadas. SSIDs, senhas, segredos RADIUS e identificadores exclusivos não são publicados.
-
-## Documentação Relacionada
-
-- [Segmentação por VLANs](vlans.md)
-- [Mapa de Portas do Switch](mapa-de-portas-switch.md)
-- [Registro de Configuração do Switch](registro-switch-vlans-2026-11-04.md)
-- [Roteador Cisco C8200L](roteador-c8200l.md)
-- [Wi-Fi Corporativo — VLAN 60](wifi-corporativo-vlan60.md)
-- [Infraestrutura Física](../evidencias/infraestrutura-fisica.md)
+[Visão geral de Redes](README.md) · [VLANs](vlans.md) · [Mapa de portas](mapa-de-portas-switch.md) · [Registro do switch](registro-switch-vlans-2026-11-04.md) · [Wi-Fi corporativo · VLAN 60](wifi-corporativo-vlan60.md) · [Topologia lógica](topologia-logica-consolidada.md) · [Infraestrutura física](../evidencias/infraestrutura-fisica.md)

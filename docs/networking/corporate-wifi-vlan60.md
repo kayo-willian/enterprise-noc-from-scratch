@@ -4,309 +4,47 @@
 
 **English** | [Português (Brasil)](../pt-BR/redes/wifi-corporativo-vlan60.md)
 
----
+## Equipment and switch connection
 
-## 1. Overview
-
-The **Enterprise NOC — From Scratch** infrastructure includes a dedicated network segment for corporate wireless connectivity.
-
-**VLAN 60** is assigned to the corporate Wi-Fi environment, providing logical separation from departmental workstations, administrative infrastructure, voice services, and IoT connectivity.
-
-The documented wireless equipment is a **TP-Link Archer AX53**, associated with interface `Gi1/0/15` on the Cisco Catalyst C9200L switch.
-
-This document consolidates the equipment identification, switch configuration, network architecture, access-policy design, authentication relationships, and historical technical evidence.
-
-| Attribute | Documented Information |
+| Attribute | Documented record |
 |---|---|
-| Network Segment | Corporate Wi-Fi |
-| VLAN ID | 60 |
-| Wireless Equipment | TP-Link Archer AX53 |
-| Wireless Generation | Wi-Fi 6 |
-| Product Class | AX3000 |
-| Enterprise Switch | Cisco Catalyst C9200L-24T-4G |
-| Switch Interface | `Gi1/0/15` |
-| Interface Configuration | Access VLAN 60 |
-| Enterprise Router | Cisco Catalyst C8200L-1N-4T |
-| Configuration Reference | November 4, 2026 |
-| Equipment Evidence | November 6, 2026 |
+| Equipment | TP-Link Archer AX53 · Wi-Fi 6 AX3000 |
+| Network role | Corporate wireless |
+| VLAN | 60 |
+| Switch | Cisco Catalyst C9200L-24T-4G |
+| Port | `Gi1/0/15` — access VLAN 60 |
+| Evidence | Switch configuration, November 4, 2026; device photograph, November 6 |
 
-The available records establish the equipment identification and switch-side VLAN assignment. They do not include the wireless router's complete operating configuration.
+The corporate Archer AX53 is **a separate physical unit** from the Archer AX53 used for IoT on VLAN 70 (`Gi1/0/14`). Device identification comes from the collected photograph; the VLAN assignment comes from the Cisco switch configuration.
 
-## 2. Wireless Equipment
+The original equipment photograph includes wireless credentials or unique identifiers and is not published in the public documentation.
 
-### 2.1 TP-Link Archer AX53
-
-The corporate wireless equipment was identified from physical evidence collected on **November 6, 2026**.
-
-| Characteristic | Identification |
-|---|---|
-| Manufacturer | TP-Link |
-| Model | Archer AX53 |
-| Wireless Standard | Wi-Fi 6 |
-| Product Class | AX3000 |
-| Documented Role | Corporate wireless connectivity |
-| Associated VLAN | 60 |
-
-The AX53 is documented as part of the enterprise wireless infrastructure.
-
-Its identification is supported by the collected equipment evidence rather than inferred from the switch configuration.
-
-### 2.2 Corporate and IoT Equipment Separation
-
-The laboratory includes two separate TP-Link Archer AX53 devices.
-
-| Equipment | Network Segment | Switch Interface |
-|---|---|---|
-| Corporate Archer AX53 | VLAN 60 — Corporate Wi-Fi | `Gi1/0/15` |
-| Dedicated IoT Archer AX53 | VLAN 70 — IoT | `Gi1/0/14` |
-
-Both devices belong to the same product family but have distinct roles in the documented network architecture.
-
-The corporate wireless device is not represented as simultaneously providing the separate IoT network.
-
-### 2.3 Published Evidence
-
-The original equipment photograph contains sensitive wireless information and unique device identifiers.
-
-For this reason, the original photograph is not included in the public documentation.
-
-No wireless passwords, SSIDs, administrative credentials, authentication secrets, or device-specific identifiers are reproduced in this document.
-
-## 3. Integration with the Cisco Catalyst C9200L
-
-The Cisco Catalyst C9200L configuration captured on **November 4, 2026**, assigns `Gi1/0/15` to the corporate Wi-Fi segment.
-
-### 3.1 Switch Interface Assignment
-
-| Component | Recorded Information |
-|---|---|
-| Switch | Cisco Catalyst C9200L |
-| Interface | `Gi1/0/15` |
-| Assigned VLAN | 60 |
-| Switchport Mode | Access |
-| Documented Connection | Corporate wireless equipment |
-
-The switch record establishes the VLAN assignment configured on the Ethernet interface.
-
-It does not independently establish the physical link state, the wireless device's operating mode, or successful connectivity for wireless clients.
-
-### 3.2 Relationship with the Enterprise Router
-
-The network architecture includes a Cisco Catalyst C8200L router connected to the C9200L through the router-facing trunk configured on switch interface `Gi1/0/1`.
-
-The switch configuration establishes the trunk on the C9200L side.
-
-The corresponding C8200L interface, complete router-side VLAN configuration, and access-control implementation are not included in the collected records.
-
-The documented network VLAN inventory is not an explicitly configured allowed-VLAN list for the trunk.
-
-## 4. Logical Network Architecture
-
-The corporate wireless environment is associated with VLAN 60 on the Catalyst C9200L.
+## Logical connection
 
 ```mermaid
 flowchart TB
-    R["Cisco Catalyst C8200L<br/>Enterprise Router"]
-    SW["Cisco Catalyst C9200L<br/>Enterprise Switch"]
-    V60["VLAN 60<br/>Corporate Wi-Fi"]
-    AX53["TP-Link Archer AX53<br/>Corporate Wireless"]
-
-    R ---|"Router-facing trunk<br/>Switch Gi1/0/1"| SW
-    SW -->|"Gi1/0/15 — Access"| V60
-    V60 --> AX53
+    SW["Cisco Catalyst C9200L"]
+    V["Gi1/0/15 · Access VLAN 60"]
+    AX["TP-Link Archer AX53 · Corporate Wi-Fi"]
+    SW --> V --> AX
 ```
 
-The diagram presents the documented logical relationship between the equipment and the corporate wireless segment.
+The router-facing trunk on C9200L `Gi1/0/1` belongs to the wider network architecture; its router-side configuration was not captured. The connection shown here records the corporate wireless device's switch association, not tested wireless-client connectivity.
 
-It does not represent a complete physical cable map or establish the internal routing, NAT, DHCP, or wireless-client configuration of the Archer AX53.
+## Addressing and authentication
 
-### 4.1 Relationship with Other VLANs
+The Archer AX53 configuration was not collected, so the following are **not established**: AP versus router mode, client IP subnet, default gateway, DHCP, NAT, SSID and encryption settings.
 
-The enterprise network includes seven VLANs with distinct responsibilities.
+In AP mode, clients may join the upstream VLAN's IP network. In router mode, they may use a separate subnet behind the device. Neither mode is presented as deployed. In particular, `192.168.60.0/24` and `192.168.60.1` are not asserted without addressing evidence.
 
-| VLAN | Network Segment | Relationship to Corporate Wi-Fi |
-|---|---|---|
-| 10 | IT & NOC | Administrative and monitoring infrastructure |
-| 20 | Accounting | Departmental network |
-| 30 | Finance | Departmental network |
-| 40 | Sales | Departmental network |
-| 50 | VoIP & Authentication | Asterisk and FreeRADIUS services |
-| 60 | Corporate Wi-Fi | Dedicated corporate wireless segment |
-| 70 | IoT | Separate wireless network |
+FreeRADIUS is documented on the Debian voice/authentication server in VLAN 50 (`192.168.50.2`; standard RADIUS ports UDP 1812/1813). The available records do **not** confirm that the AX53 was configured as a RADIUS client or that wireless authentication succeeded.
 
-VLAN 60 is logically separated at Layer 2 from the other documented VLANs.
+## Security and monitoring
 
-Communication between VLANs requires Layer 3 forwarding, and restrictions on that communication depend on the corresponding routing and security configurations.
+VLAN 60 is a separate Layer 2 segment. The access-policy design restricts unauthorized traffic to internal networks; the switch assignment does not verify router ACL enforcement or client isolation tests.
 
-## 5. Operating Mode and IP Addressing
+Zabbix and Grafana records document monitoring of Cisco equipment. No dedicated dashboard with direct corporate Archer AX53 metrics appears in the collected inventory.
 
-The collected equipment records do not include a configuration export from the corporate Archer AX53.
+## References
 
-Consequently, the installed operating mode and internal addressing configuration cannot be established from the available evidence.
-
-### 5.1 Access Point and Router Modes
-
-The effect of the wireless device on client addressing depends on its operating mode.
-
-| Operating Mode | General Network Behavior |
-|---|---|
-| Access Point | Wireless clients may participate directly in the IP network associated with the upstream VLAN |
-| Router with NAT | Wireless clients may use a separate internal subnet behind the device |
-
-These are possible operating models, not confirmed configurations of the installed Archer AX53.
-
-The switch-side access VLAN assignment does not independently identify which mode was used.
-
-### 5.2 Wireless Client Addressing
-
-The available records do not establish:
-
-- The corporate wireless client subnet.
-- Wireless client IPv4 addresses.
-- The wireless default gateway.
-- The DHCP server or address pool.
-- NAT configuration.
-- Internal device addressing.
-
-No `192.168.60.0/24` network, `192.168.60.1` gateway, or other conventionally numbered address is attributed to the deployment without corresponding evidence.
-
-The documented fact is the **VLAN 60 assignment on switch interface `Gi1/0/15`**.
-
-## 6. Network Segmentation and Access Policy
-
-The enterprise architecture assigns corporate wireless connectivity to a dedicated logical segment.
-
-The access-policy design distinguishes corporate Wi-Fi from the administrative, departmental, voice, and IoT networks.
-
-### 6.1 Architectural Requirements
-
-The documented security model provides for:
-
-- Restricting unauthorized access from wireless clients to administrative infrastructure.
-- Separating corporate wireless connectivity from the IoT network.
-- Allowing communication with internal services only where authorized and required.
-- Controlling inter-VLAN traffic through the relevant Layer 3 security policies.
-
-These requirements describe the logical network security design.
-
-### 6.2 Enforcement Evidence
-
-The historical C9200L configuration establishes the VLAN 60 switchport assignment.
-
-It does not independently demonstrate:
-
-- Router ACL enforcement.
-- Successful isolation of wireless clients from other VLANs.
-- Firewall rules applied to the corporate wireless environment.
-- End-to-end inter-VLAN access-control tests.
-
-The documented architecture must therefore be distinguished from independently verified security-policy enforcement.
-
-## 7. Authentication and FreeRADIUS
-
-The Enterprise NOC infrastructure includes a FreeRADIUS server associated with VLAN 50.
-
-The documented server information is:
-
-| Attribute | Recorded Information |
-|---|---|
-| Service | FreeRADIUS |
-| Host Operating System | Debian Linux |
-| Server IPv4 Address | `192.168.50.2/24` |
-| Network Segment | VLAN 50 |
-| Authentication Protocol | RADIUS |
-| Standard Authentication Port | UDP 1812 |
-| Standard Accounting Port | UDP 1813 |
-
-The network authentication architecture relates FreeRADIUS to the corporate wireless environment.
-
-However, the available evidence does not establish that the Archer AX53 was configured as an operational RADIUS client.
-
-### 7.1 Authentication Scope
-
-The collected records do not include:
-
-- Corporate Wi-Fi SSID configuration.
-- Wireless encryption settings.
-- RADIUS client definitions for the Archer AX53.
-- Shared-secret configuration.
-- Wireless authentication transaction logs.
-- Successful authentication tests involving corporate Wi-Fi clients.
-
-The FreeRADIUS installation is documented independently from the wireless equipment configuration.
-
-Their presence in the same infrastructure does not, by itself, demonstrate an operational authentication integration.
-
-Additional technical information is available in [Asterisk and FreeRADIUS](../services/asterisk-freeradius.md).
-
-## 8. Monitoring and Observability
-
-The Enterprise NOC laboratory uses Zabbix and Grafana for infrastructure monitoring.
-
-The collected monitoring evidence includes information from Cisco network equipment and infrastructure services.
-
-The published monitoring records do not contain a dedicated dashboard identifying direct metrics from the corporate Archer AX53.
-
-### 8.1 Monitoring Coverage
-
-| Component | Documented Monitoring Evidence |
-|---|---|
-| Cisco Catalyst C8200L | Router-related Zabbix/Grafana observations |
-| Cisco Catalyst C9200L | Switch-related monitoring metrics |
-| TP-Link Archer AX53 — Corporate Wi-Fi | No dedicated direct-monitoring dashboard in the collected records |
-
-The presence of monitoring information for the Cisco infrastructure does not establish direct monitoring of the wireless router or its clients.
-
-### 8.2 Monitoring References
-
-- [Zabbix Monitoring](../monitoring/zabbix-monitoring.md)
-- [Grafana Monitoring](../monitoring/grafana-monitoring.md)
-- [SNMP Troubleshooting](../monitoring/snmp-troubleshooting.md)
-
-## 9. Technical Evidence and Scope
-
-The corporate Wi-Fi documentation combines the following historical records.
-
-| Evidence Source | Date | Documented Information |
-|---|---|---|
-| Cisco Catalyst C9200L configuration | November 4, 2026 | Access VLAN 60 assignment on `Gi1/0/15` |
-| Wireless equipment photograph | November 6, 2026 | Identification of the corporate TP-Link Archer AX53 |
-| Consolidated network inventory | November 2026 | Separate corporate and IoT wireless equipment |
-| Network architecture records | November 2026 | VLAN organization and intended segmentation |
-| Zabbix/Grafana screenshots | November 2026 | Cisco infrastructure monitoring observations |
-
-The collected evidence supports:
-
-- Identification of the corporate wireless equipment.
-- The equipment's documented role in the network.
-- VLAN 60 assignment on the C9200L.
-- Separation of the corporate and IoT wireless equipment in the architecture.
-
-The available records do not independently establish the installed wireless operating mode, client addressing, authentication transactions, NAT configuration, ACL enforcement, or direct monitoring of the Archer AX53.
-
-These boundaries define the scope of the historical technical documentation and do not constitute outstanding steps required to complete this record.
-
-## 10. Related Documentation
-
-### Networking & Architecture
-
-- [Networking & Architecture — Overview](README.md)
-- [Consolidated Logical Topology](consolidated-logical-topology.md)
-- [VLAN Segmentation](vlans.md)
-- [Cisco Catalyst C8200L](router-c8200l.md)
-- [Cisco Catalyst C9200L — Configuration Snapshot](switch-vlan-snapshot-2026-11-04.md)
-- [Cisco Catalyst C9200L — Switch Port Mapping](switch-port-map.md)
-- [IoT Network — VLAN 70](iot-vlan70.md)
-
-### Infrastructure and Monitoring
-
-- [Infrastructure Architecture](../architecture/infrastructure-overview.md)
-- [Physical Infrastructure](../evidence/physical-infrastructure.md)
-- [Asterisk and FreeRADIUS](../services/asterisk-freeradius.md)
-- [Zabbix Monitoring](../monitoring/zabbix-monitoring.md)
-- [Grafana Monitoring](../monitoring/grafana-monitoring.md)
-
----
-
-**Evidence reference:** November 4–6, 2026  
-**Document type:** Corporate wireless network architecture and historical evidence.
+[Networking overview](README.md) · [VLANs](vlans.md) · [Port map](switch-port-map.md) · [Switch snapshot](switch-vlan-snapshot-2026-11-04.md) · [IoT · VLAN 70](iot-vlan70.md) · [Asterisk / FreeRADIUS](../services/asterisk-freeradius.md) · [Physical infrastructure](../evidence/physical-infrastructure.md)
