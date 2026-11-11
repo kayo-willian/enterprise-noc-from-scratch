@@ -110,7 +110,59 @@ Os containers documentados atendem a diferentes funções.
 
 Os serviços Asterisk e FreeRADIUS são documentados separadamente, pois são executados em outro computador Linux.
 
-## 7. Escopo das Evidências
+## 7. Arquitetura, Integração dos Serviços e Decisões Técnicas
+
+A infraestrutura reúne **dez containers observados em um host físico Debian** e **outro computador Linux dedicado a Asterisk/FreeRADIUS**. Essa separação está registrada nos inventários de containers e do servidor de telefonia/autenticação; o servidor VoIP não deve ser contado como container Docker.
+
+### Caminho de uma Requisição na Infraestrutura
+
+A configuração publicada permite compreender o fluxo de acesso aos serviços:
+
+1. O cliente resolve o **nome DNS interno** pelo resolvedor configurado. O Pi-hole pode responder ou filtrar consultas dos clientes que o utilizam; as evidências não comprovam que todas as VLANs adotaram esse resolvedor.
+2. O cliente acessa o host Debian pelas portas **HTTP 80 ou HTTPS 443**, publicadas pelo container `reverse-proxy`.
+3. O Nginx seleciona o host virtual em [`lab.conf`](../../../docker_configs/reverse-proxy/conf.d/lab.conf) e encaminha a requisição para o container apropriado. Por exemplo, `grafana.noc.example.test` aponta para `grafana:3000` e `zabbix.noc.example.test` para `zabbix-web:8080`.
+4. O Zabbix Web depende do restante da stack Zabbix e do MariaDB; receber resposta HTTP da interface não equivale a comprovar que todos os itens estão sendo coletados. O Grafana apresenta métricas da integração Zabbix definida no exemplo.
+
+Os nomes apresentados são **exemplos sanitizados**, não registros DNS públicos reais. O Nginx público contempla hosts virtuais de **portal, Zabbix, Grafana e Uptime Kuma**; não publica regras de proxy para Pi-hole ou Portainer. O registro do laboratório também menciona esses outros serviços, portanto o exemplo público não é um export completo.
+
+### Importância das Dependências no Compose
+
+| Relação | Implicação técnica | O que está documentado |
+|---|---|---|
+| Health check de `db` → `zabbix-server` | O processamento do Zabbix depende do banco; o Compose espera a inicialização do MariaDB | **Dependência declarada**, não coleta correta de todos os itens |
+| `db` e `zabbix-server` → `zabbix-web` | A inicialização da interface segue os pré-requisitos da stack | Ordem de inicialização, **não** prontidão funcional |
+| `zabbix-server` → `zabbix-agent` | O agente está configurado para interagir com o servidor identificado | Configuração, **não** sucesso de coleta em todos os hosts |
+| `reverse-proxy` → aplicações web | O encaminhamento exige alcance dos upstreams pelos nomes dos containers | Rotas declaradas, **não** acesso testado de todas as VLANs |
+| Plugin Grafana → Zabbix | Os dashboards podem visualizar os dados coletados pelo Zabbix | Configuração do plugin e painéis observados |
+
+Concentrar serviços em um host facilita inventário, inspeção dos logs e acompanhamento de dependências, mas também cria um **domínio de falha compartilhado**. Alta disponibilidade ou tempo de recuperação não foram comprovados. Os volumes persistentes preservam dados nas operações normais de substituição de containers quando utilizados corretamente; isso **não** equivale a um backup validado.
+
+Algumas imagens utilizam tags mutáveis, como `latest`. Uma implantação reproduzível exigiria verificar versões ou digests específicos, que não podem ser deduzidos apenas do inventário histórico.
+
+## 8. Fluxo de Diagnóstico e Validação
+
+Os comandos abaixo são **referências para futuras verificações**, não testes executados nesta revisão. Utilizar um host autorizado e confirmar os caminhos reais das stacks antes de agir.
+
+```bash
+docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}'
+docker network ls
+docker volume ls
+```
+
+Ao inspecionar um serviço, distinguir o processo em execução do health check opcional:
+
+```bash
+docker inspect --format '{{.State.Status}} {{if .State.Health}}{{.State.Health.Status}}{{else}}no-healthcheck{{end}}' zabbix-db
+docker logs --tail 100 zabbix-server
+```
+
+Uma validação deve examinar **a aplicação e suas dependências**: diante de falha no Zabbix Web, consultar interface, Zabbix Server e MariaDB; diante de falha no portal, verificar resolução DNS, rota Nginx e `site-estatico`. Porta publicada ou container `running` é observação inicial, não teste funcional conclusivo.
+
+**Limites das investigações registradas:** as capturas mostram dez containers em execução e quatro health checks saudáveis, mas não apresentam uso individual de CPU/RAM, testes de conectividade por VLAN, validação TLS, exercícios de recuperação ou causa-raiz comprovada de indisponibilidades. Registrar novas saídas com data e hora e remover segredos antes de publicar.
+
+**Procedimentos operacionais:** [Runbook de falhas Docker](../operacoes-noc/runbooks/falhas-servicos-docker.md) · [Runbook de resolução DNS](../operacoes-noc/runbooks/falhas-resolucao-dns.md). Esses documentos descrevem métodos de diagnóstico; não afirmam que houve um incidente em 6 de novembro. 
+
+## 9. Escopo das Evidências
 
 As evidências coletadas confirmam a presença de dez containers Docker em execução em 6 de novembro de 2026.
 
@@ -126,7 +178,7 @@ O inventário datado não registra as seguintes propriedades operacionais:
 
 O inventário apresenta containers, portas e redes na data de coleta, sem tratar essas configurações como resultados de testes das aplicações.
 
-## 8. Configuração do Docker Compose
+## 10. Configuração do Docker Compose
 
 Os arquivos Docker Compose a seguir documentam as configurações
 de implantação utilizadas no laboratório.

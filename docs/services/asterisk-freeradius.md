@@ -194,7 +194,38 @@ The original configuration documentation contains authentication secrets and use
 
 The recorded PEAP/MSCHAPv2 architecture requires clients to validate a trusted CA certificate and the expected authentication-server identity. Disabling certificate validation would weaken protection against rogue servers.
 
-## 6. Monitoring Integration
+## 6. Operational Architecture and Design Considerations
+
+### Asterisk: How a Departmental Call Is Routed
+
+The documented topology pairs two Grandstream phones on the voice network with the Asterisk server at `192.168.50.2`. The following is a **protocol-level explanation of the configured design**, not a claim that a call was captured:
+
+1. An IP telephone registers its SIP identity through **PJSIP**, using SIP signaling over UDP `5060` in the documented configuration.
+2. A user dials `1001` (Sales) or `1002` (IT); the internal dialplan in `/etc/asterisk/extensions.conf` selects `Dial(PJSIP/<extension>,30,tT)`.
+3. Asterisk attempts the destination for up to **30 seconds**. The `tT` flags enable the documented transfer capabilities for the two call legs.
+4. Once a call is established, **RTP** carries voice media; the technical report lists UDP `10000–20000` for media. SIP registration status, call routing and audio quality are **different tests**.
+
+The `8888` playback application checks audio delivery from the PBX, while `9999` uses `Echo()` to help assess bidirectional media. These tests would produce useful evidence only if their results were actually recorded.
+
+### FreeRADIUS: How Enterprise Wireless Authentication Is Intended to Work
+
+The documented network design places corporate Wi-Fi in **VLAN 60**, the authentication server in **VLAN 50**, and RADIUS authentication/accounting on **UDP 1812/1813**.
+
+1. A wireless client requests access through an **802.1X authenticator** (the access equipment).
+2. The authenticator relays EAP authentication information to FreeRADIUS using RADIUS.
+3. In the recorded **PEAP/MSCHAPv2** design, the client must verify the trusted authentication server certificate and identity before submitting credentials.
+4. The result of authentication determines whether access is permitted under the actual device policy.
+
+This is the **intended interaction**, not a captured authentication exchange. In particular, the corporate [Wi-Fi VLAN 60 record](../networking/corporate-wifi-vlan60.md) does **not** confirm that the photographed TP-Link Archer AX53 was configured as a RADIUS client or supports/used the recorded enterprise authentication design. A VLAN assignment or an active `freeradius` daemon cannot establish that missing evidence.
+
+### Separation of Services and Security Boundaries
+
+Running telephony and network authentication on a dedicated Linux computer separates those daemons from the Docker monitoring/application host. It also introduces an explicit **cross-VLAN dependency**: monitoring from the infrastructure network and enterprise wireless authentication must reach the server only through permitted routes and access controls. Actual ACL enforcement and end-to-end Wi-Fi authentication were not verified in the collected material.
+
+The reported AMI port `5038` is documented as **localhost-only**; do not infer remote exposure from the port inventory. PJSIP identities, RADIUS shared secrets, user passwords and certificate private keys are intentionally absent from the public repository. Availability monitoring of this Linux host does not validate access-control correctness, SIP registration or media flow.
+
+
+## 7. Monitoring Integration
 
 The Asterisk/FreeRADIUS host (`192.168.50.2`) is monitored through Zabbix Agent; the main Zabbix server was recorded at `192.168.10.12`. The Grafana dashboard shows historical resource and availability metrics:
 
@@ -202,7 +233,7 @@ The Asterisk/FreeRADIUS host (`192.168.50.2`) is monitored through Zabbix Agent;
 
 These host metrics do not verify SIP calls or RADIUS authentication. See [Grafana](../monitoring/grafana-monitoring.md) and [Zabbix](../monitoring/zabbix-monitoring.md).
 
-## 7. Diagnostic Procedures
+## 8. Diagnostic Procedures
 
 The following read-only commands are useful for inspecting the documented services on the Linux host.
 
@@ -232,7 +263,23 @@ These commands are examples of local diagnostic procedures. Their outputs were n
 
 Before publishing diagnostic output, authentication details, internal identities, and other sensitive information must be reviewed.
 
-## 8. Evidence Scope
+## 9. Evidence, Gaps and Next Validation Steps
+
+The following matrix preserves the distinction between **implementation records**, **observations** and **still-missing tests**:
+
+| Area | Available evidence | What a future validation would need |
+|---|---|---|
+| Linux host | November 6 system report: Debian, kernel, IPv4, storage and four running services | New dated `systemctl` output and relevant service logs |
+| Telephony | October 30 Asterisk configuration report; dialplan `1001`/`1002`; two phone photographs | Dated PJSIP registration output, successful bidirectional call, audio check and (if approved) sanitized call records |
+| Enterprise Wi-Fi authentication | FreeRADIUS report: configuration directories, methods and ports | Confirm authenticator support/configuration, trusted client CA/server identity, successful/failed RADIUS exchange and permitted VLAN path |
+| Host monitoring | Historical Zabbix/Grafana metrics for the server | Distinct checks of SIP reachability, registration and RADIUS authentication, not just CPU/RAM |
+
+**Operational failure points to consider:** incorrect SIP endpoint credentials or registration, routing/firewall restrictions between voice devices and services, RTP audio-path issues, incorrect RADIUS client definition or shared secret, and unsafe PEAP certificate validation. These are **diagnostic possibilities**, not incidents proven to have occurred.
+
+For a future authorized investigation, start with the read-only `systemctl`, `asterisk -rx` and `ss` commands already listed above, record time-stamped results, and avoid publishing identities or secrets. Do not label authentication or call flows as operationally validated until they have corresponding test evidence.
+
+
+## 10. Evidence Scope
 
 | Evidence | What it establishes |
 |---|---|
@@ -254,7 +301,7 @@ The collected records do not contain independent results for:
 
 The original technical PDFs and service report are not published directly because they contain authentication secrets and internal configuration details.
 
-## 9. Related Documentation
+## 11. Related Documentation
 
 - [Workstation and Server Inventory](../endpoints/workstation-inventory.md)
 - [Zabbix Monitoring](../monitoring/zabbix-monitoring.md)

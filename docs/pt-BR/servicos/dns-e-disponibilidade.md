@@ -38,6 +38,19 @@ As portas publicadas descrevem a configuração Docker, não testes de acesso em
 
 Para consultar o inventário completo, acesse [Infraestrutura Docker e Serviços](../containers/servicos-docker.md).
 
+### 2.1. Caminho da Consulta DNS e Dependências dos Serviços
+
+Um cliente só utiliza o Pi-hole quando a configuração do seu resolvedor direciona consultas ao serviço. Na implantação documentada, o host Debian publica DNS TCP/UDP **53**; o container Pi-hole avalia as requisições pelas regras de filtragem e pelos servidores upstream configurados.
+
+1. O cliente recebe ou configura um resolvedor DNS. As evidências públicas **não** comprovam opções DHCP de DNS aplicadas a todas as VLANs.
+2. O cliente envia a consulta ao resolvedor. Quando o Pi-hole a recebe, pode responder com registros/cache disponíveis, aplicar bloqueios ou consultar os resolvedores upstream configurados.
+3. A aplicação acessa separadamente o endereço retornado. **Resolver DNS com sucesso não comprova que HTTP, HTTPS ou o backend Docker esteja acessível.**
+
+O [Compose do Pi-hole](../../../docker_configs/lab-ti/pihole/docker-compose.yml) publica `53:53/tcp`, `53:53/udp` e a porta `8080` do host para interface web; a senha administrativa e os upstreams são informados por **variáveis de ambiente locais**. Assim, é possível examinar a declaração do serviço sem expor credenciais no repositório.
+
+Essa distinção ajuda a investigar indisponibilidades: bloqueio intencional de domínio, timeout do resolvedor, falha de roteamento e erro de aplicação web exigem **correções diferentes**.
+
+
 ## 3. Pi-hole — Filtragem DNS
 
 O Pi-hole disponibiliza filtragem de domínios baseada em DNS e visibilidade sobre consultas realizadas pelos clientes que utilizam o serviço.
@@ -178,7 +191,50 @@ As configurações públicas não incluem segredos de autenticação nem configu
 
 Esses arquivos documentam a estrutura de implantação, enquanto as capturas coletadas comprovam a presença das aplicações no laboratório.
 
-## 7. Escopo das Evidências Históricas
+## 7. Interpretação Técnica, Correlação de Incidentes e Validação
+
+### Por que Essas Ferramentas São Complementares
+
+O **Pi-hole** registra consultas DNS e aplica regras de filtragem. O **Uptime Kuma** consulta um conjunto limitado de alvos e registra mudanças de estado. O **Zabbix** coleta métricas e triggers de hosts/rede; o **Grafana** visualiza os dados selecionados. Combinar os sinais pode delimitar falhas, mas nenhuma ferramenta sozinha comprova a saúde de toda a cadeia de aplicações.
+
+Se um usuário não consegue abrir o portal corporativo, a investigação deve separar:
+
+| Verificação | Questão técnica | Evidência necessária |
+|---|---|---|
+| Resolvedor do cliente | O cliente usa o DNS esperado? | Configuração atual e resposta da consulta |
+| Pi-hole | A consulta foi bloqueada, não respondida ou encaminhada? | Resposta/log datado, regra correspondente ou estado do upstream |
+| Rede e proxy | O nome resolvido chega ao Nginx e ao upstream correto? | Testes autorizados de conectividade e HTTPS |
+| Aplicação | O `site-estatico` entrega o conteúdo solicitado? | Estado do container, logs relevantes e resposta HTTP funcional |
+| Uptime Kuma / Zabbix | Houve falha no mesmo período e alertas relacionados? | Histórico e timestamps correlacionados |
+
+### Anomalias Históricas Não São Causas Comprovadas
+
+O histórico capturado no Uptime Kuma inclui **verificações malsucedidas de conectividade com o roteador Cisco** e um **evento de conexão reiniciada do Grafana**, seguidos de verificações bem-sucedidas. Isso comprova **falhas registradas**, mas não demonstra causas-raiz, procedimentos de correção, duração do impacto ou solução permanente. Os quatro monitores atuais em `Up` não apagam eventos anteriores.
+
+Da mesma forma, 1.827 consultas DNS bloqueadas comprovam atividade de filtragem, **não** 1.827 incidentes de segurança. Os 75.952 domínios da lista representam entradas de filtragem, não solicitações efetivamente bloqueadas.
+
+### Verificações Futuras Somente de Leitura
+
+Estes comandos são **exemplos de diagnóstico autorizado**, não testes executados nesta revisão. Substituir placeholders por informações atuais verificadas e evitar divulgar consultas reais de usuários.
+
+```bash
+docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'
+docker logs --tail 100 pihole
+docker logs --tail 100 uptime-kuma
+```
+
+Com `dig` instalado, é possível consultar um nome permitido no resolvedor Pi-hole atualmente autorizado:
+
+```bash
+dig @<VERIFIED_DNS_SERVER_IP> example.org A +time=2 +tries=1
+```
+
+Uma resposta HTTP `200 OK` e uma resposta DNS são verificações distintas. Confirmar tipo de monitor, estado esperado, intervalo de medição e rede de origem antes de interpretar percentuais do Uptime Kuma como disponibilidade.
+
+**Runbooks:** [Falhas de resolução DNS](../operacoes-noc/runbooks/falhas-resolucao-dns.md) · [Falhas de serviços Docker](../operacoes-noc/runbooks/falhas-servicos-docker.md). Eles descrevem procedimentos de diagnóstico; não comprovam que novos incidentes foram reproduzidos.
+
+
+## 8. Escopo das Evidências Históricas
 
 | Evidência | O que demonstra |
 |---|---|
@@ -189,7 +245,7 @@ Esses arquivos documentam a estrutura de implantação, enquanto as capturas col
 
 As capturas de 6 de novembro documentam consultas DNS e quatro monitores do Uptime Kuma. Elas não estabelecem cobertura DNS de todas as VLANs, disponibilidade contínua ou SLA comprovado.
 
-## 8. Documentação Relacionada
+## 9. Documentação Relacionada
 
 - [Infraestrutura Docker e Serviços](../containers/servicos-docker.md)
 - [Monitoramento com Zabbix](../monitoramento/zabbix.md)
