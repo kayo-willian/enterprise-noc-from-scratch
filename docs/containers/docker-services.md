@@ -1,164 +1,105 @@
-# Docker Infrastructure and Services
+# Linux and Docker — Infrastructure Services
 
-[English](docker-services.md) | [Português (Brasil)](../pt-BR/containers/servicos-docker.md)
+**English** | [Português (Brasil)](../pt-BR/containers/servicos-docker.md)
 
-## 1. Overview
+**Evidence:** November 6, 2026 · **Host:** Dell OptiPlex 3020, Intel Core i5-4590, approximately 8 GB RAM, Debian GNU/Linux 13 (Trixie), observed IPv4 `192.168.10.12/24`.
 
-The Enterprise NOC — From Scratch laboratory uses Docker to host infrastructure, monitoring, and network services.
+This document separates the **running-container inventory** recorded through `docker ps` and Portainer from the **sanitized Compose configuration** published in the repository. Published configuration files describe deployment structure; they are not a verified, self-contained reproduction of the captured installation.
 
-The container environment runs on the main IT workstation, a Dell OptiPlex 3020 with an Intel Core i5-4590 processor, approximately 8 GB of RAM, and Debian GNU/Linux 13 (Trixie).
-
-The host was identified with the IPv4 address `192.168.10.12/24` during the evidence collection.
-
-This document describes the Docker environment observed on November 6, 2026, using the `docker ps` output and Portainer screenshots.
-
-## 2. Docker Environment
+## Docker Inventory
 
 ![Portainer environment summary](../assets/images/docker/portainer-environment-summary.png)
 
-The Portainer dashboard reported the following resources:
-
-| Resource | Observed quantity |
+| Portainer resource | Recorded on November 6 |
 |---|---:|
 | Docker environments | 1 |
 | Stacks | 3 |
-| Containers | 10 |
-| Running containers | 10 |
-| Stopped containers | 0 |
+| Containers / running / stopped | 10 / 10 / 0 |
 | Container images | 11 |
 | Volumes | 4 |
-| Docker networks | 6 |
+| Networks | 6 |
+| Containers reported healthy | 4 |
+| Containers reported unhealthy | 0 |
 
-Four containers were reported as healthy, with no unhealthy containers indicated by the dashboard at the time of collection.
+The four *healthy* results refer to health checks reported by Portainer, not independent functional tests of every container.
 
-These values represent a specific observation, not continuous availability statistics.
+![Running Docker containers](../assets/images/docker/portainer-running-containers.png)
 
-## 3. Container Inventory
+| Container | Recorded image | Role | Published host ports |
+|---|---|---|---|
+| `reverse-proxy` | `nginx:alpine` | Nginx reverse proxy | 80, 443 |
+| `zabbix-web` | `zabbix/zabbix-web-apache-mysql:ubuntu-7.0-latest` | Zabbix frontend | 8082 |
+| `zabbix-server` | `zabbix/zabbix-server-mysql:ubuntu-7.0-latest` | Metrics and triggers | 10051 |
+| `uptime-kuma` | `louislam/uptime-kuma:1` | Availability checks | 3001 |
+| `zabbix-db` | `mariadb:11.4` | Zabbix database | None |
+| `grafana` | `grafana/grafana-oss:latest` | Monitoring dashboards | 3000 |
+| `zabbix-agent` | `zabbix/zabbix-agent:ubuntu-7.0-latest` | Zabbix Agent | 10050 |
+| `site-estatico` | `httpd:alpine` | Static corporate portal | 8081 |
+| `pihole` | `pihole/pihole:latest` | DNS filtering | 53 TCP/UDP, 8080 |
+| `portainer` | `portainer/portainer-ce:latest` | Docker administration | 8000, 9000, 9443 |
 
-![Running containers in Portainer](../assets/images/docker/portainer-running-containers.png)
+The image references and ports come from the collected inventory. A `latest` tag does **not** identify an exact application version; a published port does **not** prove reachability from all VLANs.
 
-The `docker ps` output identified ten running containers.
+## Deployment Structure and Dependencies
 
-| Container | Image | Purpose |
+The public Compose files are organized by service group:
+
+| Public configuration | Services declared | Relevant configuration |
 |---|---|---|
-| `reverse-proxy` | `nginx:alpine` | Reverse proxy |
-| `zabbix-web` | `zabbix/zabbix-web-apache-mysql:ubuntu-7.0-latest` | Zabbix web interface |
-| `zabbix-server` | `zabbix/zabbix-server-mysql:ubuntu-7.0-latest` | Zabbix monitoring server |
-| `uptime-kuma` | `louislam/uptime-kuma:1` | Service availability monitoring |
-| `zabbix-db` | `mariadb:11.4` | Zabbix database |
-| `grafana` | `grafana/grafana-oss:latest` | Monitoring dashboards and visualization |
-| `zabbix-agent` | `zabbix/zabbix-agent:ubuntu-7.0-latest` | Zabbix monitoring agent |
-| `site-estatico` | `httpd:alpine` | Static website |
-| `pihole` | `pihole/pihole:latest` | DNS filtering and management |
-| `portainer` | `portainer/portainer-ce:latest` | Container management |
+| [Infrastructure stack](../../docker_configs/docker-compose.yml) | `db`, `zabbix-server`, `zabbix-web`, `zabbix-agent`, `grafana`, `uptime-kuma`, `reverse-proxy`, `site-estatico` | Shared `zabbix-net` bridge; application data mounts; startup dependencies |
+| [Pi-hole](../../docker_configs/lab-ti/pihole/docker-compose.yml) | `pihole` | DNS TCP/UDP 53, web 8080, persistent configuration volumes |
+| [Portainer](../../docker_configs/lab-ti/portainer/docker-compose.yml) | `portainer` | Docker socket mount, persistent `portainer_data` volume, administration ports |
 
-Image tags are reproduced from the collected output. Tags such as `latest` do not establish an exact installed software version.
+The three public Compose groups together declare the **ten named containers** in the historical inventory. This correspondence does not establish that the exported files alone can recreate the laboratory, which also depended on local data, DNS, certificates and credentials.
 
-## 4. Published Service Ports
+### Main Stack
 
-The following host ports were identified in the collected `docker ps` output:
+The public `docker-compose.yml` documents these relationships and settings:
 
-| Container | Published host port(s) |
-|---|---|
-| `reverse-proxy` | 80, 443 |
-| `zabbix-web` | 8082 |
-| `zabbix-server` | 10051 |
-| `uptime-kuma` | 3001 |
-| `zabbix-db` | No published host port |
-| `grafana` | 3000 |
-| `zabbix-agent` | 10050 |
-| `site-estatico` | 8081 |
-| `pihole` | 53 TCP/UDP, 8080 |
-| `portainer` | 8000, 9000, 9443 |
+- **MariaDB (`db`):** image `mariadb:11.4`, data directory bind mount `./zabbix-db-data:/var/lib/mysql`, a connection/initialization health check, `512M` InnoDB buffer pool and `300` maximum connections in the example.
+- **Zabbix Server:** waits for `db` to report `service_healthy`; uses the same database environment variables, mounts external/alert scripts read-only and publishes TCP `10051`.
+- **Zabbix Web:** depends on the database health check and the server startup; its internal port `8080` is published as host `8082`.
+- **Zabbix Agent:** configured for passive monitoring with the server host set to `zabbix-server`; TCP `10050` is published.
+- **Grafana:** the example specifies plugin `alexanderzobnin-zabbix-app` and persists `/var/lib/grafana` through `./grafana-data`.
+- **Uptime Kuma:** persists `/app/data` through `./uptime-kuma-data`; its web interface is published on `3001`.
+- **Nginx proxy:** depends on Zabbix Web, Grafana, Uptime Kuma and the static site; exposes `80`/`443` and mounts proxy rules and certificate paths.
+- **Static site:** Apache `httpd:alpine` serves `./site-estatico-html` read-only at container port `80` / host `8081`.
 
-These ports describe the container configuration at the time of collection. Published ports are recorded configuration values, not network-by-network reachability test results.
+These are **settings present in the sanitized repository configuration**, not evidence that the local system still uses those exact values.
 
-## 5. Docker Networking
+### Pi-hole and Portainer
+
+The Pi-hole example requires local values for `PIHOLE_ADMIN_PASSWORD` and `PIHOLE_DNS_UPSTREAMS`, sets the DNS listening mode to `ALL`, and mounts `./etc-pihole` and `./etc-dnsmasq.d`. Do not interpret the sample listening mode as proof of DNS filtering across every VLAN.
+
+The Portainer example mounts `/var/run/docker.sock` and a named `portainer_data` volume. Docker-socket access is administratively sensitive; the example should not be published with real credentials.
+
+## Networking and Reverse Proxy
 
 ![Docker networks in Portainer](../assets/images/docker/portainer-docker-networks.png)
 
-Portainer reported six Docker networks.
+Portainer showed **six Docker networks**. The published main Compose defines one named bridge, `zabbix-net`, while the other Compose groups are separate; the exact runtime network memberships and container-to-container reachability were not fully captured.
 
-The environment includes Docker's standard networking mechanisms and networks associated with the deployed application stacks.
+The public Nginx files are:
 
-The collected Linux system report also identifies Docker bridge interfaces and private container subnets.
+- [Main Nginx settings](../../docker_configs/reverse-proxy/nginx.conf)
+- [Virtual hosts and upstreams](../../docker_configs/reverse-proxy/conf.d/lab.conf)
 
-The network inventory shows configured Docker networks, rather than an application-to-application connectivity test matrix.
+| Example hostname | Proxy target |
+|---|---|
+| `portal.noc.example.test` | `site-estatico:80` |
+| `zabbix.noc.example.test` | `zabbix-web:8080` |
+| `grafana.noc.example.test` | `grafana:3000` |
+| `status.noc.example.test` | `uptime-kuma:3001` |
 
-## 6. Service Organization
+The files declare HTTP/HTTPS listeners and example certificate paths (`/etc/nginx/certs/lab.crt` and `lab.key`). The sanitized rules **do not include** Pi-hole or Portainer proxy virtual hosts, even though those services were recorded in the environment; the collected laboratory configuration and public example differ in scope. No automatic HTTP-to-HTTPS redirect is established by the published rules.
 
-The documented containers support several functions:
+The real certificate files, database passwords, internal DNS settings and persisted application data are intentionally absent. Do not run the public stack without supplying local prerequisites and assessing the exposed interfaces.
 
-### Infrastructure and Application Access
+## Evidence and Validation Boundaries
 
-- Nginx provides reverse-proxy functionality.
-- Apache HTTP Server hosts a static website.
-- Portainer provides container management.
+The November 6 `docker ps` / Portainer records establish ten running containers, published ports and resource counts. They do **not** establish uninterrupted uptime, complete application health, cross-VLAN reachability, high availability, backup recovery or production hardening.
 
-### Monitoring and Observability
-
-- Zabbix Server collects and processes monitoring data.
-- Zabbix Web provides the monitoring interface.
-- Zabbix Agent supplies monitoring data.
-- Grafana provides dashboards and visualizations.
-- Uptime Kuma monitors service availability.
-
-### Supporting Services
-
-- MariaDB provides database storage for Zabbix.
-- Pi-hole provides DNS-related functionality.
-
-The Asterisk and FreeRADIUS services are documented separately because they run on a different Linux computer.
-
-## 7. Evidence Scope
-
-The collected evidence confirms the presence of ten running Docker containers on November 6, 2026.
-
-The Portainer screenshots also document container management, network configuration, and resource counts.
-
-This dated container inventory does not record the following operational properties:
-
-- Continuous service availability.
-- Successful access from every VLAN.
-- Complete application security.
-- Correct operation of every monitoring item.
-- High availability or redundancy.
-
-The inventory describes containers, published ports and networks at the collection date, without treating those configuration entries as application test results.
-
-## 8. Docker Compose Configuration
-
-The following Docker Compose files are sanitized public examples based on the laboratory configuration. They exclude local certificates, secrets, persistent data, and other machine-specific prerequisites.
-
-- [Monitoring and Infrastructure Stack](../../docker_configs/docker-compose.yml)
-- [Pi-hole](../../docker_configs/lab-ti/pihole/docker-compose.yml)
-- [Portainer](../../docker_configs/lab-ti/portainer/docker-compose.yml)
-
-### Reverse Proxy and Corporate Portal
-
-The laboratory includes an Nginx reverse proxy and an
-Apache HTTP Server container responsible for the corporate portal.
-
-The collected configuration includes routes for Zabbix,
-Grafana, Uptime Kuma, Portainer, Pi-hole, and the portal.
-
-The public configuration currently documents the routes
-for the portal, Zabbix, Grafana, and Uptime Kuma.
-
-Configuration files:
-
-- [Nginx Main Configuration](../../docker_configs/reverse-proxy/nginx.conf)
-- [Reverse Proxy Rules](../../docker_configs/reverse-proxy/conf.d/lab.conf)
-
-The public files use example domains and certificate paths.
-The original environment used local DNS names and TLS certificates.
-
-Private keys and institution-specific settings are not included.
-
-The static website is hosted by the `site-estatico` container,
-using the `httpd:alpine` image and port `8081` on the Docker host.
-
-These files are sanitized versions of the collected configurations.
-Credentials and institution-specific DNS settings have been removed.
-
-**Evidence collection date:** November 6, 2026.
+- **Zabbix/Grafana monitoring evidence:** [Zabbix](../monitoring/zabbix-monitoring.md) · [Grafana](../monitoring/grafana-monitoring.md).
+- **DNS and uptime observations:** [Pi-hole and Uptime Kuma](../services/dns-and-availability.md).
+- **Services on another physical Linux computer:** [Asterisk and FreeRADIUS](../services/asterisk-freeradius.md).
+- **Linux and workstation inventory:** [Workstation and Server Inventory](../endpoints/workstation-inventory.md).

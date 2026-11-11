@@ -1,200 +1,73 @@
-# Filtragem DNS e Disponibilidade dos Serviços
+# Pi-hole e Uptime Kuma — DNS e Disponibilidade
 
 [English](../../services/dns-and-availability.md) | **Português (Brasil)**
 
-## 1. Visão Geral
+**Data das evidências:** 6 de novembro de 2026 · **Host:** servidor Docker Debian 13 principal, IPv4 observado `192.168.10.12/24`.
 
-O laboratório Enterprise NOC — From Scratch utiliza Pi-hole e Uptime Kuma para disponibilizar filtragem DNS, visualização de atividades de rede e monitoramento de disponibilidade dos serviços.
+O Pi-hole filtra e registra consultas DNS; o Uptime Kuma verifica a disponibilidade de alvos selecionados. Eles complementam as métricas do Zabbix e as visualizações do Grafana.
 
-As duas aplicações são executadas como containers Docker no computador principal da infraestrutura, utilizando Debian GNU/Linux 13.
-
-Os serviços documentados possuem funções diferentes:
-
-| Serviço | Função principal |
-|---|---|
-| Pi-hole | Filtragem DNS, estatísticas de consultas e bloqueio de domínios |
-| Uptime Kuma | Monitoramento de disponibilidade e histórico de eventos |
-
-Esta documentação utiliza capturas coletadas em **6 de novembro de 2026**.
-
-Todas as estatísticas exibidas representam observações históricas, não dados de monitoramento em tempo real.
-
-## 2. Arquitetura da Infraestrutura
-
-O servidor principal da infraestrutura foi identificado com o endereço IPv4 `192.168.10.12/24` durante a coleta.
-
-O ambiente Docker inclui:
-
-| Container | Imagem | Acesso documentado |
+| Serviço | Imagem do container registrada | Portas publicadas no host |
 |---|---|---|
-| `pihole` | `pihole/pihole:latest` | DNS nas portas TCP/UDP 53; interface web na porta 8080 do host |
-| `uptime-kuma` | `louislam/uptime-kuma:1` | Interface web na porta 3001 do host |
+| Pi-hole (`pihole`) | `pihole/pihole:latest` | DNS TCP/UDP 53; web 8080 |
+| Uptime Kuma (`uptime-kuma`) | `louislam/uptime-kuma:1` | Web 3001 |
 
-Essas aplicações complementam o ambiente de monitoramento com Zabbix e Grafana.
+As portas registram a configuração dos containers; não há comprovação independente de alcance a partir de todos os segmentos.
 
-O proxy reverso documentado também fornece acesso web interno a serviços.
+## Pi-hole — Filtragem DNS
 
-As portas publicadas descrevem a configuração Docker, não testes de acesso em todas as VLANs.
+![Dashboard DNS do Pi-hole](../../assets/images/services/pihole_dashboard.png)
 
-Para consultar o inventário completo, acesse [Infraestrutura Docker e Serviços](../containers/servicos-docker.md).
-
-## 3. Pi-hole — Filtragem DNS
-
-O Pi-hole disponibiliza filtragem de domínios baseada em DNS e visibilidade sobre consultas realizadas pelos clientes que utilizam o serviço.
-
-O laboratório utiliza essa aplicação como parte de sua infraestrutura de serviços de rede.
-
-### 3.1 Evidência do Dashboard
-
-![Dashboard de filtragem DNS do Pi-hole](../../assets/images/services/pihole_dashboard.png)
-
-O dashboard coletado apresenta as seguintes estatísticas:
-
-| Métrica | Valor observado |
+| Indicador do dashboard | Valor registrado |
 |---|---:|
-| Total de consultas DNS | 12.293 |
-| Consultas DNS bloqueadas | 1.827 |
-| Percentual bloqueado | 14,9% |
-| Domínios nas listas de bloqueio | 75.952 |
-| Clientes ativos | 13 |
-| Estado do serviço | Ativo |
+| Consultas DNS | **12.293** |
+| Consultas bloqueadas | **1.827** |
+| Percentual bloqueado | **14,9%** |
+| Domínios nas listas de bloqueio | **75.952** |
+| Clientes ativos | **13** |
+| Estado do serviço | **Ativo** |
 
-O painel também apresenta:
+A captura apresenta também evolução das consultas, tipos de requisições, DNS upstream e atividade dos clientes. Os valores pertencem ao intervalo exibido pelo dashboard, não a totais permanentes.
 
-- Atividade de consultas DNS ao longo do tempo.
-- Atividade dos clientes.
-- Distribuição dos tipos de consultas.
-- Informações dos servidores DNS upstream.
-- Estatísticas de filtragem DNS.
+**Interpretação:** Uma consulta bloqueada correspondeu às regras configuradas; não prova infecção, ataque ou bloqueio de todas as conexões indesejadas. A quantidade de domínios nas listas não equivale ao número de consultas bloqueadas.
 
-Os contadores representam o período apresentado pela interface do Pi-hole.
+![Domínios e estatísticas de clientes do Pi-hole](../../assets/images/services/pihole_dashboard_tops.png)
 
-Não devem ser interpretados como totais permanentes nem como medições de desempenho de longo prazo.
+Quatro tabelas apresentam **domínios permitidos mais consultados**, **domínios bloqueados mais consultados**, **clientes por volume de consultas** e **clientes por consultas bloqueadas**. Há endereços IPv4 privados de mais de um segmento do laboratório; eles comprovam atividade DNS registrada, **não** a identidade dos equipamentos ou a aplicação de políticas DNS em todas as VLANs.
 
-### 3.2 Funcionamento do Bloqueio DNS
+**Privacidade:** Endereços de clientes e histórico DNS são dados operacionais sensíveis; considerar a privacidade dos usuários antes de reutilizar as capturas publicamente.
 
-O Pi-hole avalia as consultas DNS utilizando regras de filtragem e listas de domínios configuradas.
+## Uptime Kuma — Verificações de Serviços
 
-Uma consulta DNS bloqueada indica que a solicitação correspondeu a uma regra de bloqueio ou outra condição de filtragem configurada.
+![Monitores e eventos históricos do Uptime Kuma](../../assets/images/services/UpTimeKuma.png)
 
-As estatísticas representam correspondências com regras de filtragem DNS, não diagnósticos de infecção, incidentes de ataque ou cobertura integral de tráfego.
-
-Da mesma forma, a quantidade de domínios cadastrados nas listas não representa o número de domínios efetivamente bloqueados durante o período observado.
-
-### 3.3 Atividade dos Clientes e Domínios
-
-![Estatísticas de domínios e clientes no Pi-hole](../../assets/images/services/pihole_dashboard_tops.png)
-
-A segunda captura apresenta quatro tabelas:
-
-- Domínios permitidos mais consultados.
-- Domínios bloqueados mais consultados.
-- Clientes com maior quantidade de consultas.
-- Clientes com maior quantidade de consultas bloqueadas.
-
-Essas informações demonstram que o Pi-hole registrou atividades DNS de diferentes clientes durante o período observado.
-
-Diversos clientes aparecem identificados por endereços IPv4 privados de diferentes segmentos departamentais e de redes sem fio.
-
-Esses registros constituem evidências complementares da atividade DNS no laboratório.
-
-Os endereços IPv4 da lista identificam clientes DNS apresentados pelo Pi-hole; as especificações de hardware pertencem ao inventário de estações.
-
-**Observação sobre privacidade:** esta captura contém histórico de consultas DNS e endereços dos clientes. A divulgação pública exige considerar a privacidade dos usuários da rede.
-
-## 4. Uptime Kuma — Disponibilidade dos Serviços
-
-O Uptime Kuma realiza verificações de disponibilidade e mantém registros históricos dos eventos relacionados aos serviços e equipamentos monitorados.
-
-A captura coletada apresenta quatro monitores configurados.
-
-### 4.1 Dashboard de Monitoramento
-
-![Dashboard de monitoramento do Uptime Kuma](../../assets/images/services/UpTimeKuma.png)
-
-O dashboard apresenta o seguinte resumo:
-
-| Estado | Quantidade de monitores |
+| Estado do monitor | Quantidade registrada |
 |---|---:|
-| Ligado | 4 |
-| Desligado | 0 |
+| Up | **4** |
+| Down | 0 |
 | Manutenção | 0 |
 | Desconhecido | 0 |
 | Pausado | 0 |
 
-Os alvos monitorados apresentados são:
-
-| Monitor | Componente |
+| Monitor identificado | Alvo |
 |---|---|
-| Grafana NOC | Aplicação de monitoramento Grafana |
-| Portal Web Zabbix | Interface web do Zabbix |
-| Roteador Cisco C8200L | Equipamento de roteamento |
-| Site Institucional | Portal web corporativo |
+| Grafana NOC | Grafana |
+| Portal Web Zabbix | Interface web Zabbix |
+| Cisco C8200L Router | Roteador Cisco |
+| Site Institucional | Portal corporativo |
 
-A barra lateral apresenta indicadores de `100%` para os quatro monitores.
+A interface apresenta **100%** para os quatro monitores dentro do contexto configurado para o relatório. Isso **não** comprova SLA auditado ou disponibilidade ininterrupta.
 
-Os indicadores de `100%` correspondem ao intervalo e às regras de relatório exibidos na captura.
+A tabela histórica registra verificações HTTP `200 OK`, falhas anteriores de conectividade com o roteador Cisco, evento de conexão reiniciada do Grafana e verificações bem-sucedidas posteriores. Um monitor marcado `Up` na captura pode, portanto, possuir falhas anteriores.
 
-Não constituem comprovação de um acordo de nível de serviço ou de disponibilidade ininterrupta.
+Os quatro monitores selecionados não abrangem individualmente os dez containers nem todos os equipamentos.
 
-### 4.2 Histórico de Eventos
+## Referências das Configurações
 
-A captura também apresenta uma tabela com mudanças de estado registradas antes da data da coleta.
+- [Compose do Pi-hole](../../../docker_configs/lab-ti/pihole/docker-compose.yml): DNS `53/tcp` e `53/udp`, web `8080`, volumes `etc-pihole` e `etc-dnsmasq.d`, senha administrativa e upstream DNS fornecidos localmente.
+- [Compose principal](../../../docker_configs/docker-compose.yml): Uptime Kuma `3001` e persistência em `./uptime-kuma-data:/app/data`.
+- [Inventário Docker e proxy reverso](../containers/servicos-docker.md): distingue o inventário datado dos exemplos Compose e Nginx sanitizados.
+- [Zabbix](../monitoramento/zabbix.md) / [Grafana](../monitoramento/grafana.md): métricas e visualizações mais amplas da infraestrutura.
 
-Entre os registros observados estão:
+Os Compose públicos omitem segredos e dados locais. Os dashboards comprovam **atividades DNS e estados dos monitores registrados**, não disponibilidade contínua, hardening, cumprimento de SLA ou cobertura DNS integral.
 
-- Verificações HTTP bem-sucedidas com resposta `200 OK`.
-- Falhas anteriores de conectividade com o roteador Cisco.
-- Um evento de conexão reiniciada relacionado ao Grafana.
-- Registros posteriores de verificações bem-sucedidas.
-
-Essas informações demonstram que o Uptime Kuma registra tanto verificações positivas quanto falhas.
-
-Consequentemente, o estado atual `Ligado` não deve ser interpretado como prova de que um serviço nunca apresentou interrupções.
-
-### 4.3 Escopo do Monitoramento
-
-A captura confirma quatro monitores cadastrados e apresentados na interface.
-
-A captura do Uptime Kuma registra quatro monitores específicos, não uma cobertura individual de todos os containers ou equipamentos.
-
-A aplicação complementa o Zabbix, sem substituir o monitoramento mais abrangente da infraestrutura.
-
-## 5. Relação com Zabbix e Grafana
-
-O Pi-hole registra filtragem DNS; o Uptime Kuma verifica serviços selecionados. O Zabbix coleta métricas de infraestrutura e o Grafana as apresenta. Cada ferramenta possui escopo distinto; veja [Zabbix](../monitoramento/zabbix.md) e [Grafana](../monitoramento/grafana.md).
-
-## 6. Configuração de Implantação
-
-A configuração sanitizada do Docker Compose do Pi-hole está disponível no repositório:
-
-[Docker Compose do Pi-hole](../../../docker_configs/lab-ti/pihole/docker-compose.yml)
-
-O container Uptime Kuma está descrito no Compose principal da infraestrutura:
-
-[Docker Compose da Infraestrutura](../../../docker_configs/docker-compose.yml)
-
-As configurações públicas não incluem segredos de autenticação nem configurações DNS internas.
-
-Esses arquivos documentam a estrutura de implantação, enquanto as capturas coletadas comprovam a presença das aplicações no laboratório.
-
-## 7. Escopo das Evidências Históricas
-
-| Evidência | O que demonstra |
-|---|---|
-| `pihole_dashboard.png` | Consultas DNS, estatísticas de bloqueio, atividade dos clientes e estado ativo do serviço |
-| `pihole_dashboard_tops.png` | Atividade de domínios e estatísticas dos clientes |
-| `UpTimeKuma.png` | Quatro monitores configurados, estados observados e histórico de eventos |
-| Inventário dos containers Docker | Presença dos containers Pi-hole e Uptime Kuma na infraestrutura |
-
-As capturas de 6 de novembro documentam consultas DNS e quatro monitores do Uptime Kuma. Elas não estabelecem cobertura DNS de todas as VLANs, disponibilidade contínua ou SLA comprovado.
-
-## 8. Documentação Relacionada
-
-- [Infraestrutura Docker e Serviços](../containers/servicos-docker.md)
-- [Monitoramento com Zabbix](../monitoramento/zabbix.md)
-- [Monitoramento com Grafana](../monitoramento/grafana.md)
-- [Inventário de Computadores e Servidores](../estacoes/inventario-de-computadores.md)
-
-**Data da coleta das evidências:** 6 de novembro de 2026.
-
+**Imagens originais:** `pihole_dashboard.png`, `pihole_dashboard_tops.png`, `UpTimeKuma.png` — coletadas em 6 de novembro de 2026.
