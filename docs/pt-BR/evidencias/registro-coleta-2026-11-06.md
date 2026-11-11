@@ -14,15 +14,21 @@ Os arquivos originais são preservados em armazenamento privado de trabalho. A d
 
 ## Componentes documentados
 
-| Área | Evidências coletadas |
-|---|---|
-| Infraestrutura física | Rack, roteador Cisco C8200L, switch Catalyst 9200L, patch panel, cabeamento e estações de trabalho. |
-| Estações | Registros de oito computadores Windows e duas estações Linux com funções distintas no laboratório. |
-| Redes | Capturas de configuração IP por setor e cópia histórica da configuração do switch, anterior à ativação do SNMP. |
-| Telefonia e autenticação | Dois telefones Grandstream e documentação do servidor Asterisk/FreeRADIUS. |
-| Containers | Registros do Docker/Portainer, com dez containers em execução no instante da coleta. |
-| Observabilidade | Capturas de Zabbix, Grafana e Uptime Kuma, incluindo painéis de infraestrutura e serviços. |
-| Serviços adicionais | Evidências de Pi-hole, proxy reverso e serviço web em container. |
+| Área | Evidências coletadas | Registro técnico |
+|---|---|---|
+| Infraestrutura física | Rack, roteador Cisco C8200L, switch Catalyst 9200L, patch panel, cabeamento e estações de trabalho. | [Rack e cabeamento](infraestrutura-fisica.md) |
+| Estações | Registros de oito computadores Windows e duas estações Linux com funções distintas no laboratório. | [Inventário de computadores](../estacoes/inventario-de-computadores.md) |
+| Redes | Capturas de configuração IP por setor e cópia histórica da configuração do switch, anterior à ativação do SNMP. | [Configuração do switch](../redes/registro-switch-vlans-2026-11-04.md) |
+| Telefonia e autenticação | Dois telefones Grandstream e documentação do servidor Asterisk/FreeRADIUS. | [VoIP e autenticação](../servicos/asterisk-freeradius.md) |
+| Containers | Registros do Docker/Portainer, com dez containers em execução no instante da coleta. | [Ambiente Docker](../containers/servicos-docker.md) |
+| Observabilidade | Capturas de Zabbix, Grafana e Uptime Kuma, incluindo painéis de infraestrutura e serviços. | [Zabbix](../monitoramento/zabbix.md), [Grafana](../monitoramento/grafana.md) |
+| Serviços adicionais | Evidências de Pi-hole, proxy reverso e serviço web em container. | [DNS e disponibilidade](../servicos/dns-e-disponibilidade.md) |
+
+## Datas dos Registros e Quantidades do Inventário
+
+A [configuração do C9200L](../redes/registro-switch-vlans-2026-11-04.md) foi coletada em 4 de novembro de 2026. As [fotografias da infraestrutura](infraestrutura-fisica.md), o [inventário de computadores](../estacoes/inventario-de-computadores.md) e os [registros de monitoramento](../monitoramento/zabbix.md) correspondem à coleta de 6 de novembro.
+
+O inventário contém **oito estações Windows e duas máquinas Linux**. Os doze hosts cadastrados no Zabbix correspondem a esses dez computadores e aos equipamentos Cisco C8200L e C9200L. O [registro do Zabbix](../monitoramento/zabbix.md#divergências-de-endereçamento) apresenta seis diferenças entre os endereços IPv4 fotografados nas estações e os cadastros dos hosts.
 
 ## Limites Históricos das Evidências
 
@@ -32,9 +38,6 @@ Os arquivos originais são preservados em armazenamento privado de trabalho. A d
 - A configuração histórica do switch não substitui uma exportação atualizada do equipamento.
 - O inventário técnico apresenta modelos e especificações somente quando constam das evidências coletadas.
 
-## Inventário das Evidências Publicadas
-
-O material datado está organizado na [infraestrutura física](infraestrutura-fisica.md), no [inventário de computadores](../estacoes/inventario-de-computadores.md), no [registro do switch](../redes/registro-switch-vlans-2026-11-04.md), em [serviços Docker](../containers/servicos-docker.md), no [Zabbix](../monitoramento/zabbix.md) e no [Grafana](../monitoramento/grafana.md). Este registro documenta a coleta, sem transformar estados momentâneos em garantias de disponibilidade contínua.
 
 ---
 

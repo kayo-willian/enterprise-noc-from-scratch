@@ -14,15 +14,21 @@ The original files are preserved in private working storage. Published documenta
 
 ## Documented components
 
-| Area | Collected evidence |
-|---|---|
-| Physical infrastructure | Rack, Cisco C8200L router, Catalyst 9200L switch, patch panel, cabling, and workstations. |
-| Workstations | Records for eight Windows computers and two Linux machines with distinct roles in the lab. |
-| Networking | Department-level IP configuration screenshots and a historical switch configuration captured before SNMP was enabled. |
-| Telephony and authentication | Two Grandstream IP phones and technical documentation for the Asterisk/FreeRADIUS server. |
-| Containers | Docker/Portainer records showing ten running containers at the time of collection. |
-| Observability | Zabbix, Grafana, and Uptime Kuma screenshots, including infrastructure and service dashboards. |
-| Additional services | Evidence of Pi-hole, a reverse proxy, and a containerized web service. |
+| Area | Collected evidence | Technical record |
+|---|---|---|
+| Physical infrastructure | Rack, Cisco C8200L router, Catalyst 9200L switch, patch panel, cabling, and workstations. | [Rack and cabling](physical-infrastructure.md) |
+| Workstations | Records for eight Windows computers and two Linux machines with distinct roles in the lab. | [Computer inventory](../endpoints/workstation-inventory.md) |
+| Networking | Department-level IP configuration screenshots and a historical switch configuration captured before SNMP was enabled. | [Switch configuration](../networking/switch-vlan-snapshot-2026-11-04.md) |
+| Telephony and authentication | Two Grandstream IP phones and technical documentation for the Asterisk/FreeRADIUS server. | [VoIP and authentication](../services/asterisk-freeradius.md) |
+| Containers | Docker/Portainer records showing ten running containers at the time of collection. | [Docker environment](../containers/docker-services.md) |
+| Observability | Zabbix, Grafana, and Uptime Kuma screenshots, including infrastructure and service dashboards. | [Zabbix](../monitoring/zabbix-monitoring.md), [Grafana](../monitoring/grafana-monitoring.md) |
+| Additional services | Evidence of Pi-hole, a reverse proxy, and a containerized web service. | [DNS and availability](../services/dns-and-availability.md) |
+
+## Record Dates and Inventory Counts
+
+The [C9200L configuration](../networking/switch-vlan-snapshot-2026-11-04.md) was collected on November 4, 2026. The [physical photographs](physical-infrastructure.md), [computer inventory](../endpoints/workstation-inventory.md), and [monitoring records](../monitoring/zabbix-monitoring.md) refer to the November 6 collection.
+
+The computer inventory covers **eight Windows workstations and two Linux computers**. The twelve hosts registered in Zabbix include those ten computers plus the C8200L router and C9200L switch. The [Zabbix record](../monitoring/zabbix-monitoring.md#workstation-address-discrepancies) lists six differences between photographed workstation IPv4 addresses and host registrations.
 
 ## Historical Evidence Boundaries
 
@@ -32,9 +38,6 @@ The original files are preserved in private working storage. Published documenta
 - The historical switch configuration does not replace a current export of the device's configuration.
 - The technical inventory includes models and specifications only where captured in the collected evidence.
 
-## Published Evidence Inventory
-
-The dated evidence is organized in the [physical infrastructure](physical-infrastructure.md), [workstation inventory](../endpoints/workstation-inventory.md), [switch snapshot](../networking/switch-vlan-snapshot-2026-11-04.md), [Docker services](../containers/docker-services.md), [Zabbix](../monitoring/zabbix-monitoring.md), and [Grafana](../monitoring/grafana-monitoring.md). This record documents the collected scope, without treating point-in-time states as continuous service guarantees.
 
 ---
 

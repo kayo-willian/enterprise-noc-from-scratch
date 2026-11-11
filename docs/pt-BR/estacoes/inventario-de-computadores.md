@@ -112,15 +112,15 @@ Evidência complementar:
 
 Os computadores documentados estão distribuídos nas seguintes VLANs:
 
-| VLAN | Setor ou finalidade |
-|---|---|
-| 10 | TI e infraestrutura |
-| 20 | Contabilidade |
-| 30 | Financeiro |
-| 40 | Vendas |
-| 50 | VoIP e serviços locais de autenticação |
+| VLAN | Setor ou finalidade | Portas do C9200L (configuração de 4 de novembro) |
+|---|---|---|
+| 10 | TI e infraestrutura | Gi1/0/2–3 |
+| 20 | Contabilidade | Gi1/0/4–6 |
+| 30 | Financeiro | Gi1/0/7–8 |
+| 40 | Vendas | Gi1/0/9–10 |
+| 50 | VoIP e serviços locais de autenticação | Gi1/0/11–13 |
 
-Essas atribuições são compatíveis com a configuração de switch coletada e com as evidências de endereçamento das estações.
+As atribuições constam do [registro do switch de 4 de novembro](../redes/mapa-de-portas-switch.md). A Gi1/0/11 possui atribuição de VLAN 50, mas seu modo efetivo de operação não está definido nas declarações coletadas. A documentação não inclui um mapeamento completo do cabeamento entre patch panel e estações.
 
 ## 5. Consistência do Monitoramento
 
@@ -133,6 +133,8 @@ O laboratório utiliza DHCP nas estações. Divergências de endereço podem con
 As divergências de endereçamento são observações históricas e não identificam, por si só, a causa de todos os alertas.
 
 ## 6. Abrangência do Inventário
+
+O inventário contém oito estações Windows e duas máquinas Linux. O [inventário do Zabbix](../monitoramento/zabbix.md#hosts-e-disponibilidade-das-interfaces) inclui ainda o C8200L e o C9200L, totalizando doze hosts cadastrados.
 
 O traço (—) na tabela de hardware indica característica não registrada nas evidências de 06/11, e não ausência física do componente. CPU, RAM, tipo e capacidade de armazenamento são apresentados somente quando documentados nas capturas.
 
