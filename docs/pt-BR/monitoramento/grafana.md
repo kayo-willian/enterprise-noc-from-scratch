@@ -1,264 +1,98 @@
-# Monitoramento com Grafana e Dashboards
+# Grafana — Dashboards do NOC
 
-[English](../../monitoring/grafana-monitoring.md) | [Português (Brasil)](grafana.md)
+[English](../../monitoring/grafana-monitoring.md) | **Português (Brasil)**
 
-## 1. Visão Geral
+**Data das evidências:** 6 de novembro de 2026 · **Implantação:** Grafana em Debian 13 / Docker · **Fonte de dados:** integração Zabbix
 
-O laboratório Enterprise NOC — From Scratch utiliza o Grafana para visualizar dados de monitoramento dos equipamentos de rede, servidores Linux, estações Windows e serviços de infraestrutura.
+O Grafana apresenta métricas coletadas da infraestrutura. As imagens são **capturas datadas**, não um painel em tempo real; configurações completas das fontes de dados e exportações JSON dos dashboards não constam das evidências coletadas.
 
-O Grafana é executado como container Docker no computador principal da infraestrutura, utilizando Debian GNU/Linux 13.
+## Organização dos Dashboards
 
-O ambiente integra o Grafana ao Zabbix, permitindo apresentar as métricas coletadas por meio de dashboards personalizados.
+![Organização dos dashboards Grafana](../../assets/images/monitoring/grafana/grafana_order.png)
 
-Este documento apresenta o ambiente Grafana observado em **6 de novembro de 2026**, utilizando as capturas originais coletadas no laboratório.
-
-Todas as imagens representam observações históricas, não painéis de monitoramento em tempo real.
-
-## 2. Organização dos Dashboards
-
-![Organização dos dashboards no Grafana](../../assets/images/monitoring/grafana/grafana_order.png)
-
-O ambiente Grafana possui um dashboard consolidado do NOC, organizado em cinco seções de monitoramento:
-
-| Seção | Componentes monitorados |
+| Seção do dashboard | Alvos registrados |
 |---|---|
-| Aplicações Web e Containers | Aplicações web, serviços Docker e verificações de disponibilidade |
-| Roteador Cisco | Interfaces, VLANs e tráfego do Catalyst C8200L |
-| Switch Cisco | Hardware, interfaces e throughput do Catalyst C9200L |
-| Servidores e VoIP | Servidor Asterisk e servidor de infraestrutura Zabbix |
-| Estações Windows e Endpoints | Computadores dos setores, consumo de recursos e tráfego de rede |
+| Aplicações Web e Containers | Site, serviços Docker e verificações HTTP |
+| Roteador Cisco | Interfaces e tráfego das VLANs no Catalyst C8200L |
+| Switch Cisco | Hardware e interfaces do Catalyst C9200L |
+| Servidores e VoIP | Servidor Debian do NOC e host Asterisk/FreeRADIUS |
+| Estações Windows e Endpoints | Computadores dos setores, CPU/RAM e tráfego |
 
-A captura documenta a estrutura do dashboard disponível no momento da coleta.
+## Aplicações Web e Containers
 
-## 3. Aplicações Web e Containers
+![Aplicações web e containers](../../assets/images/monitoring/grafana/grafana_dashboard_web_containers.png)
 
-![Dashboard de aplicações web e containers](../../assets/images/monitoring/grafana/grafana_dashboard_web_containers.png)
+Os painéis apresentam status e tempo de resposta HTTP, histórico de desempenho web, disponibilidade de serviços e indicadores de heartbeat dos containers.
 
-Esta seção apresenta informações de monitoramento relacionadas ao site corporativo e a determinados serviços Docker.
+- **Resultado HTTP:** `200 OK` para a aplicação web monitorada durante a verificação registrada.
+- **Serviços representados:** site corporativo, Pi-hole, Grafana, Zabbix Web e Portainer.
+- **Escopo:** serviços selecionados, **não** todos os dez containers do [inventário Docker](../containers/servicos-docker.md). Uma resposta HTTP bem-sucedida não verifica todas as funções da aplicação.
 
-O dashboard inclui:
+## Cisco Catalyst C8200L — Roteador
 
-- Status das respostas HTTP.
-- Tempo de resposta da aplicação web.
-- Indicadores de disponibilidade dos serviços.
-- Gráficos históricos de desempenho web.
-- Informações de heartbeat dos serviços Docker.
+![Estado das interfaces e tráfego do roteador](../../assets/images/monitoring/grafana/grafana_dashboard_router1.png)
 
-### 3.1 Monitoramento HTTP
+A primeira captura apresenta indicadores `UP` para interfaces/subinterfaces selecionadas e throughput relacionado às conexões WAN, trunk e VLANs.
 
-A captura apresenta o status HTTP **200 OK** para a aplicação web monitorada.
+![Histórico de throughput do roteador](../../assets/images/monitoring/grafana/grafana_dashboard_router2.png)
 
-Também são exibidos tempos de resposta e gráficos históricos relacionados às verificações de desempenho.
+A segunda apresenta séries históricas do tráfego das interfaces e subinterfaces VLAN. As medições documentam os caminhos monitorados no intervalo selecionado, não a configuração completa do roteador, a aplicação das ACLs ou largura de banda contínua.
 
-O código HTTP 200 indica que a requisição correspondente recebeu uma resposta bem-sucedida durante a verificação. Entretanto, isso não garante que todas as funcionalidades da aplicação estivessem operando corretamente.
+## Cisco Catalyst C9200L — Switch
 
-### 3.2 Disponibilidade dos Containers
+![Hardware e estado das interfaces do switch](../../assets/images/monitoring/grafana/grafana_dashboard_switch1.png)
 
-O dashboard apresenta indicadores de disponibilidade de serviços selecionados:
+Inclui CPU, RAM, temperatura, ventiladores, fontes de alimentação, estado das interfaces e throughput. Há estados `UP` e `DOWN`; uma porta down pode estar ociosa ou administrativamente desabilitada.
 
-- Site corporativo.
-- Pi-hole.
-- Grafana.
-- Zabbix Web.
-- Portainer.
+**Problema de identificação:** vários painéis apresentam o mesmo rótulo `Gi1/0/1 TRUNK-ROUTER`. As capturas, isoladamente, não associam cada painel a uma interface física distinta.
 
-Esses indicadores não representam o inventário completo dos dez containers documentados no ambiente Docker.
+![Throughput das interfaces do switch](../../assets/images/monitoring/grafana/grafana_dashboard_switch2.png)
 
-Para consultar o inventário completo, acesse [Infraestrutura Docker e Serviços](../containers/servicos-docker.md).
+Séries históricas de tráfego para interfaces selecionadas de trunk, setores e infraestrutura. Os rótulos dos painéis devem ser conferidos com os itens do monitoramento e o [mapa de portas do switch](../redes/mapa-de-portas-switch.md).
 
-## 4. Roteador Cisco Catalyst C8200L
+![Erros de interfaces e temperatura do switch](../../assets/images/monitoring/grafana/grafana_dashboard_switch3.png)
 
-O monitoramento do roteador Cisco está documentado em duas capturas consecutivas.
+Erros das interfaces, leituras relacionadas a CRC e histórico de temperatura fornecem contexto para diagnóstico no período observado.
 
-### 4.1 Interfaces do Roteador
+## Servidores Linux e VoIP
 
-![Interfaces e tráfego do roteador Cisco](../../assets/images/monitoring/grafana/grafana_dashboard_router1.png)
+![Servidores Linux Asterisk e Zabbix](../../assets/images/monitoring/grafana/grafana_dashboard_asterisk.png)
 
-O dashboard apresenta:
+| Sistema | Função | Estado exibido |
+|---|---|---|
+| Host Asterisk / FreeRADIUS | Telefonia IP e autenticação de rede | `ONLINE` |
+| Servidor de infraestrutura Zabbix | Stack de monitoramento Debian/Docker | `ONLINE` |
 
-- Indicadores de estado operacional das interfaces e subinterfaces selecionadas.
-- Tráfego da interface WAN.
-- Tráfego da interface trunk.
-- Throughput das subinterfaces das VLANs.
+Os painéis incluem CPU, RAM, disponibilidade e histórico do Zabbix Agent. Disponibilidade do host **não** comprova chamadas SIP ou autenticação RADIUS; consulte [Asterisk/FreeRADIUS](../servicos/asterisk-freeradius.md).
 
-A captura apresenta indicadores verdes `UP` para as interfaces representadas nos painéis de status.
+## Estações Windows
 
-Esses resultados descrevem o estado das interfaces monitoradas durante o período registrado; a captura não é um inventário operacional de todas as interfaces físicas e funções de roteamento.
+![Disponibilidade e recursos das estações Windows](../../assets/images/monitoring/grafana/grafana_dashboard_pcs1.png)
 
-### 4.2 Histórico de Tráfego do Roteador
+Oito estações Windows dos setores aparecem no dashboard:
 
-![Histórico de tráfego do roteador Cisco](../../assets/images/monitoring/grafana/grafana_dashboard_router2.png)
-
-A segunda captura apresenta a continuação do monitoramento do roteador.
-
-Ela contém gráficos históricos de throughput associados às interfaces de rede e subinterfaces das VLANs.
-
-Os gráficos demonstram que a plataforma recebeu medições de tráfego durante o intervalo selecionado.
-
-Os valores exibidos representam amostras históricas, não garantias de largura de banda ou desempenho contínuo.
-
-## 5. Switch Cisco Catalyst C9200L
-
-O monitoramento do switch está documentado em três capturas consecutivas.
-
-### 5.1 Hardware e Estado das Interfaces
-
-![Monitoramento do hardware e interfaces do Catalyst 9200L](../../assets/images/monitoring/grafana/grafana_dashboard_switch1.png)
-
-O dashboard apresenta:
-
-- Utilização de CPU.
-- Utilização de memória RAM.
-- Leituras de temperatura.
-- Indicadores dos ventiladores.
-- Indicadores da fonte de alimentação.
-- Estado operacional das interfaces.
-- Throughput de rede.
-
-A captura apresenta interfaces identificadas como `UP` e `DOWN`.
-
-Uma interface em estado `DOWN` não representa necessariamente uma falha. Interfaces desconectadas, sem utilização ou administrativamente desabilitadas podem permanecer nesse estado durante a operação normal.
-
-**Limitação identificada:** vários painéis de estado apresentam o mesmo rótulo, `Gi1/0/1 TRUNK-ROUTER`.
-
-A captura apresenta os painéis e seus rótulos originais, sem associar cada rótulo a uma interface física distinta.
-
-As capturas históricas não incluem a correspondência completa entre os itens do Zabbix e as interfaces físicas do switch; os rótulos repetidos são preservados.
-
-### 5.2 Throughput das Interfaces
-
-![Throughput das interfaces do switch Cisco](../../assets/images/monitoring/grafana/grafana_dashboard_switch2.png)
-
-Esta captura apresenta a continuação do dashboard com gráficos históricos de tráfego.
-
-Os gráficos incluem medições associadas a interfaces selecionadas de trunk, setores e infraestrutura.
-
-Os valores históricos demonstram a existência de séries de tráfego coletadas.
-
-Entretanto, não validam isoladamente as descrições das interfaces nem o mapeamento físico completo das portas.
-
-### 5.3 Erros e Temperatura
-
-![Erros das interfaces e temperatura do switch](../../assets/images/monitoring/grafana/grafana_dashboard_switch3.png)
-
-A última captura apresenta:
-
-- Indicadores de erros nas interfaces.
-- Informações relacionadas a erros CRC.
-- Histórico de temperatura do switch.
-
-Esses painéis fornecem informações relevantes para o diagnóstico de problemas de rede e monitoramento do hardware.
-
-As medições apresentadas estão limitadas ao intervalo selecionado e às fontes de dados configuradas.
-
-## 6. Servidores Linux e VoIP
-
-![Monitoramento dos servidores Asterisk e Zabbix](../../assets/images/monitoring/grafana/grafana_dashboard_asterisk.png)
-
-Esta seção apresenta os dados de monitoramento de dois computadores Linux:
-
-| Sistema | Função principal |
-|---|---|
-| Servidor Asterisk | Serviços VoIP e FreeRADIUS |
-| Servidor de infraestrutura Zabbix | Infraestrutura de monitoramento e Docker |
-
-O dashboard apresenta:
-
-- Indicadores de disponibilidade.
-- Utilização de CPU.
-- Utilização de memória RAM.
-- Histórico do consumo de recursos.
-- Histórico de disponibilidade dos agentes Zabbix.
-
-Ambos os servidores aparecem como `ONLINE` na captura.
-
-As medições de CPU e RAM representam o estado dos sistemas durante o intervalo selecionado.
-
-Os indicadores representam métricas de monitoramento e não registros de chamadas SIP ou transações RADIUS.
-
-As configurações das aplicações Asterisk e FreeRADIUS são documentadas separadamente dessas métricas de recursos.
-
-## 7. Estações Windows e Endpoints
-
-O monitoramento das estações Windows está documentado em duas capturas consecutivas.
-
-### 7.1 Disponibilidade e Utilização de Recursos
-
-![Dashboard das estações Windows](../../assets/images/monitoring/grafana/grafana_dashboard_pcs1.png)
-
-O dashboard apresenta oito estações Windows distribuídas pelos setores do laboratório.
-
-Na captura, os indicadores apresentam:
-
-| Estado no dashboard | Estações |
+| Painel de estado | Estações |
 |---|---:|
 | `ONLINE` | 3 |
 | `No data` | 5 |
 | **Total** | **8** |
 
-Algumas medições de CPU e RAM estão disponíveis, embora diversos painéis de status apresentem `No data`.
+Alguns valores de CPU/RAM aparecem apesar da ausência de status. `No data` significa que a consulta não retornou dados utilizáveis para aquele painel e intervalo; **não** comprova que o computador estava desligado. Possíveis causas incluem itens/consultas, agentes, conectividade e referências de hosts; nenhuma foi confirmada como causa comum.
 
-**O indicador `No data` não significa automaticamente que o computador esteja desligado.**
+![Histórico de CPU, RAM e tráfego das estações](../../assets/images/monitoring/grafana/grafana_dashboard_pcs2.png)
 
-Ele indica que a consulta correspondente do Grafana não retornou dados utilizáveis para aquele painel e intervalo.
+Existem séries históricas de CPU, RAM, download e upload para determinadas estações. Algumas legendas repetem identificadores; é preciso verificar a associação entre itens e hosts. Seis IPv4 também divergiam dos cadastros no Zabbix na [comparação de 6 de novembro](zabbix.md#divergências-de-endereçamento).
 
-As possíveis explicações incluem referências incorretas aos hosts, ausência de itens de monitoramento, problemas de conectividade ou configuração das consultas.
+## Pendências de Verificação
 
-As capturas registram os sintomas observados, sem identificar uma causa única para todos os painéis com ausência de dados.
-
-### 7.2 Histórico de CPU, RAM e Tráfego de Rede
-
-![Histórico de recursos e tráfego das estações Windows](../../assets/images/monitoring/grafana/grafana_dashboard_pcs2.png)
-
-A segunda captura apresenta:
-
-- Histórico de utilização de CPU.
-- Histórico de utilização de memória RAM.
-- Tráfego de download.
-- Tráfego de upload.
-
-Os gráficos contêm séries históricas de determinadas estações Windows.
-
-Algumas legendas repetem identificadores de computadores. Os rótulos foram preservados conforme exibidos, sem atribuir a cada um uma medição independente.
-
-As séries apresentadas documentam a cobertura registrada durante a coleta, sem caracterizar medição contínua fora desse período.
-
-### 7.3 Divergências de Endereçamento
-
-A revisão das evidências identificou diferenças entre os endereços das estações fotografados com `ipconfig` e aqueles cadastrados no Zabbix.
-
-Seis das oito estações Windows apresentavam endereços divergentes entre os registros comparados.
-
-Essas diferenças podem contribuir para a indisponibilidade de dados de monitoramento, mas exigem verificações adicionais.
-
-Documentações relacionadas:
-
-- [Monitoramento com Zabbix](zabbix.md)
-- [Inventário de Computadores e Servidores](../estacoes/inventario-de-computadores.md)
-
-## 8. Resultados Históricos
-
-As capturas de 6 de novembro incluem **cinco painéis de estações com `No data`**, rótulos repetidos de interfaces Cisco e indicações `UP`/`DOWN`. Seis endereços de estações também divergiam dos cadastros do Zabbix, conforme o [monitoramento Zabbix](zabbix.md). As capturas não estabelecem uma causa comum.
-
-## 9. Integração entre Grafana e Zabbix
-
-O Grafana apresenta métricas do ambiente Zabbix, incluindo equipamentos monitorados por SNMP e Zabbix Agent. As evidências publicadas consistem em capturas dos dashboards; não foram coletadas configurações completas das fontes de dados ou exportações JSON dos painéis.
-
-## 10. Resumo das Evidências
-
-| Evidência | Nome original |
+| Sintoma registrado | Verificação necessária |
 |---|---|
-| Organização dos dashboards | `grafana_order.png` |
-| Aplicações web e containers | `grafana_dashboard_web_containers.png` |
-| Roteador Cisco — Parte 1 | `grafana_dashboard_router1.png` |
-| Roteador Cisco — Parte 2 | `grafana_dashboard_router2.png` |
-| Switch Cisco — Parte 1 | `grafana_dashboard_switch1.png` |
-| Switch Cisco — Parte 2 | `grafana_dashboard_switch2.png` |
-| Switch Cisco — Parte 3 | `grafana_dashboard_switch3.png` |
-| Servidores Linux e Asterisk | `grafana_dashboard_asterisk.png` |
-| Estações Windows — Parte 1 | `grafana_dashboard_pcs1.png` |
-| Estações Windows — Parte 2 | `grafana_dashboard_pcs2.png` |
+| Cinco painéis Windows com `No data` | Estado do item Zabbix, consulta Grafana, identidade do host e intervalo |
+| Rótulos repetidos nas interfaces Cisco | Identidade dos itens/interfaces Zabbix e mapeamento físico das portas |
+| Portas `UP`/`DOWN` | Estado operacional esperado conforme a topologia atual |
+| Registros históricos de HTTP e disponibilidade | Testes funcionais independentes dos serviços, quando necessários |
+| Configuração de dashboards não exportada | Obter fontes de dados e JSON antes de afirmar reprodução completa dos dashboards |
 
-**Data da coleta das evidências:** 6 de novembro de 2026.
+**Registros relacionados:** [Monitoramento Zabbix](zabbix.md) · [Diagnóstico SNMP](diagnostico-snmp.md) · [Serviços Docker](../containers/servicos-docker.md)
 
-Todas as imagens preservam seus nomes originais e são apresentadas como evidências históricas do ambiente do laboratório.
+As dez capturas originais acima foram preservadas de **6 de novembro de 2026**. Não comprovam resolução posterior dos incidentes.

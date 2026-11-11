@@ -1,232 +1,100 @@
-# Zabbix Monitoring
+# Zabbix — Infrastructure Monitoring
 
-[English](zabbix-monitoring.md) | [Português (Brasil)](../pt-BR/monitoramento/zabbix.md)
+**English** | [Português (Brasil)](../pt-BR/monitoramento/zabbix.md)
 
-## 1. Overview
+**Evidence date:** November 6, 2026 · **Platform:** Zabbix 7.0.32 · **Deployment:** Debian 13 / Docker
 
-The Enterprise NOC — From Scratch laboratory uses Zabbix to monitor network equipment, Linux servers, Windows workstations, infrastructure services, and network traffic.
+## Monitoring Architecture
 
-The monitoring environment integrates physical Cisco networking equipment with services hosted on Linux systems and Docker containers.
+The main Debian infrastructure computer hosts Zabbix Server, Zabbix Web, Zabbix Agent and MariaDB. Grafana uses Zabbix monitoring data for visualization; the container deployment is documented in [Docker Services](../containers/docker-services.md).
 
-This documentation is based on screenshots collected on **November 6, 2026**.
+| Monitored systems | Hosts | Monitoring interface |
+|---|---:|---|
+| Cisco Catalyst C8200L router and C9200L switch | 2 | SNMP (UDP 161) |
+| Debian infrastructure and Asterisk/FreeRADIUS servers | 2 | Zabbix Agent |
+| Departmental Windows workstations | 8 | Zabbix Agent |
+| **Total** | **12** | |
 
-The screenshots represent the environment at the time of collection. They are not live monitoring feeds.
+The dashboards also include HTTP checks, infrastructure resource indicators and service availability observations. The following values and captures describe the environment **at collection time**, not live or continuous measurements.
 
-## 2. Monitoring Architecture
-
-The Zabbix environment is hosted on the main infrastructure computer, running Debian GNU/Linux 13.
-
-The Docker deployment includes:
-
-| Component | Purpose |
-|---|---|
-| Zabbix Server | Collection and processing of monitoring data |
-| Zabbix Web | Web interface and dashboards |
-| Zabbix Agent | Collection of system monitoring data |
-| MariaDB | Storage of Zabbix monitoring information |
-
-The monitored infrastructure includes:
-
-- Cisco Catalyst C8200L router.
-- Cisco Catalyst C9200L switch.
-- Debian infrastructure server.
-- Debian Asterisk and FreeRADIUS server.
-- Eight Windows workstations.
-
-The Cisco devices are monitored through SNMP interfaces, while the documented operating systems use Zabbix Agent interfaces.
-
-Additional HTTP and service monitoring information is presented in the dashboards.
-
-For details about the container deployment, see [Docker Infrastructure and Services](../containers/docker-services.md).
-
-## 3. Zabbix System Information
+## System Snapshot
 
 ![Zabbix system information](../assets/images/monitoring/zabbix/zabbix_info_system.png)
 
-The system information page provides the following snapshot:
-
-| Parameter | Observed value |
+| Parameter | Recorded value |
 |---|---:|
-| Zabbix Server version | 7.0.32 |
-| Zabbix Frontend version | 7.0.32 |
-| Registered hosts | 12 |
-| Enabled hosts | 12 |
+| Zabbix Server / Frontend | 7.0.32 / 7.0.32 |
+| Registered / enabled hosts | 12 / 12 |
 | Templates | 356 |
-| Total items | 1,820 |
-| Enabled items | 1,698 |
-| Disabled items | 9 |
-| Unsupported items | 113 |
-| Total triggers | 1,082 |
-| Enabled triggers | 1,073 |
-| Disabled triggers | 9 |
-| Triggers in problem state | 34 |
+| Total / enabled / disabled items | 1,820 / 1,698 / 9 |
+| Unsupported items | **113** |
+| Total / enabled / disabled triggers | 1,082 / 1,073 / 9 |
+| Triggers in problem state | **34** |
 | High-availability cluster | Inactive |
 
-The screenshot confirms that the Zabbix Server was running when the information was collected.
+The server was running during the capture. Unsupported items require item-level diagnosis; the aggregate count does not identify their causes.
 
-However, 113 unsupported items and 34 triggers in a problem state indicate that the monitoring environment still required investigation.
+## Dashboard Evidence
 
-The number of unsupported items does not identify their individual causes.
+### 1. Unified NOC Dashboard
 
-## 4. Dashboard Evidence
+![Unified Zabbix dashboard](../assets/images/monitoring/zabbix/zabbix_dashboard1.png)
 
-Six screenshots document consecutive sections of the monitoring dashboards.
+The dashboard combines host availability, alarm severity, Cisco metrics, Linux resource usage, service checks and Asterisk indicators.
 
-They are presented below in their original order.
-
-### 4.1 Unified Infrastructure Dashboard
-
-![Zabbix unified infrastructure dashboard](../assets/images/monitoring/zabbix/zabbix_dashboard1.png)
-
-The unified dashboard provides an overview of:
-
-- Host availability.
-- Alarm severity.
-- Application and service monitoring.
-- Cisco infrastructure metrics.
-- Linux server resource utilization.
-- Asterisk service indicators.
-
-At the time of collection, the availability widget reported:
-
-| Status | Hosts |
+| Host availability | Recorded count |
 |---|---:|
 | Available | 7 |
 | Unavailable | 5 |
-| Total | 12 |
+| **Total** | **12** |
 
-The interface breakdown showed five available and five unavailable passive Zabbix Agent interfaces, along with two available SNMP interfaces.
+The interface breakdown shows **five available and five unavailable passive Zabbix Agent interfaces**, plus **two available SNMP interfaces**. Positive service checks are shown for the corporate website, Pi-hole, Grafana, Zabbix Web, Portainer and Asterisk. Each check reflects only its configured test at that time.
 
-The service widgets also displayed positive checks for the corporate website, Pi-hole, Grafana, Zabbix Web, Portainer, and Asterisk.
+### 2. Cisco C8200L — Interfaces and VLAN Traffic
 
-These results represent individual monitoring observations rather than guaranteed long-term availability.
+![Cisco router monitoring](../assets/images/monitoring/zabbix/zabbix_dashboard2.png)
 
-### 4.2 Cisco Router Interfaces and VLAN Traffic
+Interface/subinterface status, WAN and trunk throughput, VLAN-related traffic and historical network series are displayed. The visible interface indicators are operational; this is **not** independent verification of router-side VLAN configuration, NAT, routing or ACL enforcement.
 
-![Cisco router interface and VLAN monitoring](../assets/images/monitoring/zabbix/zabbix_dashboard2.png)
+### 3. Cisco C9200L — Hardware and Interfaces
 
-This section presents monitoring information associated with the Cisco Catalyst C8200L router.
+![Cisco switch monitoring](../assets/images/monitoring/zabbix/zabbix_dashboard3.png)
 
-The dashboard includes:
+CPU, RAM, temperature, cooling, power and Ethernet interface status/traffic are monitored. Both `up` and `down` states appear. Unused or disabled ports may legitimately be down; truncated interface labels require item-to-port verification.
 
-- Interface and subinterface status.
-- WAN and trunk traffic.
-- VLAN-related traffic visualization.
-- Network throughput over the displayed observation period.
+### 4. Traffic, Services and Events
 
-The interface indicators are displayed as operational in the screenshot.
+![Traffic, performance and events](../assets/images/monitoring/zabbix/zabbix_dashboard4.png)
 
-These observations demonstrate monitoring data collection but do not independently verify every routing or access-control policy.
+Shows core/server throughput, departmental switch-port traffic, corporate website response, CPU/RAM and problem/resolved-event entries. An event marked resolved in this historical view is not evidence that other monitoring issues were also resolved.
 
-### 4.3 Cisco Catalyst 9200L Monitoring
+### 5. Infrastructure Resource Usage
 
-![Cisco Catalyst 9200L monitoring dashboard](../assets/images/monitoring/zabbix/zabbix_dashboard3.png)
+![Infrastructure resource metrics](../assets/images/monitoring/zabbix/zabbix_dashboard5.png)
 
-The switch dashboard provides visibility into:
+CPU and RAM indicators and resource rankings for monitored systems. Several labels repeat the switch name; the screenshot does not establish separate item identities for those repeated labels.
 
-- CPU utilization.
-- Memory utilization.
-- Temperature sensors.
-- Cooling and power indicators.
-- Ethernet interface status.
-- Traffic distribution across interfaces.
+### 6. Router and Workstation Throughput
 
-The screenshot shows a combination of interfaces marked as `up` and `down`.
+![Router and Windows network throughput](../assets/images/monitoring/zabbix/zabbix_dashboard6.png)
 
-An interface in the `down` state does not automatically indicate an incident. Unused, disconnected, or administratively disabled ports may legitimately remain down.
+Historical internet/core traffic, VLAN subinterface throughput, and Windows workstation upload/download series. Only the displayed items and intervals are evidenced.
 
-The screenshot also contains some truncated labels. Interface identities must be checked against the monitoring configuration before assigning specific physical-port functions.
+## Host Inventory and Interface Availability
 
-### 4.4 Network Traffic, Service Performance, and Events
+![Configured Zabbix hosts](../assets/images/monitoring/zabbix/zabbix_hosts.png)
 
-![Zabbix traffic, service performance, and incident monitoring](../assets/images/monitoring/zabbix/zabbix_dashboard4.png)
+The configured hosts correspond to **eight Windows workstations, two Linux servers and two Cisco devices**. The Cisco devices use SNMP interfaces; the computers use Zabbix Agent monitoring.
 
-This section displays additional infrastructure monitoring information:
+![Zabbix host status and incidents](../assets/images/monitoring/zabbix/zabbix_hosts2.png)
 
-- Core and server network throughput.
-- Departmental switch-port traffic.
-- Corporate website response performance.
-- CPU and memory utilization across monitored systems.
-- Events and incident records.
+The host list records interfaces, availability indicators, data/graph access and problem counts. All 12 hosts are **enabled**, but five were reported **unavailable** in the collection: enabled status does not imply agent reachability.
 
-The event panel contains incident and resolved-event entries.
+## Workstation Address Discrepancies
 
-These records demonstrate event tracking during the observed period, but they do not establish that every recorded issue was permanently resolved.
+The photographed `ipconfig` addresses and Zabbix host registrations differ for six Windows workstations:
 
-### 4.5 Infrastructure Resource Utilization
-
-![Zabbix infrastructure resource utilization](../assets/images/monitoring/zabbix/zabbix_dashboard5.png)
-
-This section presents resource-consumption indicators for monitored equipment.
-
-The dashboard includes:
-
-- CPU utilization indicators.
-- RAM utilization indicators.
-- Resource rankings across monitored computers and servers.
-
-The collected screenshot also contains multiple indicators labeled with the same switch name.
-
-The screenshots show repeated or truncated labels. Their values are preserved as displayed, without treating each label as a distinct monitoring item.
-
-The screenshot is retained as evidence of the dashboard configuration observed on November 6, 2026.
-
-### 4.6 Network Throughput and Windows Workstations
-
-![Zabbix network throughput and Windows workstation monitoring](../assets/images/monitoring/zabbix/zabbix_dashboard6.png)
-
-The final dashboard screenshot presents:
-
-- Internet and core routing throughput.
-- Traffic distribution across VLAN subinterfaces.
-- Download traffic for Windows workstations.
-- Upload traffic for Windows workstations.
-
-The graphs demonstrate that the monitoring platform contained historical network-traffic series for selected interfaces and computers.
-
-They do not establish complete monitoring coverage for every workstation.
-
-## 5. Host Configuration and Availability
-
-### 5.1 Configured Hosts
-
-![Zabbix configured host list](../assets/images/monitoring/zabbix/zabbix_hosts.png)
-
-The host configuration screen identifies twelve registered hosts:
-
-- Eight Windows workstations.
-- The main Zabbix infrastructure server.
-- The Asterisk and FreeRADIUS Linux server.
-- The Cisco Catalyst C8200L router.
-- The Cisco Catalyst C9200L switch.
-
-The Windows and Linux systems are associated with Zabbix Agent monitoring.
-
-The Cisco router and switch use SNMP interfaces on UDP port 161.
-
-### 5.2 Host Status and Incidents
-
-![Zabbix host availability and incident list](../assets/images/monitoring/zabbix/zabbix_hosts2.png)
-
-The second host-list screenshot complements the previous image.
-
-It shows:
-
-- Host availability indicators.
-- Registered monitoring interfaces.
-- Active host status.
-- Links to collected data and graphs.
-- Incident counters.
-
-Although all twelve hosts were enabled, not all monitoring interfaces were available.
-
-**A host being enabled in Zabbix does not mean its monitoring agent is reachable.**
-
-## 6. Addressing Inconsistencies
-
-A comparison between the Zabbix host interfaces and the workstation `ipconfig` photographs revealed six mismatches.
-
-| Workstation | Photographed IPv4 | Zabbix registered IPv4 |
+| Workstation | Photographed IPv4 | Zabbix host IPv4 |
 |---|---|---|
 | IT 2 | `192.168.10.13` | `192.168.10.11` |
 | Accounting 2 | `192.168.20.12` | `192.168.20.10` |
@@ -235,38 +103,18 @@ A comparison between the Zabbix host interfaces and the workstation `ipconfig` p
 | Sales 1 | `192.168.40.11` | `192.168.40.14` |
 | Sales 2 | `192.168.40.10` | `192.168.40.13` |
 
-Accounting 1 and Finance 2 had matching addresses in the compared records.
+Accounting 1 and Finance 2 matched in the compared records. DHCP changes **may** contribute to unavailable agents or missing metrics, but agent configuration, reachability, firewalls and item settings also require inspection. The table represents November 6 observations, not currently assigned IPs.
 
-These inconsistencies may contribute to agent availability problems or missing monitoring data.
+## Open Monitoring Findings
 
-This collection does not establish a single root cause for every problem; agent settings, host addressing, firewall behavior, connectivity, and monitoring item configuration can all affect collection.
-
-The photographed addresses are historical observations from November 6, 2026.
-
-For the workstation inventory, see [Workstation and Server Inventory](../endpoints/workstation-inventory.md).
-
-## 7. Interpretation of Historical Results
-
-The November 6 capture records **five unavailable hosts, 113 unsupported items, 34 problem triggers, six address discrepancies** and some switch interfaces shown as down. The DHCP-based workstation addressing may contribute to mismatches but does not establish the cause of every alert. These measurements describe the captured state; individual item and interface status requires its own diagnosis.
-
-## 8. Relationship with Grafana
-
-Zabbix supplies monitoring data for Grafana dashboards covering Cisco equipment, Windows and Linux hosts, Asterisk and web services. See the [Grafana evidence](grafana-monitoring.md) for panel-specific observations.
-
-## 9. Evidence Summary
-
-| Evidence | Original filename |
+| Observed condition | Verification still required |
 |---|---|
-| Unified monitoring | `zabbix_dashboard1.png` |
-| Router interfaces and VLANs | `zabbix_dashboard2.png` |
-| Cisco switch monitoring | `zabbix_dashboard3.png` |
-| Traffic, performance, and events | `zabbix_dashboard4.png` |
-| Infrastructure resource utilization | `zabbix_dashboard5.png` |
-| Network throughput | `zabbix_dashboard6.png` |
-| Registered hosts | `zabbix_hosts.png` |
-| Host status and incidents | `zabbix_hosts2.png` |
-| System information | `zabbix_info_system.png` |
+| 113 unsupported items | Identify affected item keys, errors and supported metrics |
+| 34 problem-state triggers | Correlate trigger conditions with actual service impact |
+| Five unavailable hosts | Verify current agent interfaces, addressing and network paths |
+| Six address discrepancies | Compare current DHCP leases with Zabbix host interfaces |
+| `down` interfaces and repeated labels | Confirm expected port roles and item-to-interface mapping |
 
-All screenshots were collected on **November 6, 2026**.
+**Related records:** [Grafana dashboards](grafana-monitoring.md) · [Cisco SNMP troubleshooting — November 4](snmp-troubleshooting.md) · [Workstation inventory](../endpoints/workstation-inventory.md)
 
-This documentation describes the observed environment and its limitations. It does not claim uninterrupted availability, complete monitoring coverage, or a fully remediated infrastructure.
+The nine original screenshots above were collected on **November 6, 2026**. No later remediation is inferred from them.
