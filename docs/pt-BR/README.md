@@ -4,7 +4,7 @@
 
 [English](../README.md) | **Português (Brasil)**
 
-Índice da documentação de arquitetura, infraestrutura física, serviços, monitoramento e operações.
+Índice da documentação de arquitetura, infraestrutura física, serviços, monitoramento, operações NOC e análise de custos da infraestrutura.
 
 ## Arquitetura e Redes
 
@@ -47,6 +47,13 @@
 - [Runbook de recursos dos sistemas](operacoes-noc/runbooks/utilizacao-recursos-sistema.md)
 - [Runbook de conectividade do Zabbix Agent](operacoes-noc/runbooks/conectividade-zabbix-agent.md)
 
+## Análise de Custos da Infraestrutura
+
+- [Análise de custos completa — Português (BRL)](custos/enterprise-noc-orcamento-final-brl-2026.md)
+- [Planilha financeira — Português (BRL)](custos/enterprise-noc-orcamento-final-brl-2026.xlsx)
+- [Análise de custos completa — English (USD)](../costs/enterprise-noc-final-budget-usd-2026.md)
+- [Planilha financeira — English (USD)](../costs/enterprise-noc-final-budget-usd-2026.xlsx)
+
 ## Referências do Projeto e Site Público
 
 - [Perguntas frequentes técnicas](faq/perguntas-frequentes.md)
@@ -62,5 +69,4 @@
 ## Recursos Complementares
 
 - [Site público](index.html)
-- [Análise de custos da infraestrutura (português)](custos/analise-de-custos-infraestrutura-noc-pt-BR.md)
 - [README principal](../../README.pt-BR.md)

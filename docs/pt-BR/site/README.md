@@ -135,7 +135,7 @@ A galeria contém **25 imagens selecionáveis**, divididas assim:
 | `endpoints` | 4 | Registros de estações |
 | `all` | 25 | Todas as categorias |
 
-Seis botões possuem `data-filter`. Cada cartão de imagem apresenta `data-category`, metadados e uma fotografia ou captura. O script altera a propriedade `hidden` de cada item, marca o filtro ativo com `aria-pressed` e atualiza a contagem visível (`[data-count]`).
+Seis botões possuem `data-filter`. Cada cartão de imagem apresenta `data-category`, metadados e uma fotografia ou captura. O script altera a propriedade `hidden` de cada item, marca o filtro ativo com `aria-pressed` e atualiza a contagem visível (`[data-count]`), anunciada pela região de status da galeria (`role="status"`).
 
 Ao selecionar uma imagem, abre-se o `<dialog id="gallery-dialog">` nativo, exibindo a imagem, título, observação, navegação anterior/próxima e botão de fechamento. As setas esquerda/direita do teclado mudam de imagem enquanto o diálogo está ativo; clicar no fundo do diálogo também o fecha. A navegação percorre os itens **visíveis no filtro atual**, e não todo o acervo. Quando existe uma única imagem na seleção, os botões anterior/próxima são desabilitados.
 
@@ -245,7 +245,8 @@ O código implementa estes cuidados:
 - Atributos de idioma no elemento `<html>`.
 - Link para pular ao conteúdo e região `<main id="main">` identificada.
 - Navegação semântica, hierarquia de títulos e botões.
-- Rótulos acessíveis para menu móvel, filtros, controles de galeria e diálogo ampliado.
+- Rótulos acessíveis no idioma da página para menu móvel, filtros, controles de galeria e diálogo ampliado; o rótulo do menu acompanha os estados aberto/fechado.
+- Região de status que anuncia a quantidade de imagens exibidas após uma mudança de filtro.
 - `aria-expanded` no menu móvel e `aria-pressed` nos controles selecionáveis.
 - Contorno visual para `:focus-visible` no CSS.
 - Elementos `<details>` nativos no FAQ e `<dialog>` para as fotografias ampliadas.
