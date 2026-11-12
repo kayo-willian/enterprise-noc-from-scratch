@@ -6,7 +6,7 @@
 
 ## Monitoring Architecture
 
-The main Debian infrastructure computer hosts Zabbix Server, Zabbix Web, Zabbix Agent and MariaDB. Grafana uses Zabbix monitoring data for visualization; the container deployment is documented in [Docker Services](../containers/docker-services.md).
+The main Debian infrastructure computer hosts Zabbix Server, Zabbix Web, Zabbix Agent and MariaDB. Grafana uses Zabbix monitoring data for visualization; the container deployment is documented in [Docker Services](../containers/docker-services.md). The database dependency and its persistence limits are detailed in [MariaDB — Zabbix database](../services/mariadb-zabbix/README.md).
 
 | Monitored systems | Hosts | Monitoring interface |
 |---|---:|---|

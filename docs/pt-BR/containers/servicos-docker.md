@@ -91,7 +91,7 @@ Os containers documentados atendem a diferentes funções.
 
 ### Infraestrutura e Acesso às Aplicações
 
-- Nginx disponibiliza funcionalidades de proxy reverso.
+- Nginx disponibiliza [funcionalidades de proxy reverso](../servicos/nginx-proxy-reverso/README.md).
 - Apache HTTP Server hospeda um site estático.
 - Portainer permite gerenciar os containers.
 
@@ -105,7 +105,7 @@ Os containers documentados atendem a diferentes funções.
 
 ### Serviços Complementares
 
-- MariaDB armazena os dados utilizados pelo Zabbix.
+- MariaDB [armazena os dados utilizados pelo Zabbix](../servicos/mariadb-zabbix/README.md).
 - Pi-hole disponibiliza funcionalidades relacionadas ao DNS.
 
 Os serviços Asterisk e FreeRADIUS são documentados separadamente, pois são executados em outro computador Linux.

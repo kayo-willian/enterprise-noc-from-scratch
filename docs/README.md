@@ -33,6 +33,8 @@ Documentation index for architecture, physical infrastructure, services, monitor
 ## Linux, Containers and Infrastructure Services
 
 - [Docker, Compose and containers](containers/docker-services.md)
+- [Nginx reverse proxy — architecture and operations](services/nginx-reverse-proxy/README.md)
+- [MariaDB — Zabbix database and persistence](services/mariadb-zabbix/README.md)
 - [Asterisk and FreeRADIUS](services/asterisk-freeradius.md)
 - [DNS filtering and availability](services/dns-and-availability.md)
 
