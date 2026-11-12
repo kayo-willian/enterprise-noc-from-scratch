@@ -2,10 +2,10 @@
 
 **English** | [Português (Brasil)](../pt-BR/site/README.md)
 
-**Project:** [Enterprise NOC — From Scratch](../../README.md)  
+**Technical index:** [English documentation](../README.md) · [Português (Brasil)](../pt-BR/README.md)  
 **Website:** [English](https://kayo-willian.github.io/enterprise-noc-from-scratch/) · [Português (Brasil)](https://kayo-willian.github.io/enterprise-noc-from-scratch/pt-BR/)  
 **Organization:** Tapajós Inovações — fictional company used as the laboratory's business scenario  
-**Technical basis:** Repository `main`, commit `08d2aedafa8ce2a71277293816a287575782c9c0` (November 10, 2026)  
+**Technical basis:** Repository `main`, commit `4ef6531513e07bba5eea1b76d48b558abfab7f9d` (November 11, 2026); phase 8 portal consolidation  
 **Document type:** Implementation record and maintenance reference
 
 ---
@@ -91,9 +91,9 @@ Visitor's browser
 
 The site is maintained directly as static source files. The repository does not require a front-end framework or a JavaScript package build to understand these pages.
 
-## 4. Page map: all 11 HTML sections
+## 4. Page map: all 12 HTML sections
 
-Both language versions contain **11 `<section>` elements**: the hero, nine other sections with anchors, and a final call to action without a section ID. The English identifiers are also used by the Portuguese page, so common interaction code remains compatible.
+Both language versions contain **12 `<section>` elements**: the hero, ten other sections with anchors, and a final call to action without a section ID. The English identifiers are also used by the Portuguese page, so common interaction code remains compatible.
 
 | Order | Section / anchor | Implemented content and behavior |
 | --- | --- | --- |
@@ -105,11 +105,12 @@ Both language versions contain **11 `<section>` elements**: the hero, nine other
 | 6 | `#cabling` — Cabling | Illustrated RJ45/T568A pin arrangement, physical cabling explanation and link to infrastructure evidence. |
 | 7 | `#monitoring` — Monitoring | Monitoring architecture narrative and dated figures; link to technical Zabbix documentation. |
 | 8 | `#timeline` — Timeline | Historical milestones for the switch snapshot, evidence collection and documentation consolidation. |
-| 9 | `#documentation` — Technical documentation | Curated links to architecture, VLAN, Docker, monitoring, service and physical infrastructure records. |
-| 10 | `#faq` — FAQ | Four native expandable questions and a link to the longer technical FAQ. |
-| 11 | Final call to action (no ID) | Project/GitHub and evidence links; the footer follows this section. |
+| 9 | `#budget` — Infrastructure costs | Three scenarios in USD, BRL/USD conversion disclosure, links to English and Portuguese reports and downloadable spreadsheets. |
+| 10 | `#documentation` — Technical documentation | Curated links to architecture, VLAN, Docker, monitoring, service and physical infrastructure records. |
+| 11 | `#faq` — FAQ | Four native expandable questions and a link to the longer technical FAQ. |
+| 12 | Final call to action (no ID) | Project/GitHub and evidence links; the footer follows this section. |
 
-The global navigation links to `#about`, `#architecture`, `#services`, `#evidence`, `#cabling`, `#monitoring` and `#documentation`. The brand link returns to `#top`. The footer provides supplemental navigation and a return-to-top link.
+The global navigation links to `#about`, `#architecture`, `#services`, `#evidence`, `#cabling`, `#monitoring` and `#documentation` and `#budget`. The brand link returns to `#top`. The footer provides supplemental navigation and a return-to-top link.
 
 ### 4.1 Interactive VLAN panel
 
@@ -147,6 +148,10 @@ The RJ45 component renders the **T568A** pin sequence visually using `.wire` ele
 ### 4.5 Monitoring and FAQ
 
 The monitoring section communicates the role of Zabbix, Grafana, SNMP and Uptime Kuma and provides dated evidence context. It does not run monitoring queries. The FAQ uses native `<details>` and `<summary>` elements: questions cover the fictional company, whether the page is a live dashboard, the limits of ACL/Wi-Fi verification and the state of hosts shown in historical screenshots.
+
+### 4.6 Financial analysis
+
+The `#budget` section summarizes the verified budget workbook totals (A: USD 15,590.49; B: USD 1,339.72; C: USD 194.98/month) and links to both English/USD and Portuguese/BRL reports and spreadsheets. The BRL originals remain the pricing basis; USD totals were converted with the documented reference of USD 1 = BRL 5.5600 on November 11, 2026. Displayed amounts are **estimates**, not paid expenses, contracts, or independent U.S. supplier quotes. File links target the actual published paths under `docs/costs/` and `docs/pt-BR/custos/`.
 
 ## 5. JavaScript behavior (`site.js`)
 
@@ -310,8 +315,12 @@ The public website is a static bilingual technical case study, not an infrastruc
 
 ## 13. Related project documentation
 
-- [Main project README](../../README.md)
-- [Portuguese project README](../../README.pt-BR.md)
+- [English technical documentation index](../README.md)
+- [Portuguese technical documentation index](../pt-BR/README.md)
+- [English financial analysis](../costs/enterprise-noc-final-budget-usd-2026.md)
+- [English USD spreadsheet](../costs/enterprise-noc-final-budget-usd-2026.xlsx)
+- [Portuguese financial analysis](../pt-BR/custos/enterprise-noc-orcamento-final-brl-2026.md)
+- [Portuguese BRL spreadsheet](../pt-BR/custos/enterprise-noc-orcamento-final-brl-2026.xlsx)
 - [Infrastructure Architecture](../architecture/infrastructure-overview.md)
 - [Consolidated Logical Network Topology](../networking/consolidated-logical-topology.md)
 - [Switch Configuration Snapshot](../networking/switch-vlan-snapshot-2026-11-04.md)
@@ -326,4 +335,4 @@ The public website is a static bilingual technical case study, not an infrastruc
 
 **Enterprise NOC — From Scratch**  
 *From physical infrastructure to network operations.*  
-**Website documentation reference:** November 10, 2026.
+**Website documentation reference:** November 12, 2026.

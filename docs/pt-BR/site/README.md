@@ -2,10 +2,10 @@
 
 [English](../../site/README.md) | **Português (Brasil)**
 
-**Projeto:** [Enterprise NOC — From Scratch](../../../README.pt-BR.md)  
+**Índice técnico:** [Português (Brasil)](../README.md) · [English](../../README.md)  
 **Site:** [English](https://kayo-willian.github.io/enterprise-noc-from-scratch/) · [Português (Brasil)](https://kayo-willian.github.io/enterprise-noc-from-scratch/pt-BR/)  
 **Organização:** Tapajós Inovações — empresa fictícia utilizada no cenário corporativo do laboratório  
-**Base técnica:** Repositório `main`, commit `08d2aedafa8ce2a71277293816a287575782c9c0` (10 de novembro de 2026)  
+**Base técnica:** Repositório `main`, commit `4ef6531513e07bba5eea1b76d48b558abfab7f9d` (11 de novembro de 2026); consolidação do portal na fase 8  
 **Tipo de documento:** Registro de implementação e referência de manutenção
 
 ---
@@ -91,9 +91,9 @@ Navegador do visitante
 
 Os arquivos estáticos podem ser mantidos diretamente. Não é necessário um framework de front-end nem um processo de compilação JavaScript para compreender as páginas atuais.
 
-## 4. Mapa das 11 seções HTML
+## 4. Mapa das 12 seções HTML
 
-As duas versões possuem **11 elementos `<section>`**: abertura, outras nove seções com âncoras e uma chamada final sem `id`. Os identificadores HTML permanecem iguais nos dois idiomas para que o mesmo JavaScript funcione corretamente.
+As duas versões possuem **12 elementos `<section>`**: abertura, outras dez seções com âncoras e uma chamada final sem `id`. Os identificadores HTML permanecem iguais nos dois idiomas para que o mesmo JavaScript funcione corretamente.
 
 | Ordem | Seção / âncora | Conteúdo e funcionamento |
 | --- | --- | --- |
@@ -105,11 +105,12 @@ As duas versões possuem **11 elementos `<section>`**: abertura, outras nove se�
 | 6 | `#cabling` — Cabeamento | Representação dos pinos RJ45/T568A, explicação de cabeamento físico e link para evidências. |
 | 7 | `#monitoring` — Monitoramento | Descrição da arquitetura de observabilidade e valores datados; link para documentação técnica do Zabbix. |
 | 8 | `#timeline` — Linha do tempo | Marcos históricos do registro do switch, da coleta de evidências e da consolidação documental. |
-| 9 | `#documentation` — Documentação | Links selecionados para arquitetura, VLANs, Docker, monitoramento, serviços e infraestrutura física. |
-| 10 | `#faq` — Perguntas frequentes | Quatro perguntas expansíveis e link para o FAQ técnico completo. |
-| 11 | Chamada final (sem `id`) | Links para o repositório e as evidências; o rodapé aparece após essa seção. |
+| 9 | `#budget` — Análise de custos | Três cenários em BRL, identificação do câmbio BRL/USD e acesso aos relatórios e às planilhas em português e inglês. |
+| 10 | `#documentation` — Documentação | Links selecionados para arquitetura, VLANs, Docker, monitoramento, serviços e infraestrutura física. |
+| 11 | `#faq` — Perguntas frequentes | Quatro perguntas expansíveis e link para o FAQ técnico completo. |
+| 12 | Chamada final (sem `id`) | Links para o repositório e as evidências; o rodapé aparece após essa seção. |
 
-O menu principal contém links para `#about`, `#architecture`, `#services`, `#evidence`, `#cabling`, `#monitoring` e `#documentation`. A marca retorna a `#top`. O rodapé possui navegação complementar e um link para voltar ao início.
+O menu principal contém links para `#about`, `#architecture`, `#services`, `#evidence`, `#cabling`, `#monitoring` e `#documentation` e `#budget`. A marca retorna a `#top`. O rodapé possui navegação complementar e um link para voltar ao início.
 
 ### 4.1 Seletor de VLANs
 
@@ -147,6 +148,10 @@ O componente RJ45 representa visualmente a sequência **T568A** com elementos `.
 ### 4.5 Monitoramento e FAQ
 
 A seção de monitoramento descreve os papéis de Zabbix, Grafana, SNMP e Uptime Kuma e contextualiza os registros históricos. Ela não executa consultas de monitoramento. O FAQ utiliza os elementos nativos `<details>` e `<summary>`: as perguntas abordam a empresa fictícia, se o site é um dashboard ao vivo, os limites da comprovação de ACLs/autenticação Wi-Fi e a disponibilidade dos hosts nas capturas históricas.
+
+### 4.6 Análise financeira
+
+A seção `#budget` apresenta os valores consolidados da planilha em reais (A: R$ 86.683,14; B: R$ 7.448,85; C: R$ 1.084,09/mês) e os links para os relatórios e planilhas em português/BRL e inglês/USD. A versão em BRL é a referência dos preços; a versão em USD utiliza a taxa documentada de US$ 1 = R$ 5,5600, com data-base de 11/11/2026. Os valores são **estimativas**, não despesas pagas, contratos ou cotações independentes nos EUA. Os links apontam para os arquivos publicados em `docs/pt-BR/custos/` e `docs/costs/`.
 
 ## 5. Funcionamento do JavaScript (`site.js`)
 
@@ -310,8 +315,12 @@ O site público é um estudo de caso técnico estático e bilíngue, não uma in
 
 ## 13. Documentação técnica relacionada
 
-- [README principal em português](../../../README.pt-BR.md)
-- [README principal em inglês](../../../README.md)
+- [Índice de documentação em português](../README.md)
+- [Índice de documentação em inglês](../../README.md)
+- [Análise financeira em português](../custos/enterprise-noc-orcamento-final-brl-2026.md)
+- [Planilha em BRL](../custos/enterprise-noc-orcamento-final-brl-2026.xlsx)
+- [Análise financeira em inglês](../../costs/enterprise-noc-final-budget-usd-2026.md)
+- [Planilha em USD](../../costs/enterprise-noc-final-budget-usd-2026.xlsx)
 - [Visão Geral da Infraestrutura](../arquitetura/visao-geral-da-infraestrutura.md)
 - [Topologia Lógica Consolidada](../redes/topologia-logica-consolidada.md)
 - [Registro de Configuração do Switch](../redes/registro-switch-vlans-2026-11-04.md)
@@ -326,4 +335,4 @@ O site público é um estudo de caso técnico estático e bilíngue, não uma in
 
 **Enterprise NOC — From Scratch**  
 *Da infraestrutura física às operações de rede.*  
-**Referência da documentação do site:** 10 de novembro de 2026.
+**Referência da documentação do site:** 12 de novembro de 2026.
