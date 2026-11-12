@@ -1,3 +1,4 @@
+```gitignore
 # Environment variables
 **/.env
 **/.env.*
@@ -6,7 +7,19 @@
 # Private keys and certificates
 **/*.key
 **/*.pem
+**/*.p12
+**/*.pfx
+**/*.jks
+**/*.keystore
+**/id_rsa
+**/id_ed25519
+**/id_ecdsa
 docker_configs/reverse-proxy/certs/
+
+# Database backups
+**/*.sql.gz
+**/*.dump
+**/*.bak
 
 # Persistent Docker data
 docker_configs/zabbix-db-data/
@@ -16,3 +29,4 @@ docker_configs/uptime-kuma-data/
 # Pi-hole persistent data
 docker_configs/lab-ti/pihole/etc-pihole/
 docker_configs/lab-ti/pihole/etc-dnsmasq.d/
+```
