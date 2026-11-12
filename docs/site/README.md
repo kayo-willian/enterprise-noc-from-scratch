@@ -5,7 +5,7 @@
 **Technical index:** [English documentation](../README.md) · [Português (Brasil)](../pt-BR/README.md)  
 **Website:** [English](https://kayo-willian.github.io/enterprise-noc-from-scratch/) · [Português (Brasil)](https://kayo-willian.github.io/enterprise-noc-from-scratch/pt-BR/)  
 **Organization:** Tapajós Inovações — fictional company used as the laboratory's business scenario  
-**Technical basis:** Repository `main`, commit `4ef6531513e07bba5eea1b76d48b558abfab7f9d` (November 11, 2026); phase 8 portal consolidation  
+**Technical reference:** Published source in repository `main`, reviewed November 12, 2026 (baseline commit `dace2c5b35af2eac6f3c4d4ff058a0fd7a076d6a`)  
 **Document type:** Implementation record and maintenance reference
 
 ---
@@ -265,7 +265,7 @@ The script is loaded with `defer`. The English and Portuguese pages each referen
 - English: https://kayo-willian.github.io/enterprise-noc-from-scratch/
 - Portuguese: https://kayo-willian.github.io/enterprise-noc-from-scratch/pt-BR/
 
-The public website files reside under `docs/`, and the repository has successful GitHub Actions **pages build and deployment** runs associated with the reviewed branding changes. The final golden-logo change was successfully deployed for commit `08d2aedafa8ce2a71277293816a287575782c9c0`.
+The public website files reside under `docs/`. The GitHub Actions **pages build and deployment** run for commit `dace2c5b35af2eac6f3c4d4ff058a0fd7a076d6a` completed successfully on November 12, 2026. A successful deployment confirms the publishing workflow result, **not** full browser compatibility, mobile layout, accessibility compliance or live-service health.
 
 GitHub Pages hosts the static presentation; it does not deploy the Docker-based corporate portal or expose the local laboratory monitoring services. The publication directory, workflow results and URLs are supported by the repository; deployment settings not visible in the checked files are not assumed.
 
