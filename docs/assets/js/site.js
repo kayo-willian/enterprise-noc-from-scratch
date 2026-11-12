@@ -5,6 +5,7 @@
   const nav=d.querySelector('.nav-links');
   menu?.addEventListener('click',()=>{const next=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(next));nav?.classList.toggle('is-open',next)});
   nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('is-open');menu?.setAttribute('aria-expanded','false')}));
+  d.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu?.getAttribute('aria-expanded')==='true'){nav?.classList.remove('is-open');menu.setAttribute('aria-expanded','false');menu.focus()}});
   const progress=d.querySelector('.reading-line');
   const scroll=()=>{if(progress){const total=d.documentElement.scrollHeight-innerHeight;progress.style.width=(total>0?Math.min(100,scrollY/total*100):0)+'%'}};
   addEventListener('scroll',scroll,{passive:true});scroll();
