@@ -5,7 +5,7 @@
 **Índice técnico:** [Português (Brasil)](../README.md) · [English](../../README.md)  
 **Site:** [English](https://kayo-willian.github.io/enterprise-noc-from-scratch/) · [Português (Brasil)](https://kayo-willian.github.io/enterprise-noc-from-scratch/pt-BR/)  
 **Organização:** Tapajós Inovações — empresa fictícia utilizada no cenário corporativo do laboratório  
-**Base técnica:** Repositório `main`, commit `4ef6531513e07bba5eea1b76d48b558abfab7f9d` (11 de novembro de 2026); consolidação do portal na fase 8  
+**Referência técnica:** Código publicado na `main`, revisado em 12 de novembro de 2026 (commit-base `dace2c5b35af2eac6f3c4d4ff058a0fd7a076d6a`)  
 **Tipo de documento:** Registro de implementação e referência de manutenção
 
 ---
@@ -265,7 +265,7 @@ O script é carregado com `defer`. Cada página possui **37 elementos `<img>`**,
 - Inglês: https://kayo-willian.github.io/enterprise-noc-from-scratch/
 - Português: https://kayo-willian.github.io/enterprise-noc-from-scratch/pt-BR/
 
-Os arquivos públicos estão sob `docs/`, e o repositório possui execuções bem-sucedidas de **pages build and deployment** associadas às alterações visuais examinadas. A atualização final da onça dourada foi publicada com sucesso para o commit `08d2aedafa8ce2a71277293816a287575782c9c0`.
+Os arquivos públicos estão sob `docs/`. A execução de **pages build and deployment** do GitHub Actions para o commit `dace2c5b35af2eac6f3c4d4ff058a0fd7a076d6a` terminou com sucesso em 12 de novembro de 2026. A conclusão do deploy comprova o resultado da publicação, **não** a compatibilidade com todos os navegadores, a responsividade visual, a conformidade de acessibilidade ou a saúde dos serviços locais.
 
 O GitHub Pages entrega a apresentação estática; ele não disponibiliza a aplicação corporativa executada por Docker nem os serviços de monitoramento da rede local. A pasta pública, o histórico das execuções e as URLs são sustentados pelos arquivos e registros do repositório; configurações de publicação não visíveis nas fontes examinadas não são presumidas.
 

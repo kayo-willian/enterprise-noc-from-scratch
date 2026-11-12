@@ -186,6 +186,14 @@ The following Docker Compose files are sanitized public examples based on the la
 - [Pi-hole](../../docker_configs/lab-ti/pihole/docker-compose.yml)
 - [Portainer](../../docker_configs/lab-ti/portainer/docker-compose.yml)
 
+### Public Compose prerequisites and reproducibility limits
+
+The [main Compose example](../../docker_configs/docker-compose.yml) refers to local bind-mount sources under `docker_configs/`: `alertscripts/`, `externalscripts/`, `site-estatico-html/` and `reverse-proxy/certs/`. These paths are **not included in the versioned repository**. A fresh clone therefore does not provide the private TLS certificates, local Zabbix scripts or intranet website files required by those mounts. Starting Compose with missing paths does not supply the absent contents and may create empty host directories.
+
+The [`.env.example`](../../docker_configs/.env.example) and [Pi-hole `.env.example`](../../docker_configs/lab-ti/pihole/.env.example) contain setup variable names and example values, **not real credentials**. Local `.env` files, persistent database/application data and TLS keys must remain outside Git. Portainer's `portainer_data` is a **named Docker volume**, not a repository folder. The public GitHub Pages website in `docs/` and the locally mounted `site-estatico` content are distinct deployment paths; the published examples do not prove both have identical content.
+
+Reproducing the laboratory stack requires checking the actual host paths, secrets, image versions, port exposure and TLS/DNS configuration before running it. These public files are a **sanitized configuration reference**, not a ready-to-run production release.
+
 ### Reverse Proxy and Corporate Portal
 
 The laboratory includes an Nginx reverse proxy and an

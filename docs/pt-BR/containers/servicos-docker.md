@@ -180,12 +180,19 @@ O inventário apresenta containers, portas e redes na data de coleta, sem tratar
 
 ## 10. Configuração do Docker Compose
 
-Os arquivos Docker Compose a seguir documentam as configurações
-de implantação utilizadas no laboratório.
+Os arquivos Docker Compose a seguir são exemplos públicos sanitizados, baseados nos registros do laboratório. Não representam uma exportação integral da implantação nem incluem os arquivos privados necessários para reproduzi-la.
 
 - [Stack de Monitoramento e Infraestrutura](../../../docker_configs/docker-compose.yml)
 - [Pi-hole](../../../docker_configs/lab-ti/pihole/docker-compose.yml)
 - [Portainer](../../../docker_configs/lab-ti/portainer/docker-compose.yml)
+
+### Pré-requisitos dos exemplos públicos e limites de reprodução
+
+O [Compose principal](../../../docker_configs/docker-compose.yml) referencia diretórios locais montados a partir de `docker_configs/`: `alertscripts/`, `externalscripts/`, `site-estatico-html/` e `reverse-proxy/certs/`. Esses caminhos **não estão incluídos nos arquivos versionados**. Portanto, um clone novo não contém os certificados TLS privados, scripts locais do Zabbix ou arquivos do site interno exigidos por essas montagens. Iniciar o Compose com caminhos ausentes não fornece esse conteúdo e pode criar diretórios vazios no host.
+
+Os arquivos [`.env.example`](../../../docker_configs/.env.example) e [`.env.example` do Pi-hole](../../../docker_configs/lab-ti/pihole/.env.example) mostram nomes de variáveis e valores demonstrativos, **não credenciais reais**. Arquivos `.env` locais, dados persistentes e chaves TLS não devem ser publicados no Git. O volume `portainer_data` do Portainer é um **volume nomeado do Docker**, não uma pasta do repositório. O site público no GitHub Pages, em `docs/`, e o conteúdo local montado em `site-estatico` são implantações distintas; os exemplos publicados não comprovam que tenham arquivos idênticos.
+
+Para reproduzir a stack, é necessário conferir caminhos existentes no host, segredos, versões das imagens, exposição de portas e parâmetros de TLS/DNS antes da execução. Os arquivos públicos são uma **referência sanitizada de configuração**, não uma implantação de produção pronta para executar.
 
 ### Proxy Reverso e Portal Corporativo
 
