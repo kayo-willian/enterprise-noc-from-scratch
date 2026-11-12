@@ -4,7 +4,7 @@
 
 **English** | [Português (Brasil)](pt-BR/README.md)
 
-Documentation index for architecture, physical infrastructure, services, monitoring and operations.
+Documentation index for architecture, physical infrastructure, services, monitoring, NOC operations and infrastructure cost analysis.
 
 ## Architecture and Networking
 
@@ -47,6 +47,13 @@ Documentation index for architecture, physical infrastructure, services, monitor
 - [System resource runbook](noc-operations/runbooks/host-resource-utilization.md)
 - [Zabbix Agent connectivity runbook](noc-operations/runbooks/zabbix-agent-connectivity.md)
 
+## Infrastructure Cost Analysis
+
+- [Full cost analysis — English (USD)](costs/enterprise-noc-final-budget-usd-2026.md)
+- [Financial spreadsheet — English (USD)](costs/enterprise-noc-final-budget-usd-2026.xlsx)
+- [Full cost analysis — Português (BRL)](pt-BR/custos/enterprise-noc-orcamento-final-brl-2026.md)
+- [Financial spreadsheet — Português (BRL)](pt-BR/custos/enterprise-noc-orcamento-final-brl-2026.xlsx)
+
 ## Project Reference and Public Website
 
 - [Technical FAQ](faq/technical-faq.md)
@@ -62,5 +69,4 @@ Documentation index for architecture, physical infrastructure, services, monitor
 ## Additional Resources
 
 - [Public website](index.html)
-- [Infrastructure cost analysis (Portuguese)](pt-BR/custos/analise-de-custos-infraestrutura-noc-pt-BR.md)
 - [Root README](../README.md)

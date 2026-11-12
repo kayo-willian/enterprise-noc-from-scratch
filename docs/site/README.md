@@ -135,7 +135,7 @@ The gallery includes **25 selectable evidence items**, divided as follows:
 | `endpoints` | 4 | Workstation records |
 | `all` | 25 | All categories combined |
 
-Six filter buttons use `data-filter`. Each photo has `data-category`, descriptive metadata and an image. The script sets each item's `hidden` property, updates the active filter's `aria-pressed`, and refreshes the displayed item counter (`[data-count]`).
+Six filter buttons use `data-filter`. Each photo has `data-category`, descriptive metadata and an image. The script sets each item's `hidden` property, updates the active filter's `aria-pressed`, and refreshes the displayed item counter (`[data-count]`), announced through the gallery status region (`role="status"`).
 
 Selecting an image opens the native `<dialog id="gallery-dialog">` lightbox, with the image, title, note, previous/next buttons and close control. Arrow Left/Right keys change the displayed image while the dialog is active; clicking the dialog backdrop also closes it. Navigation wraps within the **currently visible filter result**, not the entire gallery. The script disables previous/next controls when the selection contains one item.
 
@@ -245,7 +245,8 @@ The source includes the following provisions:
 - Language attributes on the `<html>` element.
 - A skip-to-content link and a named `<main id="main">` landmark.
 - Semantic navigation, section headings and buttons.
-- Accessible labels for the mobile menu, filters, gallery controls and enlarged-image dialog.
+- Language-specific accessible labels for the mobile menu, gallery filters, image controls and enlarged-image dialog; the mobile menu label reflects its open/closed state.
+- A live status message announces the number of gallery images after a filter change.
 - `aria-expanded` on the mobile navigation control and `aria-pressed` on selectable controls.
 - A visible `:focus-visible` outline in the stylesheet.
 - Native `<details>` elements for the FAQ and a native `<dialog>` for enlarged photographs.
