@@ -33,6 +33,8 @@
 ## Linux, Containers e Serviços de Infraestrutura
 
 - [Docker, Compose e containers](containers/servicos-docker.md)
+- [Proxy reverso Nginx — arquitetura e operação](servicos/nginx-proxy-reverso/README.md)
+- [MariaDB — banco de dados e persistência do Zabbix](servicos/mariadb-zabbix/README.md)
 - [Asterisk e FreeRADIUS](servicos/asterisk-freeradius.md)
 - [Filtragem DNS e disponibilidade](servicos/dns-e-disponibilidade.md)
 

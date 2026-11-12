@@ -6,7 +6,7 @@
 
 ## Arquitetura de Monitoramento
 
-O computador Debian principal hospeda Zabbix Server, Zabbix Web, Zabbix Agent e MariaDB. O Grafana utiliza os dados do Zabbix para visualização; a implantação dos containers está documentada em [Serviços Docker](../containers/servicos-docker.md).
+O computador Debian principal hospeda Zabbix Server, Zabbix Web, Zabbix Agent e MariaDB. O Grafana utiliza os dados do Zabbix para visualização; a implantação dos containers está documentada em [Serviços Docker](../containers/servicos-docker.md). A dependência do banco e os limites de persistência são detalhados em [MariaDB — banco de dados do Zabbix](../servicos/mariadb-zabbix/README.md).
 
 | Sistemas monitorados | Hosts | Interface de monitoramento |
 |---|---:|---|
