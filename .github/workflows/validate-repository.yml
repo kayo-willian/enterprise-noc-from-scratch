@@ -1,0 +1,29 @@
+name: Validate documentation and infrastructure examples
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  documentation:
+    name: Markdown links and image references
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check local documentation references
+        run: python3 scripts/check_documentation_links.py
+      - name: Test validation scripts
+        run: python3 -m unittest discover -s tests -p 'test_*.py'
+
+  configuration:
+    name: Compose and reverse-proxy consistency
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check published Compose examples and Nginx upstreams
+        run: python3 scripts/check_infrastructure_config.py

@@ -123,13 +123,16 @@ These are **diagnostic principles**, not new tests executed as part of the docum
 
 ## Open Monitoring Findings
 
-| Observed condition | Verification still required |
-|---|---|
-| 113 unsupported items | Identify affected item keys, errors and supported metrics |
-| 34 problem-state triggers | Correlate trigger conditions with actual service impact |
-| Five unavailable hosts | Verify current agent interfaces, addressing and network paths |
-| Six address discrepancies | Compare current DHCP leases with Zabbix host interfaces |
-| `down` interfaces and repeated labels | Confirm expected port roles and item-to-interface mapping |
+**Investigation order — historical snapshot, November 6, 2026.** The priorities below are a proposed diagnostic sequence, not measured incident severity. They do not represent a new test, a confirmed root cause, or remediation performed after the capture.
+
+| Order | Recorded observation | Next evidence-based diagnostic step | Evidence needed to document resolution |
+|---|---|---|---|
+| 1 | Five unavailable Zabbix Agent interfaces; six workstation IPv4 discrepancies | Compare current workstation addresses and DHCP leases with the registered agent interfaces; inspect reachability, agent service and host firewall separately | Dated host/interface readings, agent diagnostics and a new availability capture; address mismatches alone do not establish causation |
+| 2 | 113 unsupported monitoring items | Extract item-level error messages and keys; compare templates, interface type and supported metrics | Dated item diagnostics and a new count with each corrected item identified |
+| 3 | 34 triggers in problem state | Inspect trigger expressions and related events; distinguish active service failures from expected states such as unused switch ports | Event/trigger records correlated with a functional service check or documented expected state |
+| 4 | Switch interfaces shown as `down` and repeated dashboard labels | Compare actual switch port roles, item keys and Grafana panel queries | Port-to-item mapping and corrected labels where the underlying evidence supports a correction |
+
+**Completion rule:** record the observation date, affected host/item, test command or UI evidence, result and corrective action before marking any finding resolved. No post-capture resolution is asserted here.
 
 **Related records:** [Grafana dashboards](grafana-monitoring.md) · [Cisco SNMP troubleshooting — November 4](snmp-troubleshooting.md) · [Workstation inventory](../endpoints/workstation-inventory.md)
 
