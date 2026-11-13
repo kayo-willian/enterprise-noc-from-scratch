@@ -1,7 +1,9 @@
 <div align="center">
 
 [![READ IN PORTUGUESE](https://img.shields.io/badge/READ%20IN%20PORTUGUESE-009C3B?style=for-the-badge&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iOSIvPjxwYXRoIGQ9Ik0zIDEyaDE4TTEyIDNjLTUgNS01IDEzIDAgMThNMTIgM2M1IDUgNSAxMyAwIDE4Ii8+PC9zdmc+&logoColor=white)](README.pt-BR.md)  
-<a href="README.pt-BR.md"><strong>Português (Brasil) — versão completa</strong></a>
+<a href="https://kayo-willian.github.io/enterprise-noc-from-scratch/">
+  <img src="https://img.shields.io/badge/VISIT%20CORPORATE%20PORTAL-ENGLISH-0B3D91?style=for-the-badge&labelColor=0D0D0D&logo=googlechrome&logoColor=white" alt="Visit Corporate Portal — English">
+</a>
 
 <img src="docs/assets/brand/enterprise-noc-banner.png" alt="Enterprise NOC — From Scratch, Tapajós Inovações, golden jaguar brand" width="100%" />
 
