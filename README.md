@@ -694,8 +694,8 @@ Supporting tools used for **technical writing, organization and review of the do
 
 | Tool | Identification |
 | --- | --- |
-| **ChatGPT** | **OpenAI GPT-6** |
-| **Antigravity** | **Gemini 3.8 Flash · High** |
+| **ChatGPT Plus** | **OpenAI GPT-6** |
+| **Antigravity** | **Gemini 3.8 Flash & 4 Argon · High** |
 
 **Enterprise NOC planning, implementation and authorship: Kayo Willian.**
 
