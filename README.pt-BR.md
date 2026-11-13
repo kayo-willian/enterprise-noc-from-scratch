@@ -694,7 +694,7 @@ Ferramentas de apoio utilizadas na **redação, organização e revisão técnic
 
 | Ferramenta | Identificação |
 | --- | --- |
-| **ChatGPT Plus** | **OpenAI GPT-6** |
+| **ChatGPT Plus** | **OpenAI GPT-6 · High** |
 | **Antigravity** | **Gemini 3.8 Flash & 4 Argon · High** |
 
 **Autoria, planejamento e execução do Enterprise NOC: Kayo Willian.**
