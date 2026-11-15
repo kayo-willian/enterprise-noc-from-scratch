@@ -367,7 +367,7 @@ Two Grandstream IP phones are included using the GRP2601 as a commercial pricing
 
 ## 8. Computers — Workstation and Server Inventory
 
-The **Computers** worksheet itemizes the ten physical computers using a unified **{money(tables['Computers']['values'][1][9])}** commercial reference per system. It contains eight Windows workstations and two distinct Linux servers.
+The **Computers** worksheet itemizes the ten physical computers using a unified **$156.17** commercial reference per system. It contains eight Windows workstations and two distinct Linux servers.
 
 | ID | Department / Role | CPU / Reference | RAM | Storage record | Operating system | Desktop reference (USD) |
 |---|---|---|---|---|---|---:|
@@ -787,10 +787,10 @@ means the `G23` cell in the `Monthly Operations` worksheet. These references are
 
 | Investment model | Initial amount | 12-month operating estimate | First-year combined estimate |
 |---|---:|---:|---:|
-| Full acquisition and deployment | {money(a_total)} | {money(annual)} | **{money(a_total+annual)}** |
-| Deployment with provided assets | {money(b_total)} | {money(annual)} | **{money(b_total+annual)}** |
+| Full acquisition and deployment | $15,590.49 | $2,339.76 | **$17,930.25** |
+| Deployment with provided assets | $1,339.72 | $2,339.76 | **$3,679.47** |
 
-The 36-month operations-only projection is **{money(three_year)}**. These projections keep monthly expense and the chosen USD conversion basis constant across the simulated horizon.
+The 36-month operations-only projection is **$7,019.29**. These projections keep monthly expense and the chosen USD conversion basis constant across the simulated horizon.
 
 Differences in hardware purchasing are confined to the initial investment. Both scenarios are modeled with equivalent ongoing infrastructure requirements once operating.
 
@@ -860,12 +860,12 @@ This README describes the financial workbook's **November 11, 2026 reference rev
 
 ## 19. Financial Conclusion
 
-The full-acquisition scenario estimates **{money(a_total)}** for purchasing and deploying the modeled infrastructure. Deployment with customer-provided assets estimates **{money(b_total)}**. The modeled monthly operating expense is **{money(c_total)}**.
+The full-acquisition scenario estimates **$15,590.49** for purchasing and deploying the modeled infrastructure. Deployment with customer-provided assets estimates **$1,339.72**. The modeled monthly operating expense is **$194.98**.
 
 The combined first-year amounts are:
 
-- **Full acquisition + 12 months:** **{money(a_total+annual)}**.
-- **Existing assets + 12 months:** **{money(b_total+annual)}**.
+- **Full acquisition + 12 months:** **$17,930.25**.
+- **Existing assets + 12 months:** **$3,679.47**.
 
 These figures support comparisons between a complete initial purchase and a services-focused deployment, with a consistent recurring operating model. They are planning estimates and do not establish actual historical expenditures or contractual pricing.
 

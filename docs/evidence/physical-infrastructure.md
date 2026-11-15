@@ -73,6 +73,6 @@ These aspects must be evaluated using the corresponding configuration records, t
 
 The original photographs are preserved separately from the copies prepared for public documentation.
 
-Published evidence must exclude credentials, institutional asset identifiers, and other information that has not been authorized for public disclosure.
+Photographs are dated historical evidence and can contain visible equipment inventory stickers. They should not be described as fully anonymized. Public distribution of any institutional asset identifier must be reviewed separately; the evidence does not prove permission for third-party labels to be disclosed.
 
 **Evidence collection date:** November 6, 2026.

@@ -10,7 +10,7 @@
 
 Em 6 de novembro de 2026, foi realizada uma coleta de evidências da infraestrutura física e lógica do laboratório. O material reúne fotografias dos equipamentos, capturas de estações de trabalho e ferramentas de monitoramento, registros de hardware e documentos técnicos.
 
-Os arquivos originais são preservados em armazenamento privado de trabalho. A documentação publicada utiliza cópias selecionadas e sanitizadas das evidências, sem credenciais ou identificadores institucionais privados.
+O repositório contém evidências históricas selecionadas. Arquivos de configuração privados e credenciais não integram os exemplos publicados. Algumas fotografias preservam etiquetas físicas de inventário; o conjunto de imagens não é apresentado como integralmente anonimizado.
 
 ## Componentes documentados
 
@@ -33,8 +33,8 @@ O inventário contém **oito estações Windows e duas máquinas Linux**. Os doz
 ## Limites Históricos das Evidências
 
 - Alguns endereços IP exibidos nas estações divergem dos cadastrados no Zabbix na data da coleta.
-- Há hosts indisponíveis, itens não suportados e painéis sem dados no material capturado; esses estados serão descritos como observações do período, sem afirmar disponibilidade contínua.
-- A seleção pública de imagens exclui credenciais, informações institucionais e identificadores privados.
+- Os hosts indisponíveis, itens não suportados e painéis sem dados são observações do período de coleta, sem comprovação de disponibilidade contínua.
+- Os exemplos públicos de configuração omitem credenciais privadas. Fotografias físicas são registros históricos e podem preservar etiquetas de inventário dos equipamentos.
 - A configuração histórica do switch não substitui uma exportação atualizada do equipamento.
 - O inventário técnico apresenta modelos e especificações somente quando constam das evidências coletadas.
 

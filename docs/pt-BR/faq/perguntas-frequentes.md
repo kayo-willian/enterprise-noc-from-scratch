@@ -429,7 +429,7 @@ Algumas situações possuem investigações e resultados documentados, enquanto 
 
 O projeto diferencia essas situações em vez de apresentar todos os alertas como incidentes resolvidos.
 
-Procedimentos operacionais e runbooks adicionais fazem parte de uma seção própria de documentação NOC.
+Os [procedimentos de gestão de incidentes](../operacoes-noc/gerenciamento-de-incidentes.md) e os [runbooks](../operacoes-noc/runbooks/conectividade-zabbix-agent.md) integram a documentação concluída; sua existência não transforma ocorrências históricas sem validação em incidentes resolvidos.
 
 ### 51. A análise financeira representa os valores realmente gastos no projeto?
 
@@ -439,19 +439,15 @@ A documentação financeira utiliza cenários de custos e estimativas de referê
 
 Os cenários diferenciam implantação completa do zero, utilização de equipamentos existentes e despesas recorrentes de operação e manutenção.
 
-A análise depende da consolidação final do inventário e da verificação das premissas financeiras.
+O modelo financeiro concluído utiliza o inventário documentado e premissas explícitas de custos; os valores continuam sendo estimativas, não despesas comprovadas.
 
 Subtotais parciais não devem ser interpretados como gastos reais confirmados.
 
-### 52. Quais são as próximas prioridades do projeto?
+### 52. O projeto está concluído?
 
-O desenvolvimento continua com documentação técnica, revisão da consistência da infraestrutura, análise do monitoramento e elaboração de procedimentos operacionais.
+Sim. O projeto de infraestrutura e sua documentação técnica pública estão concluídos. O laboratório físico foi encerrado, sem possibilidade de novas coletas de configurações, capturas de monitoramento ou testes presenciais.
 
-A próxima grande área documental é **NOC Operations & Troubleshooting**.
-
-Ela abordará classificação de incidentes, triagem de alertas, procedimentos de diagnóstico, ações corretivas, validação e registro de ocorrências.
-
-A análise financeira será finalizada depois da consolidação do inventário técnico e das premissas restantes.
+Os procedimentos NOC, runbooks, análise financeira e portal corporativo bilíngue são entregas documentais concluídas. Ocorrências históricas sem resolução registrada permanecem identificadas como limites das evidências, não como etapas pendentes do projeto.
 
 ---
 
@@ -467,7 +463,7 @@ O conteúdo diferencia:
 - Resultados documentados de troubleshooting.
 - Detalhes de configuração ausentes dos registros históricos coletados.
 
-As respostas devem ser atualizadas quando novas informações tecnicamente validadas forem incorporadas ao projeto.
+Este FAQ representa a documentação final e as evidências disponíveis do laboratório encerrado.
 
 Para consultar configurações, diagramas, inventários e capturas completas, utilize os documentos técnicos relacionados em cada seção.
 

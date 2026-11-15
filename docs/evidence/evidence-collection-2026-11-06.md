@@ -10,7 +10,7 @@
 
 On November 6, 2026, physical and logical infrastructure evidence was collected from the lab. The materials include photographs of equipment, screenshots of workstations and monitoring tools, hardware records, and technical documents.
 
-The original files are preserved in private working storage. Published documentation uses selected and sanitized copies of the collected material; private credentials and institution-specific identifiers are excluded.
+The repository contains selected historical evidence. Private configuration files and credentials are not part of the published examples. Some photographs retain physical inventory labels; the image collection is not represented as fully anonymized.
 
 ## Documented components
 
@@ -34,7 +34,7 @@ The computer inventory covers **eight Windows workstations and two Linux compute
 
 - Some workstation IP addresses in the photographs differ from the addresses registered in Zabbix on the collection date.
 - The collected material includes unavailable hosts, unsupported items, and panels showing no data. These are point-in-time observations and do not establish continuous availability.
-- Public image selection excludes credentials, institution-specific information, and private identifiers.
+- Public configuration examples omit private credentials. Physical photographs are historical captures and may retain equipment inventory markings.
 - The historical switch configuration does not replace a current export of the device's configuration.
 - The technical inventory includes models and specifications only where captured in the collected evidence.
 
