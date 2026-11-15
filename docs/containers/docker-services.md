@@ -37,7 +37,7 @@ These values represent a specific observation, not continuous availability stati
 
 ![Running containers in Portainer](../assets/images/docker/portainer-running-containers.png)
 
-The `docker ps` output identified ten running containers.
+The `docker ps` output identified ten running containers. The November 6 Portainer capture lists `site-estatico` under stack `-` with address `172.17.0.2`. This historical runtime association differs from the public main Compose, which declares `site-estatico` on `zabbix-net` alongside seven other services. The file is a sanitized configuration reference, not an exact export of every runtime attachment in the photograph.
 
 | Container | Image | Purpose |
 |---|---|---|
@@ -83,7 +83,7 @@ The environment includes Docker's standard networking mechanisms and networks as
 
 The collected Linux system report also identifies Docker bridge interfaces and private container subnets.
 
-The network inventory shows configured Docker networks, rather than an application-to-application connectivity test matrix.
+The network inventory shows configured Docker networks, rather than an application-to-application connectivity test matrix. The `site-estatico` default-bridge address in the screenshot must not be taken as verification of the `zabbix-net` membership declared in the public Compose.
 
 ## 6. Service Organization
 
@@ -190,9 +190,9 @@ The following Docker Compose files are sanitized public examples based on the la
 
 The [main Compose example](../../docker_configs/docker-compose.yml) refers to local bind-mount sources under `docker_configs/`: `alertscripts/`, `externalscripts/`, `site-estatico-html/` and `reverse-proxy/certs/`. These paths are **not included in the versioned repository**. A fresh clone therefore does not provide the private TLS certificates, local Zabbix scripts or intranet website files required by those mounts. Starting Compose with missing paths does not supply the absent contents and may create empty host directories.
 
-The [`.env.example`](../../docker_configs/.env.example) and [Pi-hole `.env.example`](../../docker_configs/lab-ti/pihole/.env.example) contain setup variable names and example values, **not real credentials**. Local `.env` files, persistent database/application data and TLS keys must remain outside Git. Portainer's `portainer_data` is a **named Docker volume**, not a repository folder. The public GitHub Pages website in `docs/` and the locally mounted `site-estatico` content are distinct deployment paths; the published examples do not prove both have identical content.
+The [`.env.example`](../../docker_configs/.env.example) and [Pi-hole `.env.example`](../../docker_configs/lab-ti/pihole/.env.example) contain setup variable names and example values, **not real credentials**. Mutable tags such as `latest` and `alpine` do not pin exact image digests or provide deterministic rebuilds. Local `.env` files, persistent database/application data and TLS keys must remain outside Git. Portainer's `portainer_data` is a **named Docker volume**, not a repository folder. The public GitHub Pages website in `docs/` and the locally mounted `site-estatico` content are distinct deployment paths; the published examples do not prove both have identical content.
 
-Reproducing the laboratory stack requires checking the actual host paths, secrets, image versions, port exposure and TLS/DNS configuration before running it. These public files are a **sanitized configuration reference**, not a ready-to-run production release.
+Reproducing the laboratory stack requires checking the actual host paths, secrets, image versions, port exposure and TLS/DNS configuration before running it. These public files are a **sanitized configuration reference**, not a ready-to-run production release. The containerized Zabbix Agent uses bridge networking without explicit host filesystem, process-namespace or interface mounts; its presence alone does not demonstrate full monitoring of the Debian host. Portainer publishes `8000`, `9000` and `9443` and mounts `/var/run/docker.sock`; no binding to a management-only host IP or firewall allow-list is shown. These are configuration exposure boundaries, not proof of public internet reachability.
 
 ### Reverse Proxy and Corporate Portal
 
@@ -210,7 +210,7 @@ Configuration files:
 - [Nginx Main Configuration](../../docker_configs/reverse-proxy/nginx.conf)
 - [Reverse Proxy Rules](../../docker_configs/reverse-proxy/conf.d/lab.conf)
 
-The public files use example domains and certificate paths.
+The public files use example domains and certificate paths. The published virtual hosts accept both HTTP and HTTPS without an enforced redirect; other application ports are also directly published by Compose. Network ACLs, UFW rules and authenticated access paths cannot be verified from these files.
 The original environment used local DNS names and TLS certificates.
 
 Private keys and institution-specific settings are not included.

@@ -73,6 +73,6 @@ Esses aspectos devem ser avaliados por meio dos registros de configuração, tes
 
 As fotografias originais são preservadas separadamente das cópias preparadas para a documentação pública.
 
-As evidências publicadas não devem conter credenciais, identificações patrimoniais institucionais ou outras informações cuja divulgação não tenha sido autorizada.
+As fotografias são evidências históricas datadas e podem conter etiquetas de inventário dos equipamentos. Não devem ser descritas como integralmente anonimizadas. A divulgação pública de qualquer identificador patrimonial institucional exige revisão específica; a presença da etiqueta não comprova autorização de divulgação.
 
 **Data da coleta das evidências:** 6 de novembro de 2026.

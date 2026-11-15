@@ -121,18 +121,18 @@ The November 6 screenshot reports **12 enabled hosts** but only **7 available**.
 
 These are **diagnostic principles**, not new tests executed as part of the documentation review. The [Zabbix Agent runbook](../noc-operations/runbooks/zabbix-agent-connectivity.md) and [incident process](../noc-operations/incident-management.md) define the operational checks and evidence requirements.
 
-## Open Monitoring Findings
+## Historical Monitoring Findings
 
-**Investigation order — historical snapshot, November 6, 2026.** The priorities below are a proposed diagnostic sequence, not measured incident severity. They do not represent a new test, a confirmed root cause, or remediation performed after the capture.
+**Recorded status — November 6, 2026.** The physical laboratory has closed. The findings below are preserved observations, not open tasks in an active monitoring deployment. Suggested diagnostics describe how the historical symptoms could be investigated; no new data or post-capture remediation is available.
 
-| Order | Recorded observation | Next evidence-based diagnostic step | Evidence needed to document resolution |
+| Order | Recorded observation | Diagnostic interpretation | Evidence absent from the concluded laboratory |
 |---|---|---|---|
 | 1 | Five unavailable Zabbix Agent interfaces; six workstation IPv4 discrepancies | Compare current workstation addresses and DHCP leases with the registered agent interfaces; inspect reachability, agent service and host firewall separately | Dated host/interface readings, agent diagnostics and a new availability capture; address mismatches alone do not establish causation |
 | 2 | 113 unsupported monitoring items | Extract item-level error messages and keys; compare templates, interface type and supported metrics | Dated item diagnostics and a new count with each corrected item identified |
 | 3 | 34 triggers in problem state | Inspect trigger expressions and related events; distinguish active service failures from expected states such as unused switch ports | Event/trigger records correlated with a functional service check or documented expected state |
 | 4 | Switch interfaces shown as `down` and repeated dashboard labels | Compare actual switch port roles, item keys and Grafana panel queries | Port-to-item mapping and corrected labels where the underlying evidence supports a correction |
 
-**Completion rule:** record the observation date, affected host/item, test command or UI evidence, result and corrective action before marking any finding resolved. No post-capture resolution is asserted here.
+**Evidence boundary:** the historical findings are not represented as closed incidents. No additional collection is possible from the concluded laboratory; the original measurements and uncertainty remain part of the completed project record.
 
 **Related records:** [Grafana dashboards](grafana-monitoring.md) · [Cisco SNMP troubleshooting — November 4](snmp-troubleshooting.md) · [Workstation inventory](../endpoints/workstation-inventory.md)
 

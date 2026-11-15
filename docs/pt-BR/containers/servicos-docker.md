@@ -37,7 +37,7 @@ Esses valores representam uma observação específica, não estatísticas de di
 
 ![Containers em execução no Portainer](../../assets/images/docker/portainer-running-containers.png)
 
-A saída do comando `docker ps` identificou dez containers em execução.
+A saída do comando `docker ps` identificou dez containers em execução. Na captura do Portainer de 6 de novembro, `site-estatico` consta na stack `-`, com endereço `172.17.0.2`. Essa associação histórica difere do Compose principal público, que declara `site-estatico` na rede `zabbix-net` junto dos outros sete serviços. O arquivo é referência sanitizada de configuração, não exportação exata de todas as associações em execução na captura.
 
 | Container | Imagem | Finalidade |
 |---|---|---|
@@ -83,7 +83,7 @@ O ambiente utiliza mecanismos padrão de rede do Docker e redes associadas às s
 
 O relatório do sistema Linux também identifica interfaces bridge do Docker e sub-redes privadas utilizadas pelos containers.
 
-A captura registra as redes Docker configuradas, não uma matriz de testes de conectividade entre aplicações.
+A captura registra as redes Docker configuradas, não uma matriz de testes de conectividade entre aplicações. O endereço de `site-estatico` na bridge padrão da captura não comprova a associação à `zabbix-net` declarada no Compose público.
 
 ## 6. Organização dos Serviços
 
@@ -192,7 +192,7 @@ O [Compose principal](../../../docker_configs/docker-compose.yml) referencia dir
 
 Os arquivos [`.env.example`](../../../docker_configs/.env.example) e [`.env.example` do Pi-hole](../../../docker_configs/lab-ti/pihole/.env.example) mostram nomes de variáveis e valores demonstrativos, **não credenciais reais**. Arquivos `.env` locais, dados persistentes e chaves TLS não devem ser publicados no Git. O volume `portainer_data` do Portainer é um **volume nomeado do Docker**, não uma pasta do repositório. O site público no GitHub Pages, em `docs/`, e o conteúdo local montado em `site-estatico` são implantações distintas; os exemplos publicados não comprovam que tenham arquivos idênticos.
 
-Para reproduzir a stack, é necessário conferir caminhos existentes no host, segredos, versões das imagens, exposição de portas e parâmetros de TLS/DNS antes da execução. Os arquivos públicos são uma **referência sanitizada de configuração**, não uma implantação de produção pronta para executar.
+Para reproduzir a stack, é necessário conferir caminhos existentes no host, segredos, versões das imagens, exposição de portas e parâmetros de TLS/DNS antes da execução. Os arquivos públicos são uma **referência sanitizada de configuração**, não uma implantação de produção pronta para executar. O Zabbix Agent em container usa rede bridge e não declara montagens dos sistemas de arquivos, namespaces de processos ou interfaces do host; portanto, sua presença não comprova monitoramento completo do Debian físico. O Portainer publica `8000`, `9000` e `9443` e monta `/var/run/docker.sock`, sem vinculação demonstrada a IP exclusivo de gerenciamento nem regras de firewall documentadas. Esses limites de configuração não comprovam acesso pela internet.
 
 ### Proxy Reverso e Portal Corporativo
 
@@ -211,7 +211,7 @@ Arquivos de configuração:
 - [Regras do Proxy Reverso](../../../docker_configs/reverse-proxy/conf.d/lab.conf)
 
 Os arquivos públicos utilizam domínios e caminhos de
-certificados demonstrativos.
+certificados demonstrativos. Os hosts virtuais publicados aceitam HTTP e HTTPS sem redirecionamento obrigatório; além disso, o Compose publica diretamente portas das aplicações. ACLs, regras UFW e caminhos de autenticação não são verificáveis pelos exemplos.
 
 O ambiente original utilizava nomes DNS internos
 e certificados TLS.

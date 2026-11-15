@@ -121,18 +121,18 @@ A captura de 6 de novembro mostra **12 hosts habilitados**, mas somente **7 disp
 
 São **princípios de diagnóstico**, não novos testes executados nesta revisão. O [runbook Zabbix Agent](../operacoes-noc/runbooks/conectividade-zabbix-agent.md) e a [gestão de incidentes](../operacoes-noc/gerenciamento-de-incidentes.md) definem procedimentos e evidências.
 
-## Pendências de Monitoramento
+## Ocorrências Históricas de Monitoramento
 
-**Ordem de investigação — registro histórico de 6 de novembro de 2026.** As prioridades abaixo indicam uma sequência sugerida de diagnóstico, não a severidade medida de incidentes. Não representam novos testes, causas comprovadas ou correções executadas depois da coleta.
+**Estado registrado — 6 de novembro de 2026.** O laboratório físico está encerrado. As ocorrências abaixo são observações preservadas, não tarefas em aberto de uma infraestrutura ativa. As verificações sugeridas descrevem como os sintomas históricos poderiam ser investigados; não existem novos dados ou correções comprovadas após a coleta.
 
-| Ordem | Observação registrada | Próxima etapa de diagnóstico baseada em evidências | Evidência necessária para documentar a resolução |
+| Ordem | Observação registrada | Interpretação diagnóstica | Evidência ausente no laboratório encerrado |
 |---|---|---|---|
 | 1 | Cinco interfaces Zabbix Agent indisponíveis; seis divergências de IPv4 entre estações e cadastros | Comparar endereços atuais e concessões DHCP com interfaces cadastradas; examinar separadamente conectividade, serviço do agente e firewall | Registros datados de interfaces/hosts, diagnóstico do agente e nova captura de disponibilidade; divergência de IP não comprova causa |
 | 2 | 113 itens de monitoramento não suportados | Obter mensagens de erro e chaves individuais; comparar templates, tipos de interface e métricas disponíveis | Diagnósticos datados de itens e nova contagem, identificando cada item corrigido |
 | 3 | 34 triggers em estado de problema | Inspecionar expressões e eventos; diferenciar falhas de serviços de estados esperados, como portas não utilizadas | Registros de eventos/triggers correlacionados com teste funcional ou estado esperado documentado |
 | 4 | Interfaces do switch indicadas como `down` e rótulos repetidos em dashboards | Comparar função real das portas, chaves dos itens e consultas dos painéis Grafana | Mapeamento porta/item e correções de rótulos somente quando sustentadas pelas evidências |
 
-**Critério de conclusão:** registrar data da observação, host/item afetado, comando ou evidência de interface, resultado e ação corretiva antes de marcar qualquer pendência como resolvida. Não se afirma nenhuma resolução posterior à coleta.
+**Limite das evidências:** as ocorrências históricas não são apresentadas como incidentes encerrados. Como não é possível uma nova coleta no laboratório concluído, as medições originais e suas incertezas permanecem no registro final do projeto.
 
 **Registros relacionados:** [Dashboards Grafana](grafana.md) · [Diagnóstico SNMP de 4 de novembro](diagnostico-snmp.md) · [Inventário das estações](../estacoes/inventario-de-computadores.md)
 

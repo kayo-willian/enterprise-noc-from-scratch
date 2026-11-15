@@ -431,7 +431,7 @@ Some issues have documented investigations and results, while others remain hist
 
 The project distinguishes these situations rather than treating every warning as a successfully resolved incident.
 
-Additional NOC operational procedures and troubleshooting runbooks form a separate documentation workstream.
+The [NOC incident procedures](../noc-operations/incident-management.md) and [troubleshooting runbooks](../noc-operations/runbooks/zabbix-agent-connectivity.md) are part of the completed documentation; they do not turn unverified historical events into resolved incidents.
 
 ### 51. Does the financial analysis represent actual project expenditure?
 
@@ -441,19 +441,15 @@ The financial documentation uses infrastructure cost scenarios and reference est
 
 The scenarios distinguish full deployment from scratch, implementation using existing equipment, and recurring operations or maintenance.
 
-The analysis remains subject to final inventory reconciliation and verification of cost assumptions.
+The completed financial model uses the documented inventory and explicit cost assumptions; these remain estimates, not verified expenditure.
 
 Partial subtotals must not be interpreted as confirmed real expenditure.
 
-### 52. What are the next development priorities?
+### 52. Is the project complete?
 
-The project continues through technical documentation, infrastructure consistency reviews, monitoring analysis, and operational procedures.
+Yes. The infrastructure project and its public technical documentation are complete. The physical laboratory has closed, so additional device exports, live monitoring captures and on-site tests are not available.
 
-The next major documentation workstream is **NOC Operations & Troubleshooting**.
-
-It will address incident classification, monitoring triage, diagnostic procedures, corrective actions, validation, and incident reporting.
-
-The financial analysis will be finalized after the technical inventory and remaining assumptions have been consolidated.
+The published NOC procedures, runbooks, financial analysis and bilingual corporate portal are completed documentation deliverables. Historical findings without recorded remediation remain identified as evidence limitations, not as unfinished project phases.
 
 ---
 
@@ -469,7 +465,7 @@ It distinguishes:
 - Documented troubleshooting results.
 - Configuration details absent from the collected historical records.
 
-Answers should be updated when new validated information is added to the project.
+This FAQ reflects the final documentation and the evidence retained from the concluded laboratory.
 
 For detailed configurations, diagrams, inventories, and screenshots, consult the technical documents linked throughout this FAQ.
 

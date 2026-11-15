@@ -340,7 +340,7 @@ flowchart TB
 
 ```
 
-**Docker stack layout:** the Debian NOC host contains **eight services in the main stack**, plus **Pi-hole** and **Portainer** in separate Compose stacks. This organization is shown in the diagram and documented through the source configuration files.
+**Docker stack layout:** the published main Compose declares **eight services**, with **Pi-hole** and **Portainer** in separate Compose files. In the November 6 Portainer capture, `site-estatico` appears with stack `-` and address `172.17.0.2`; that historical runtime view is not identical to the sanitized Compose reference.
 
 [Consolidated logical topology](docs/networking/consolidated-logical-topology.md) · [Computer inventory](docs/endpoints/workstation-inventory.md) · [Docker architecture](docs/containers/docker-services.md)
 
@@ -367,7 +367,7 @@ flowchart TB
 
 **Configuration and security:** the Compose files specify image tags, network topology, published ports and mounts. Passwords, private TLS keys, persistent data and internal content remain outside Git; `.env.example` provides local setup variables.
 
-The main-stack services use the **`zabbix-net`** Docker network. **Pi-hole** and **Portainer** are maintained through their own Compose definitions, with the role of each stack specified in the documentation.
+The **published main Compose** places its eight services on **`zabbix-net`**. **Pi-hole** and **Portainer** have separate definitions. The captured Portainer runtime does not establish identical network membership for every service, particularly `site-estatico`.
 
 [Docker/Portainer documentation](docs/containers/docker-services.md) · [Main Compose](docker_configs/docker-compose.yml) · [Pi-hole Compose](docker_configs/lab-ti/pihole/docker-compose.yml) · [Portainer Compose](docker_configs/lab-ti/portainer/docker-compose.yml)
 

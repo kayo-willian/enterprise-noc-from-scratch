@@ -340,7 +340,7 @@ flowchart TB
 
 ```
 
-**Organização Docker:** o host Debian principal reúne **oito serviços na stack principal**, com **Pi-hole** e **Portainer** em stacks Compose separadas. A arquitetura preserva essa distinção, assim como os dois computadores Linux com funções diferentes.
+**Organização Docker:** o Compose principal publicado declara **oito serviços**, com **Pi-hole** e **Portainer** em arquivos Compose separados. Na captura do Portainer de 06/11, `site-estatico` aparece com stack `-` e endereço `172.17.0.2`; o estado histórico não coincide integralmente com a referência Compose sanitizada.
 
 [Topologia consolidada com escopo de evidência](docs/pt-BR/redes/topologia-logica-consolidada.md) · [Inventário de computadores](docs/pt-BR/estacoes/inventario-de-computadores.md) · [Infraestrutura Docker](docs/pt-BR/containers/servicos-docker.md)
 
@@ -367,7 +367,7 @@ O **TI 1 / NOC** (`192.168.10.12`) hospeda o ambiente Docker documentado em **06
 
 **Reprodutibilidade:** os arquivos Compose especificam as imagens/tags publicadas, redes, portas e montagens. **Segurança:** segredos, chaves TLS, dados persistentes e conteúdo interno permanecem fora do repositório; os `.env.example` apresentam as variáveis para configuração local.
 
-Os containers da stack principal utilizam a rede Docker **`zabbix-net`**. **Pi-hole** e **Portainer** possuem seus próprios arquivos Compose; o projeto registra a função de cada stack e os relacionamentos especificados entre serviços.
+O **Compose principal publicado** declara seus oito serviços na rede **`zabbix-net`**. **Pi-hole** e **Portainer** têm definições separadas. A captura histórica do Portainer não comprova associação idêntica para todos os serviços, especialmente `site-estatico`.
 
 [Docker e Portainer](docs/pt-BR/containers/servicos-docker.md) · [Compose principal](docker_configs/docker-compose.yml) · [Compose Pi-hole](docker_configs/lab-ti/pihole/docker-compose.yml) · [Compose Portainer](docker_configs/lab-ti/portainer/docker-compose.yml)
 
