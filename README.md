@@ -697,6 +697,7 @@ Supporting tools used for **technical writing, organization and review of the do
 | Tool | Identification |
 | --- | --- |
 | **ChatGPT Plus** | **OpenAI GPT-6 · High** |
+| **ChatGPT Work** | **OpenAI GPT-6.1 Sol · Max** |
 | **Antigravity** | **Gemini 3.8 Flash & 4 Argon · High** |
 
 ---
