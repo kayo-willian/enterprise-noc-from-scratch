@@ -697,6 +697,7 @@ Ferramentas de apoio utilizadas na **redação, organização e revisão técnic
 | Ferramenta | Identificação |
 | --- | --- |
 | **ChatGPT Plus** | **OpenAI GPT-6 · High** |
+| **ChatGPT Work** | **OpenAI GPT-6.1 Sol · Max** |
 | **Antigravity** | **Gemini 3.8 Flash & 4 Argon · High** |
 
 ---
