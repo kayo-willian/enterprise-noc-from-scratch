@@ -64,8 +64,8 @@ Comparar servidor DNS utilizado com o projeto autorizado. Os documentos público
 Com `dig` instalado, substituir pelo IP **atual e autorizado** do servidor e escolher nome de teste permitido:
 
 ~~~bash
-dig @<IP_DNS_CONFIRMADO> example.org A +time=2 +tries=1
-dig @<IP_DNS_CONFIRMADO> example.org AAAA +time=2 +tries=1
+dig @<VERIFIED_DNS_SERVER_IP> example.org A +time=2 +tries=1
+dig @<VERIFIED_DNS_SERVER_IP> example.org AAAA +time=2 +tries=1
 ~~~
 
 Conferir `SERVER`, `status`, respostas e tempo. Comparar com outro resolver expressamente autorizado pode delimitar a falha, mas não autoriza contornar bloqueios corporativos.
@@ -73,7 +73,7 @@ Conferir `SERVER`, `status`, respostas e tempo. Comparar com outro resolver expr
 Porta publicada pelo Docker não comprova acesso real na rede. Se consultas UDP falharem, conferir o caminho TCP autorizado:
 
 ~~~bash
-dig +tcp @<IP_DNS_CONFIRMADO> example.org A +time=2 +tries=1
+dig +tcp @<VERIFIED_DNS_SERVER_IP> example.org A +time=2 +tries=1
 ~~~
 
 ### C. Inspecionar Pi-hole e Docker sem alterar

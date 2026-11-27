@@ -72,14 +72,14 @@ O Compose público registra as portas **10050** (agente) e **10051** (servidor).
 De um terminal Linux autorizado no lado do monitoramento, substituir o endereço pelo **IP atual confirmado**:
 
 ~~~bash
-ping -c 3 <IP_ATUAL_CONFIRMADO>
-nc -vz -w 3 <IP_ATUAL_CONFIRMADO> 10050
+ping -c 3 <CURRENT_HOST_IP>
+nc -vz -w 3 <CURRENT_HOST_IP> 10050
 ~~~
 
 Se a ferramenta estiver instalada e o agente autorizar, realizar consulta de leitura:
 
 ~~~bash
-zabbix_get -s <IP_ATUAL_CONFIRMADO> -p 10050 -k agent.ping
+zabbix_get -s <CURRENT_HOST_IP> -p 10050 -k agent.ping
 ~~~
 
 Falha no `ping` não comprova, sozinha, queda do host. Conexão TCP bem-sucedida não comprova a validade de todos os itens. Em verificações ativas, observar o acesso do agente ao servidor/proxy e a correspondência entre hostname configurado e cadastro do host.
